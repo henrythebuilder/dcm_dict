@@ -11,5 +11,6 @@ Gem::Specification.new do |s|
   s.email       = 'henrythebuilder@yahoo.it'
   s.files       = `git ls-files`.split("\n")
   s.homepage    = 'http://rubygems.org/gems/dcm_dict'
-  s.license     = 'GPL'
+  s.license     = 'GPL-3.0+'
+  s.required_ruby_version = '>= 2.1'
 end
