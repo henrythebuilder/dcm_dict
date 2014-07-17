@@ -20,6 +20,20 @@ module DcmDict
         zero_width_space = "\u200B"
         self.gsub(zero_width_space, '').strip
       end
+
+      def dcm_methodize_key
+        self.gsub(/([^\A])([A-Z])([a-z])/,'\1_\2\3').
+          gsub(/([a-z])([A-Z])/,'\1_\2').
+          downcase.to_sym
+      end
+
+      def dcm_tag_to_numeric_string
+        self.gsub(/[\(|\),]/, '')
+      end
+
+      def dcm_tag_to_ary
+        self.gsub(/[\(|\)]/, '').split(',').map{|s| s.hex}
+      end
     end
   end
 end

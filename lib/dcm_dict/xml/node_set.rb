@@ -24,6 +24,9 @@ module DcmDict
       NODE_SET_IDX.each do |sym, idx|
         data[sym] = node_set[idx].content.dcm_unspace
       end
+      data[:tag_sym]=data[:tag_key].dcm_methodize_key
+      data[:tag_num]=data[:tag_str].dcm_tag_to_numeric_string
+      data[:tag_ary]=data[:tag_str].dcm_tag_to_ary
       data
     end
   end
