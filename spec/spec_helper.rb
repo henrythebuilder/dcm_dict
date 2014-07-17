@@ -1,0 +1,1 @@
+require 'dcm_dict'
