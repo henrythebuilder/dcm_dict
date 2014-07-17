@@ -4,13 +4,20 @@ require "dcm_dict/version"
 Gem::Specification.new do |s|
   s.name        = 'dcm_dict'
   s.version     = DcmDict::VERSION
-  s.date        = DateTime.now.strftime('%Y-%m-%d')
+  s.platform    = Gem::Platform::RUBY
+  s.date        = TODAY
   s.summary     = "A simple way to handle DICOM Data Dictionary"
   s.description = "DcmDict is a Ruby gem (dcm_dict) to handle in a simple way the Data defined within the DICOM Standard"
   s.authors     = ["Enrico Rivarola"]
   s.email       = 'henrythebuilder@yahoo.it'
-  s.files       = `git ls-files`.split("\n")
+  s.files       = Dir.glob("lib/**/*")
+  s.files       += %w[README.md LICENSE COPYING]
+  s.test_files  = Dir.glob("spec/**/*")
+  s.test_files  += %w[Rakefile]
+  s.require_paths = ['lib']
   s.homepage    = 'http://rubygems.org/gems/dcm_dict'
   s.license     = 'GPL-3.0+'
   s.required_ruby_version = '>= 2.1'
+  s.add_development_dependency "rspec", '~> 3.0', ">= 3.0.0"
+  s.add_development_dependency "simplecov", '~> 0.8', '>= 0.8.2'
 end

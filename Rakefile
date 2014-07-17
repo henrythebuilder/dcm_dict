@@ -3,10 +3,23 @@ require "dcm_dict/version"
 require 'rake'
 require 'rspec/core/rake_task'
 
-RSpec::Core::RakeTask.new(:spec)
+desc "Run RSpec for all spec"
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.pattern = 'spec/**/*_spec.rb'
+  t.ruby_opts = "-w"
+  t.rspec_opts = '--format documentation'
+end
 
-task :default => :spec
+desc "Run RSpec with code coverage"
+task :coverage do
+  ENV['COVERAGE'] = "true"
+  Rake::Task["spec"].execute
+end
 
+desc "Run tests with code coverage"
+task :default => :coverage
+
+desc "Build dcm_dict v#{DcmDict::VERSION} gem"
 task :build do
   system "gem build dcm_dict.gemspec"
   FileUtils.mkdir_p "pkg"
