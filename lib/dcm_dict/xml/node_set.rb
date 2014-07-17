@@ -18,15 +18,21 @@ require 'nokogiri'
 module DcmDict
   module XML
     using DcmDict::StringRefine
-    NODE_SET_IDX={tag_str: 0, tag_name: 1, tag_key: 2, tag_vr: 3, tag_vm: 4, tag_note: 5}
+    NODE_SET_IDX = { tag_str: 0,
+                     tag_name: 1,
+                     tag_key: 2,
+                     tag_vr: 3,
+                     tag_vm: 4,
+                     tag_note: 5 }
+
     def self.extract_node_set_data(node_set)
       data = {}
       NODE_SET_IDX.each do |sym, idx|
         data[sym] = node_set[idx].content.dcm_unspace
       end
-      data[:tag_sym]=data[:tag_key].dcm_methodize_key
-      data[:tag_num]=data[:tag_str].dcm_tag_to_numeric_string
-      data[:tag_ary]=data[:tag_str].dcm_tag_to_ary
+      data[:tag_sym] = data[:tag_key].tag_key_to_sym
+      data[:tag_num] = data[:tag_str].tag_str_to_digit_str
+      data[:tag_ary] = data[:tag_str].tag_str_to_ary
       data
     end
   end

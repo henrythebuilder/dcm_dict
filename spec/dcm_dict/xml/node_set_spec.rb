@@ -19,18 +19,21 @@ require 'spec_helper'
 require 'xml_sample_spec_helper'
 
 module DcmDict
-  describe "XML management" do
 
-    XmlSampleSpecHelper.xml_single_set.each do |xml_string, data|
-      describe "should extract data from single node set for '#{data[:tag_name]}'" do
+  describe "XML management" do
+    describe "should extract data from single node set data" do
+      XmlSampleSpecHelper.xml_single_set.each do |xml_string, data|
         ns = XmlSampleSpecHelper.string_to_nodeset(xml_string)
         xml_data = DcmDict::XML.extract_node_set_data(ns)
-        data.each do |key, value|
-          it "for #{key.inspect} key" do
-            expect(xml_data[key]).to eq(value)
+        describe "for '#{data[:tag_name]}'" do
+          data.each do |key, value|
+            it "with key #{key.inspect}" do
+              expect(xml_data[key]).to eq(value)
+            end
           end
         end
       end
     end
   end
+
 end

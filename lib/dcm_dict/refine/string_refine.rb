@@ -16,24 +16,33 @@
 module DcmDict
   module StringRefine
     refine String do
+
+      # remove zero width spaces
       def dcm_unspace
         zero_width_space = "\u200B"
         self.gsub(zero_width_space, '').strip
       end
 
-      def dcm_methodize_key
+      # 'PatientName' -> :patient_name
+      def tag_key_to_sym
         self.gsub(/([^\A])([A-Z])([a-z])/,'\1_\2\3').
           gsub(/([a-z])([A-Z])/,'\1_\2').
-          downcase.to_sym
+          downcase.
+          to_sym
       end
 
-      def dcm_tag_to_numeric_string
+      # (0010,0010) -> '00100010'
+      def tag_str_to_digit_str
         self.gsub(/[\(|\),]/, '')
       end
 
-      def dcm_tag_to_ary
-        self.gsub(/[\(|\)]/, '').split(',').map{|s| s.hex}
+      # (0010,0010) -> [0x0010, 0x0010]
+      def tag_str_to_ary
+        self.gsub(/[\(|\)]/, '').
+          split(',').
+          map(&:hex)
       end
+
     end
   end
 end
