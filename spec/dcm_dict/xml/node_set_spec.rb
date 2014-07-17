@@ -23,10 +23,8 @@ module DcmDict
 
     XmlSampleSpecHelper.xml_single_set.each do |xml_string, data|
       it "should extract data from single node set for '#{data[:tag_name]}'" do
-        xml_doc  = Nokogiri::XML(xml_string)
-        tr = xml_doc.xpath('//tr')
-        td = tr[0].xpath('td')
-        xml_data = DcmDict::XML.extract_node_set_data(td)
+        ns = XmlSampleSpecHelper.string_to_nodeset(xml_string)
+        xml_data = DcmDict::XML.extract_node_set_data(ns)
         data.each do |key, value|
           expect(xml_data[key]).to eq(value)
         end

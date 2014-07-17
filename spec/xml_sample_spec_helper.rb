@@ -117,5 +117,10 @@ END
                        tag_note: 'RET'}}
     end
 
+    def self.string_to_nodeset(xml_string)
+      xml_doc  = Nokogiri::XML(xml_string)
+      tr = xml_doc.xpath('//tr')
+      tr[0].xpath('td')
+    end
   end
 end
