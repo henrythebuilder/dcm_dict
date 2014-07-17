@@ -1,3 +1,5 @@
+# coding: utf-8
+
 #  This file is part of DcmDict gem (dcm_dict).
 #
 #  DcmDict is free software: you can redistribute it and/or modify
@@ -13,6 +15,22 @@
 #  You should have received a copy of the GNU General Public License
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
-require "dcm_dict/version"
-require "dcm_dict/refine/string_refine"
-require "dcm_dict/xml/node_set"
+require 'spec_helper'
+require 'xml_sample_spec_helper'
+
+module DcmDict
+  describe "XML management" do
+
+    XmlSampleSpecHelper.xml_single_set.each do |xml_string, data|
+      it "should extract data from single node set for '#{data[:tag_name]}'" do
+        xml_doc  = Nokogiri::XML(xml_string)
+        tr = xml_doc.xpath('//tr')
+        td = tr[0].xpath('td')
+        xml_data = DcmDict::XML.extract_node_set_data(td)
+        data.each do |key, value|
+          expect(xml_data[key]).to eq(value)
+        end
+      end
+    end
+  end
+end

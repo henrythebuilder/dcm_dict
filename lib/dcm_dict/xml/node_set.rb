@@ -13,6 +13,18 @@
 #  You should have received a copy of the GNU General Public License
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
-require "dcm_dict/version"
-require "dcm_dict/refine/string_refine"
-require "dcm_dict/xml/node_set"
+require 'nokogiri'
+
+module DcmDict
+  module XML
+    using DcmDict::StringRefine
+    NODE_SET_IDX={tag_str: 0, tag_name: 1, tag_key: 2, tag_vr: 3, tag_vm: 4, tag_note: 5}
+    def self.extract_node_set_data(node_set)
+      data = {}
+      NODE_SET_IDX.each do |sym, idx|
+        data[sym] = node_set[idx].content.dcm_unspace
+      end
+      data
+    end
+  end
+end

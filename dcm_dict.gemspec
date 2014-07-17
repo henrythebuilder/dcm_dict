@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'http://rubygems.org/gems/dcm_dict'
   s.license     = 'GPL-3.0+'
   s.required_ruby_version = '>= 2.1'
+  s.add_runtime_dependency 'nokogiri', '~> 1.6.2','>= 1.6.2.1'
   s.add_development_dependency "rspec", '~> 3.0', ">= 3.0.0"
   s.add_development_dependency "simplecov", '~> 0.8', '>= 0.8.2'
 end
