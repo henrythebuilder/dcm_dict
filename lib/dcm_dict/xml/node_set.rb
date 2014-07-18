@@ -26,14 +26,63 @@ module DcmDict
                      tag_note: 5 }
 
     def self.extract_node_set_data(node_set)
-      data = {}
-      NODE_SET_IDX.each do |sym, idx|
-        data[sym] = node_set[idx].content.dcm_unspace
-      end
-      data[:tag_sym] = data[:tag_key].tag_key_to_sym
-      data[:tag_num] = data[:tag_str].tag_str_to_digit_str
-      data[:tag_ary] = data[:tag_str].tag_str_to_ary
-      data
+      {
+        :tag_str =>  extract_tag_str_from_node_set(node_set),
+        :tag_name =>  extract_tag_name_from_node_set(node_set),
+        :tag_key =>  extract_tag_key_from_node_set(node_set),
+        :tag_vr =>  extract_tag_vr_from_node_set(node_set),
+        :tag_vm =>  extract_tag_vm_from_node_set(node_set),
+        :tag_sym => extract_tag_sym_from_node_set(node_set),
+        :tag_num => extract_tag_num_from_node_set(node_set),
+        :tag_ary => extract_tag_ary_from_node_set(node_set),
+        :tag_note => extract_tag_note_from_node_set(node_set)
+      }
     end
+
+    private
+    def self.extract_tag_note_from_node_set(node_set)
+      extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_note])
+    end
+
+    def self.extract_tag_key_from_node_set(node_set)
+      extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_key])
+    end
+
+    def self.extract_tag_name_from_node_set(node_set)
+      extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_name])
+    end
+
+    def self.extract_tag_str_from_node_set(node_set)
+      extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_str])
+    end
+
+    def self.extract_tag_ary_from_node_set(node_set)
+      extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_str]).tag_str_to_ary
+    end
+
+    def self.extract_tag_num_from_node_set(node_set)
+      extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_str]).tag_str_to_digit_str
+    end
+
+    def self.extract_tag_sym_from_node_set(node_set)
+      extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_key]).tag_key_to_sym
+    end
+
+    def self.extract_tag_vr_from_node_set(node_set)
+      extract_multiple_data_from_node_set(node_set, NODE_SET_IDX[:tag_vr]).map(&:to_sym)
+    end
+
+    def self.extract_tag_vm_from_node_set(node_set)
+      extract_multiple_data_from_node_set(node_set, NODE_SET_IDX[:tag_vm])
+    end
+
+    def self.extract_multiple_data_from_node_set(node_set, idx)
+      extract_content_data_from_node_set(node_set, idx).split(' or ')
+    end
+
+    def self.extract_content_data_from_node_set(node_set, idx)
+      node_set[idx].content.dcm_unspace
+    end
+
   end
 end
