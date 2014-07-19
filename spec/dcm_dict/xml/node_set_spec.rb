@@ -22,13 +22,13 @@ module DcmDict
 
   describe "XML management" do
     describe "should extract data from single node set data" do
-      XmlSampleSpecHelper.xml_single_set.each do |xml_string, data|
+      XmlSampleSpecHelper.xml_single_set.each do |xml_string, expected_data|
         ns = XmlSampleSpecHelper.string_to_nodeset(xml_string)
-        xml_data = DcmDict::XML.extract_node_set_data(ns)
-        describe "for '#{data[:tag_name]}'" do
-          data.each do |key, value|
+        xml_data = DcmDict::XML::NodeSetData.new(ns).data_element_data
+        describe "for '#{expected_data[:tag_name]}'" do
+          expected_data.each do |key, expected_value|
             it "with key #{key.inspect}" do
-              expect(xml_data[key]).to eq(value)
+              expect(xml_data[key]).to eq(expected_value)
             end
           end
         end
