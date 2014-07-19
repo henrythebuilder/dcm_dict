@@ -14,7 +14,7 @@
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
 module DcmDict
-  module StringRefine
+  module StringRefineXml
     refine String do
 
       # remove zero width spaces

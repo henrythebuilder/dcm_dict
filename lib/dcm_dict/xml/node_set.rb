@@ -29,7 +29,7 @@ module DcmDict
     MultiFieldSeparator = ' or '
 
     class NodeSetData
-      using DcmDict::StringRefine
+      using DcmDict::StringRefineXml
 
       def initialize(node_set)
         @node_set = node_set

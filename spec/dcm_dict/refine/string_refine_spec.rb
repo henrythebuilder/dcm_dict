@@ -21,7 +21,7 @@ module DcmDict
   describe "String refinement" do
 
     describe "should remove unwanted space characters" do
-      using DcmDict::StringRefine
+      using DcmDict::StringRefineXml
 
       [
         ["FileSetDescriptorFileID ", "trailing spaces"],
@@ -37,7 +37,7 @@ module DcmDict
     end
 
     describe "should convert keyword tag string to symbol object" do
-      using DcmDict::StringRefine
+      using DcmDict::StringRefineXml
 
       [
         ['DarkCurrentCounts', :dark_current_counts],
@@ -56,7 +56,7 @@ module DcmDict
     end
 
     describe "should convert standard string tag" do
-      using DcmDict::StringRefine
+      using DcmDict::StringRefineXml
 
       [
         ['(0014,3050)', '00143050', [0x0014,0x3050]],
