@@ -153,8 +153,36 @@ END
           </td>
         </tr>
 END
+      xml_string6=<<END
+  <tr valign="top">
+          <td align="center" colspan="1" rowspan="1">
+            <para>(0018,1202)</para>
+          </td>
+          <td align="left" colspan="1" rowspan="1">
+            <para>DateTime of Last Calibration</para>
+          </td>
+          <td align="left" colspan="1" rowspan="1">
+            <para>Date​Time​Of​Last​Calibration</para>
+          </td>
+          <td align="left" colspan="1" rowspan="1">
+            <para>DT</para>
+          </td>
+          <td align="left" colspan="1" rowspan="1">
+            <para>1</para>
+          </td>
+        </tr>
+END
 
-      {xml_string5 => {tag_str: '(0028,1200)',
+      { xml_string6 => {tag_str: '(0018,1202)',
+                       tag_ary: [0x0018,0x1202],
+                       tag_sym: :date_time_of_last_calibration,
+                       tag_num: '00181202',
+                       tag_name: 'DateTime of Last Calibration',
+                       tag_key: 'DateTimeOfLastCalibration',
+                       tag_vr: [:DT],
+                       tag_vm: ['1'],
+                       tag_note: ''},
+        xml_string5 => {tag_str: '(0028,1200)',
                        tag_ary: [0x0028,0x1200],
                        tag_sym: :gray_lookup_table_data,
                        tag_num: '00281200',

@@ -81,6 +81,7 @@ module DcmDict
     end
 
     def self.extract_content_data_from_node_set(node_set, idx)
+      return '' unless node_set[idx]
       node_set[idx].content.dcm_unspace
     end
 
