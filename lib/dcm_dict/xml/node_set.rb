@@ -18,7 +18,7 @@ require 'nokogiri'
 module DcmDict
   module XML
     using DcmDict::StringRefine
-    NODE_SET_IDX = { tag_str: 0,
+    NODE_SET_IDX = { tag_ps: 0,
                      tag_name: 1,
                      tag_key: 2,
                      tag_vr: 3,
@@ -26,46 +26,28 @@ module DcmDict
                      tag_note: 5 }
 
     def self.extract_node_set_data(node_set)
-      {
-        :tag_str =>  extract_tag_str_from_node_set(node_set),
+      data = {
+        :tag_ps =>  extract_tag_ps_from_node_set(node_set),
         :tag_name =>  extract_tag_name_from_node_set(node_set),
         :tag_key =>  extract_tag_key_from_node_set(node_set),
         :tag_vr =>  extract_tag_vr_from_node_set(node_set),
         :tag_vm =>  extract_tag_vm_from_node_set(node_set),
-        :tag_sym => extract_tag_sym_from_node_set(node_set),
-        :tag_num => extract_tag_num_from_node_set(node_set),
-        :tag_ary => extract_tag_ary_from_node_set(node_set),
         :tag_note => extract_tag_note_from_node_set(node_set)
       }
+      extend_data_element_data(data)
     end
 
     private
-    def self.extract_tag_note_from_node_set(node_set)
-      extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_note])
-    end
-
-    def self.extract_tag_key_from_node_set(node_set)
-      extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_key])
+    def self.extract_tag_ps_from_node_set(node_set)
+      extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_ps])
     end
 
     def self.extract_tag_name_from_node_set(node_set)
       extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_name])
     end
 
-    def self.extract_tag_str_from_node_set(node_set)
-      extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_str])
-    end
-
-    def self.extract_tag_ary_from_node_set(node_set)
-      extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_str]).tag_str_to_ary
-    end
-
-    def self.extract_tag_num_from_node_set(node_set)
-      extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_str]).tag_str_to_digit_str
-    end
-
-    def self.extract_tag_sym_from_node_set(node_set)
-      extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_key]).tag_key_to_sym
+    def self.extract_tag_key_from_node_set(node_set)
+      extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_key])
     end
 
     def self.extract_tag_vr_from_node_set(node_set)
@@ -74,6 +56,39 @@ module DcmDict
 
     def self.extract_tag_vm_from_node_set(node_set)
       extract_multiple_data_from_node_set(node_set, NODE_SET_IDX[:tag_vm])
+    end
+
+    def self.extract_tag_note_from_node_set(node_set)
+      extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_note])
+    end
+
+    def self.extend_data_element_data(data)
+      data[:tag_str] = extract_tag_str_from_data(data)
+      data[:tag_sym] = extract_tag_sym_from_data(data)
+      data[:tag_num] = extract_tag_num_from_data(data)
+      data[:tag_ary] = extract_tag_ary_from_data(data)
+      data[:tag_multiple] = data_with_multiple_tag?(data)
+      data
+    end
+
+    def self.extract_tag_str_from_data(data)
+      data[:tag_ps].gsub(/[xX|]/,'2')
+    end
+
+    def self.data_with_multiple_tag?(data)
+      data[:tag_ps].index(/[xX|]/) ? true : false
+    end
+
+    def self.extract_tag_ary_from_data(data)
+      data[:tag_str].tag_str_to_ary
+    end
+
+    def self.extract_tag_num_from_data(data)
+      data[:tag_str].tag_str_to_digit_str
+    end
+
+    def self.extract_tag_sym_from_data(data)
+      data[:tag_key].tag_key_to_sym
     end
 
     def self.extract_multiple_data_from_node_set(node_set, idx)
