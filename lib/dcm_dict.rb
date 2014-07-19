@@ -16,3 +16,4 @@
 require "dcm_dict/version"
 require "dcm_dict/refine/string_refine"
 require "dcm_dict/xml/node_set"
+require "dcm_dict/data_element_record"
