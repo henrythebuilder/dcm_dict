@@ -26,7 +26,12 @@ module DcmDict
                      tag_note: 5 }
 
     def self.extract_node_set_data(node_set)
-      data = {
+      extend_data_element_data( extract_base_data_from_node_set(node_set) )
+    end
+
+    private
+    def self.extract_base_data_from_node_set(node_set)
+      {
         :tag_ps =>  extract_tag_ps_from_node_set(node_set),
         :tag_name =>  extract_tag_name_from_node_set(node_set),
         :tag_key =>  extract_tag_key_from_node_set(node_set),
@@ -34,10 +39,8 @@ module DcmDict
         :tag_vm =>  extract_tag_vm_from_node_set(node_set),
         :tag_note => extract_tag_note_from_node_set(node_set)
       }
-      extend_data_element_data(data)
     end
 
-    private
     def self.extract_tag_ps_from_node_set(node_set)
       extract_content_data_from_node_set(node_set, NODE_SET_IDX[:tag_ps])
     end
@@ -65,7 +68,7 @@ module DcmDict
     def self.extend_data_element_data(data)
       data[:tag_str] = extract_tag_str_from_data(data)
       data[:tag_sym] = extract_tag_sym_from_data(data)
-      data[:tag_num] = extract_tag_num_from_data(data)
+      data[:tag_ndm] = extract_tag_ndm_from_data(data)
       data[:tag_ary] = extract_tag_ary_from_data(data)
       data[:tag_multiple] = data_with_multiple_tag?(data)
       data
@@ -83,7 +86,7 @@ module DcmDict
       data[:tag_str].tag_str_to_ary
     end
 
-    def self.extract_tag_num_from_data(data)
+    def self.extract_tag_ndm_from_data(data)
       data[:tag_str].tag_str_to_digit_str
     end
 
