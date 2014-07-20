@@ -1,5 +1,3 @@
-# coding: utf-8
-
 #  This file is part of DcmDict gem (dcm_dict).
 #
 #  DcmDict is free software: you can redistribute it and/or modify
@@ -15,22 +13,26 @@
 #  You should have received a copy of the GNU General Public License
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
-require 'spec_helper'
-require 'xml_sample_spec_helper'
+module DcmDict
+  module DataToCode
+    def self.data_element_data_to_code(data, indent: 4)
+      "#{' '*indent}{ tag_ps: '#{data[:tag_ps]}', tag_name: \"#{data[:tag_name]}\", tag_key: '#{data[:tag_key]}', tag_vr: #{data[:tag_vr]}, tag_vm: #{data[:tag_vm]}, tag_str: '#{data[:tag_str]}', tag_sym: #{data[:tag_sym].inspect}, tag_ndm: '#{data[:tag_ndm]}', tag_ary: #{data[:tag_ary].inspect}, tag_multiple: #{data[:tag_multiple].inspect}, tag_note: '#{data[:tag_note]}'},"
+    end
 
-describe "XML management" do
-  describe "should extract data from single node set data" do
-    XmlSampleSpecHelper.xml_single_set.each do |xml_string, expected_data|
-      ns = XmlSampleSpecHelper.string_to_nodeset(xml_string)
-      xml_data = DcmDict::XML::NodeSetData.new(ns).data_element_data
-      describe "for '#{expected_data[:tag_name]}'" do
-        expected_data.each do |key, expected_value|
-          it "with key #{key.inspect}" do
-            expect(xml_data[key]).to eq(expected_value)
-          end
-        end
-      end
+    def self.data_element_header
+      <<END
+module DcmDict
+  module SourceData
+    DataElementsData = [
+END
+    end
+
+    def self.data_element_footer
+      <<END
+    ]
+  end
+end
+END
     end
   end
-
 end
