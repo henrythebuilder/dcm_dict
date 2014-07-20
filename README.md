@@ -17,5 +17,8 @@ TBD
 ## License
 Copyright (C) 2014  Enrico Rivarola. See the `LICENSE` file for license details.
 
+## Source
+Main source code repository on github at [henrythebuilder/dcm_dict](https://github.com/henrythebuilder/dcm_dict)
+
 
 [1]: http://medical.nema.org/dicom/        "DICOM Homepage"
