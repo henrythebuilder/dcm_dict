@@ -7,7 +7,7 @@ desc "Check all spec"
 RSpec::Core::RakeTask.new(:spec) do |t|
   t.pattern = 'spec/**/*_spec.rb'
   t.ruby_opts = "-w"
-  t.rspec_opts = '--format documentation'
+  t.rspec_opts = '--color --format documentation'
 end
 
 desc "Check all spec with code coverage"
