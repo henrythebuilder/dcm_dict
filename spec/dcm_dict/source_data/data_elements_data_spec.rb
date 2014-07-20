@@ -16,9 +16,20 @@
 #  You should have received a copy of the GNU General Public License
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
-require "dcm_dict/version"
-require "dcm_dict/refine/string_refine"
-require "dcm_dict/xml/node_set"
-require "dcm_dict/encoder/data_to_code"
-require "dcm_dict/data_element_record"
-require "dcm_dict/source_data/data_elements_data"
+require 'spec_helper'
+require 'set'
+
+describe "DcmDict::SourceData::DataElementsData" do
+  it "All record must have valid field" do
+    supported_keys = [:tag_ps, :tag_name, :tag_key, :tag_vr, :tag_vm, :tag_str, :tag_sym, :tag_ndm, :tag_ary, :tag_multiple, :tag_note].to_set
+    not_empty_keys = supported_keys-[:tag_multiple, :tag_note]
+    DcmDict::SourceData::DataElementsData.each do |record|
+      supported_keys.each do |key|
+        expect(record).to have_key(key)
+      end
+      not_empty_keys.each do |key|
+        expect(record[key].empty?).to be_falsy, "Error on check #{key} not empty for #{record[:tag_ps]} - '#{record[key].inspect}'"
+      end
+    end
+  end
+end
