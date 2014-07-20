@@ -300,6 +300,47 @@ END
     {xml_string => data}
   end
 
+  def self.xml_sample_empty
+    xml_string=<<END
+        <tr valign="top">
+          <td align="center" colspan="1" rowspan="1">
+            <para>
+              <emphasis role="italic">(0018,9445)</emphasis>
+            </para>
+          </td>
+          <td align="center" colspan="1" rowspan="1">
+            <para/>
+          </td>
+          <td align="center" colspan="1" rowspan="1">
+            <para/>
+          </td>
+          <td align="center" colspan="1" rowspan="1">
+            <para/>
+          </td>
+          <td align="center" colspan="1" rowspan="1">
+            <para/>
+          </td>
+          <td align="center" colspan="1" rowspan="1">
+            <para>
+              <emphasis role="italic">RET - See Note <xref linkend="note_6_3"/></emphasis>
+            </para>
+          </td>
+        </tr>
+END
+    data = {tag_ps: '(0018,9445)',
+            tag_str: '(0018,9445)',
+            tag_ary: [0x0018,0x9445],
+            tag_sym: :placeholder_0018_9445,
+            tag_ndm: '00189445',
+            tag_name: 'Placeholder (0018,9445)',
+            tag_key: 'Placeholder_0018_9445',
+            tag_vr: [:UN],
+            tag_vm: ['1'],
+            tag_note: 'RET - See Note',
+            tag_multiple: false}
+    {xml_string => data}
+  end
+
   def self.xml_single_set
     { }.merge(xml_sample_standard).
       merge(xml_sample_standard_empty_note).
@@ -307,7 +348,8 @@ END
       merge(xml_sample_no_note).
       merge(xml_sample_multi_vr_vm).
       merge(xml_sample_no_vr).
-      merge(xml_sample_multi_vr)
+      merge(xml_sample_multi_vr).
+      merge(xml_sample_empty)
   end
 
   def self.string_to_nodeset(xml_string)

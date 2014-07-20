@@ -44,14 +44,36 @@ module DcmDict
 
       private
       def extract_base_data()
-        {
-          :tag_ps =>  extract_tag_ps(),
-          :tag_name =>  extract_tag_name(),
-          :tag_key =>  extract_tag_key(),
-          :tag_vr =>  extract_tag_vr(),
-          :tag_vm =>  extract_tag_vm(),
-          :tag_note => extract_tag_note()
-        }
+        check_base_data( { :tag_ps =>  extract_tag_ps(),
+                           :tag_name =>  extract_tag_name(),
+                           :tag_key =>  extract_tag_key(),
+                           :tag_vr =>  extract_tag_vr(),
+                           :tag_vm =>  extract_tag_vm(),
+                           :tag_note => extract_tag_note() })
+      end
+
+      def check_base_data(data)
+        check_placeholders(data)
+        data
+      end
+
+      def check_placeholders(data)
+        # PS3.5:
+        # For some Data Elements, no Name or Keyword or VR or VM is specified;
+        # these are "placeholders" that are not assigned but will not be reused.
+        if data[:tag_name].empty?
+          data[:tag_name] = "Placeholder #{data[:tag_ps]}" if data[:tag_name].empty?
+        end
+        if data[:tag_key].empty?
+          new_key = data[:tag_ps].gsub(',','_').gsub(/[\(\)]/,'')
+          data[:tag_key] = "Placeholder_#{new_key}"
+        end
+        if data[:tag_vr].empty?
+          data[:tag_vr] = [:UN]
+        end
+        if data[:tag_vm].empty?
+          data[:tag_vm] = ['1']
+        end
       end
 
       def extract_tag_ps()
