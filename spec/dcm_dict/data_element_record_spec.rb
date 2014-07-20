@@ -15,64 +15,60 @@
 #
 require 'spec_helper'
 
-module DcmDict
+describe DcmDict::DataElementRecord do
+  [
+    {tag_ps: '(0008,0010)',
+     tag_name: 'Recognition Code',
+     tag_key: 'RecognitionCode',
+     tag_vr: [:SH],
+     tag_vm: ['1'],
+     tag_note: 'RET',
+     tag_ary: [0x0008,0x0010],
+     tag_sym: :recognition_code,
+     tag_ndm: '00080010',
+     tag_str: '(0008,0010)',
+     tag_multiple: false
+    },
+  ].each do |data|
+    it "Handle Data Element Data correctly" do
+      der = DcmDict::DataElementRecord.new(data)
+      expect(der.tag_ps).to eq(data[:tag_ps])
+      expect(der.name).to eq(data[:tag_name])
+      expect(der.keyword).to eq(data[:tag_key])
+      expect(der.vr).to eq(data[:tag_vr])
+      expect(der.vm).to eq(data[:tag_vm])
+      expect(der.note).to eq(data[:tag_note])
+      expect(der.tag_ary).to eq(data[:tag_ary])
+      expect(der.tag_sym).to eq(data[:tag_sym])
+      expect(der.tag_ndm).to eq(data[:tag_ndm])
+      expect(der.tag_str).to eq(data[:tag_str])
+      expect(der.multiple_tag?).to eq(data[:tag_multiple])
 
-  describe DcmDict::DataElementRecord do
-    [
-      {tag_ps: '(0008,0010)',
-       tag_name: 'Recognition Code',
-       tag_key: 'RecognitionCode',
-       tag_vr: [:SH],
-       tag_vm: ['1'],
-       tag_note: 'RET',
-       tag_ary: [0x0008,0x0010],
-       tag_sym: :recognition_code,
-       tag_ndm: '00080010',
-       tag_str: '(0008,0010)',
-       tag_multiple: false
-      },
-    ].each do |data|
-      it "Handle Data Element Data correctly" do
-        der = DataElementRecord.new(data)
-        expect(der.tag_ps).to eq(data[:tag_ps])
-        expect(der.name).to eq(data[:tag_name])
-        expect(der.keyword).to eq(data[:tag_key])
-        expect(der.vr).to eq(data[:tag_vr])
-        expect(der.vm).to eq(data[:tag_vm])
-        expect(der.note).to eq(data[:tag_note])
-        expect(der.tag_ary).to eq(data[:tag_ary])
-        expect(der.tag_sym).to eq(data[:tag_sym])
-        expect(der.tag_ndm).to eq(data[:tag_ndm])
-        expect(der.tag_str).to eq(data[:tag_str])
-        expect(der.multiple_tag?).to eq(data[:tag_multiple])
-
-        data.each do |key, expected_val|
-          expect(der.send(key)).to eq(expected_val)
-        end
-
+      data.each do |key, expected_val|
+        expect(der.send(key)).to eq(expected_val)
       end
 
-      it "Handle methods correctly (by symbol)" do
-        der = DataElementRecord.new(data)
-        data.each do |key, expected_val|
-          expect(der.respond_to?(key)).to be true
-        end
+    end
 
-        expect(der.respond_to?(:undefined_method_for_data_element_record)).to be false
-        expect {der.undefined_method_for_data_element_record }.to raise_error(NoMethodError)
+    it "Handle methods correctly (by symbol)" do
+      der = DcmDict::DataElementRecord.new(data)
+      data.each do |key, expected_val|
+        expect(der.respond_to?(key)).to be true
       end
 
-      it "Handle methods correctly (by string)" do
-        der = DataElementRecord.new(data)
-        data.each do |key, expected_val|
-          expect(der.respond_to?(key.to_s)).to be true
-        end
+      expect(der.respond_to?(:undefined_method_for_data_element_record)).to be false
+      expect {der.undefined_method_for_data_element_record }.to raise_error(NoMethodError)
+    end
 
-        expect(der.respond_to?(:undefined_method_for_data_element_record.to_s)).to be false
-        expect {der.undefined_method_for_data_element_record }.to raise_error(NoMethodError)
-        expect {der.send("undefined_method_for_data_element_record") }.to raise_error(NoMethodError)
+    it "Handle methods correctly (by string)" do
+      der = DcmDict::DataElementRecord.new(data)
+      data.each do |key, expected_val|
+        expect(der.respond_to?(key.to_s)).to be true
       end
 
+      expect(der.respond_to?(:undefined_method_for_data_element_record.to_s)).to be false
+      expect {der.undefined_method_for_data_element_record }.to raise_error(NoMethodError)
+      expect {der.send("undefined_method_for_data_element_record") }.to raise_error(NoMethodError)
     end
 
   end
