@@ -28,7 +28,6 @@ module DcmDict
                    tag_vm: 4,
                    tag_note: 5 }
 
-    DefaultMultiTagValue = '2'
     MultiFieldSeparator = ' or '
 
     class NodeSetData
@@ -39,42 +38,20 @@ module DcmDict
       end
 
       def data_element_data
-        extend_base_data( extract_base_data )
+        SourceData::RawData.new( extract_base_data ).
+          data_element_record_data
       end
 
       private
       def extract_base_data()
-        check_base_data( { :tag_ps =>  extract_tag_ps(),
-                           :tag_name =>  extract_tag_name(),
-                           :tag_key =>  extract_tag_key(),
-                           :tag_vr =>  extract_tag_vr(),
-                           :tag_vm =>  extract_tag_vm(),
-                           :tag_note => extract_tag_note() })
+        { :tag_ps =>  extract_tag_ps(),
+          :tag_name =>  extract_tag_name(),
+          :tag_key =>  extract_tag_key(),
+          :tag_vr =>  extract_tag_vr(),
+          :tag_vm =>  extract_tag_vm(),
+          :tag_note => extract_tag_note() }
       end
 
-      def check_base_data(data)
-        check_placeholders(data)
-        data
-      end
-
-      def check_placeholders(data)
-        # PS3.5:
-        # For some Data Elements, no Name or Keyword or VR or VM is specified;
-        # these are "placeholders" that are not assigned but will not be reused.
-        if data[:tag_name].empty?
-          data[:tag_name] = "Placeholder #{data[:tag_ps]}" if data[:tag_name].empty?
-        end
-        if data[:tag_key].empty?
-          new_key = data[:tag_ps].gsub(',','_').gsub(/[\(\)]/,'')
-          data[:tag_key] = "Placeholder_#{new_key}"
-        end
-        if data[:tag_vr].empty?
-          data[:tag_vr] = [:UN]
-        end
-        if data[:tag_vm].empty?
-          data[:tag_vm] = ['1']
-        end
-      end
 
       def extract_tag_ps()
         extract_content_data(NodeSetIdx[:tag_ps])
@@ -100,34 +77,6 @@ module DcmDict
         extract_content_data(NodeSetIdx[:tag_note])
       end
 
-      def extend_base_data(data)
-        data[:tag_str] = extract_tag_str_from_data(data)
-        data[:tag_sym] = extract_tag_sym_from_data(data)
-        data[:tag_ndm] = extract_tag_ndm_from_data(data)
-        data[:tag_ary] = extract_tag_ary_from_data(data)
-        data[:tag_multiple] = data_with_multiple_tag?(data)
-        data
-      end
-
-      def extract_tag_str_from_data(data)
-        data[:tag_ps].gsub(/[xX|]/, DefaultMultiTagValue)
-      end
-
-      def data_with_multiple_tag?(data)
-        data[:tag_ps].index(/[xX|]/) ? true : false
-      end
-
-      def extract_tag_ary_from_data(data)
-        data[:tag_str].tag_str_to_ary
-      end
-
-      def extract_tag_ndm_from_data(data)
-        data[:tag_str].tag_str_to_digit_str
-      end
-
-      def extract_tag_sym_from_data(data)
-        data[:tag_key].tag_key_to_sym
-      end
 
       def extract_multiple_data(idx)
         extract_content_data(idx).split(MultiFieldSeparator)
