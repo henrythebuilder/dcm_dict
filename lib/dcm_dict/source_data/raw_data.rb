@@ -49,11 +49,11 @@ module DcmDict
       end
 
       def extract_tag_ary_from_data
-        @data[:tag_str].tag_str_to_ary
+        @data[:tag_str].to_tag_ary
       end
 
       def extract_tag_ndm_from_data
-        @data[:tag_str].tag_str_to_digit_str
+        @data[:tag_str].to_tag_ndm
       end
 
       def extract_tag_sym_from_data

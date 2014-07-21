@@ -64,7 +64,7 @@ module DcmDict
     def make_specific_record(tag)
       ref_tag = tag.to_tag_ary
       DataElementRecord.new( @data.merge( { tag_str: ref_tag.to_tag_str,
-                                            tag_ndm: ref_tag.to_tag_str.tag_str_to_digit_str,
+                                            tag_ndm: ref_tag.to_tag_str.to_tag_ndm,
                                             tag_ary: ref_tag }))
     end
 

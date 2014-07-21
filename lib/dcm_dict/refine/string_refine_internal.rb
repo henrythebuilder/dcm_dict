@@ -35,29 +35,23 @@ module DcmDict
       end
 
       # (0010,0010) -> '00100010'
-      def tag_str_to_digit_str
+      def to_tag_ndm
         dgt = self.gsub(/[\(|\),]/, '')
         raise "wrong value for tag" unless dgt.match(/^[0-9|A-F|]{8}$/)
         dgt
       end
 
       # (0010,0010) -> [0x0010, 0x0010]
-      def tag_str_to_ary
-        return to_tag_ary
-#        self.gsub(/[\(|\)]/, '').
-#          split(',').
-#          map(&:hex)
-      end
-
       def to_tag_ary
-        self.tag_str_to_digit_str.
+        self.to_tag_ndm.
           insert(4,',').
           split(',').
           map(&:hex)
       end
 
+      # '00100010', (0010,0010) -> (0010,0010)
       def to_tag_str
-        self.tag_str_to_digit_str.
+        self.to_tag_ndm.
           insert(4,',').
           insert(0,'(').
           concat(')')

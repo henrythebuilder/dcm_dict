@@ -65,11 +65,11 @@ describe "String refinement" do
       ['(FFFE,E00D)', 'FFFEE00D', [0xfffe,0xe00d]]
     ].each do |str, value_str, value_ary|
       it "from #{str.inspect} to a numeric string tag as #{value_str.inspect}" do
-        expect(str.tag_str_to_digit_str).to eq(value_str)
+        expect(str.to_tag_ndm).to eq(value_str)
       end
 
       it "from #{str.inspect} to an array object as #{value_ary.inspect}" do
-        expect(str.tag_str_to_ary).to eq(value_ary)
+        expect(str.to_tag_ary).to eq(value_ary)
       end
     end
   end
