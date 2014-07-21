@@ -20,6 +20,7 @@ module DcmDict
   module Dictionary
     class DataElementDictionary
       using DcmDict::ArrayRefineInternal
+      using DcmDict::StringRefineInternal
 
       def initialize
         @index_keys = [:tag_ps, :tag_name, :tag_key, :tag_str, :tag_sym, :tag_ndm, :tag_ary]
@@ -27,10 +28,11 @@ module DcmDict
         @multi_dict = []
         map_source_data
       end
+
       def feature_of(tag)
-        @standard_dict[tag] ||
-          try_to_find_multiple_tag(tag) ||
-          try_to_find_unknown_tag(tag)
+        try_to_find(tag)
+        rescue
+          nil
       end
 
       private
@@ -44,10 +46,15 @@ module DcmDict
         end
       end
 
+      def try_to_find(tag)
+        @standard_dict[tag] ||
+          try_to_find_multiple_tag(tag) ||
+          try_to_find_unknown_tag(tag)
+      end
+
       def try_to_find_multiple_tag(tag)
         @multi_dict.each do |record|
           if (record.match_tag?(tag))
-            puts "bingo #{'!'*20}"
             return record.make_specific_record(tag)
           end
         end
@@ -55,8 +62,7 @@ module DcmDict
       end
 
       def try_to_find_unknown_tag(unknown_tag)
-        tag = [unknown_tag.group, unknown_tag.element]
-        return nil unless tag.size == 2
+        tag = unknown_tag.to_tag_ary
         data = if tag[1] == 0
                  SourceData::DetachedData.make_group_length_data(tag)
                elsif tag[0].odd? and tag[1]<0xff

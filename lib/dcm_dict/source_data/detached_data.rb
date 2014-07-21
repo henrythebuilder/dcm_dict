@@ -20,8 +20,10 @@ module DcmDict
   module SourceData
     module DetachedData
       using DcmDict::ArrayRefineInternal
+      using DcmDict::StringRefineInternal
+
       def self.make_group_length_data(tag)
-        group = tag.group_str
+        group = tag.to_tag_ary.group_str
         base_data = { :tag_ps =>  "(#{group},0000)",
                       :tag_name => "Group Length",
                       :tag_key =>  "GroupLength",
@@ -30,8 +32,9 @@ module DcmDict
                       :tag_note =>  'Dummy Record'}
         RawData.new(base_data).data_element_record_data
       end
+
       def self.make_private_creator_data(tag)
-        base_data = { :tag_ps =>  tag.tag_str,
+        base_data = { :tag_ps =>  tag.to_tag_str,
                       :tag_name => "Private Creator",
                       :tag_key =>  "PrivateCreator",
                       :tag_vr =>  [:LO],
@@ -41,7 +44,7 @@ module DcmDict
       end
 
       def self.make_unknown_data(tag)
-        base_data = { :tag_ps =>  tag.tag_str,
+        base_data = { :tag_ps =>  tag.to_tag_str,
                       :tag_name => "Unknown Tag",
                       :tag_key =>  "UnknownTag",
                       :tag_vr =>  [:UN],

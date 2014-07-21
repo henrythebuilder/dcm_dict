@@ -62,9 +62,9 @@ module DcmDict
     end
 
     def make_specific_record(tag)
-      ref_tag = tag.tag_ary
-      DataElementRecord.new( @data.merge( { tag_str: ref_tag.tag_str,
-                                            tag_ndm: ref_tag.tag_str.tag_str_to_digit_str,
+      ref_tag = tag.to_tag_ary
+      DataElementRecord.new( @data.merge( { tag_str: ref_tag.to_tag_str,
+                                            tag_ndm: ref_tag.to_tag_str.tag_str_to_digit_str,
                                             tag_ary: ref_tag }))
     end
 
@@ -74,8 +74,7 @@ module DcmDict
     end
 
     def decompose_tag(tag)
-      return tag.tag_str if tag.is_a?(Array)
-      tag
+      tag.to_tag_str
     end
 
     def tag_pattern

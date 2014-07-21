@@ -48,11 +48,24 @@ describe DcmDict::Dictionary::DataElementDictionary do
   DataElementSampleSpecHelper.multiple_tag_sample.each do |tag, data|
     it "should handling multiple tag (#{tag.inspect})" do
       obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(tag)
+      expect(obj).not_to be_nil, "#{tag.inspect} not found into dictionary"
       data.each do |key, value|
         field = obj.send(key)
         expect(field).to eq(value)
       end
 
+    end
+  end
+
+  [nil,
+   123455,
+   'abracadabra',
+   Time.now,
+   [1234.5678, 1234]
+  ].each do |wrong_tag|
+    it "with wrong tag request as tag = #{wrong_tag.inspect}" do
+      obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(wrong_tag)
+      expect(obj).to be_nil
     end
   end
 end

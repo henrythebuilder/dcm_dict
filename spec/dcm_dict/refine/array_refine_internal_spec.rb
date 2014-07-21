@@ -53,14 +53,14 @@ describe "Array Refinement" do
       it "for #{tag.inspect}" do
         expect(tag.group_str).to eq(value[:group])
         expect(tag.element_str).to eq(value[:element])
-        expect(tag.tag_str).to eq(value[:tag_str])
+        expect(tag.to_tag_str).to eq(value[:tag_str])
       end
     end
   end
 
   using DcmDict::ArrayRefineInternal
   it "should implement tag_ary metod" do
-    expect([0x0010,0x0020].tag_ary).to eq([0x0010,0x0020])
+    expect([0x0010,0x0020].to_tag_ary).to eq([0x0010,0x0020])
   end
 
 end

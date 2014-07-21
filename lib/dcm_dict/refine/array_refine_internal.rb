@@ -37,11 +37,11 @@ module DcmDict
         element.to_s(16).rjust(4, '0').upcase()
       end
 
-      def tag_str
+      def to_tag_str
         "(#{group_str},#{element_str})"
       end
 
-      def tag_ary
+      def to_tag_ary
         [group,element]
       end
 

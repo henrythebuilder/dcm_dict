@@ -80,8 +80,28 @@ describe "String refinement" do
     '00100020' => [0x0010,0x0020]
 
   }.each do |src, expected_val|
-    it "should implement tag_ary metod" do
-      expect(src.tag_ary).to eq(expected_val)
+    it "should implement to_tag_ary metod" do
+      expect(src.to_tag_ary).to eq(expected_val)
+    end
+  end
+
+  {
+    '(0010,0020)'=> '(0010,0020)',
+    '00100020' => '(0010,0020)'
+
+  }.each do |src, expected_val|
+    it "should implement to_tag_str method" do
+      expect(src.to_tag_str).to eq(expected_val)
+    end
+  end
+
+  [
+    '(0010,00208)',
+    'abracadabra',
+    Time.now.to_s,
+  ].each do |src|
+    it "should manage wrong value (#{src.inspect}) with to_tag_str method" do
+      expect{src.to_tag_str}.to raise_error
     end
   end
 

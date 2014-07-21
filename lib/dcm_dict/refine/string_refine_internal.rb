@@ -18,8 +18,8 @@
 #
 module DcmDict
   module StringRefineInternal
-    refine String do
 
+    refine String do
       # remove zero width spaces
       def dcm_unspace
         zero_width_space = "\u200B"
@@ -36,20 +36,31 @@ module DcmDict
 
       # (0010,0010) -> '00100010'
       def tag_str_to_digit_str
-        self.gsub(/[\(|\),]/, '')
+        dgt = self.gsub(/[\(|\),]/, '')
+        raise "wrong value for tag" unless dgt.match(/^[0-9|A-F|]{8}$/)
+        dgt
       end
 
       # (0010,0010) -> [0x0010, 0x0010]
       def tag_str_to_ary
-        self.gsub(/[\(|\)]/, '').
+        return to_tag_ary
+#        self.gsub(/[\(|\)]/, '').
+#          split(',').
+#          map(&:hex)
+      end
+
+      def to_tag_ary
+        self.tag_str_to_digit_str.
+          insert(4,',').
           split(',').
           map(&:hex)
       end
 
-      def tag_ary
+      def to_tag_str
         self.tag_str_to_digit_str.
           insert(4,',').
-          tag_str_to_ary
+          insert(0,'(').
+          concat(')')
       end
 
     end

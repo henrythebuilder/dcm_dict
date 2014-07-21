@@ -23,6 +23,14 @@ module DataElementSampleSpecHelper
       [17,5] => {tag_ps: '(0011,0005)', tag_str: '(0011,0005)', tag_ary: [0x0011,0x0005],
                  tag_sym: :private_creator, tag_ndm: '00110005', tag_name: 'Private Creator',
                  tag_key: 'PrivateCreator', tag_vr: [:LO], tag_vm: ['1'], tag_note: 'Dummy Record',
+                 tag_multiple: false},
+      '(0011,0005)' => {tag_ps: '(0011,0005)', tag_str: '(0011,0005)', tag_ary: [0x0011,0x0005],
+                 tag_sym: :private_creator, tag_ndm: '00110005', tag_name: 'Private Creator',
+                 tag_key: 'PrivateCreator', tag_vr: [:LO], tag_vm: ['1'], tag_note: 'Dummy Record',
+                 tag_multiple: false},
+      '00110005' => {tag_ps: '(0011,0005)', tag_str: '(0011,0005)', tag_ary: [0x0011,0x0005],
+                 tag_sym: :private_creator, tag_ndm: '00110005', tag_name: 'Private Creator',
+                 tag_key: 'PrivateCreator', tag_vr: [:LO], tag_vm: ['1'], tag_note: 'Dummy Record',
                  tag_multiple: false}
     }
   end
@@ -33,6 +41,12 @@ module DataElementSampleSpecHelper
                    tag_sym: :unknown_tag, tag_ndm: '00110200', tag_name: 'Unknown Tag',
                    tag_key: 'UnknownTag', tag_vr: [:UN], tag_vm: ['1'], tag_note: 'Dummy Record', tag_multiple: false},
       [0x4444,0x1234] => {tag_ps: '(4444,1234)', tag_str: '(4444,1234)', tag_ary: [0x4444,0x1234],
+                   tag_sym: :unknown_tag, tag_ndm: '44441234', tag_name: 'Unknown Tag',
+                   tag_key: 'UnknownTag', tag_vr: [:UN], tag_vm: ['1'], tag_note: 'Dummy Record', tag_multiple: false},
+      '(4444,1234)' => {tag_ps: '(4444,1234)', tag_str: '(4444,1234)', tag_ary: [0x4444,0x1234],
+                   tag_sym: :unknown_tag, tag_ndm: '44441234', tag_name: 'Unknown Tag',
+                   tag_key: 'UnknownTag', tag_vr: [:UN], tag_vm: ['1'], tag_note: 'Dummy Record', tag_multiple: false},
+      '44441234' => {tag_ps: '(4444,1234)', tag_str: '(4444,1234)', tag_ary: [0x4444,0x1234],
                    tag_sym: :unknown_tag, tag_ndm: '44441234', tag_name: 'Unknown Tag',
                    tag_key: 'UnknownTag', tag_vr: [:UN], tag_vm: ['1'], tag_note: 'Dummy Record', tag_multiple: false},
     }
@@ -59,15 +73,31 @@ module DataElementSampleSpecHelper
       [0x4444,0x0000] => {tag_ps: '(4444,0000)', tag_str: '(4444,0000)', tag_ary: [0x4444,0x0000],
                           tag_sym: :group_length, tag_ndm: '44440000', tag_name: 'Group Length',
                           tag_key: 'GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',
+                          tag_multiple: false},
+      '44440000' => {tag_ps: '(4444,0000)', tag_str: '(4444,0000)', tag_ary: [0x4444,0x0000],
+                          tag_sym: :group_length, tag_ndm: '44440000', tag_name: 'Group Length',
+                          tag_key: 'GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',
+                          tag_multiple: false},
+      '(4444,0000)' => {tag_ps: '(4444,0000)', tag_str: '(4444,0000)', tag_ary: [0x4444,0x0000],
+                          tag_sym: :group_length, tag_ndm: '44440000', tag_name: 'Group Length',
+                          tag_key: 'GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',
                           tag_multiple: false}
+
     }
   end
 
   def self.multiple_tag_sample
     {
       # (60xx,0010) -> "Overlay Rows"
-      [0x60a2,0x0010] => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(60A2,0010)', tag_sym: :overlay_rows, tag_ndm: '60A20010', tag_ary: [0x60a2,0x0010], tag_multiple: true, tag_note: ''},
-      '60a20010' => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(60A2,0010)', tag_sym: :overlay_rows, tag_ndm: '60A20010', tag_ary: [0x60a2,0x0010], tag_multiple: true, tag_note: ''}
+      [0x60A2,0x0010] => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(60A2,0010)', tag_sym: :overlay_rows, tag_ndm: '60A20010', tag_ary: [0x60a2,0x0010], tag_multiple: true, tag_note: ''},
+      '60A20010' => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(60A2,0010)', tag_sym: :overlay_rows, tag_ndm: '60A20010', tag_ary: [0x60a2,0x0010], tag_multiple: true, tag_note: ''},
+      '(60A2,0010)' => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(60A2,0010)', tag_sym: :overlay_rows, tag_ndm: '60A20010', tag_ary: [0x60a2,0x0010], tag_multiple: true, tag_note: ''},
+      '(6022,0010)' => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(6022,0010)', tag_sym: :overlay_rows, tag_ndm: '60220010', tag_ary: [24610, 16], tag_multiple: true, tag_note: ''},
+      'OverlayRows' => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(6022,0010)', tag_sym: :overlay_rows, tag_ndm: '60220010', tag_ary: [24610, 16], tag_multiple: true, tag_note: ''},
+      [0x6022,0x0010] => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(6022,0010)', tag_sym: :overlay_rows, tag_ndm: '60220010', tag_ary: [24610, 16], tag_multiple: true, tag_note: ''},
+      [0x1010,0xa1b2] => { tag_ps: '(1010,xxxx)', tag_name: "Zonal Map", tag_key: 'ZonalMap', tag_vr: [:US], tag_vm: ["1-n"], tag_str: '(1010,A1B2)', tag_sym: :zonal_map, tag_ndm: '1010A1B2', tag_ary: [0x1010, 0xa1b2], tag_multiple: true, tag_note: 'RET'},
+      '(1010,A1B2)' => { tag_ps: '(1010,xxxx)', tag_name: "Zonal Map", tag_key: 'ZonalMap', tag_vr: [:US], tag_vm: ["1-n"], tag_str: '(1010,A1B2)', tag_sym: :zonal_map, tag_ndm: '1010A1B2', tag_ary: [0x1010, 0xa1b2], tag_multiple: true, tag_note: 'RET'},
+      '1010A1B2' => { tag_ps: '(1010,xxxx)', tag_name: "Zonal Map", tag_key: 'ZonalMap', tag_vr: [:US], tag_vm: ["1-n"], tag_str: '(1010,A1B2)', tag_sym: :zonal_map, tag_ndm: '1010A1B2', tag_ary: [0x1010, 0xa1b2], tag_multiple: true, tag_note: 'RET'},
     }
   end
 
