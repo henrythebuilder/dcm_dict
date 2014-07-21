@@ -19,6 +19,7 @@
 module DcmDict
   class DataElementRecord
     using DcmDict::StringRefineXml
+    using DcmDict::ArrayRefine
 
     MethodsMap = {:multiple_tag? => :tag_multiple,
                   :name => :tag_name,
@@ -35,6 +36,14 @@ module DcmDict
 
     def initialize(data)
       @data = data
+    end
+
+    def group
+      @data[:tag_ary].group
+    end
+
+    def element
+      @data[:tag_ary].element
     end
 
     def method_missing(name, *args, &block)
