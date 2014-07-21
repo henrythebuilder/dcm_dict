@@ -61,13 +61,9 @@ module DcmDict
       end
 
       def check_base_data(data)
-        check_lowercase_tag(data)
+        data[:tag_ps].upcase!
         check_placeholders(data)
         data
-      end
-
-      def check_lowercase_tag(data)
-        data[:tag_ps].upcase!
       end
 
       def check_placeholders(data)
@@ -75,7 +71,7 @@ module DcmDict
         # For some Data Elements, no Name or Keyword or VR or VM is specified;
         # these are "placeholders" that are not assigned but will not be reused.
         if data[:tag_name].empty?
-          data[:tag_name] = "Placeholder #{data[:tag_ps]}" if data[:tag_name].empty?
+          data[:tag_name] = "Placeholder #{data[:tag_ps]}"
         end
         if data[:tag_key].empty?
           new_key = data[:tag_ps].gsub(',','_').gsub(/[\(\)]/,'')

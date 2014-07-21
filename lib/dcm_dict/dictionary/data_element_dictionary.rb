@@ -18,6 +18,8 @@
 #
 module DcmDict
   module Dictionary
+
+    # Main class to handle data element data as dictionary
     class DataElementDictionary
       using DcmDict::ArrayRefineInternal
       using DcmDict::StringRefineInternal

@@ -17,6 +17,8 @@
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
 module DcmDict
+
+  # Class to handle data element record from source dictionary data
   class DataElementRecord
     using DcmDict::StringRefineInternal
     using DcmDict::ArrayRefineInternal
@@ -47,7 +49,7 @@ module DcmDict
     end
 
     def match_tag?(tag)
-      tag_to_match = decompose_tag(tag)
+      tag_to_match = tag.to_tag_str
       tag_pattern.each do |pattern|
         re = Regexp.new(pattern)
         return true if re.match(tag_to_match)
@@ -56,25 +58,23 @@ module DcmDict
     end
 
     def method_missing(name, *args, &block)
-      return @data[MethodsMap[name.to_sym]] if (MethodsMap.has_key?(name.to_sym))
-      return @data[name.to_sym] if (@data.has_key?(name.to_sym))
+      name_as_sym = name.to_sym
+      return @data[MethodsMap[name_as_sym]] if (MethodsMap.has_key?(name_as_sym))
+      return @data[name_as_sym] if (@data.has_key?(name_as_sym))
       super
     end
 
     def make_specific_record(tag)
       ref_tag = tag.to_tag_ary
-      DataElementRecord.new( @data.merge( { tag_str: ref_tag.to_tag_str,
-                                            tag_ndm: ref_tag.to_tag_str.to_tag_ndm,
+      tag_str = ref_tag.to_tag_str
+      DataElementRecord.new( @data.merge( { tag_str: tag_str,
+                                            tag_ndm: tag_str.to_tag_ndm,
                                             tag_ary: ref_tag }))
     end
 
     private
     def respond_to_missing?(name, include_priv)
       MethodsMap.has_key?(name) || @data.has_key?(name)
-    end
-
-    def decompose_tag(tag)
-      tag.to_tag_str
     end
 
     def tag_pattern
