@@ -44,4 +44,15 @@ describe DcmDict::Dictionary::DataElementDictionary do
       end
     end
   end
+
+  DataElementSampleSpecHelper.multiple_tag_sample.each do |tag, data|
+    it "should handling multiple tag (#{tag.inspect})" do
+      obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(tag)
+      data.each do |key, value|
+        field = obj.send(key)
+        expect(field).to eq(value)
+      end
+
+    end
+  end
 end

@@ -74,12 +74,39 @@ describe DcmDict::DataElementRecord do
       expect {der.send("undefined_method_for_data_element_record") }.to raise_error(NoMethodError)
     end
 
-    using DcmDict::ArrayRefine
+    using DcmDict::ArrayRefineInternal
 
     it "Handle group and element with explicit method" do
       der = DcmDict::DataElementRecord.new(data)
       expect(der.group).to eq(data[:tag_ary].group)
       expect(der.element).to eq(data[:tag_ary].element)
+    end
+
+  end
+
+  {
+    # { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(6022,0010)', tag_sym: :overlay_rows, tag_ndm: '60220010', tag_ary: [24610, 16], tag_multiple: true, tag_note: ''},
+    [
+      '(6068,0010)', '60680010', [0x6068,0x0010]
+    ] => {
+      :source_data => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(6022,0010)', tag_sym: :overlay_rows, tag_ndm: '60220010', tag_ary: [24610, 16], tag_multiple: true, tag_note: ''},
+      :specific_data => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(6068,0010)', tag_sym: :overlay_rows, tag_ndm: '60680010', tag_ary: [0x6068,0x0010], tag_multiple: true, tag_note: ''} }
+  }.each do |keys, multi_data|
+    it "check match for multiple tag definition" do
+      der = DcmDict::DataElementRecord.new(multi_data[:source_data])
+      keys.each do |key|
+        expect(der.match_tag?(key)).to be_truthy
+      end
+
+    end
+
+    it "generate equivalent record for specific tag" do
+      der_multi = DcmDict::DataElementRecord.new(multi_data[:source_data])
+      der = der_multi.make_specific_record(multi_data[:specific_data][:tag_ary])
+      multi_data[:specific_data].each do |key, val|
+        expect(der.send(key)).to eq(val)
+      end
+
     end
   end
 

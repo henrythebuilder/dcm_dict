@@ -18,8 +18,8 @@
 #
 module DcmDict
   class DataElementRecord
-    using DcmDict::StringRefineXml
-    using DcmDict::ArrayRefine
+    using DcmDict::StringRefineInternal
+    using DcmDict::ArrayRefineInternal
 
     MethodsMap = {:multiple_tag? => :tag_multiple,
                   :name => :tag_name,
@@ -46,15 +46,41 @@ module DcmDict
       @data[:tag_ary].element
     end
 
+    def match_tag?(tag)
+      tag_to_match = decompose_tag(tag)
+      tag_pattern.each do |pattern|
+        re = Regexp.new(pattern)
+        return true if re.match(tag_to_match)
+      end
+      false
+    end
+
     def method_missing(name, *args, &block)
       return @data[MethodsMap[name.to_sym]] if (MethodsMap.has_key?(name.to_sym))
       return @data[name.to_sym] if (@data.has_key?(name.to_sym))
       super
     end
 
+    def make_specific_record(tag)
+      ref_tag = tag.tag_ary
+      DataElementRecord.new( @data.merge( { tag_str: ref_tag.tag_str,
+                                            tag_ndm: ref_tag.tag_str.tag_str_to_digit_str,
+                                            tag_ary: ref_tag }))
+    end
+
     private
     def respond_to_missing?(name, include_priv)
       MethodsMap.has_key?(name) || @data.has_key?(name)
+    end
+
+    def decompose_tag(tag)
+      return tag.tag_str if tag.is_a?(Array)
+      tag
+    end
+
+    def tag_pattern
+      gs, es = self.tag_ps.gsub(/[\(|\)]/, '').gsub(/[xX]/,"[0-9A-Fa-f]").split(',')
+      ["^\\(#{gs}\\,#{es}\\)$", "^#{gs}#{es}$" ]
     end
 
   end

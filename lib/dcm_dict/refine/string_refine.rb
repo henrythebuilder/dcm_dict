@@ -17,7 +17,7 @@
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
 module DcmDict
-  module StringRefineXml
+  module StringRefineInternal
     refine String do
 
       # remove zero width spaces
@@ -44,6 +44,12 @@ module DcmDict
         self.gsub(/[\(|\)]/, '').
           split(',').
           map(&:hex)
+      end
+
+      def tag_ary
+        self.tag_str_to_digit_str.
+          insert(4,',').
+          tag_str_to_ary
       end
 
     end

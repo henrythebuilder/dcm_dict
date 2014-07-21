@@ -22,7 +22,7 @@ require 'spec_helper'
 describe "String refinement" do
 
   describe "should remove unwanted space characters" do
-    using DcmDict::StringRefineXml
+    using DcmDict::StringRefineInternal
 
     [
       ["FileSetDescriptorFileID ", "trailing spaces"],
@@ -38,7 +38,7 @@ describe "String refinement" do
   end
 
   describe "should convert keyword tag string to symbol object" do
-    using DcmDict::StringRefineXml
+    using DcmDict::StringRefineInternal
 
     [
       ['DarkCurrentCounts', :dark_current_counts],
@@ -57,7 +57,7 @@ describe "String refinement" do
   end
 
   describe "should convert standard string tag" do
-    using DcmDict::StringRefineXml
+    using DcmDict::StringRefineInternal
 
     [
       ['(0014,3050)', '00143050', [0x0014,0x3050]],
@@ -71,6 +71,17 @@ describe "String refinement" do
       it "from #{str.inspect} to an array object as #{value_ary.inspect}" do
         expect(str.tag_str_to_ary).to eq(value_ary)
       end
+    end
+  end
+
+  using DcmDict::StringRefineInternal
+  {
+    '(0010,0020)'=> [0x0010,0x0020],
+    '00100020' => [0x0010,0x0020]
+
+  }.each do |src, expected_val|
+    it "should implement tag_ary metod" do
+      expect(src.tag_ary).to eq(expected_val)
     end
   end
 

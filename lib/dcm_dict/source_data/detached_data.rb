@@ -19,7 +19,7 @@
 module DcmDict
   module SourceData
     module DetachedData
-      using DcmDict::ArrayRefine
+      using DcmDict::ArrayRefineInternal
       def self.make_group_length_data(tag)
         group = tag.group_str
         base_data = { :tag_ps =>  "(#{group},0000)",

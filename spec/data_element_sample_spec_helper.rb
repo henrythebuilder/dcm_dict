@@ -31,8 +31,10 @@ module DataElementSampleSpecHelper
     {
       [17,512] => {tag_ps: '(0011,0200)', tag_str: '(0011,0200)', tag_ary: [0x0011,0x0200],
                    tag_sym: :unknown_tag, tag_ndm: '00110200', tag_name: 'Unknown Tag',
-                   tag_key: 'UnknownTag', tag_vr: [:UN], tag_vm: ['1'], tag_note: 'Dummy Record',
-                   tag_multiple: false}
+                   tag_key: 'UnknownTag', tag_vr: [:UN], tag_vm: ['1'], tag_note: 'Dummy Record', tag_multiple: false},
+      [0x4444,0x1234] => {tag_ps: '(4444,1234)', tag_str: '(4444,1234)', tag_ary: [0x4444,0x1234],
+                   tag_sym: :unknown_tag, tag_ndm: '44441234', tag_name: 'Unknown Tag',
+                   tag_key: 'UnknownTag', tag_vr: [:UN], tag_vm: ['1'], tag_note: 'Dummy Record', tag_multiple: false},
     }
   end
 
@@ -58,6 +60,14 @@ module DataElementSampleSpecHelper
                           tag_sym: :group_length, tag_ndm: '44440000', tag_name: 'Group Length',
                           tag_key: 'GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',
                           tag_multiple: false}
+    }
+  end
+
+  def self.multiple_tag_sample
+    {
+      # (60xx,0010) -> "Overlay Rows"
+      [0x60a2,0x0010] => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(60A2,0010)', tag_sym: :overlay_rows, tag_ndm: '60A20010', tag_ary: [0x60a2,0x0010], tag_multiple: true, tag_note: ''},
+      '60a20010' => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(60A2,0010)', tag_sym: :overlay_rows, tag_ndm: '60A20010', tag_ary: [0x60a2,0x0010], tag_multiple: true, tag_note: ''}
     }
   end
 

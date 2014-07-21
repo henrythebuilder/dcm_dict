@@ -17,7 +17,7 @@
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
 module DcmDict
-  module ArrayRefine
+  module ArrayRefineInternal
     refine Array do
       def group
         check_dicom_tag
@@ -39,6 +39,10 @@ module DcmDict
 
       def tag_str
         "(#{group_str},#{element_str})"
+      end
+
+      def tag_ary
+        [group,element]
       end
 
       private

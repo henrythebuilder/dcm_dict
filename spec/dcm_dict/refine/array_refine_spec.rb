@@ -21,7 +21,7 @@ require 'spec_helper'
 describe "Array Refinement" do
 
   describe "should extract group and element from 'array tag'" do
-    using DcmDict::ArrayRefine
+    using DcmDict::ArrayRefineInternal
     it "for correct object" do
       expect([0x0010,0x0020].group).to eq(0x0010)
       expect([0x0010,0x0020].element).to eq(0x0020)
@@ -45,7 +45,7 @@ describe "Array Refinement" do
   end
 
   describe "should convert group and element to four char hex string" do
-    using DcmDict::ArrayRefine
+    using DcmDict::ArrayRefineInternal
     {
       [0xfffe,0xe0dd] => {group: 'FFFE', element: 'E0DD', tag_str: '(FFFE,E0DD)'},
       [0x0010,0x0020] => {group: '0010', element: '0020', tag_str: '(0010,0020)'}
@@ -56,6 +56,11 @@ describe "Array Refinement" do
         expect(tag.tag_str).to eq(value[:tag_str])
       end
     end
+  end
+
+  using DcmDict::ArrayRefineInternal
+  it "should implement tag_ary metod" do
+    expect([0x0010,0x0020].tag_ary).to eq([0x0010,0x0020])
   end
 
 end

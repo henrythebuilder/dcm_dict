@@ -19,13 +19,17 @@
 module DcmDict
   module Dictionary
     class DataElementDictionary
+      using DcmDict::ArrayRefineInternal
+
       def initialize
         @index_keys = [:tag_ps, :tag_name, :tag_key, :tag_str, :tag_sym, :tag_ndm, :tag_ary]
-        @dict = {}
+        @standard_dict = {}
+        @multi_dict = []
         map_source_data
       end
       def feature_of(tag)
-        @dict[tag] ||
+        @standard_dict[tag] ||
+          try_to_find_multiple_tag(tag) ||
           try_to_find_unknown_tag(tag)
       end
 
@@ -34,23 +38,36 @@ module DcmDict
         SourceData::DataElementsData.each do |data|
           record = DataElementRecord.new(data)
           @index_keys.each do |key|
-            @dict[data[key]] = record
+            @standard_dict[data[key]] = record
           end
+          @multi_dict << record if record.multiple_tag?
         end
       end
 
+      def try_to_find_multiple_tag(tag)
+        @multi_dict.each do |record|
+          if (record.match_tag?(tag))
+            puts "bingo #{'!'*20}"
+            return record.make_specific_record(tag)
+          end
+        end
+        nil
+      end
+
       def try_to_find_unknown_tag(unknown_tag)
-         return nil unless unknown_tag.respond_to?(:to_ary)
-         tag = unknown_tag.to_ary
-         return nil unless tag.size == 2
-         data = if tag[1] == 0
-                  SourceData::DetachedData.make_group_length_data(tag)
-                elsif tag[0].odd? and tag[1]<0xff
-                  SourceData::DetachedData.make_private_creator_data(tag)
-                else
-                  SourceData::DetachedData.make_unknown_data(tag)
-                end
-         DataElementRecord.new(data)
+        tag = [unknown_tag.group, unknown_tag.element]
+        return nil unless tag.size == 2
+        data = if tag[1] == 0
+                 SourceData::DetachedData.make_group_length_data(tag)
+               elsif tag[0].odd? and tag[1]<0xff
+                 SourceData::DetachedData.make_private_creator_data(tag)
+               else
+                 SourceData::DetachedData.make_unknown_data(tag)
+               end
+        DataElementRecord.new(data)
+      end
+
+      def try_to_find_private_tag
       end
     end
     TheDataElementDictionary = DataElementDictionary.new

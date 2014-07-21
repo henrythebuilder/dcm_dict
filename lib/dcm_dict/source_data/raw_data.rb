@@ -21,7 +21,7 @@ module DcmDict
     DefaultMultiTagValue = '2'
 
     class RawData
-      using DcmDict::StringRefineXml
+      using DcmDict::StringRefineInternal
 
       def initialize(data)
         @data = check_base_data(data)
