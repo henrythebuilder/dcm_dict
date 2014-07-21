@@ -18,5 +18,34 @@
 #
 require 'spec_helper'
 describe DcmDict::SourceData::RawData do
-  pending
+  [
+    { #lowercase tag
+      :source_data => {
+        tag_ps: '(0074,100a)',
+        tag_name: 'Contact URI',
+        tag_key: 'ContactURI',
+        tag_vr: [:ST],
+        tag_vm: ['1'],
+        tag_note: ''},
+      :expected_data => {
+        tag_ps: '(0074,100A)',
+        tag_str: '(0074,100A)',
+        tag_ary: [0x0074,0x100a],
+        tag_sym: :contact_uri,
+        tag_ndm: '0074100A',
+        tag_name: 'Contact URI',
+        tag_key: 'ContactURI',
+        tag_vr: [:ST],
+        tag_vm: ['1'],
+        tag_note: '',
+        tag_multiple: false}}
+  ].each do |data|
+    it "check source data" do
+      record_data = DcmDict::SourceData::RawData.new(data[:source_data]).data_element_record_data
+      data[:expected_data].each do |key, val|
+        expect(record_data[key]).to eq(val)
+      end
+    end
+  end
+
 end

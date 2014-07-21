@@ -129,7 +129,7 @@ END
         </tr>
 END
 
-    data = {tag_ps: '(60xx,0040)',
+    data = {tag_ps: '(60XX,0040)',
             tag_str: '(6022,0040)',
             tag_ary: [0x6022,0x0040],
             tag_sym: :overlay_type,
@@ -341,6 +341,43 @@ END
     {xml_string => data}
   end
 
+  def self.xml_sample_lowercase_tag
+    xml_string = <<END
+        <tr valign="top">
+          <td align="center" colspan="1" rowspan="1">
+            <para>(0074,100a)</para>
+          </td>
+          <td align="left" colspan="1" rowspan="1">
+            <para>Contact URI</para>
+          </td>
+          <td align="left" colspan="1" rowspan="1">
+            <para>ContactURI</para>
+          </td>
+          <td align="center" colspan="1" rowspan="1">
+            <para>ST</para>
+          </td>
+          <td align="center" colspan="1" rowspan="1">
+            <para>1</para>
+          </td>
+          <td align="center" colspan="1" rowspan="1">
+            <para/>
+          </td>
+        </tr>
+END
+    data = {tag_ps: '(0074,100A)',
+            tag_str: '(0074,100A)',
+            tag_ary: [0x0074,0x100a],
+            tag_sym: :contact_uri,
+            tag_ndm: '0074100A',
+            tag_name: 'Contact URI',
+            tag_key: 'ContactURI',
+            tag_vr: [:ST],
+            tag_vm: ['1'],
+            tag_note: '',
+            tag_multiple: false}
+    {xml_string => data}
+  end
+
   def self.xml_single_set
     { }.merge(xml_sample_standard).
       merge(xml_sample_standard_empty_note).
@@ -349,7 +386,8 @@ END
       merge(xml_sample_multi_vr_vm).
       merge(xml_sample_no_vr).
       merge(xml_sample_multi_vr).
-      merge(xml_sample_empty)
+      merge(xml_sample_empty).
+      merge(xml_sample_lowercase_tag)
   end
 
   def self.string_to_nodeset(xml_string)

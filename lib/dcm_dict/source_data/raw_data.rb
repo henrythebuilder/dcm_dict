@@ -61,8 +61,13 @@ module DcmDict
       end
 
       def check_base_data(data)
+        check_lowercase_tag(data)
         check_placeholders(data)
         data
+      end
+
+      def check_lowercase_tag(data)
+        data[:tag_ps].upcase!
       end
 
       def check_placeholders(data)

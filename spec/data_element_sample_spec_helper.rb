@@ -89,15 +89,15 @@ module DataElementSampleSpecHelper
   def self.multiple_tag_sample
     {
       # (60xx,0010) -> "Overlay Rows"
-      [0x60A2,0x0010] => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(60A2,0010)', tag_sym: :overlay_rows, tag_ndm: '60A20010', tag_ary: [0x60a2,0x0010], tag_multiple: true, tag_note: ''},
-      '60A20010' => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(60A2,0010)', tag_sym: :overlay_rows, tag_ndm: '60A20010', tag_ary: [0x60a2,0x0010], tag_multiple: true, tag_note: ''},
-      '(60A2,0010)' => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(60A2,0010)', tag_sym: :overlay_rows, tag_ndm: '60A20010', tag_ary: [0x60a2,0x0010], tag_multiple: true, tag_note: ''},
-      '(6022,0010)' => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(6022,0010)', tag_sym: :overlay_rows, tag_ndm: '60220010', tag_ary: [24610, 16], tag_multiple: true, tag_note: ''},
-      'OverlayRows' => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(6022,0010)', tag_sym: :overlay_rows, tag_ndm: '60220010', tag_ary: [24610, 16], tag_multiple: true, tag_note: ''},
-      [0x6022,0x0010] => { tag_ps: '(60xx,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(6022,0010)', tag_sym: :overlay_rows, tag_ndm: '60220010', tag_ary: [24610, 16], tag_multiple: true, tag_note: ''},
-      [0x1010,0xa1b2] => { tag_ps: '(1010,xxxx)', tag_name: "Zonal Map", tag_key: 'ZonalMap', tag_vr: [:US], tag_vm: ["1-n"], tag_str: '(1010,A1B2)', tag_sym: :zonal_map, tag_ndm: '1010A1B2', tag_ary: [0x1010, 0xa1b2], tag_multiple: true, tag_note: 'RET'},
-      '(1010,A1B2)' => { tag_ps: '(1010,xxxx)', tag_name: "Zonal Map", tag_key: 'ZonalMap', tag_vr: [:US], tag_vm: ["1-n"], tag_str: '(1010,A1B2)', tag_sym: :zonal_map, tag_ndm: '1010A1B2', tag_ary: [0x1010, 0xa1b2], tag_multiple: true, tag_note: 'RET'},
-      '1010A1B2' => { tag_ps: '(1010,xxxx)', tag_name: "Zonal Map", tag_key: 'ZonalMap', tag_vr: [:US], tag_vm: ["1-n"], tag_str: '(1010,A1B2)', tag_sym: :zonal_map, tag_ndm: '1010A1B2', tag_ary: [0x1010, 0xa1b2], tag_multiple: true, tag_note: 'RET'},
+      [0x60A2,0x0010] => { tag_ps: '(60XX,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(60A2,0010)', tag_sym: :overlay_rows, tag_ndm: '60A20010', tag_ary: [0x60a2,0x0010], tag_multiple: true, tag_note: ''},
+      '60A20010' => { tag_ps: '(60XX,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(60A2,0010)', tag_sym: :overlay_rows, tag_ndm: '60A20010', tag_ary: [0x60a2,0x0010], tag_multiple: true, tag_note: ''},
+      '(60A2,0010)' => { tag_ps: '(60XX,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(60A2,0010)', tag_sym: :overlay_rows, tag_ndm: '60A20010', tag_ary: [0x60a2,0x0010], tag_multiple: true, tag_note: ''},
+      '(6022,0010)' => { tag_ps: '(60XX,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(6022,0010)', tag_sym: :overlay_rows, tag_ndm: '60220010', tag_ary: [24610, 16], tag_multiple: true, tag_note: ''},
+      'OverlayRows' => { tag_ps: '(60XX,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(6022,0010)', tag_sym: :overlay_rows, tag_ndm: '60220010', tag_ary: [24610, 16], tag_multiple: true, tag_note: ''},
+      [0x6022,0x0010] => { tag_ps: '(60XX,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(6022,0010)', tag_sym: :overlay_rows, tag_ndm: '60220010', tag_ary: [24610, 16], tag_multiple: true, tag_note: ''},
+      [0x1010,0xa1b2] => { tag_ps: '(1010,XXXX)', tag_name: "Zonal Map", tag_key: 'ZonalMap', tag_vr: [:US], tag_vm: ["1-n"], tag_str: '(1010,A1B2)', tag_sym: :zonal_map, tag_ndm: '1010A1B2', tag_ary: [0x1010, 0xa1b2], tag_multiple: true, tag_note: 'RET'},
+      '(1010,A1B2)' => { tag_ps: '(1010,XXXX)', tag_name: "Zonal Map", tag_key: 'ZonalMap', tag_vr: [:US], tag_vm: ["1-n"], tag_str: '(1010,A1B2)', tag_sym: :zonal_map, tag_ndm: '1010A1B2', tag_ary: [0x1010, 0xa1b2], tag_multiple: true, tag_note: 'RET'},
+      '1010A1B2' => { tag_ps: '(1010,XXXX)', tag_name: "Zonal Map", tag_key: 'ZonalMap', tag_vr: [:US], tag_vm: ["1-n"], tag_str: '(1010,A1B2)', tag_sym: :zonal_map, tag_ndm: '1010A1B2', tag_ary: [0x1010, 0xa1b2], tag_multiple: true, tag_note: 'RET'},
     }
   end
 
