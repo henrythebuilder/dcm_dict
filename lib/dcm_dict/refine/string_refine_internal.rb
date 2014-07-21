@@ -28,8 +28,10 @@ module DcmDict
 
       # 'PatientName' -> :patient_name
       def tag_key_to_sym
-        self.gsub(/([^\A])([A-Z])([a-z])/,'\1_\2\3').
+        self.gsub('IDs', 'IDS').gsub('3D', '_3D').
+          gsub(/([A-Z])([a-z])/,'_\1\2').
           gsub(/([a-z])([A-Z])/,'\1_\2').
+          gsub(/^_/,'').
           downcase.
           to_sym
       end

@@ -48,7 +48,22 @@ describe "String refinement" do
       ['OffsetOfReferencedLowerLevelDirectoryEntity', :offset_of_referenced_lower_level_directory_entity],
       ['FileSetDescriptorFileID', :file_set_descriptor_file_id],
       ['SOPClassUID', :sop_class_uid],
-      ['RelatedGeneralSOPClassUID', :related_general_sop_class_uid]
+      ['RelatedGeneralSOPClassUID', :related_general_sop_class_uid],
+      ['ReferencedSOPClassUIDInFile', :referenced_sop_class_uid_in_file],
+      ['MAUsedInGainCalibration', :ma_used_in_gain_calibration],
+      ['OtherPatientIDsSequence', :other_patient_ids_sequence],
+      ['RelativeXRayExposure', :relative_x_ray_exposure],
+      ['DisplayedZValue', :displayed_z_value],
+      ['PhysicalUnitsXDirection', :physical_units_x_direction],
+      ['XRay3DFrameTypeSequence', :x_ray_3d_frame_type_sequence],
+      ['SOPInstanceUIDOfConcatenationSource',  :sop_instance_uid_of_concatenation_source],
+      ['RowsForNthOrderCoefficients', :rows_for_nth_order_coefficients],
+      ['EquivalentCDADocumentSequence', :equivalent_cda_document_sequence],
+      ['ALineRate', :a_line_rate],
+      ['ThreeDPointCoordinates', :three_d_point_coordinates],
+      ['SourceImageIDs', :source_image_ids],
+      ['ModifyingDeviceID', :modifying_device_id],
+      ['TIDOffset', :tid_offset]
     ].each do |str, value|
       it "from #{str.inspect} to #{value.inspect}" do
         expect(str.tag_key_to_sym).to eq(value)
