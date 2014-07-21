@@ -16,13 +16,38 @@
 #  You should have received a copy of the GNU General Public License
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
-require "dcm_dict/version"
-require "dcm_dict/refine/string_refine"
-require "dcm_dict/refine/array_refine"
-require "dcm_dict/xml/node_set"
-require "dcm_dict/encoder/data_to_code"
-require "dcm_dict/data_element_record"
-require "dcm_dict/source_data/data_elements_data"
-require "dcm_dict/source_data/raw_data"
-require "dcm_dict/source_data/detached_data"
-require "dcm_dict/dictionary/data_element_dictionary"
+module DcmDict
+  module ArrayRefine
+    refine Array do
+      def group
+        check_dicom_tag
+        self[0]
+      end
+
+      def element
+        check_dicom_tag
+        self[1]
+      end
+
+      def group_str
+        group.to_s(16).rjust(4, '0').upcase()
+      end
+
+      def element_str
+        element.to_s(16).rjust(4, '0').upcase()
+      end
+
+      def tag_str
+        "(#{group_str},#{element_str})"
+      end
+
+      private
+      def check_dicom_tag
+        return true if ( (self.size==2) &&
+                         self[0].is_a?(Integer) &&
+                         self[1].is_a?(Integer))
+        raise "Wrong object definition for Tag Array"
+      end
+    end
+  end
+end
