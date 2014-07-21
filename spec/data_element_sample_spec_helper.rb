@@ -48,15 +48,15 @@ module DataElementSampleSpecHelper
   def self.unknown_group_length_sample
     {
       [16,0] => {tag_ps: '(0010,0000)', tag_str: '(0010,0000)', tag_ary: [0x0010,0x0000],
-                 tag_sym: :_0010__group_length, tag_ndm: '00100000', tag_name: '0010 Group Length',
-                 tag_key: '_0010_GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',
+                 tag_sym: :group_length, tag_ndm: '00100000', tag_name: 'Group Length',
+                 tag_key: 'GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',
                  tag_multiple: false},
       [17,0] =>  {tag_ps: '(0011,0000)', tag_str: '(0011,0000)', tag_ary: [0x0011,0x0000],
-                  tag_sym: :_0011__group_length, tag_ndm: '00110000', tag_name: '0011 Group Length',
-                  tag_key: '_0011_GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',},
+                  tag_sym: :group_length, tag_ndm: '00110000', tag_name: 'Group Length',
+                  tag_key: 'GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',},
       [0x4444,0x0000] => {tag_ps: '(4444,0000)', tag_str: '(4444,0000)', tag_ary: [0x4444,0x0000],
-                          tag_sym: :_4444__group_length, tag_ndm: '44440000', tag_name: '4444 Group Length',
-                          tag_key: '_4444_GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',
+                          tag_sym: :group_length, tag_ndm: '44440000', tag_name: 'Group Length',
+                          tag_key: 'GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',
                           tag_multiple: false}
     }
   end

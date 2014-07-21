@@ -23,8 +23,8 @@ module DcmDict
       def self.make_group_length_data(tag)
         group = tag.group_str
         base_data = { :tag_ps =>  "(#{group},0000)",
-                      :tag_name => "#{group} Group Length",
-                      :tag_key =>  "_#{group}_GroupLength",
+                      :tag_name => "Group Length",
+                      :tag_key =>  "GroupLength",
                       :tag_vr =>  [:UL],
                       :tag_vm =>  ['1'],
                       :tag_note =>  'Dummy Record'}
