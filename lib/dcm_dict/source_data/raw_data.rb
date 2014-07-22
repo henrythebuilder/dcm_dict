@@ -22,6 +22,7 @@ module DcmDict
 
     class RawData
       using DcmDict::StringRefineInternal
+      using DcmDict::Refine::HashRefineInternal
 
       def initialize(data)
         @data = check_base_data(data)
@@ -62,29 +63,9 @@ module DcmDict
 
       def check_base_data(data)
         data[:tag_ps].upcase!
-        check_placeholders(data)
+        data.check_placeholder_data!
         data
       end
-
-      def check_placeholders(data)
-        # PS3.5:
-        # For some Data Elements, no Name or Keyword or VR or VM is specified;
-        # these are "placeholders" that are not assigned but will not be reused.
-        if data[:tag_name].empty?
-          data[:tag_name] = "Placeholder #{data[:tag_ps]}"
-        end
-        if data[:tag_key].empty?
-          new_key = data[:tag_ps].gsub(',','_').gsub(/[\(\)]/,'')
-          data[:tag_key] = "Placeholder_#{new_key}"
-        end
-        if data[:tag_vr].empty?
-          data[:tag_vr] = [:UN]
-        end
-        if data[:tag_vm].empty?
-          data[:tag_vm] = ['1']
-        end
-      end
-
     end
 
   end
