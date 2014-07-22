@@ -20,8 +20,8 @@ module DcmDict
 
   # Class to handle data element record from source dictionary data
   class DataElementRecord
-    using DcmDict::StringRefineInternal
-    using DcmDict::ArrayRefineInternal
+    using DcmDict::Refine::Internal::StringRefineInternal
+    using DcmDict::Refine::Internal::ArrayRefineInternal
 
     MethodsMap = {:multiple_tag? => :tag_multiple,
                   :name => :tag_name,

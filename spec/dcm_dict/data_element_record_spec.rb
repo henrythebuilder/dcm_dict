@@ -74,7 +74,7 @@ describe DcmDict::DataElementRecord do
       expect {der.send("undefined_method_for_data_element_record") }.to raise_error(NoMethodError)
     end
 
-    using DcmDict::ArrayRefineInternal
+    using DcmDict::Refine::Internal::ArrayRefineInternal
 
     it "Handle group and element with explicit method" do
       der = DcmDict::DataElementRecord.new(data)

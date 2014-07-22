@@ -17,9 +17,9 @@
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
 require "dcm_dict/version"
-require "dcm_dict/refine/string_refine_internal"
-require "dcm_dict/refine/array_refine_internal"
-require "dcm_dict/refine/hash_refine_internal"
+require "dcm_dict/refine/internal/string_refine_internal"
+require "dcm_dict/refine/internal/array_refine_internal"
+require "dcm_dict/refine/internal/hash_refine_internal"
 require "dcm_dict/xml/node_set"
 require "dcm_dict/encoder/data_to_code"
 require "dcm_dict/data_element_record"

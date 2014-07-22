@@ -19,8 +19,8 @@
 module DcmDict
   module SourceData
     module DetachedData
-      using DcmDict::ArrayRefineInternal
-      using DcmDict::StringRefineInternal
+      using DcmDict::Refine::Internal::ArrayRefineInternal
+      using DcmDict::Refine::Internal::StringRefineInternal
 
       def self.make_group_length_data(tag)
         group = tag.to_tag_ary.group_str

@@ -22,7 +22,7 @@ require 'spec_helper'
 describe "String refinement" do
 
   describe "should remove unwanted space characters" do
-    using DcmDict::StringRefineInternal
+    using DcmDict::Refine::Internal::StringRefineInternal
 
     [
       ["FileSetDescriptorFileID ", "trailing spaces"],
@@ -38,7 +38,7 @@ describe "String refinement" do
   end
 
   describe "should convert keyword tag string to symbol object" do
-    using DcmDict::StringRefineInternal
+    using DcmDict::Refine::Internal::StringRefineInternal
 
     [
       ['DarkCurrentCounts', :dark_current_counts],
@@ -72,7 +72,7 @@ describe "String refinement" do
   end
 
   describe "should convert standard string tag" do
-    using DcmDict::StringRefineInternal
+    using DcmDict::Refine::Internal::StringRefineInternal
 
     [
       ['(0014,3050)', '00143050', [0x0014,0x3050]],
@@ -89,7 +89,7 @@ describe "String refinement" do
     end
   end
 
-  using DcmDict::StringRefineInternal
+  using DcmDict::Refine::Internal::StringRefineInternal
   {
     '(0010,0020)'=> [0x0010,0x0020],
     '00100020' => [0x0010,0x0020]

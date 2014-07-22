@@ -21,8 +21,8 @@ module DcmDict
 
     # Main class to handle data element data as dictionary
     class DataElementDictionary
-      using DcmDict::ArrayRefineInternal
-      using DcmDict::StringRefineInternal
+      using DcmDict::Refine::Internal::ArrayRefineInternal
+      using DcmDict::Refine::Internal::StringRefineInternal
 
       def initialize
         @index_keys = [:tag_ps, :tag_name, :tag_key, :tag_str, :tag_sym, :tag_ndm, :tag_ary]

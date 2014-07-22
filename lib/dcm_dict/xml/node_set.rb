@@ -31,7 +31,7 @@ module DcmDict
     MultiFieldSeparator = ' or '
 
     class NodeSetData
-      using DcmDict::StringRefineInternal
+      using DcmDict::Refine::Internal::StringRefineInternal
 
       def initialize(node_set)
         @node_set = node_set

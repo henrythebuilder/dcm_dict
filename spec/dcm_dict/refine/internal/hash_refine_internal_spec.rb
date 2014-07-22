@@ -19,7 +19,7 @@
 require 'spec_helper'
 
 describe "Hash internal refinement" do
-  using DcmDict::Refine::HashRefineInternal
+  using DcmDict::Refine::Internal::HashRefineInternal
   context "Placeholders data: no Name or Keyword or VR or VM is specified" do
     {
       { tag_ps: '(0018,9445)', tag_name: '', tag_key: '', tag_vr: [], tag_vm: [], tag_note: 'RET - See Note' } => { tag_ps: '(0018,9445)', tag_name: "Placeholder (0018,9445)", tag_key: 'Placeholder_0018_9445', tag_vr: [:UN], tag_vm: ["1"], tag_note: 'RET - See Note'},
