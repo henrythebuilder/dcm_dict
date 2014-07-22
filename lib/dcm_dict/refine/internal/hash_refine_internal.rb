@@ -22,12 +22,23 @@ module DcmDict
       module HashRefineInternal
 
         refine Hash do
+          def check_base_data_tag_field!
+            check_tag_ps!
+            check_placeholder_data!
+            self
+          end
+
+          def check_tag_ps!
+            raise "Missing tag_ps field" if tag_ps_nil_or_empty?
+            self[:tag_ps].upcase!
+          end
+
           def check_placeholder_data!
             # PS3.5:
             # For some Data Elements, no Name or Keyword or VR or VM is specified;
             # these are "placeholders" that are not assigned but will not be reused.
             tag_ps = self[:tag_ps]
-            raise "Missing tag_ps field" if tag_ps.nil? || tag_ps.empty?
+            raise "Missing tag_ps field" if tag_ps_nil_or_empty?
             if self[:tag_name].nil? || self[:tag_name].empty?
               self[:tag_name] = "Placeholder #{tag_ps}"
             end
@@ -41,6 +52,12 @@ module DcmDict
             if self[:tag_vm].nil? || self[:tag_vm].empty?
               self[:tag_vm] = ['1']
             end
+          end
+
+          private
+          def tag_ps_nil_or_empty?
+            tag_ps = self[:tag_ps]
+            tag_ps.nil? || tag_ps.empty?
           end
         end
 

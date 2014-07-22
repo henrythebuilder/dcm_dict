@@ -43,7 +43,7 @@ END
 
   end
 
-  describe "should covert data element data to source code text" do
+  describe "should convert data element data to source code text" do
     it "for standard sample" do
       sample = XmlSampleSpecHelper.xml_sample_standard.flatten
       xml_string, data = sample

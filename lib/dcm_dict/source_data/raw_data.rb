@@ -25,7 +25,8 @@ module DcmDict
       using DcmDict::Refine::Internal::HashRefineInternal
 
       def initialize(data)
-        @data = check_base_data(data)
+        @data = data
+        @data.check_base_data_tag_field!
         extend_base_data
       end
 
@@ -59,12 +60,6 @@ module DcmDict
 
       def extract_tag_sym_from_data
         @data[:tag_key].tag_key_to_sym
-      end
-
-      def check_base_data(data)
-        data[:tag_ps].upcase!
-        data.check_placeholder_data!
-        data
       end
     end
 

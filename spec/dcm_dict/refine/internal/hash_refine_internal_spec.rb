@@ -20,6 +20,18 @@ require 'spec_helper'
 
 describe "Hash internal refinement" do
   using DcmDict::Refine::Internal::HashRefineInternal
+
+  it "should check for lowercase tag_ps field" do
+    h = {tag_ps: '(fffe,E000)'}
+    h.check_tag_ps!
+    expect(h).to eq({tag_ps: '(FFFE,E000)'})
+  end
+
+  it "should check for missing tag_ps field" do
+    expect{ {tag_ps: ''}.check_tag_ps! }.to raise_error("Missing tag_ps field")
+    expect{ {}.check_tag_ps! }.to raise_error("Missing tag_ps field")
+  end
+
   context "Placeholders data: no Name or Keyword or VR or VM is specified" do
     {
       { tag_ps: '(0018,9445)', tag_name: '', tag_key: '', tag_vr: [], tag_vm: [], tag_note: 'RET - See Note' } => { tag_ps: '(0018,9445)', tag_name: "Placeholder (0018,9445)", tag_key: 'Placeholder_0018_9445', tag_vr: [:UN], tag_vm: ["1"], tag_note: 'RET - See Note'},
@@ -42,5 +54,6 @@ describe "Hash internal refinement" do
         expect{data.check_placeholder_data!}.to raise_error("Missing tag_ps field")
       end
     end
+
   end
 end
