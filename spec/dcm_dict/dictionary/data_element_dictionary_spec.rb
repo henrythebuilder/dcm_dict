@@ -26,7 +26,7 @@ describe DcmDict::Dictionary::DataElementDictionary do
       index_keys.each do |key|
         obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(record[key])
         expect(obj).not_to be_nil, "#{key.inspect} > #{record[:tag_ps]}"
-        expect(obj).to be_a(DcmDict::DataElementRecord)
+        expect(obj).to be_a(DcmDict::Dictionary::DataElementRecord)
       end
     end
   end

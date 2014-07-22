@@ -18,7 +18,7 @@
 #
 require 'spec_helper'
 
-describe DcmDict::DataElementRecord do
+describe DcmDict::Dictionary::DataElementRecord do
   [
     {tag_ps: '(0008,0010)',
      tag_name: 'Recognition Code',
@@ -34,7 +34,7 @@ describe DcmDict::DataElementRecord do
     },
   ].each do |data|
     it "Handle Data Element Data correctly" do
-      der = DcmDict::DataElementRecord.new(data)
+      der = DcmDict::Dictionary::DataElementRecord.new(data)
       expect(der.tag_ps).to eq(data[:tag_ps])
       expect(der.name).to eq(data[:tag_name])
       expect(der.keyword).to eq(data[:tag_key])
@@ -54,7 +54,7 @@ describe DcmDict::DataElementRecord do
     end
 
     it "Handle methods correctly (by symbol)" do
-      der = DcmDict::DataElementRecord.new(data)
+      der = DcmDict::Dictionary::DataElementRecord.new(data)
       data.each do |key, expected_val|
         expect(der.respond_to?(key)).to be true
       end
@@ -64,7 +64,7 @@ describe DcmDict::DataElementRecord do
     end
 
     it "Handle methods correctly (by string)" do
-      der = DcmDict::DataElementRecord.new(data)
+      der = DcmDict::Dictionary::DataElementRecord.new(data)
       data.each do |key, expected_val|
         expect(der.respond_to?(key.to_s)).to be true
       end
@@ -77,7 +77,7 @@ describe DcmDict::DataElementRecord do
     using DcmDict::Refine::Internal::ArrayRefineInternal
 
     it "Handle group and element with explicit method" do
-      der = DcmDict::DataElementRecord.new(data)
+      der = DcmDict::Dictionary::DataElementRecord.new(data)
       expect(der.group).to eq(data[:tag_ary].group)
       expect(der.element).to eq(data[:tag_ary].element)
     end
@@ -93,7 +93,7 @@ describe DcmDict::DataElementRecord do
       :specific_data => { tag_ps: '(60XX,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(6068,0010)', tag_sym: :overlay_rows, tag_ndm: '60680010', tag_ary: [0x6068,0x0010], tag_multiple: true, tag_note: ''} }
   }.each do |keys, multi_data|
     it "check match for multiple tag definition" do
-      der = DcmDict::DataElementRecord.new(multi_data[:source_data])
+      der = DcmDict::Dictionary::DataElementRecord.new(multi_data[:source_data])
       keys.each do |key|
         expect(der.match_tag?(key)).to be_truthy
       end
@@ -101,7 +101,7 @@ describe DcmDict::DataElementRecord do
     end
 
     it "generate equivalent record for specific tag" do
-      der_multi = DcmDict::DataElementRecord.new(multi_data[:source_data])
+      der_multi = DcmDict::Dictionary::DataElementRecord.new(multi_data[:source_data])
       der = der_multi.make_specific_record(multi_data[:specific_data][:tag_ary])
       multi_data[:specific_data].each do |key, val|
         expect(der.send(key)).to eq(val)
