@@ -18,24 +18,23 @@
 #
 module DcmDict
   module Dictionary
+    DataElementMethodMap = {:multiple_tag? => :tag_multiple,
+                             :name => :tag_name,
+                             :keyword => :tag_key,
+                             :vr => :tag_vr,
+                             :vm => :tag_vm,
+                             :note => :tag_note,
+                             :tag => :tag_ary,
+                             :tag_ary => :tag_ary,
+                             :tag_ps => :tag_ps,
+                             :tag_sym => :tag_sym,
+                             :tag_ndm => :tag_ndm,
+                             :tag_str => :tag_str }
 
     # Class to handle data element record from source dictionary data
     class DataElementRecord
       using DcmDict::Refine::Internal::StringRefineInternal
       using DcmDict::Refine::Internal::ArrayRefineInternal
-
-      MethodsMap = {:multiple_tag? => :tag_multiple,
-                    :name => :tag_name,
-                    :keyword => :tag_key,
-                    :vr => :tag_vr,
-                    :vm => :tag_vm,
-                    :note => :tag_note,
-                    :tag_ary => :tag_ary,
-                    :tag_ps => :tag_ps,
-                    :tag_sym => :tag_sym,
-                    :tag_ndm => :tag_ndm,
-                    :tag_str => :tag_str
-                   }
 
       def initialize(data)
         @data = data
@@ -60,7 +59,7 @@ module DcmDict
 
       def method_missing(name, *args, &block)
         name_as_sym = name.to_sym
-        return @data[MethodsMap[name_as_sym]] if (MethodsMap.has_key?(name_as_sym))
+        return @data[DataElementMethodMap[name_as_sym]] if (DataElementMethodMap.has_key?(name_as_sym))
         return @data[name_as_sym] if (@data.has_key?(name_as_sym))
         super
       end
@@ -75,7 +74,7 @@ module DcmDict
 
       private
       def respond_to_missing?(name, include_priv)
-        MethodsMap.has_key?(name) || @data.has_key?(name)
+        DataElementMethodMap.has_key?(name) || @data.has_key?(name)
       end
 
       def tag_pattern

@@ -19,7 +19,7 @@
 #
 require 'spec_helper'
 
-describe "String refinement" do
+describe "String refinement (internal)" do
 
   describe "should remove unwanted space characters" do
     using DcmDict::Refine::Internal::StringRefineInternal

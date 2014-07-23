@@ -18,6 +18,7 @@
 #
 module DcmDict
   module Dictionary
+    DataElementIndexKey = [:tag_ps, :tag_name, :tag_key, :tag_str, :tag_sym, :tag_ndm, :tag_ary]
 
     # Main class to handle data element data as dictionary
     class DataElementDictionary
@@ -25,7 +26,6 @@ module DcmDict
       using DcmDict::Refine::Internal::StringRefineInternal
 
       def initialize
-        @index_keys = [:tag_ps, :tag_name, :tag_key, :tag_str, :tag_sym, :tag_ndm, :tag_ary]
         @standard_dict = {}
         @multi_dict = []
         map_source_data
@@ -41,7 +41,7 @@ module DcmDict
       def map_source_data
         SourceData::DataElementsData.each do |data|
           record = DataElementRecord.new(data)
-          @index_keys.each do |key|
+          DataElementIndexKey.each do |key|
             @standard_dict[data[key]] = record
           end
           @multi_dict << record if record.multiple_tag?
