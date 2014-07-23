@@ -16,7 +16,6 @@
 #  You should have received a copy of the GNU General Public License
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
-require 'nokogiri'
 
 module DcmDict
   module XML
@@ -33,8 +32,8 @@ module DcmDict
     class NodeSetData
       using DcmDict::Refine::Internal::StringRefineInternal
 
-      def initialize(node_set)
-        @node_set = node_set
+      def initialize(extract_proc)
+        @exproc = extract_proc
       end
 
       def data_element_data
@@ -54,37 +53,36 @@ module DcmDict
 
 
       def extract_tag_ps()
-        extract_content_data(NodeSetIdx[:tag_ps])
+        extract_content_data(:tag_ps)
       end
 
       def extract_tag_name()
-        extract_content_data(NodeSetIdx[:tag_name])
+        extract_content_data(:tag_name)
       end
 
       def extract_tag_key()
-        extract_content_data(NodeSetIdx[:tag_key])
+        extract_content_data(:tag_key)
       end
 
       def extract_tag_vr()
-        extract_multiple_data(NodeSetIdx[:tag_vr]).map(&:to_sym)
+        extract_multiple_data(:tag_vr).map(&:to_sym)
       end
 
       def extract_tag_vm()
-        extract_multiple_data(NodeSetIdx[:tag_vm])
+        extract_multiple_data(:tag_vm)
       end
 
       def extract_tag_note()
-        extract_content_data(NodeSetIdx[:tag_note])
+        extract_content_data(:tag_note)
       end
 
 
-      def extract_multiple_data(idx)
-        extract_content_data(idx).split(MultiFieldSeparator)
+      def extract_multiple_data(key)
+        extract_content_data(key).split(MultiFieldSeparator)
       end
 
-      def extract_content_data(idx)
-        return '' unless @node_set[idx]
-        @node_set[idx].content.dcm_unspace
+      def extract_content_data(key)
+        @exproc.call(key).dcm_unspace
       end
 
     end

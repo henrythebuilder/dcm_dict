@@ -16,12 +16,21 @@
 #  You should have received a copy of the GNU General Public License
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
-
-if ENV['COVERAGE']
-  require 'simplecov'
-  SimpleCov.start
+module DcmDict
+  module Xml
+    module NokogiriTool
+      def self.tag_field_extract_proc(node_set)
+        node_set_idx = { tag_ps: 0,
+                         tag_name: 1,
+                         tag_key: 2,
+                         tag_vr: 3,
+                         tag_vm: 4,
+                         tag_note: 5 }
+        Proc.new do |key|
+          idx = node_set_idx[key]
+          node_set[idx] ? node_set[idx].content : ''
+        end
+      end
+    end
+  end
 end
-
-require 'dcm_dict'
-require 'dcm_dict/xml/nokogiri_tool'
-require 'nokogiri'

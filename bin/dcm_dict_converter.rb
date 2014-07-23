@@ -20,7 +20,9 @@
 #
 require 'open-uri'
 require 'tempfile'
-require_relative '../lib/dcm_dict'
+require 'nokogiri'
+require 'dcm_dict'
+require 'dcm_dict/xml/nokogiri_tool'
 
 class DcmDictConverter
   Part6XmlUrl="http://dicom.nema.org/medical/dicom/2014a/source/docbook/part06/part06.xml"
@@ -68,7 +70,8 @@ class DcmDictConverter
       trs = noko_doc.xpath(xpath)
       trs.each do |tr|
         td = tr.xpath('xmlns:td')
-        data =  DcmDict::XML::NodeSetData.new(td).data_element_data
+        noko_proc = DcmDict::Xml::NokogiriTool.tag_field_extract_proc(td)
+        data =  DcmDict::XML::NodeSetData.new(noko_proc).data_element_data
         check_data_element_data(data, table)
         yield(data) if block_given?
       end
