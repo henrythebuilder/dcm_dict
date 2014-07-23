@@ -19,21 +19,13 @@
 
 module DcmDict
   module XML
-
-    NodeSetIdx = { tag_ps: 0,
-                   tag_name: 1,
-                   tag_key: 2,
-                   tag_vr: 3,
-                   tag_vm: 4,
-                   tag_note: 5 }
-
     MultiFieldSeparator = ' or '
 
-    class NodeSetData
+    class TagFieldData
       using DcmDict::Refine::Internal::StringRefineInternal
 
       def initialize(extract_proc)
-        @exproc = extract_proc
+        @extract_proc = extract_proc
       end
 
       def data_element_data
@@ -82,7 +74,7 @@ module DcmDict
       end
 
       def extract_content_data(key)
-        @exproc.call(key).dcm_unspace
+        @extract_proc.call(key).dcm_unspace
       end
 
     end
