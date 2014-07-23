@@ -16,15 +16,33 @@
 #  You should have received a copy of the GNU General Public License
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
-require "dcm_dict/version"
-require "dcm_dict/ext/object_extension"
-require "dcm_dict/refine/internal/string_refine_internal"
-require "dcm_dict/refine/internal/array_refine_internal"
-require "dcm_dict/refine/internal/hash_refine_internal"
-require "dcm_dict/xml/node_set"
-require "dcm_dict/encoder/data_to_code"
-require "dcm_dict/source_data/data_elements_data"
-require "dcm_dict/source_data/raw_data"
-require "dcm_dict/source_data/detached_data"
-require "dcm_dict/dictionary/data_element_record"
-require "dcm_dict/dictionary/data_element_dictionary"
+require 'spec_helper'
+
+describe "Object extension" do
+
+  describe "should check object for nil or empty status" do
+    describe "for class with empty? method" do
+      it "as string object" do
+        expect("bla bla".nil_or_empty?).to be_falsy
+        expect("".nil_or_empty?).to be_truthy
+      end
+
+      it "as array object" do
+        expect([1, 2].nil_or_empty?).to be_falsy
+        expect([].nil_or_empty?).to be_truthy
+      end
+
+    end
+
+    describe "for class without empty? method" do
+      it "as fixnum object" do
+        expect(5.nil_or_empty?).to be_falsy
+      end
+
+      it "as nil object" do
+        expect(nil.nil_or_empty?).to be_truthy
+      end
+    end
+
+  end
+end

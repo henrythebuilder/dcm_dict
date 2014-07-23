@@ -29,8 +29,9 @@ module DcmDict
           end
 
           def check_tag_ps!
-            raise "Missing tag_ps field" if tag_ps_nil_or_empty?
-            self[:tag_ps].upcase!
+            tag_ps = self[:tag_ps]
+            raise "Missing tag_ps field" if tag_ps.nil_or_empty?
+            tag_ps.upcase!
           end
 
           def check_placeholder_data!
@@ -38,26 +39,21 @@ module DcmDict
             # For some Data Elements, no Name or Keyword or VR or VM is specified;
             # these are "placeholders" that are not assigned but will not be reused.
             tag_ps = self[:tag_ps]
-            raise "Missing tag_ps field" if tag_ps_nil_or_empty?
-            if self[:tag_name].nil? || self[:tag_name].empty?
-              self[:tag_name] = "Placeholder #{tag_ps}"
-            end
-            if self[:tag_key].nil? || self[:tag_key].empty?
+            raise "Missing tag_ps field" if tag_ps.nil_or_empty?
+            fill_nil_or_empty_value(:tag_name) { "Placeholder #{tag_ps}" }
+            fill_nil_or_empty_value(:tag_key) do
               new_key = tag_ps.gsub(',','_').gsub(/[\(\)]/,'')
-              self[:tag_key] = "Placeholder_#{new_key}"
+              "Placeholder_#{new_key}"
             end
-            if self[:tag_vr].nil? || self[:tag_vr].empty?
-              self[:tag_vr] = [:UN]
-            end
-            if self[:tag_vm].nil? || self[:tag_vm].empty?
-              self[:tag_vm] = ['1']
-            end
+            fill_nil_or_empty_value(:tag_vr) { [:UN] }
+            fill_nil_or_empty_value(:tag_vm) { ['1'] }
           end
 
           private
-          def tag_ps_nil_or_empty?
-            tag_ps = self[:tag_ps]
-            tag_ps.nil? || tag_ps.empty?
+          def fill_nil_or_empty_value(key)
+            if self[key].nil_or_empty?
+              self[key] = yield
+            end
           end
         end
 
