@@ -19,10 +19,10 @@
 require 'spec_helper'
 require 'xml_sample_spec_helper'
 
-describe DcmDict::DataToCode do
+describe DcmDict::Encoder::DataToCode do
   describe "should print out" do
     it "data elements header code" do
-      header = DcmDict::DataToCode.data_element_header
+      header = DcmDict::Encoder::DataToCode.data_element_header
       expected_header = <<END
 module DcmDict
   module SourceData
@@ -32,7 +32,7 @@ END
     end
 
     it "data elements footer code" do
-      footer = DcmDict::DataToCode.data_element_footer
+      footer = DcmDict::Encoder::DataToCode.data_element_footer
       expected_footer=<<END
     ]
   end
@@ -44,19 +44,22 @@ END
   end
 
   describe "should convert data element data to source code text" do
+    using DcmDict::Refine::Internal::ArrayRefineInternal
+
     it "for standard sample" do
       sample = XmlSampleSpecHelper.xml_sample_standard.flatten
       xml_string, data = sample
       ns = XmlSampleSpecHelper.string_to_nodeset(xml_string)
       xml_data = DcmDict::XML::NodeSetData.new(ns).data_element_data
       indent = 4
-      src_text = "#{' '*indent}{ tag_ps: '#{data[:tag_ps]}', tag_name: \"#{data[:tag_name]}\", tag_key: '#{data[:tag_key]}', tag_vr: #{data[:tag_vr]}, tag_vm: #{data[:tag_vm]}, tag_str: '#{data[:tag_str]}', tag_sym: #{data[:tag_sym].inspect}, tag_ndm: '#{data[:tag_ndm]}', tag_ary: #{data[:tag_ary].inspect}, tag_multiple: #{data[:tag_multiple].inspect}, tag_note: '#{data[:tag_note]}'},"
-      src_line = DcmDict::DataToCode.data_element_data_to_code(xml_data)
+      tag_ary_str = "[0x#{data[:tag_ary].group_str},0x#{data[:tag_ary].element_str}]"
+      src_text = "#{' '*indent}{ tag_ps: '#{data[:tag_ps]}', tag_name: \"#{data[:tag_name]}\", tag_key: '#{data[:tag_key]}', tag_vr: #{data[:tag_vr]}, tag_vm: #{data[:tag_vm]}, tag_str: '#{data[:tag_str]}', tag_sym: #{data[:tag_sym].inspect}, tag_ndm: '#{data[:tag_ndm]}', tag_ary: #{tag_ary_str}, tag_multiple: #{data[:tag_multiple].inspect}, tag_note: '#{data[:tag_note]}'},"
+      src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(xml_data)
       expect(src_line).to eq(src_text)
-      src_line = DcmDict::DataToCode.data_element_data_to_code(xml_data, indent: indent)
+      src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(xml_data, indent: indent)
       expect(src_line).to eq(src_text)
       indent = 6
-      src_line = DcmDict::DataToCode.data_element_data_to_code(xml_data, indent: indent)
+      src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(xml_data, indent: indent)
       expect(src_line.start_with?("#{' '*indent}{")).to be true
     end
   end

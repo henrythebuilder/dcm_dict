@@ -83,18 +83,18 @@ class DcmDictConverter
   end
 
   def print_out_data_elements()
-    print_out(DcmDict::DataToCode.data_element_header)
+    print_out(DcmDict::Encoder::DataToCode.data_element_header)
     DataElementSource.each do |url, table_to_map|
       Tempfile.create('dcm') do |xml_file|
         pull_standard_draft(url, xml_file)
         extract_data_element(xml_file, table_to_map) do |data|
-          print_out(DcmDict::DataToCode.data_element_data_to_code(data, indent: 6))
+          print_out(DcmDict::Encoder::DataToCode.data_element_data_to_code(data, indent: 6))
           print_out("\r\n")
           trace('.')
         end
       end
     end
-    print_out(DcmDict::DataToCode.data_element_footer)
+    print_out(DcmDict::Encoder::DataToCode.data_element_footer)
   end
 
   def print_out(string)
