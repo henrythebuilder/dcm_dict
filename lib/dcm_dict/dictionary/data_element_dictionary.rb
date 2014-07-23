@@ -49,9 +49,15 @@ module DcmDict
       end
 
       def try_to_find(tag)
-        @standard_dict[tag] ||
+        try_to_find_standard_tag(tag) ||
           try_to_find_multiple_tag(tag) ||
+          try_to_group_length_tag(tag) ||
+          try_to_find_private_creator_tag(tag) ||
           try_to_find_unknown_tag(tag)
+      end
+
+      def try_to_find_standard_tag(tag)
+        @standard_dict[tag]
       end
 
       def try_to_find_multiple_tag(tag)
@@ -63,20 +69,30 @@ module DcmDict
         nil
       end
 
-      def try_to_find_unknown_tag(unknown_tag)
+      def try_to_group_length_tag(unknown_tag)
         tag = unknown_tag.to_tag_ary
-        data = if tag[1] == 0
-                 SourceData::DetachedData.make_group_length_data(tag)
-               elsif tag[0].odd? and tag[1]<0xff
-                 SourceData::DetachedData.make_private_creator_data(tag)
-               else
-                 SourceData::DetachedData.make_unknown_data(tag)
-               end
-        DataElementRecord.new(data)
+        if (tag.element == 0)
+          return DataElementRecord.new(
+                   SourceData::DetachedData.make_group_length_data(tag))
+        end
+        nil
       end
 
-      def try_to_find_private_tag
+      def try_to_find_private_creator_tag(unknown_tag)
+        tag = unknown_tag.to_tag_ary
+        if (tag.group.odd? && tag.element<0xff)
+          return DataElementRecord.new(
+                   SourceData::DetachedData.make_private_creator_data(tag))
+        end
+        nil
       end
+
+      def try_to_find_unknown_tag(unknown_tag)
+        tag = unknown_tag.to_tag_ary
+        DataElementRecord.new(
+          SourceData::DetachedData.make_unknown_data(tag))
+      end
+
     end
     TheDataElementDictionary = DataElementDictionary.new
   end
