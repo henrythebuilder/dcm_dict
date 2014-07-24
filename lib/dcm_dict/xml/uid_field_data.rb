@@ -20,6 +20,7 @@
 module DcmDict
   module XML
     class UidFieldData < FieldData
+      using DcmDict::Refine::Internal::StringRefineInternal
 
       def initialize(extract_proc)
         super
@@ -33,7 +34,7 @@ module DcmDict
       def extract_base_data
         { uid_value: extract_content_data(:uid_value),
           uid_name: extract_content_data(:uid_name),
-          uid_type: extract_content_data(:uid_type)}
+          uid_type: extract_content_data(:uid_type).uid_type_to_sym}
       end
     end
   end

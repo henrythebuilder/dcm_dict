@@ -409,7 +409,7 @@ END
 END
     data = {uid_value: "1.2.840.10008.1.2",
             uid_name: "Implicit VR Little Endian: Default Transfer Syntax for DICOM",
-            uid_type: "Transfer Syntax"}
+            uid_type: :transfer_syntax}
     {xml_string => data}
   end
 

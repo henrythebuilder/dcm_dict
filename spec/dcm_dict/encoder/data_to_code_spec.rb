@@ -93,7 +93,7 @@ END
         noko_proc = DcmDict::Xml::NokogiriTool.uid_field_extract_proc(ns)
         xml_data = DcmDict::XML::UidFieldData.new(noko_proc).uid_data
         indent = 4
-        src_text = "#{' '*indent}{ uid_value: '#{data[:uid_value]}', uid_name: \"#{data[:uid_name]}\", uid_type: '#{data[:uid_type]}'},"
+        src_text = "#{' '*indent}{ uid_value: '#{data[:uid_value]}', uid_name: \"#{data[:uid_name]}\", uid_type: #{data[:uid_type].inspect}},"
         src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(xml_data)
         expect(src_line).to eq(src_text)
         src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(xml_data, indent: indent)

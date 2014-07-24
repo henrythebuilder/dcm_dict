@@ -125,7 +125,7 @@ class DcmDictConverter
   end
 
   def print_out_uid_data()
-    print_out(DcmDict::Encoder::DataToCode.data_element_header)
+    print_out(DcmDict::Encoder::DataToCode.uid_header)
     UidSource.each do |url, table_to_map|
       Tempfile.create('dcmps') do |xml_file|
         pull_standard_draft(url, xml_file)
@@ -136,7 +136,7 @@ class DcmDictConverter
         end
       end
     end
-    print_out(DcmDict::Encoder::DataToCode.data_element_footer)
+    print_out(DcmDict::Encoder::DataToCode.uid_footer)
   end
 
 

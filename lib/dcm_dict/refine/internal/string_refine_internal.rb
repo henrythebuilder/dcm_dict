@@ -60,6 +60,13 @@ module DcmDict
               insert(0,'(').
               concat(')')
           end
+
+          def uid_type_to_sym
+            self.gsub(/[ -\/]/, '_').
+              downcase.
+              to_sym
+          end
+
         end
 
       end

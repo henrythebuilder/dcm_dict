@@ -120,4 +120,20 @@ describe "String refinement (internal)" do
     end
   end
 
+  {
+    'SOP Class' => :sop_class,
+    'Transfer Syntax' => :transfer_syntax,
+    'Well-known frame of reference' => :well_known_frame_of_reference,
+    'Well-known SOP Instance' => :well_known_sop_instance,
+    'DICOM UIDs as a Coding Scheme' => :dicom_uids_as_a_coding_scheme,
+    'Coding Scheme' => :coding_scheme,
+    'Query/Retrieve' => :query_retrieve,
+    'LDAP OID' => :ldap_oid
+
+
+  }.each do |src, expected_val|
+    it "should implement uid_type_to_sym method #{src.inspect} > #{expected_val.inspect}" do
+      expect(src.uid_type_to_sym).to eq(expected_val)
+    end
+  end
 end

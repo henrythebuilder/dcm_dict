@@ -59,7 +59,7 @@ END
       end
 
       def self.uid_data_to_code(data, indent: 4)
-        "#{' '*indent}{ uid_value: '#{data[:uid_value]}', uid_name: \"#{data[:uid_name]}\", uid_type: '#{data[:uid_type]}'},"
+        "#{' '*indent}{ uid_value: '#{data[:uid_value]}', uid_name: \"#{data[:uid_name]}\", uid_type: #{data[:uid_type].inspect}},"
       end
     end
   end
