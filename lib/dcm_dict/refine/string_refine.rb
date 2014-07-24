@@ -21,15 +21,7 @@ module DcmDict
     module StringRefine
 
       refine String do
-        DcmDict::Dictionary::DataElementMethodMap.flatten.uniq.each do |method|
-          define_method(method) do
-            Dictionary::TheDataElementDictionary.feature_of(self).send(method)
-          end
-        end
-
-        def data_element
-          Dictionary::TheDataElementDictionary.feature_of(self)
-        end
+        include DcmDict::Refine::DataElementRefine
       end
 
     end

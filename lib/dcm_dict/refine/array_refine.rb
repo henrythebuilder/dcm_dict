@@ -16,18 +16,14 @@
 #  You should have received a copy of the GNU General Public License
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
-require "dcm_dict/version"
-require "dcm_dict/ext/object_extension"
-require "dcm_dict/refine/internal/string_refine_internal"
-require "dcm_dict/refine/internal/array_refine_internal"
-require "dcm_dict/refine/internal/hash_refine_internal"
-require "dcm_dict/xml/tag_field_data"
-require "dcm_dict/encoder/data_to_code"
-require "dcm_dict/source_data/data_elements_data"
-require "dcm_dict/source_data/raw_data"
-require "dcm_dict/source_data/detached_data"
-require "dcm_dict/dictionary/data_element_record"
-require "dcm_dict/dictionary/data_element_dictionary"
-require "dcm_dict/refine/data_element_refine"
-require "dcm_dict/refine/string_refine"
-require "dcm_dict/refine/array_refine"
+module DcmDict
+  module Refine
+    module ArrayRefine
+
+      refine Array do
+        include DcmDict::Refine::DataElementRefine
+      end
+
+    end
+  end
+end
