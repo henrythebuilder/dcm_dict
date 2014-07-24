@@ -18,23 +18,57 @@
 #
 require 'spec_helper'
 describe "string refinement" do
-  describe "should permit to access data element dictionary information" do
-    using DcmDict::Refine::StringRefine
-    [
-      "(0010,1005)", '(60XX,0040)', '(0028,1200)', '(0014,3050)'
-    ].each do |tag|
-      describe "for tag #{tag}" do
-        obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(tag)
-        [:tag_ps, :tag_name, :tag_key, :tag_str, :tag_ndm].each do |key|
-          DcmDict::Dictionary::DataElementMethodMap.flatten.uniq.each do |method|
-            it "as #{obj.send(key).inspect}.#{method.to_s} > #{obj.send(method).inspect}" do
-              value = eval("\"#{obj.send(key)}\".#{method.to_s}")
-              expect(value).to eq(obj.send(method))
+  using DcmDict::Refine::StringRefine
+  describe "should permit access to single data element dictionary information" do
+
+    describe "for standard tag" do
+      [
+        "(0010,1005)", '(60XX,0040)', '(0028,1200)', '(0014,3050)'
+      ].each do |tag|
+        describe "as #{tag}" do
+          obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(tag)
+          [:tag_ps, :tag_name, :tag_key, :tag_str, :tag_ndm].each do |key|
+            DcmDict::Dictionary::DataElementMethodMap.flatten.uniq.each do |method|
+              it "as #{obj.send(key).inspect}.#{method.to_s} > #{obj.send(method).inspect}" do
+                value = eval("\"#{obj.send(key)}\".#{method.to_s}")
+                expect(value).to eq(obj.send(method))
+              end
             end
           end
         end
       end
     end
 
+    describe "for multiple tag" do
+      {
+        '(6046,0040)' => { name: "Overlay Type",
+                           tag_multiple: true,
+                           tag_name: "Overlay Type",
+                           keyword: "OverlayType",
+                           tag_key: "OverlayType",
+                           vr: [:CS], tag_vr: [:CS], vm: ["1"], tag_vm: ["1"],
+                           tag: [0x6046, 0x0040], tag_ary: [0x6046, 0x0040],
+                           tag_ps: "(60XX,0040)",
+                           tag_sym: :overlay_type,
+                           tag_ndm: "60460040",
+                           tag_str: "(6046,0040)" }
+      }.each do |tag, data|
+        data.each do |key, exp_value|
+          it "as #{tag.inspect}.#{key} > #{exp_value.inspect}" do
+            value = eval("#{tag.inspect}.#{key.to_s}")
+            expect(value).to eq(exp_value)
+          end
+        end
+      end
+    end
+  end
+
+  [
+    "Patient's Birth Name", "PatientBirthName", "(0010,1005)", "00101005"
+  ].each do |tag|
+    it "should get single 'information record' for a data element with #{tag.inspect}.data_element" do
+      value = eval("#{tag.inspect}.data_element")
+      expect(value).to be_a(DcmDict::Dictionary::DataElementRecord)
+    end
   end
 end
