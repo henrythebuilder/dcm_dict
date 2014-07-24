@@ -32,6 +32,10 @@ class DcmDictConverter
     Part6XmlUrl => ["table_7-1", "table_8-1", "table_6-1"]
   }
 
+  UidSource={
+    Part6XmlUrl => ["table_A-1"]
+  }
+
   DataElementFix = {
     "table_E.2-1" => {:tag_note => 'RET'}
   }
@@ -40,9 +44,15 @@ class DcmDictConverter
 
   end
 
-  def print_out_data
+  def print_out_tag
     trace("Print out data to stdout\n")
     print_out_data_elements()
+    trace("Print out done.\n")
+  end
+
+  def print_out_uid
+    trace("Print out data to stdout\n")
+    print_out_uid_data()
     trace("Print out done.\n")
   end
 
@@ -106,6 +116,30 @@ class DcmDictConverter
     print_out(DcmDict::Encoder::DataToCode.data_element_footer)
   end
 
+  def extract_uid(xml_file, table_to_map)
+    extract_node_set(xml_file, table_to_map) do |table, td|
+      noko_proc = DcmDict::Xml::NokogiriTool.uid_field_extract_proc(td)
+      data =  DcmDict::XML::UidFieldData.new(noko_proc).uid_data
+      yield(data) if block_given?
+    end
+  end
+
+  def print_out_uid_data()
+    print_out(DcmDict::Encoder::DataToCode.data_element_header)
+    UidSource.each do |url, table_to_map|
+      Tempfile.create('dcmps') do |xml_file|
+        pull_standard_draft(url, xml_file)
+        extract_uid(xml_file, table_to_map) do |data|
+          print_out(DcmDict::Encoder::DataToCode.uid_data_to_code(data, indent: 6))
+          print_out("\r\n")
+          trace('.')
+        end
+      end
+    end
+    print_out(DcmDict::Encoder::DataToCode.data_element_footer)
+  end
+
+
   def print_out(string)
     $stdout.print(string)
   end
@@ -116,4 +150,10 @@ class DcmDictConverter
 
 end
 
-DcmDictConverter.new.print_out_data
+case ARGV[0]
+when "tag"
+  DcmDictConverter.new.print_out_tag
+when "uid"
+  DcmDictConverter.new.print_out_uid
+else
+end

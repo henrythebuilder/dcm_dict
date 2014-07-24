@@ -16,32 +16,24 @@
 #  You should have received a copy of the GNU General Public License
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
+
 module DcmDict
-  module Xml
-    module NokogiriTool
-      def self.tag_field_extract_proc(node_set)
-        node_set_idx = { tag_ps: 0,
-                         tag_name: 1,
-                         tag_key: 2,
-                         tag_vr: 3,
-                         tag_vm: 4,
-                         tag_note: 5 }
-        Proc.new do |key|
-          idx = node_set_idx[key]
-          node_set[idx] ? node_set[idx].content : ''
-        end
+  module XML
+    class UidFieldData < FieldData
+
+      def initialize(extract_proc)
+        super
       end
 
-      def self.uid_field_extract_proc(node_set)
-        node_set_idx = { uid_value: 0,
-                         uid_name: 1,
-                         uid_type: 2,
-                         uid_part: 3,}
-        Proc.new do |key|
-          idx = node_set_idx[key]
-          node_set[idx] ? node_set[idx].content : ''
-        end
+      def uid_data
+        extract_base_data
+      end
 
+      private
+      def extract_base_data
+        { uid_value: extract_content_data(:uid_value),
+          uid_name: extract_content_data(:uid_name),
+          uid_type: extract_content_data(:uid_type)}
       end
     end
   end

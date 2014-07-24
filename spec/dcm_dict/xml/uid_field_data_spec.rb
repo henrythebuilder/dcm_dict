@@ -19,13 +19,13 @@
 require 'spec_helper'
 require 'xml_sample_spec_helper'
 
-describe "XML management for Data Element" do
+describe "XML management for UID" do
   describe "should extract data from single node set data" do
-    XmlSampleSpecHelper.xml_tag_single_set.each do |xml_string, expected_data|
+    XmlSampleSpecHelper.xml_uid_set.each do |xml_string, expected_data|
       ns = XmlSampleSpecHelper.string_to_nodeset(xml_string)
-      noko_proc = DcmDict::Xml::NokogiriTool.tag_field_extract_proc(ns)
-      xml_data = DcmDict::XML::TagFieldData.new(noko_proc).data_element_data
-      describe "for '#{expected_data[:tag_name]}'" do
+      noko_proc = DcmDict::Xml::NokogiriTool.uid_field_extract_proc(ns)
+      xml_data = DcmDict::XML::UidFieldData.new(noko_proc).uid_data
+      describe "for '#{expected_data[:uid_name]}'" do
         expected_data.each do |key, expected_value|
           it "with key #{key.inspect}" do
             expect(xml_data[key]).to eq(expected_value)
@@ -33,6 +33,6 @@ describe "XML management for Data Element" do
         end
       end
     end
-  end
 
+  end
 end

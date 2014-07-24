@@ -25,32 +25,35 @@ module DcmDict
       def self.make_group_length_data(tag)
         group = tag.to_tag_ary.group_str
         base_data = { :tag_ps =>  "(#{group},0000)",
-                      :tag_name => "Group Length",
-                      :tag_key =>  "GroupLength",
-                      :tag_vr =>  [:UL],
-                      :tag_vm =>  ['1'],
+                      :tag_name => 'Group Length',
+                      :tag_key =>  'GroupLength',
+                      :tag_vr =>  'UL',
+                      :tag_vm =>  '1',
                       :tag_note =>  'Dummy Record'}
-        RawData.new(base_data).data_element_record_data
+        DcmDict::XML::TagFieldData.new(Proc.new {|key| base_data[key]}).
+          data_element_data
       end
 
       def self.make_private_creator_data(tag)
         base_data = { :tag_ps =>  tag.to_tag_str,
-                      :tag_name => "Private Creator",
-                      :tag_key =>  "PrivateCreator",
-                      :tag_vr =>  [:LO],
-                      :tag_vm =>  ['1'],
+                      :tag_name => 'Private Creator',
+                      :tag_key =>  'PrivateCreator',
+                      :tag_vr =>  'LO',
+                      :tag_vm =>  '1',
                       :tag_note =>  'Dummy Record'}
-        RawData.new(base_data).data_element_record_data
+        DcmDict::XML::TagFieldData.new(Proc.new {|key| base_data[key]}).
+          data_element_data
       end
 
       def self.make_unknown_data(tag)
         base_data = { :tag_ps =>  tag.to_tag_str,
-                      :tag_name => "Unknown Tag",
-                      :tag_key =>  "UnknownTag",
-                      :tag_vr =>  [:UN],
-                      :tag_vm =>  ['1'],
+                      :tag_name => 'Unknown Tag',
+                      :tag_key =>  'UnknownTag',
+                      :tag_vr =>  'UN',
+                      :tag_vm =>  '1',
                       :tag_note =>  'Dummy Record'}
-        RawData.new(base_data).data_element_record_data
+        DcmDict::XML::TagFieldData.new(Proc.new {|key| base_data[key]}).
+          data_element_data
       end
 
     end

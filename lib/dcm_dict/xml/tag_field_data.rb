@@ -20,61 +20,67 @@
 module DcmDict
   module XML
     MultiFieldSeparator = ' or '
+    DefaultMultiTagValue = '2'
 
-    class TagFieldData
+    class TagFieldData < FieldData
       using DcmDict::Refine::Internal::StringRefineInternal
+      using DcmDict::Refine::Internal::HashRefineInternal
 
       def initialize(extract_proc)
-        @extract_proc = extract_proc
+        super
       end
 
       def data_element_data
-        SourceData::RawData.new( extract_base_data ).
-          data_element_record_data
+        extract_base_data()
+        @data.check_base_data_tag_field!
+        extend_base_data()
+        @data
       end
 
       private
       def extract_base_data()
-        { :tag_ps =>  extract_tag_ps(),
-          :tag_name =>  extract_tag_name(),
-          :tag_key =>  extract_tag_key(),
-          :tag_vr =>  extract_tag_vr(),
-          :tag_vm =>  extract_tag_vm(),
-          :tag_note => extract_tag_note() }
-      end
-
-
-      def extract_tag_ps()
-        extract_content_data(:tag_ps)
-      end
-
-      def extract_tag_name()
-        extract_content_data(:tag_name)
-      end
-
-      def extract_tag_key()
-        extract_content_data(:tag_key)
+        @data = { :tag_ps =>  extract_content_data(:tag_ps),
+                  :tag_name =>  extract_content_data(:tag_name),
+                  :tag_key =>  extract_content_data(:tag_key),
+                  :tag_vr =>  extract_tag_vr(),
+                  :tag_vm =>  extract_tag_vm(),
+                  :tag_note => extract_content_data(:tag_note) }
       end
 
       def extract_tag_vr()
-        extract_multiple_data(:tag_vr).map(&:to_sym)
+        extract_multiple_data(:tag_vr, MultiFieldSeparator).map(&:to_sym)
       end
 
       def extract_tag_vm()
-        extract_multiple_data(:tag_vm)
+        extract_multiple_data(:tag_vm, MultiFieldSeparator)
       end
 
-      def extract_tag_note()
-        extract_content_data(:tag_note)
+      def extend_base_data
+        @data[:tag_str] = extract_tag_str_from_data
+        @data[:tag_sym] = extract_tag_sym_from_data
+        @data[:tag_ndm] = extract_tag_ndm_from_data
+        @data[:tag_ary] = extract_tag_ary_from_data
+        @data[:tag_multiple] = data_with_multiple_tag?
       end
 
-
-      def extract_multiple_data(key)
-        extract_content_data(key).split(MultiFieldSeparator)
+      def extract_tag_str_from_data
+        @data[:tag_ps].gsub(/[xX|]/, DefaultMultiTagValue)
       end
 
-      def extract_content_data(key)
-        @extract_proc.call(key).dcm_unspace
+      def data_with_multiple_tag?
+        @data[:tag_ps].index(/[xX|]/) ? true : false
+      end
+
+      def extract_tag_ary_from_data
+        @data[:tag_str].to_tag_ary
+      end
+
+      def extract_tag_ndm_from_data
+        @data[:tag_str].to_tag_ndm
+      end
+
+      def extract_tag_sym_from_data
+        @data[:tag_key].tag_key_to_sym
       end
 
     end

@@ -41,6 +41,26 @@ END
 end
 END
       end
+
+      def self.uid_header
+        <<END
+module DcmDict
+  module SourceData
+    UidValues = [
+END
+      end
+
+      def self.uid_footer
+        <<END
+    ]
+  end
+end
+END
+      end
+
+      def self.uid_data_to_code(data, indent: 4)
+        "#{' '*indent}{ uid_value: '#{data[:uid_value]}', uid_name: \"#{data[:uid_name]}\", uid_type: '#{data[:uid_type]}'},"
+      end
     end
   end
 end

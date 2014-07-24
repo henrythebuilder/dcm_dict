@@ -19,7 +19,7 @@
 #
 
 module XmlSampleSpecHelper
-  def self.xml_sample_standard
+  def self.xml_tag_sample_standard
     xml_string=<<END
         <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
@@ -68,7 +68,7 @@ END
     {xml_string => data}
   end
 
-  def self.xml_sample_standard_empty_note
+  def self.xml_tag_sample_standard_empty_note
     xml_string = <<END
         <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
@@ -105,7 +105,7 @@ END
     {xml_string => data}
   end
 
-  def self.xml_sample_multiple_tag
+  def self.xml_tag_sample_multiple_tag
     xml_string=<<END
 <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
@@ -143,7 +143,7 @@ END
     {xml_string => data}
   end
 
-  def self.xml_sample_no_note
+  def self.xml_tag_sample_no_note
     xml_string=<<END
   <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
@@ -177,7 +177,7 @@ END
     {xml_string => data}
   end
 
-  def self.xml_sample_multi_vr_vm
+  def self.xml_tag_sample_multi_vr_vm
     xml_string = <<END
         <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
@@ -226,7 +226,7 @@ END
     {xml_string => data}
   end
 
-  def self.xml_sample_no_vr
+  def self.xml_tag_sample_no_vr
     xml_string = <<END
 <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
@@ -263,7 +263,7 @@ END
     {xml_string => data}
   end
 
-  def self.xml_sample_multi_vr
+  def self.xml_tag_sample_multi_vr
     xml_string = <<END
         <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
@@ -300,7 +300,7 @@ END
     {xml_string => data}
   end
 
-  def self.xml_sample_empty
+  def self.xml_tag_sample_empty
     xml_string=<<END
         <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
@@ -341,7 +341,7 @@ END
     {xml_string => data}
   end
 
-  def self.xml_sample_lowercase_tag
+  def self.xml_tag_sample_lowercase_tag
     xml_string = <<END
         <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
@@ -378,16 +378,43 @@ END
     {xml_string => data}
   end
 
-  def self.xml_single_set
-    { }.merge(xml_sample_standard).
-      merge(xml_sample_standard_empty_note).
-      merge(xml_sample_multiple_tag).
-      merge(xml_sample_no_note).
-      merge(xml_sample_multi_vr_vm).
-      merge(xml_sample_no_vr).
-      merge(xml_sample_multi_vr).
-      merge(xml_sample_empty).
-      merge(xml_sample_lowercase_tag)
+  def self.xml_tag_single_set
+    { }.merge(xml_tag_sample_standard).
+      merge(xml_tag_sample_standard_empty_note).
+      merge(xml_tag_sample_multiple_tag).
+      merge(xml_tag_sample_no_note).
+      merge(xml_tag_sample_multi_vr_vm).
+      merge(xml_tag_sample_no_vr).
+      merge(xml_tag_sample_multi_vr).
+      merge(xml_tag_sample_empty).
+      merge(xml_tag_sample_lowercase_tag)
+  end
+
+  def self.uid_single_standard
+    xml_string=<<END
+        <tr valign="top">
+          <td align="left" colspan="1" rowspan="1">
+            <para>1.2.840.10008.1.​2</para>
+          </td>
+          <td align="left" colspan="1" rowspan="1">
+            <para>Implicit VR Little Endian: Default Transfer Syntax for DICOM</para>
+          </td>
+          <td align="left" colspan="1" rowspan="1">
+            <para>Transfer Syntax</para>
+          </td>
+          <td align="center" colspan="1" rowspan="1">
+            <para><olink targetdoc="PS3.5" targetptr="PS3.5" xrefstyle="select: labelnumber"/></para>
+          </td>
+        </tr>
+END
+    data = {uid_value: "1.2.840.10008.1.2",
+            uid_name: "Implicit VR Little Endian: Default Transfer Syntax for DICOM",
+            uid_type: "Transfer Syntax"}
+    {xml_string => data}
+  end
+
+  def self.xml_uid_set
+    {}.merge(uid_single_standard)
   end
 
   def self.string_to_nodeset(xml_string)

@@ -20,7 +20,7 @@ require 'spec_helper'
 require 'xml_sample_spec_helper'
 
 describe DcmDict::Encoder::DataToCode do
-  describe "should print out" do
+  describe "should print out data element with" do
     it "data elements header code" do
       header = DcmDict::Encoder::DataToCode.data_element_header
       expected_header = <<END
@@ -41,27 +41,69 @@ END
       expect(footer).to eq(expected_footer)
     end
 
-  end
+    describe "data element data field" do
+      using DcmDict::Refine::Internal::ArrayRefineInternal
 
-  describe "should convert data element data to source code text" do
-    using DcmDict::Refine::Internal::ArrayRefineInternal
-
-    it "for standard sample" do
-      sample = XmlSampleSpecHelper.xml_sample_standard.flatten
-      xml_string, data = sample
-      ns = XmlSampleSpecHelper.string_to_nodeset(xml_string)
-      noko_proc = DcmDict::Xml::NokogiriTool.tag_field_extract_proc(ns)
-      xml_data = DcmDict::XML::TagFieldData.new(noko_proc).data_element_data
-      indent = 4
-      tag_ary_str = "[0x#{data[:tag_ary].group_str},0x#{data[:tag_ary].element_str}]"
-      src_text = "#{' '*indent}{ tag_ps: '#{data[:tag_ps]}', tag_name: \"#{data[:tag_name]}\", tag_key: '#{data[:tag_key]}', tag_vr: #{data[:tag_vr]}, tag_vm: #{data[:tag_vm]}, tag_str: '#{data[:tag_str]}', tag_sym: #{data[:tag_sym].inspect}, tag_ndm: '#{data[:tag_ndm]}', tag_ary: #{tag_ary_str}, tag_multiple: #{data[:tag_multiple].inspect}, tag_note: '#{data[:tag_note]}'},"
-      src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(xml_data)
-      expect(src_line).to eq(src_text)
-      src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(xml_data, indent: indent)
-      expect(src_line).to eq(src_text)
-      indent = 6
-      src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(xml_data, indent: indent)
-      expect(src_line.start_with?("#{' '*indent}{")).to be true
+      it "for standard sample" do
+        sample = XmlSampleSpecHelper.xml_tag_sample_standard.flatten
+        xml_string, data = sample
+        ns = XmlSampleSpecHelper.string_to_nodeset(xml_string)
+        noko_proc = DcmDict::Xml::NokogiriTool.tag_field_extract_proc(ns)
+        xml_data = DcmDict::XML::TagFieldData.new(noko_proc).data_element_data
+        indent = 4
+        tag_ary_str = "[0x#{data[:tag_ary].group_str},0x#{data[:tag_ary].element_str}]"
+        src_text = "#{' '*indent}{ tag_ps: '#{data[:tag_ps]}', tag_name: \"#{data[:tag_name]}\", tag_key: '#{data[:tag_key]}', tag_vr: #{data[:tag_vr]}, tag_vm: #{data[:tag_vm]}, tag_str: '#{data[:tag_str]}', tag_sym: #{data[:tag_sym].inspect}, tag_ndm: '#{data[:tag_ndm]}', tag_ary: #{tag_ary_str}, tag_multiple: #{data[:tag_multiple].inspect}, tag_note: '#{data[:tag_note]}'},"
+        src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(xml_data)
+        expect(src_line).to eq(src_text)
+        src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(xml_data, indent: indent)
+        expect(src_line).to eq(src_text)
+        indent = 6
+        src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(xml_data, indent: indent)
+        expect(src_line.start_with?("#{' '*indent}{")).to be true
+      end
     end
   end
+
+   describe "should print out uid with" do
+    it "uid header code" do
+      header = DcmDict::Encoder::DataToCode.uid_header
+      expected_header = <<END
+module DcmDict
+  module SourceData
+    UidValues = [
+END
+      expect(header).to eq(expected_header)
+    end
+
+    it "uid footer code" do
+      footer = DcmDict::Encoder::DataToCode.uid_footer
+      expected_footer=<<END
+    ]
+  end
+end
+END
+      expect(footer).to eq(expected_footer)
+    end
+
+    describe "uid data field" do
+      it "for standard sample" do
+        sample = XmlSampleSpecHelper.uid_single_standard.flatten
+        xml_string, data = sample
+        ns = XmlSampleSpecHelper.string_to_nodeset(xml_string)
+        noko_proc = DcmDict::Xml::NokogiriTool.uid_field_extract_proc(ns)
+        xml_data = DcmDict::XML::UidFieldData.new(noko_proc).uid_data
+        indent = 4
+        src_text = "#{' '*indent}{ uid_value: '#{data[:uid_value]}', uid_name: \"#{data[:uid_name]}\", uid_type: '#{data[:uid_type]}'},"
+        src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(xml_data)
+        expect(src_line).to eq(src_text)
+        src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(xml_data, indent: indent)
+        expect(src_line).to eq(src_text)
+        indent = 6
+        src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(xml_data, indent: indent)
+        expect(src_line.start_with?("#{' '*indent}{")).to be true
+      end
+    end
+
+  end
+
 end
