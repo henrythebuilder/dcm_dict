@@ -62,7 +62,7 @@ class DcmDictConverter
     output.rewind
   end
 
-  def extract_data_element(xml_file, table_to_map)
+  def extract_node_set(xml_file, table_to_map)
     noko_doc = Nokogiri::XML(xml_file)
     table_to_map.each do |table|
       trace("Extracting data elements data from '#{table}':")
@@ -70,12 +70,18 @@ class DcmDictConverter
       trs = noko_doc.xpath(xpath)
       trs.each do |tr|
         td = tr.xpath('xmlns:td')
-        noko_proc = DcmDict::Xml::NokogiriTool.tag_field_extract_proc(td)
-        data =  DcmDict::XML::NodeSetData.new(noko_proc).data_element_data
-        check_data_element_data(data, table)
-        yield(data) if block_given?
+        yield(table, td)
       end
       trace("Done.\n")
+    end
+  end
+
+  def extract_data_element(xml_file, table_to_map)
+    extract_node_set(xml_file, table_to_map) do |table, td|
+      noko_proc = DcmDict::Xml::NokogiriTool.tag_field_extract_proc(td)
+      data =  DcmDict::XML::TagFieldData.new(noko_proc).data_element_data
+      check_data_element_data(data, table)
+      yield(data) if block_given?
     end
   end
 
@@ -88,7 +94,7 @@ class DcmDictConverter
   def print_out_data_elements()
     print_out(DcmDict::Encoder::DataToCode.data_element_header)
     DataElementSource.each do |url, table_to_map|
-      Tempfile.create('dcm') do |xml_file|
+      Tempfile.create('dcmps') do |xml_file|
         pull_standard_draft(url, xml_file)
         extract_data_element(xml_file, table_to_map) do |data|
           print_out(DcmDict::Encoder::DataToCode.data_element_data_to_code(data, indent: 6))
