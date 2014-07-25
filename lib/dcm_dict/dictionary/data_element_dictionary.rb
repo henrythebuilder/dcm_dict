@@ -33,8 +33,8 @@ module DcmDict
 
       def feature_of(tag)
         try_to_find(tag)
-        rescue
-          nil
+      rescue
+        nil
       end
 
       private

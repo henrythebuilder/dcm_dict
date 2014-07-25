@@ -67,6 +67,11 @@ module DcmDict
               to_sym
           end
 
+          def uid_value?
+            (self.length <= 64) &&
+              (/^(([0-9][\.])|([1-9][0-9]*[\.]))*(([0-9])|([1-9][0-9]*))$/.match(self) != nil)
+          end
+
         end
 
       end

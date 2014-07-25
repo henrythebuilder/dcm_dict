@@ -136,4 +136,18 @@ describe "String refinement (internal)" do
       expect(src.uid_type_to_sym).to eq(expected_val)
     end
   end
+
+  {
+    '1.2.3.4.5.6' => true,
+    'not uid string' => false,
+    '0.1.2.3.4' => true,
+    '1.2.3456.789.0.1.2.3' => true,
+    '1.2.3.4.5.6.7.8.9.0.1.2.3.4.5.6.7.8.9.0.1.2.3.4.5.6.7.8.9.0.1.2.3' => false,
+    '1,2.3' => false,
+    '1.2.3.04.5' => false
+  }.each do |string, expected_as_uid|
+    it "should check for UID string #{string.inspect} -> #{expected_as_uid}" do
+      expect(string.uid_value?).to eq(expected_as_uid)
+    end
+  end
 end
