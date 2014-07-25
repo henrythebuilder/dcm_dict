@@ -17,30 +17,20 @@
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
 require 'spec_helper'
+require 'data_element_shared_example_spec'
+
 describe "Symbol refinement" do
   using DcmDict::Refine::SymbolRefine
   describe "should permit access to single data element dictionary information" do
-    describe "for standard tag" do
-      [
-        :patient_birth_name, :gray_lookup_table_data, :dark_current_counts
-      ].each do |tag|
-        describe "#{tag}" do
-          obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(tag)
-          DcmDict::Dictionary::DataElementMethodMap.flatten.uniq.each do |method|
-            it "as #{tag.inspect}.#{method.to_s} > #{obj.send(method).inspect}" do
-              value = eval("#{tag.inspect}.#{method.to_s}")
-              expect(value).to eq(obj.send(method))
-            end
-          end
-        end
-      end
-    end
+
+    include_examples "refinement for standard tag",
+                     [:patient_birth_name, :gray_lookup_table_data, :dark_current_counts],
+                     Proc.new{|tag| tag.inspect}
 
   end
 
-  it "should get single 'information record' for a data element with 'data_element' method" do
-    value = :patient_birth_name.data_element
-    expect(value).to be_a(DcmDict::Dictionary::DataElementRecord)
-  end
+  include_examples "should get data element record",
+                   [ :patient_birth_name ],
+                   Proc.new {|tag| tag.inspect}
 
 end

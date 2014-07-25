@@ -17,57 +17,41 @@
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
 require 'spec_helper'
+require 'data_element_shared_example_spec'
+
 describe "Array refinement" do
   using DcmDict::Refine::ArrayRefine
+
   describe "should permit access to single data element dictionary information" do
-    describe "for standard tag" do
-      [
-        '[0x0010,0x1005]', '[0x0028,0x1200]', '[0x0014,0x3050]'
-      ].each do |stag|
-        describe "#{stag}" do
-          tag = eval(stag)
-          obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(tag)
-          DcmDict::Dictionary::DataElementMethodMap.
-            merge({group: :group, element: :element}).
-            flatten.uniq.each do |method|
-            it "as #{stag}.#{method.to_s} > #{obj.send(method).inspect}" do
-              value = eval("#{stag}.#{method.to_s}")
-              expect(value).to eq(obj.send(method))
-            end
-          end
-        end
-      end
-    end
 
-    describe "for multiple tag" do
-      {
-        '[0x6046,0x0040]' => { name: "Overlay Type",
-                           tag_multiple: true,
-                           tag_name: "Overlay Type",
-                           keyword: "OverlayType",
-                           tag_key: "OverlayType",
-                           vr: [:CS], tag_vr: [:CS], vm: ["1"], tag_vm: ["1"],
-                           tag: [0x6046, 0x0040], tag_ary: [0x6046, 0x0040],
-                           tag_ps: "(60XX,0040)",
-                           tag_sym: :overlay_type,
-                           tag_ndm: "60460040",
-                           tag_str: "(6046,0040)",
-                           group: 0x6046,
-                           element: 0x0040}
-      }.each do |stag, data|
-        data.each do |key, exp_value|
-          it "as #{stag}.#{key} > #{exp_value.inspect}" do
-            value = eval("#{stag}.#{key}")
-            expect(value).to eq(exp_value)
-          end
-        end
-      end
-    end
+    include_examples "refinement for standard tag",
+                     [[0x0010,0x1005], [0x0028,0x1200], [0x0014,0x3050]],
+                     Proc.new{|tag| tag}
+
+
+    multi_data = { [0x6046,0x0040] => {
+                     name: "Overlay Type",
+                     tag_multiple: true,
+                     tag_name: "Overlay Type",
+                     keyword: "OverlayType",
+                     tag_key: "OverlayType",
+                     vr: [:CS], tag_vr: [:CS], vm: ["1"], tag_vm: ["1"],
+                     tag: [0x6046, 0x0040], tag_ary: [0x6046, 0x0040],
+                     tag_ps: "(60XX,0040)",
+                     tag_sym: :overlay_type,
+                     tag_ndm: "60460040",
+                     tag_str: "(6046,0040)",
+                     group: 0x6046,
+                     element: 0x0040 } }
+
+    include_examples "refinement for multiple tag",
+                     multi_data,
+                     Proc.new {|tag| tag}
+
   end
 
-  it "should get single 'information record' for a data element with 'data_element' method" do
-    value = [0x0010,0x1005].data_element
-    expect(value).to be_a(DcmDict::Dictionary::DataElementRecord)
-  end
+  include_examples "should get data element record",
+                   [ [0x0010,0x1005] ],
+                   Proc.new {|tag| tag}
 
 end
