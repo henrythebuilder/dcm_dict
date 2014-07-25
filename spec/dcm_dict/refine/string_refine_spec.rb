@@ -17,7 +17,6 @@
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
 require 'spec_helper'
-require 'data_element_shared_example_spec'
 
 describe "String refinement" do
   using DcmDict::Refine::StringRefine

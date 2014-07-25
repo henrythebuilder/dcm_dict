@@ -32,25 +32,9 @@ describe DcmDict::Dictionary::UidRecord do
     end
 
 
-    it "Handle methods correctly (by symbol)" do
-      ur = DcmDict::Dictionary::UidRecord.new(data)
-      data.each do |key, expected_val|
-        expect(ur.respond_to?(key)).to be true
-      end
+    include_examples "Record handle methods correctly",
+                     DcmDict::Dictionary::UidRecord.new(data),
+                     data
 
-      expect(ur.respond_to?(:undefined_method_for_data_element_record)).to be false
-      expect {ur.undefined_method_for_data_element_record }.to raise_error(NoMethodError)
-    end
-
-    it "Handle methods correctly (by string)" do
-      ur = DcmDict::Dictionary::DataElementRecord.new(data)
-      data.each do |key, expected_val|
-        expect(ur.respond_to?(key.to_s)).to be true
-      end
-
-      expect(ur.respond_to?(:undefined_method_for_uid_record.to_s)).to be false
-      expect {ur.undefined_method_for_data_element_record }.to raise_error(NoMethodError)
-      expect {ur.send("undefined_method_for_uid_record") }.to raise_error(NoMethodError)
-    end
   end
 end

@@ -18,7 +18,11 @@
 #
 require 'spec_helper'
 
+
+
 describe DcmDict::Dictionary::DataElementRecord do
+  using DcmDict::Refine::Internal::ArrayRefineInternal
+
   [
     {tag_ps: '(0008,0010)',
      tag_name: 'Recognition Code',
@@ -53,28 +57,10 @@ describe DcmDict::Dictionary::DataElementRecord do
 
     end
 
-    it "Handle methods correctly (by symbol)" do
-      der = DcmDict::Dictionary::DataElementRecord.new(data)
-      data.each do |key, expected_val|
-        expect(der.respond_to?(key)).to be true
-      end
+    include_examples "Record handle methods correctly",
+                     DcmDict::Dictionary::DataElementRecord.new(data),
+                     data
 
-      expect(der.respond_to?(:undefined_method_for_data_element_record)).to be false
-      expect {der.undefined_method_for_data_element_record }.to raise_error(NoMethodError)
-    end
-
-    it "Handle methods correctly (by string)" do
-      der = DcmDict::Dictionary::DataElementRecord.new(data)
-      data.each do |key, expected_val|
-        expect(der.respond_to?(key.to_s)).to be true
-      end
-
-      expect(der.respond_to?(:undefined_method_for_data_element_record.to_s)).to be false
-      expect {der.undefined_method_for_data_element_record }.to raise_error(NoMethodError)
-      expect {der.send("undefined_method_for_data_element_record") }.to raise_error(NoMethodError)
-    end
-
-    using DcmDict::Refine::Internal::ArrayRefineInternal
 
     it "Handle group and element with explicit method" do
       der = DcmDict::Dictionary::DataElementRecord.new(data)

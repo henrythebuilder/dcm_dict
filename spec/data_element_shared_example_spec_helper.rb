@@ -16,8 +16,6 @@
 #  You should have received a copy of the GNU General Public License
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
-require 'spec_helper'
-
 using DcmDict::Refine::ArrayRefine
 using DcmDict::Refine::StringRefine
 using DcmDict::Refine::SymbolRefine

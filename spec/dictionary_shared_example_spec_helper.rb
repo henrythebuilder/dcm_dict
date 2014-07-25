@@ -17,13 +17,16 @@
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-if ENV['COVERAGE']
-  require 'simplecov'
-  SimpleCov.start
-end
+RSpec.shared_examples "Record handle methods correctly" do |obj, data|
+  it "Handle methods correctly" do
+    data.each do |key, expected_val|
+      expect(obj.respond_to?(key.to_sym)).to be true
+      expect(obj.respond_to?(key.to_s)).to be true
+    end
 
-require 'dcm_dict'
-require 'dcm_dict/xml/nokogiri_tool'
-require 'nokogiri'
-require 'dictionary_shared_example_spec_helper'
-require 'data_element_shared_example_spec_helper'
+    expect(obj.respond_to?(:undefined_method_for_record)).to be false
+    expect(obj.respond_to?(:undefined_method_for_record.to_s)).to be false
+    expect{ obj.undefined_method_for_record }.to raise_error(NoMethodError)
+    expect{ obj.send("undefined_method_for_record") }.to raise_error(NoMethodError)
+  end
+end
