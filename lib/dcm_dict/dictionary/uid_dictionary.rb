@@ -50,7 +50,7 @@ module DcmDict
       end
 
       def try_to_find_unknown_uid(uid)
-        return nil unless uid.uid_value?
+        raise "Unknown UID value" unless uid.uid_value?
         UidRecord.new({ uid_value: uid,
                         uid_name: 'Unknown UID',
                         uid_type: :unknown })

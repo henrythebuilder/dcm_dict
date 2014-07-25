@@ -36,11 +36,17 @@ describe DcmDict::Dictionary::UidDictionary do
   }.each do |uid, data|
     it "should handling unknown value for uid = #{uid.inspect}" do
       obj = DcmDict::Dictionary::TheUidDictionary.feature_of(uid)
-      expect(obj).not_to be_nil#, "#{uid.inspect} not found into dictionary"
+      expect(obj).not_to be_nil, "#{uid.inspect} not found into dictionary"
       data.each do |key, value|
         field = obj.send(key)
         expect(field).to eq(value)
       end
     end
   end
+
+  it "should handling wrong value for uid as '1.2.abc.3.4'" do
+    obj = DcmDict::Dictionary::TheUidDictionary.feature_of('1.2.abs.3.4')
+    expect(obj).to be_nil
+  end
+
 end
