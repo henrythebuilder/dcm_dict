@@ -18,7 +18,7 @@
 #
 module DcmDict
   module SourceData
-    UidValues = [
+    UidValuesData = [
       { uid_value: '1.2.840.10008.1.1', uid_name: "Verification SOP Class", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.1.2', uid_name: "Implicit VR Little Endian: Default Transfer Syntax for DICOM", uid_type: :transfer_syntax},
       { uid_value: '1.2.840.10008.1.2.1', uid_name: "Explicit VR Little Endian", uid_type: :transfer_syntax},

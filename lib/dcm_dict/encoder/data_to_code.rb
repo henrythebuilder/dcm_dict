@@ -46,7 +46,7 @@ END
         <<END
 module DcmDict
   module SourceData
-    UidValues = [
+    UidValuesData = [
 END
       end
 

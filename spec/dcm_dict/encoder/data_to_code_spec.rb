@@ -70,7 +70,7 @@ END
       expected_header = <<END
 module DcmDict
   module SourceData
-    UidValues = [
+    UidValuesData = [
 END
       expect(header).to eq(expected_header)
     end
