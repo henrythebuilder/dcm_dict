@@ -28,7 +28,9 @@ describe "String refinement" do
         describe "as #{tag}" do
           obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(tag)
           [:tag_ps, :tag_name, :tag_key, :tag_str, :tag_ndm].each do |key|
-            DcmDict::Dictionary::DataElementMethodMap.flatten.uniq.each do |method|
+            DcmDict::Dictionary::DataElementMethodMap.
+              merge({group: :group, element: :element}).
+              flatten.uniq.each do |method|
               it "as #{obj.send(key).inspect}.#{method.to_s} > #{obj.send(method).inspect}" do
                 value = eval("\"#{obj.send(key)}\".#{method.to_s}")
                 expect(value).to eq(obj.send(method))
@@ -51,7 +53,9 @@ describe "String refinement" do
                            tag_ps: "(60XX,0040)",
                            tag_sym: :overlay_type,
                            tag_ndm: "60460040",
-                           tag_str: "(6046,0040)" }
+                           tag_str: "(6046,0040)",
+                           group: 0x6046,
+                           element: 0x0040 }
       }.each do |tag, data|
         data.each do |key, exp_value|
           it "as #{tag.inspect}.#{key} > #{exp_value.inspect}" do

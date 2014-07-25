@@ -20,7 +20,9 @@ module DcmDict
   module Refine
 
     module DataElementRefine
-      DcmDict::Dictionary::DataElementMethodMap.flatten.uniq.each do |method|
+      DcmDict::Dictionary::DataElementMethodMap.
+        merge({group: :group, element: :element}).
+        flatten.uniq.each do |method|
         define_method(method) do
           Dictionary::TheDataElementDictionary.feature_of(self).send(method)
         end
