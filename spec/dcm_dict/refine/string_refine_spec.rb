@@ -50,10 +50,35 @@ describe "String refinement" do
                      multi_str_data,
                      Proc.new {|tag| tag.inspect}
 
+    include_examples "should get data element record",
+                     [ "Patient's Birth Name", "PatientBirthName", "(0010,1005)", "00101005" ],
+                     Proc.new {|tag| tag.inspect}
+
   end
 
-  include_examples "should get data element record",
-                   [ "Patient's Birth Name", "PatientBirthName", "(0010,1005)", "00101005" ],
-                   Proc.new {|tag| tag.inspect}
+
+  describe "should permit access to single data uid dictionary information" do
+    describe "for regular uids" do
+      [
+        '1.2.840.10008.1.1', "Verification SOP Class",
+        '1.2.840.10008.1.2.1', "Explicit VR Little Endian",
+        '1.2.840.10008.5.1.4.1.2.1.1', "Patient Root Query/Retrieve Information Model - FIND",
+        '1.2.3.4.5.6'
+      ].each do |uid|
+        describe "as #{uid.inspect}" do
+          obj = DcmDict::Dictionary::TheUidDictionary.feature_of(uid)
+          DcmDict::Dictionary::UidMethodMap.
+            flatten.uniq.each do |method|
+            expr = "#{uid.inspect}.#{method.to_s}"
+            it "with #{expr} > #{obj.send(method).inspect}" do
+              value = eval(expr)
+              expect(value).to eq(obj.send(method))
+            end
+          end
+        end
+      end
+    end
+
+  end
 
 end

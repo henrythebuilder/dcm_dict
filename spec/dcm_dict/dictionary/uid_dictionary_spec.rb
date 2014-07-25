@@ -17,6 +17,7 @@
 require 'spec_helper'
 
 describe DcmDict::Dictionary::UidDictionary do
+
   it "should map all source data" do
     index_keys = [:uid_value, :uid_name]
     DcmDict::SourceData::UidValuesData.each do |record|

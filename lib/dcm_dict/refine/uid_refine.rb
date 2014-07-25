@@ -18,13 +18,14 @@
 #
 module DcmDict
   module Refine
-    module StringRefine
 
-      refine String do
-        include DcmDict::Refine::DataElementRefine
-        include DcmDict::Refine::UidRefine
+    module UidRefine
+      DcmDict::Dictionary::UidMethodMap.
+        flatten.uniq.each do |method|
+        define_method(method) do
+          Dictionary::TheUidDictionary.feature_of(self).send(method)
+        end
       end
-
     end
   end
 end
