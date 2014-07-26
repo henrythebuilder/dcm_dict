@@ -18,6 +18,6 @@
 #
 
 module DcmDict
-  VERSION = "1.0.0"
+  VERSION = "0.1.0"
   DICOM_DOC_VERSION = "2014a"
 end
