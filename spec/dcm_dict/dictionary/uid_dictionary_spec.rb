@@ -44,9 +44,13 @@ describe DcmDict::Dictionary::UidDictionary do
     end
   end
 
-  it "should raise exception for wrong value for uid as '1.2.abc.3.4'" do
-    expect{DcmDict::Dictionary::TheUidDictionary.feature_of('1.2.abs.3.4')}.
-      to raise_error(DcmDict::DictionaryError)
+  [
+    '1.2.abc.3.4', 'this string is not a valid uid', '1.2.3.04.5'
+  ].each do |uid|
+    it "should raise exception for wrong value for uid as #{uid.inspect}" do
+      expect{DcmDict::Dictionary::TheUidDictionary.feature_of(uid)}.
+        to raise_error(DcmDict::DictionaryError)
+    end
   end
 
 end

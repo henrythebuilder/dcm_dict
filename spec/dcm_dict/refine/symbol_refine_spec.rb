@@ -32,4 +32,9 @@ describe "Symbol refinement" do
                    [ :patient_birth_name ],
                    Proc.new {|tag| tag.inspect}
 
+  include_examples "Raise exception for wrong input",
+                   [ :wrong_data_element ],
+                   [],
+                   Proc.new {|tag| tag.inspect}
+
 end
