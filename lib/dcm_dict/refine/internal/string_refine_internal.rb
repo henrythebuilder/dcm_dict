@@ -39,10 +39,13 @@ module DcmDict
           end
 
           # (0010,0010) -> '00100010'
+          #  00100010   -> '00100010'
           def to_tag_ndm
-            dgt = self.gsub(/[\(|\),]/, '').upcase
-            raise "wrong value for tag #{self.inspect}" unless dgt.match(/^[0-9|A-F]{8}$/)
-            dgt
+            if (/^[0-9|A-F]{8}$/.match(self) ||
+                /^[\(][0-9a-fA-F]{4}[\)\,\(][0-9a-fA-F]{4}\)$/.match(self))
+                return self.gsub(/[\(|\),]/, '').upcase
+            end
+            raise "wrong value for tag #{self.inspect}"
           end
 
           # (0010,0010) -> [0x0010, 0x0010]

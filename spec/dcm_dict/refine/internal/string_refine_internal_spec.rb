@@ -21,8 +21,8 @@ require 'spec_helper'
 
 describe "String refinement (internal)" do
 
+  using DcmDict::Refine::Internal::StringRefineInternal
   describe "should remove unwanted space characters" do
-    using DcmDict::Refine::Internal::StringRefineInternal
 
     [
       ["FileSetDescriptorFileID ", "trailing spaces"],
@@ -38,8 +38,6 @@ describe "String refinement (internal)" do
   end
 
   describe "should convert keyword tag string to symbol object" do
-    using DcmDict::Refine::Internal::StringRefineInternal
-
     [
       ['DarkCurrentCounts', :dark_current_counts],
       ['InstanceCreationDate', :instance_creation_date],
@@ -72,8 +70,6 @@ describe "String refinement (internal)" do
   end
 
   describe "should convert standard string tag" do
-    using DcmDict::Refine::Internal::StringRefineInternal
-
     [
       ['(0014,3050)', '00143050', [0x0014,0x3050]],
       ['(0008,0012)', '00080012', [0x0008,0x0012]],
@@ -89,7 +85,6 @@ describe "String refinement (internal)" do
     end
   end
 
-  using DcmDict::Refine::Internal::StringRefineInternal
   {
     '(0010,0020)'=> [0x0010,0x0020],
     '00100020' => [0x0010,0x0020]
@@ -114,9 +109,13 @@ describe "String refinement (internal)" do
     '(0010,00208)',
     'abracadabra',
     Time.now.to_s,
+    '(1ffff,123)',
+    '(123,1fff0)'
   ].each do |src|
-    it "should manage wrong value (#{src.inspect}) with to_tag_str method" do
+    it "should manage wrong value #{src.inspect}" do
       expect{src.to_tag_str}.to raise_error
+      expect{src.to_tag_ndm}.to raise_error
+      expect{src.to_tag_ary}.to raise_error
     end
   end
 
