@@ -64,8 +64,8 @@ describe DcmDict::Dictionary::DataElementDictionary do
    [1234.5678, 1234]
   ].each do |wrong_tag|
     it "with wrong tag request as tag = #{wrong_tag.inspect}" do
-      obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(wrong_tag)
-      expect(obj).to be_nil
+      expect {DcmDict::Dictionary::TheDataElementDictionary.feature_of(wrong_tag)}.
+        to raise_error(DcmDict::DictionaryError)
     end
   end
 end

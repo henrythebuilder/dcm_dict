@@ -78,7 +78,38 @@ describe "String refinement" do
         end
       end
     end
+  end
 
+  describe "should raise exception for wrong input" do
+    describe "for data element" do
+      [
+        '123g123m'
+
+      ].each do |tag|
+        DcmDict::Dictionary::DataElementMethodMap.
+          merge({group: :group, element: :element}).
+          flatten.uniq.each do |method|
+          expr = "#{tag.inspect}.#{method}"
+          it "for #{expr}" do
+            expect{eval(expr)}.to raise_error(DcmDict::DictionaryError)
+          end
+        end
+      end
+    end
+    describe "and for uid" do
+      [
+        'this string is not an uid'
+      ].each do |uid|
+        DcmDict::Dictionary::UidMethodMap.
+          flatten.uniq.each do |method|
+          expr = "#{uid.inspect}.#{method.to_s}"
+          it "for #{expr}" do
+            expect{eval(expr)}.to raise_error(DcmDict::DictionaryError)
+          end
+        end
+      end
+
+    end
   end
 
 end

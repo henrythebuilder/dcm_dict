@@ -30,8 +30,8 @@ module DcmDict
 
       def feature_of(uid)
         try_to_find_uid(uid)
-      rescue
-        nil
+      rescue => ex
+        raise DictionaryError.new(ex.message)
       end
 
       private

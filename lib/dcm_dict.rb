@@ -17,6 +17,7 @@
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
 require "dcm_dict/version"
+require "dcm_dict/error/dictionary_error"
 require "dcm_dict/ext/object_extension"
 require "dcm_dict/refine/internal/string_refine_internal"
 require "dcm_dict/refine/internal/array_refine_internal"

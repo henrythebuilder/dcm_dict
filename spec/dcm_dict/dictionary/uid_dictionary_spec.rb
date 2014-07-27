@@ -44,9 +44,9 @@ describe DcmDict::Dictionary::UidDictionary do
     end
   end
 
-  it "should handling wrong value for uid as '1.2.abc.3.4'" do
-    obj = DcmDict::Dictionary::TheUidDictionary.feature_of('1.2.abs.3.4')
-    expect(obj).to be_nil
+  it "should raise exception for wrong value for uid as '1.2.abc.3.4'" do
+    expect{DcmDict::Dictionary::TheUidDictionary.feature_of('1.2.abs.3.4')}.
+      to raise_error(DcmDict::DictionaryError)
   end
 
 end
