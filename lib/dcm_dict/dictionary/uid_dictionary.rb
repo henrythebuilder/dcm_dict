@@ -31,7 +31,7 @@ module DcmDict
       def feature_of(uid)
         try_to_find_uid(uid)
       rescue => ex
-        raise DictionaryError.new(ex.message)
+        raise DictionaryError.new("Unable to find reference for uid '#{uid}' as #{uid.class}")
       end
 
       private

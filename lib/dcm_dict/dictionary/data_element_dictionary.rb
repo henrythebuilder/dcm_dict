@@ -34,7 +34,7 @@ module DcmDict
       def feature_of(tag)
         try_to_find(tag)
       rescue => ex
-        raise DictionaryError.new(ex.message)
+        raise DictionaryError.new("Unable to find reference for tag '#{tag}' as #{tag.class}")
       end
 
       private
