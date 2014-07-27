@@ -51,9 +51,17 @@ module DcmDict
           private
           def check_dicom_tag
             return true if ( (self.size==2) &&
-                             self[0].is_a?(Integer) &&
-                             self[1].is_a?(Integer))
+                             valid_tag_value?(0) &&
+                             valid_tag_value?(1) )
             raise "Wrong object definition for Tag Array"
+          end
+
+          def valid_tag_value?(index)
+            value = self[index]
+            return true if ( (value.is_a?(Integer)) &&
+                             (value.bit_length <=16) &&
+                             (value >=0) )
+            raise "Wrong value at index #{index} for Tag Array"
           end
         end
 

@@ -36,7 +36,9 @@ describe "Array Refinement" do
         [0x0010],
         [0x0010,0x0020,0x0030],
         ['0010', '0020'],
-        [16.0, 0x0020]
+        [16.0, 0x0020],
+        [0x1ffff,0x10000],
+        [-1,-2]
       ].each do |tag|
         it "as #{tag.inspect}" do
           expect{ tag.group }.to raise_error

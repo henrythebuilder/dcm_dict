@@ -54,7 +54,7 @@ describe "Array refinement" do
                    Proc.new {|tag| tag}
 
   include_examples "Raise exception for wrong input",
-                   [ [0,1,2,3], [-0x0010,-0x0010] ],
+                   [ [0,1,2,3], [-0x0010,-0x0010], [0x1ffff,0x0010], [0x1ffff,0x10010], [0x0010, 0x1ffff]],
                    [],
-                   Proc.new {|tag| tag.inspect}
+                   Proc.new {|tag| tag}
 end
