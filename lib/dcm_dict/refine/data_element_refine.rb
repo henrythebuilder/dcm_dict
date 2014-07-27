@@ -21,7 +21,7 @@ module DcmDict
 
     module DataElementRefine
       DcmDict::Dictionary::DataElementMethodMap.
-        merge({group: :group, element: :element}).
+        merge({tag_group: :tag_group, tag_element: :tag_element}).
         flatten.uniq.each do |method|
         define_method(method) do
           Dictionary::TheDataElementDictionary.feature_of(self).send(method)

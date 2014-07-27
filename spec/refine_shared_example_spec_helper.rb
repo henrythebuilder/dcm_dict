@@ -25,7 +25,7 @@ RSpec.shared_examples "Raise exception for wrong input" do |tags, uids, tag_proc
     describe "for data element" do
       tags.each do |tag|
         DcmDict::Dictionary::DataElementMethodMap.
-          merge({group: :group, element: :element}).
+          merge({tag_group: :tag_group, tag_element: :tag_element}).
           flatten.uniq.each do |method|
           expr = "#{tag_proc.call(tag)}.#{method.to_s}"
           it "with #{expr}" do

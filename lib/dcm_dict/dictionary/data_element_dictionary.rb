@@ -44,7 +44,7 @@ module DcmDict
           DataElementIndexKey.each do |key|
             @standard_dict[data[key]] = record
           end
-          @multi_dict << record if record.multiple_tag?
+          @multi_dict << record if record.tag_multiple?
         end
       end
 
@@ -69,26 +69,23 @@ module DcmDict
         nil
       end
 
-      def try_to_group_length_tag(unknown_tag)
-        tag = unknown_tag.to_tag_ary
-        if (tag.element == 0)
+      def try_to_group_length_tag(tag)
+        if (tag.tag_element == 0)
           return DataElementRecord.new(
                    SourceData::DetachedData.make_group_length_data(tag))
         end
         nil
       end
 
-      def try_to_find_private_creator_tag(unknown_tag)
-        tag = unknown_tag.to_tag_ary
-        if (tag.group.odd? && tag.element<0xff)
+      def try_to_find_private_creator_tag(tag)
+        if (tag.tag_group.odd? && tag.tag_element<0xff)
           return DataElementRecord.new(
                    SourceData::DetachedData.make_private_creator_data(tag))
         end
         nil
       end
 
-      def try_to_find_unknown_tag(unknown_tag)
-        tag = unknown_tag.to_tag_ary
+      def try_to_find_unknown_tag(tag)
         DataElementRecord.new(
           SourceData::DetachedData.make_unknown_data(tag))
       end

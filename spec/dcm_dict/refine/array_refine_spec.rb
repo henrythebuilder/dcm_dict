@@ -29,19 +29,19 @@ describe "Array refinement" do
 
 
     multi_data = { [0x6046,0x0040] => {
-                     name: "Overlay Type",
+                     tag_name: "Overlay Type",
                      tag_multiple: true,
                      tag_name: "Overlay Type",
-                     keyword: "OverlayType",
+                     tag_keyword: "OverlayType",
                      tag_key: "OverlayType",
-                     vr: [:CS], tag_vr: [:CS], vm: ["1"], tag_vm: ["1"],
+                     tag_vr: [:CS], tag_vm: ["1"],
                      tag: [0x6046, 0x0040], tag_ary: [0x6046, 0x0040],
                      tag_ps: "(60XX,0040)",
                      tag_sym: :overlay_type,
                      tag_ndm: "60460040",
                      tag_str: "(6046,0040)",
-                     group: 0x6046,
-                     element: 0x0040 } }
+                     tag_group: 0x6046,
+                     tag_element: 0x0040 } }
 
     include_examples "refinement for multiple tag",
                      multi_data,

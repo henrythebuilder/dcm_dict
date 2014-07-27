@@ -26,7 +26,7 @@ RSpec.shared_examples "refinement for standard tag" do |tags, tag_proc|
       describe "as #{tag_proc.call(tag)}" do
         obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(tag)
         DcmDict::Dictionary::DataElementMethodMap.
-          merge({group: :group, element: :element}).
+          merge({tag_group: :tag_group, tag_element: :tag_element}).
           flatten.uniq.each do |method|
           expr = "#{tag_proc.call(tag)}.#{method.to_s}"
           it "with #{expr} > #{obj.send(method).inspect}" do

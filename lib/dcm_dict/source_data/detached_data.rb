@@ -23,8 +23,7 @@ module DcmDict
       using DcmDict::Refine::Internal::StringRefineInternal
 
       def self.make_group_length_data(tag)
-        group = tag.to_tag_ary.group_str
-        base_data = { :tag_ps =>  "(#{group},0000)",
+        base_data = { :tag_ps =>  "(#{tag.tag_group_str},0000)",
                       :tag_name => 'Group Length',
                       :tag_key =>  'GroupLength',
                       :tag_vr =>  'UL',

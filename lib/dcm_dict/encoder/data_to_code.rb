@@ -22,7 +22,7 @@ module DcmDict
       using DcmDict::Refine::Internal::ArrayRefineInternal
 
       def self.data_element_data_to_code(data, indent: 4)
-        tag_ary_str = "[0x#{data[:tag_ary].group_str},0x#{data[:tag_ary].element_str}]"
+        tag_ary_str = "[0x#{data[:tag_ary].tag_group_str},0x#{data[:tag_ary].tag_element_str}]"
         "#{' '*indent}{ tag_ps: '#{data[:tag_ps]}', tag_name: \"#{data[:tag_name]}\", tag_key: '#{data[:tag_key]}', tag_vr: #{data[:tag_vr]}, tag_vm: #{data[:tag_vm]}, tag_str: '#{data[:tag_str]}', tag_sym: #{data[:tag_sym].inspect}, tag_ndm: '#{data[:tag_ndm]}', tag_ary: #{tag_ary_str}, tag_multiple: #{data[:tag_multiple].inspect}, tag_note: '#{data[:tag_note]}'},"
       end
 

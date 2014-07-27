@@ -105,6 +105,29 @@ describe "String refinement (internal)" do
     end
   end
 
+  {
+    '(0010,0020)'=> [0x0010,0x0020],
+    '00100020' => [0x0010,0x0020]
+
+  }.each do |src, expected_val|
+    it "should implement tag_group and tag_element method" do
+      expect(src.tag_group).to eq(expected_val[0])
+      expect(src.tag_element).to eq(expected_val[1])
+    end
+  end
+
+  {
+    '(0010,0020)'=> ['0010','0020'],
+    '00100020' => ['0010','0020'],
+    '(FFFE,E000)'=> ['FFFE','E000'],
+
+  }.each do |src, expected_val|
+    it "should implement tag_group_str and tag_element_str method" do
+      expect(src.tag_group_str).to eq(expected_val[0])
+      expect(src.tag_element_str).to eq(expected_val[1])
+    end
+  end
+
   [
     '(0010,00208)',
     'abracadabra',

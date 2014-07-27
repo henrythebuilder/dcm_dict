@@ -22,30 +22,34 @@ module DcmDict
       module ArrayRefineInternal
 
         refine Array do
-          def group
+          def tag_group
             check_dicom_tag
             self[0]
           end
 
-          def element
+          def tag_element
             check_dicom_tag
             self[1]
           end
 
-          def group_str
-            group.to_s(16).rjust(4, '0').upcase()
+          def tag_group_str
+            tag_group.to_s(16).rjust(4, '0').upcase()
           end
 
-          def element_str
-            element.to_s(16).rjust(4, '0').upcase()
+          def tag_element_str
+            tag_element.to_s(16).rjust(4, '0').upcase()
           end
 
           def to_tag_str
-            "(#{group_str},#{element_str})"
+            "(#{tag_group_str},#{tag_element_str})"
+          end
+
+          def to_tag_ndm
+            "#{tag_group_str}#{tag_element_str}"
           end
 
           def to_tag_ary
-            [group,element]
+            [tag_group, tag_element]
           end
 
           private

@@ -40,16 +40,17 @@ describe DcmDict::Dictionary::DataElementRecord do
     it "Handle Data Element Data correctly" do
       der = DcmDict::Dictionary::DataElementRecord.new(data)
       expect(der.tag_ps).to eq(data[:tag_ps])
-      expect(der.name).to eq(data[:tag_name])
-      expect(der.keyword).to eq(data[:tag_key])
-      expect(der.vr).to eq(data[:tag_vr])
-      expect(der.vm).to eq(data[:tag_vm])
-      expect(der.note).to eq(data[:tag_note])
+      expect(der.tag_name).to eq(data[:tag_name])
+      expect(der.tag_keyword).to eq(data[:tag_key])
+      expect(der.tag_vr).to eq(data[:tag_vr])
+      expect(der.tag_vm).to eq(data[:tag_vm])
+      expect(der.tag_note).to eq(data[:tag_note])
       expect(der.tag_ary).to eq(data[:tag_ary])
+      expect(der.tag).to eq(data[:tag_ary])
       expect(der.tag_sym).to eq(data[:tag_sym])
       expect(der.tag_ndm).to eq(data[:tag_ndm])
       expect(der.tag_str).to eq(data[:tag_str])
-      expect(der.multiple_tag?).to eq(data[:tag_multiple])
+      expect(der.tag_multiple?).to eq(data[:tag_multiple])
 
       data.each do |key, expected_val|
         expect(der.send(key)).to eq(expected_val)
@@ -64,8 +65,8 @@ describe DcmDict::Dictionary::DataElementRecord do
 
     it "Handle group and element with explicit method" do
       der = DcmDict::Dictionary::DataElementRecord.new(data)
-      expect(der.group).to eq(data[:tag_ary].group)
-      expect(der.element).to eq(data[:tag_ary].element)
+      expect(der.tag_group).to eq(data[:tag_ary].tag_group)
+      expect(der.tag_element).to eq(data[:tag_ary].tag_element)
     end
 
   end

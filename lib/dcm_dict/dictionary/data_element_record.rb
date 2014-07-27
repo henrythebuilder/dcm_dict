@@ -18,12 +18,12 @@
 #
 module DcmDict
   module Dictionary
-    DataElementMethodMap = {:multiple_tag? => :tag_multiple,
-                             :name => :tag_name,
-                             :keyword => :tag_key,
-                             :vr => :tag_vr,
-                             :vm => :tag_vm,
-                             :note => :tag_note,
+    DataElementMethodMap = { :tag_multiple? => :tag_multiple,
+                             :tag_name => :tag_name,
+                             :tag_keyword => :tag_key,
+                             :tag_vr => :tag_vr,
+                             :tag_vm => :tag_vm,
+                             :tag_note => :tag_note,
                              :tag => :tag_ary,
                              :tag_ary => :tag_ary,
                              :tag_ps => :tag_ps,
@@ -40,12 +40,12 @@ module DcmDict
         @data = data
       end
 
-      def group
-        @data[:tag_ary].group
+      def tag_group
+        @data[:tag_ary].tag_group
       end
 
-      def element
-        @data[:tag_ary].element
+      def tag_element
+        @data[:tag_ary].tag_element
       end
 
       def match_tag?(tag)
@@ -65,11 +65,9 @@ module DcmDict
       end
 
       def make_specific_record(tag)
-        ref_tag = tag.to_tag_ary
-        tag_str = ref_tag.to_tag_str
-        DataElementRecord.new( @data.merge( { tag_str: tag_str,
-                                              tag_ndm: tag_str.to_tag_ndm,
-                                              tag_ary: ref_tag }))
+        DataElementRecord.new( @data.merge( { tag_str: tag.to_tag_str,
+                                              tag_ndm: tag.to_tag_ndm,
+                                              tag_ary: tag.to_tag_ary }))
       end
 
       private

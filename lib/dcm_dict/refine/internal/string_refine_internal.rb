@@ -38,30 +38,36 @@ module DcmDict
               to_sym
           end
 
+          def tag_group
+            tag_group_str.hex
+          end
+
+          def tag_element
+            tag_element_str.hex
+          end
+
+          def tag_group_str
+            self.to_tag_ndm[0..3]
+          end
+
+          def tag_element_str
+            self.to_tag_ndm[4..7]
+          end
           # (0010,0010) -> '00100010'
           #  00100010   -> '00100010'
           def to_tag_ndm
-            if (/^[0-9|A-F]{8}$/.match(self) ||
-                /^[\(][0-9a-fA-F]{4}[\)\,\(][0-9a-fA-F]{4}\)$/.match(self))
-                return self.gsub(/[\(|\),]/, '').upcase
-            end
-            raise "wrong value for tag #{self.inspect}"
+            check_dicom_tag
+            self.gsub(/[\(|\),]/, '').upcase
           end
 
           # (0010,0010) -> [0x0010, 0x0010]
           def to_tag_ary
-            self.to_tag_ndm.
-              insert(4,',').
-              split(',').
-              map(&:hex)
+            [tag_group,tag_element]
           end
 
           # '00100010', (0010,0010) -> (0010,0010)
           def to_tag_str
-            self.to_tag_ndm.
-              insert(4,',').
-              insert(0,'(').
-              concat(')')
+            "(#{tag_group_str},#{tag_element_str})"
           end
 
           def uid_type_to_sym
@@ -73,6 +79,13 @@ module DcmDict
           def uid_value?
             (self.length <= 64) &&
               (/^(([0-9][\.])|([1-9][0-9]*[\.]))*(([0-9])|([1-9][0-9]*))$/.match(self) != nil)
+          end
+
+          private
+          def check_dicom_tag
+            return true if (/^[0-9|A-F]{8}$/.match(self) ||
+                            /^[\(][0-9a-fA-F]{4}[\)\,\(][0-9a-fA-F]{4}\)$/.match(self))
+            raise "wrong value for tag #{self.inspect}"
           end
 
         end

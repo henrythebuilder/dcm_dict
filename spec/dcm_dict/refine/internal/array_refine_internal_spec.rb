@@ -27,8 +27,8 @@ describe "Array Refinement" do
 
   describe "should extract group and element from 'array tag'" do
     it "for correct object" do
-      expect([0x0010,0x0020].group).to eq(0x0010)
-      expect([0x0010,0x0020].element).to eq(0x0020)
+      expect([0x0010,0x0020].tag_group).to eq(0x0010)
+      expect([0x0010,0x0020].tag_element).to eq(0x0020)
     end
 
     describe "and for wrong array must be raise error" do
@@ -41,8 +41,8 @@ describe "Array Refinement" do
         [-1,-2]
       ].each do |tag|
         it "as #{tag.inspect}" do
-          expect{ tag.group }.to raise_error
-          expect{ tag.element }.to raise_error
+          expect{ tag.tag_group }.to raise_error
+          expect{ tag.tag_element }.to raise_error
 
         end
       end
@@ -50,15 +50,16 @@ describe "Array Refinement" do
 
   end
 
-  describe "should convert group and element to four char hex string" do
+  describe "should convert group and element to hex string" do
     {
-      [0xfffe,0xe0dd] => {group: 'FFFE', element: 'E0DD', tag_str: '(FFFE,E0DD)'},
-      [0x0010,0x0020] => {group: '0010', element: '0020', tag_str: '(0010,0020)'}
+      [0xfffe,0xe0dd] => {group: 'FFFE', element: 'E0DD', tag_str: '(FFFE,E0DD)', tag_ndm: 'FFFEE0DD'},
+      [0x0010,0x0020] => {group: '0010', element: '0020', tag_str: '(0010,0020)', tag_ndm: '00100020'}
     }.each do |tag, value|
       it "for #{tag.inspect}" do
-        expect(tag.group_str).to eq(value[:group])
-        expect(tag.element_str).to eq(value[:element])
+        expect(tag.tag_group_str).to eq(value[:group])
+        expect(tag.tag_element_str).to eq(value[:element])
         expect(tag.to_tag_str).to eq(value[:tag_str])
+        expect(tag.to_tag_ndm).to eq(value[:tag_ndm])
       end
     end
   end
