@@ -16,6 +16,11 @@
 #  You should have received a copy of the GNU General Public License
 #  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
 #
+#  This software has neither been tested nor approved for clinical use
+#  or for incorporation in a medical device.
+#  It is the redistributor's or user's responsibility to comply with any
+#  applicable local, state, national or international regulations.
+#
 module DcmDict
   module Dictionary
     UidMethodMap = {uid_value: :uid_value,

@@ -257,7 +257,8 @@ See the file for details.
 TBD
 
 ## License
-Copyright (C) 2014  Enrico Rivarola. See the `LICENSE` and `COPYING` files for license details.
+Copyright (C) 2014  Enrico Rivarola.
+See the `LICENSE` and `COPYING` files for license details.
 
 ## Source Code
 Main source code repository on github at [henrythebuilder/dcm_dict](https://github.com/henrythebuilder/dcm_dict)
