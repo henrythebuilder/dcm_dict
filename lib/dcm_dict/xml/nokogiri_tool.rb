@@ -35,8 +35,7 @@ module DcmDict
       def self.uid_field_extract_proc(node_set)
         node_set_idx = { uid_value: 0,
                          uid_name: 1,
-                         uid_type: 2,
-                         uid_part: 3,}
+                         uid_type: 2}
         Proc.new do |key|
           idx = node_set_idx[key]
           node_set[idx] ? node_set[idx].content : ''
