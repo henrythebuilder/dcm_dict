@@ -45,10 +45,8 @@ as weel for UIDs
 let see all features in detail:
 
 ## Library usage
-Thre are two method to using library *extension*: the **refinement** way and the **monkey patching** way.
+The library involve **Refiniment** so use it is simple, it is necessary to include the specific *using directive*:
 
-### Using as *refinement*
-For the refinement way is necessary to include the using directive with:
 ```ruby
 using DcmDict::Refine::StringRefine
 ```
@@ -61,10 +59,13 @@ for the Array object and
 ```ruby
 using DcmDict::Refine::SymbolRefine
 ```
-for the Symbol object
+for the Symbol object.
 
-### Using by *monkey patching*
-This is a **deprecated** implementation, anyway for the *monkey patching* is possible to include specific *module* into the class you want to use. There are two base module *DcmDict::Refine::DataElementRefine* and *DcmDict::Refine::UidRefine*.
+That's it.
+
+**Note**: It is possible to use also the the *monkey patching* way, this is a *deprecated* utilization but possible, and, may be, useful technique in certain contexts as an *irb* session, or for some particular test. Anyway for the *monkey patching* is possible to include some specific *common modules* into the class you want to use.
+There are two base modules *DcmDict::Refine::DataElementRefine* and *DcmDict::Refine::UidRefine*.
+
 For example in the String class will have the code:
 ```ruby
 class String
@@ -72,7 +73,8 @@ class String
   include DcmDict::Refine::UidRefine
 end
 ```
-same way for Array and Symbol class
+same way for Array and Symbol class.
+*The main way remains the **Refiniment***.
 
 ## Data Element data in detail
 Any Data Element features can be accessed from a *String*, *Array* or *Symbol* object.
@@ -98,10 +100,10 @@ The main methods supported are:
 |**tag_multiple?** | is a multiple tag ? |boolean|
 ||useful for 'multi tag' attribute||
 
-each data element is indexed by:
+each data element is indexed by these fields:
 
 |Field|Type|
-|:----|:-----|
+|:----|:-----:|
 |**tag_key** | String|
 |**tag_ps**  | String|
 |**tag_ary** | Array|
@@ -110,8 +112,8 @@ each data element is indexed by:
 |**tag_str** | String|
 |**tag_name** | String|
 
-For this fields is possible to access to data element information.
-Consider the case of the tag (0010,1005) (*Patient's Birth Name*), the primary field are:
+Through these fields is possible to access to data element information.
+Consider the case of the tag (0010,1005) (*Patient's Birth Name*), the primary fields are:
 **'(0010,1005)'**, **"Patient's Birth Name"**, **'PatientBirthName'**, **:patient_birth_name**, **'00101005'** and **[0x0010,0x1005]**
 
 - As string key you may use the standard tag format **'(0010,1005)'**, the tag name **'Patient's Birth Name'**, the tag keyword **'PatientBirthName'** or the Native DICOM Format tag **'00101005'**
@@ -156,9 +158,9 @@ will produce
 4101
 ```
 
-### note
-The library manage also the 'multiple tag' as *(0020,31XX)* (*Source Image IDs*). For this data element the default tag in array form is [0x0020,0x3122].
-All field are expressed as:
+### 'multiple tag'
+The library manage also the 'multiple tag' as *(0020,31XX)* (*Source Image IDs*).
+For this data element the default tag in array form is [0x0020,0x3122] and all fields are expressed as:
 
 |Method/field  | Value|
 |:------|:------------:|
@@ -243,7 +245,7 @@ For this uid all field are expressed as:
 - Well-known Frames of Reference UID Values
 - Context Group UID Values
 - Standard Color Palettes UID Values
-- IOD definition
+- IOD definition (???)
 
 ## How data is extracted
 The library also contains a script (*dcm_dict_converter.rb* into *bin* folder) able to download the xml documents and extracts the data in a *Ruby compatible format*.
