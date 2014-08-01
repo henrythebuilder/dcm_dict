@@ -42,7 +42,7 @@ module DcmDict
       using DcmDict::Refine::Internal::ArrayRefineInternal
 
       def initialize(data)
-        @data = data
+        initialize_data(data)
       end
 
       def tag_group
@@ -83,6 +83,16 @@ module DcmDict
       def tag_pattern
         gs, es = self.tag_ps.gsub(/[\(|\)]/, '').gsub(/[xX]/,"[0-9A-Fa-f]").split(',')
         ["^\\(#{gs}\\,#{es}\\)$", "^#{gs}#{es}$" ]
+      end
+
+      def initialize_data(data)
+        @data = data
+        freeze_data
+      end
+
+      def freeze_data
+        @data.each {|key, value| value.freeze }
+        @data.freeze
       end
 
     end

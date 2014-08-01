@@ -30,6 +30,7 @@ describe DcmDict::Dictionary::UidDictionary do
         obj = DcmDict::Dictionary::TheUidDictionary.feature_of(record[key])
         expect(obj).not_to be_nil, "#{key.inspect} > #{record[:uid_value]}"
         expect(obj).to be_a(DcmDict::Dictionary::UidRecord)
+        expect(obj).to be_frozen
       end
     end
   end
@@ -58,4 +59,10 @@ describe DcmDict::Dictionary::UidDictionary do
     end
   end
 
+  it "data should be not modifiable" do
+    expect(DcmDict::Dictionary::TheUidDictionary).to be_frozen
+    uid  = '1.2.840.10008.1.2'
+    obj = DcmDict::Dictionary::TheUidDictionary.feature_of(uid)
+    expect{obj.uid_value << 'aaa'}.to raise_error
+  end
 end

@@ -31,9 +31,8 @@ module DcmDict
       using DcmDict::Refine::Internal::StringRefineInternal
 
       def initialize
-        @standard_dict = {}
-        @multi_dict = []
         map_source_data
+        freeze_source_data
       end
 
       def feature_of(tag)
@@ -44,13 +43,21 @@ module DcmDict
 
       private
       def map_source_data
+        @standard_dict = {}
+        @multi_dict = []
         SourceData::DataElementsData.each do |data|
           record = DataElementRecord.new(data)
+          record.freeze
           DataElementIndexKey.each do |key|
             @standard_dict[data[key]] = record
           end
           @multi_dict << record if record.tag_multiple?
         end
+      end
+
+      def freeze_source_data
+        @standard_dict.freeze
+        @multi_dict.freeze
       end
 
       def try_to_find(tag)
@@ -96,6 +103,6 @@ module DcmDict
       end
 
     end
-    TheDataElementDictionary = DataElementDictionary.new
+    TheDataElementDictionary = DataElementDictionary.new.freeze
   end
 end

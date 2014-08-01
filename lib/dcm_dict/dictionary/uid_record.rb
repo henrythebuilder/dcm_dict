@@ -29,7 +29,7 @@ module DcmDict
 
     class UidRecord
       def initialize(data)
-        @data = data
+        initialize_data(data)
       end
 
       def method_missing(name, *args, &block)
@@ -42,6 +42,16 @@ module DcmDict
       private
       def respond_to_missing?(name, include_priv)
         UidMethodMap.has_key?(name) || @data.has_key?(name)
+      end
+
+      def initialize_data(data)
+        @data = data
+        freeze_data
+      end
+
+       def freeze_data
+        @data.each {|key, value| value.freeze }
+        @data.freeze
       end
 
     end

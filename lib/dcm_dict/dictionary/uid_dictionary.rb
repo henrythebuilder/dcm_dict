@@ -29,7 +29,6 @@ module DcmDict
     class UidDictionary
 
       def initialize
-        @dict={}
         map_source_data
       end
 
@@ -41,8 +40,10 @@ module DcmDict
 
       private
       def map_source_data
+        @dict={}
         SourceData::UidValuesData.each do |data|
           record = UidRecord.new(data)
+          record.freeze
           UidIndexKey.each do |key|
             @dict[data[key]] = record
           end
@@ -61,6 +62,6 @@ module DcmDict
                         uid_type: :unknown })
       end
     end
-    TheUidDictionary = UidDictionary.new
+    TheUidDictionary = UidDictionary.new.freeze
   end
 end

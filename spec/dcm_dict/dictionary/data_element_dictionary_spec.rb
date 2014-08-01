@@ -32,6 +32,7 @@ describe DcmDict::Dictionary::DataElementDictionary do
         obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(record[key])
         expect(obj).not_to be_nil, "#{key.inspect} > #{record[:tag_ps]}"
         expect(obj).to be_a(DcmDict::Dictionary::DataElementRecord)
+        expect(obj).to be_frozen
       end
     end
   end
@@ -72,5 +73,12 @@ describe DcmDict::Dictionary::DataElementDictionary do
       expect {DcmDict::Dictionary::TheDataElementDictionary.feature_of(wrong_tag)}.
         to raise_error(DcmDict::DictionaryError)
     end
+  end
+
+  it "data should be not modifiable" do
+    expect(DcmDict::Dictionary::TheDataElementDictionary).to be_frozen
+    tag = '(0002,0010)'
+    obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(tag)
+    expect{obj.tag_ps << 'aaa'}.to raise_error
   end
 end
