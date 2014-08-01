@@ -30,7 +30,7 @@ describe DcmDict::Dictionary::UidRecord do
       uid_type: :transfer_syntax }
   ].each do |data|
     it "Handle Data Element Data correctly" do
-      ur = DcmDict::Dictionary::UidRecord.new(data)
+      ur = DcmDict::Dictionary::UidRecord.new(data.dup)
       expect(ur.uid_value).to eq(data[:uid_value])
       expect(ur.uid_name).to eq(data[:uid_name])
       expect(ur.uid_type).to eq(data[:uid_type])
@@ -42,7 +42,7 @@ describe DcmDict::Dictionary::UidRecord do
                      data
 
     it "data should be not modifiable" do
-      uid = DcmDict::Dictionary::UidRecord.new(data)
+      uid = DcmDict::Dictionary::UidRecord.new(data.dup)
       old_value = uid.uid_value.dup
       expect{uid.uid_value << 'aaa'}.to raise_error
       expect(uid.uid_value).to eq(old_value)
