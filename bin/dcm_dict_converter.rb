@@ -51,6 +51,7 @@ LICENSE_TEXT=<<END_LICENSE
   or for incorporation in a medical device.
   It is the redistributor's or user's responsibility to comply with any
   applicable local, state, national or international regulations
+
 END_LICENSE
 
 class DcmDictConverter
@@ -179,8 +180,8 @@ class DcmDictConverter
 
 end
 
-STDOUT << LICENSE_TEXT
-STDOUT << "\nAny key to continue or Ctrl-C to break."
+STDERR << LICENSE_TEXT
+STDERR << "\nAny key to continue or Ctrl-C to break."
 STDIN.getc
 
 case ARGV[0]
