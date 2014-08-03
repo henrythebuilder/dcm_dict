@@ -49,7 +49,7 @@ module DcmDict
         freeze_data
       end
 
-       def freeze_data
+      def freeze_data
         @data.each {|key, value| value.freeze }
         @data.freeze
       end

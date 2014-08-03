@@ -37,7 +37,7 @@ end
 
 RSpec.shared_examples "Concurrency support" do |key, dictionary|
   it "should support concurrency" do
-    start = Time.now
+    #start = Time.now
     max_threads = 128
     times_for_threads = 1_024
     Thread.abort_on_exception = true

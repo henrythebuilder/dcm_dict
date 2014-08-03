@@ -62,7 +62,7 @@ module DcmDict
 
       def atomic_feature_of(tag)
         try_to_find(tag)
-      rescue => ex
+      rescue
         raise DictionaryError.new("Unable to find reference for tag '#{tag}' as #{tag.class}")
       end
 

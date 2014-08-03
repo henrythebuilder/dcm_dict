@@ -52,7 +52,7 @@ module DcmDict
 
       def atomic_feature_of(uid)
         try_to_find_uid(uid)
-      rescue => ex
+      rescue
         raise DictionaryError.new("Unable to find reference for uid '#{uid}' as #{uid.class}")
       end
 
