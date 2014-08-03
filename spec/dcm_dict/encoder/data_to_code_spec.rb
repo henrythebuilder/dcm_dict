@@ -49,23 +49,21 @@ END
     describe "data element data field" do
       using DcmDict::Refine::Internal::ArrayRefineInternal
 
-      it "for standard sample" do
-        sample = XmlSampleSpecHelper.xml_tag_sample_standard.flatten
-        xml_string, data = sample
-        ns = XmlSampleSpecHelper.string_to_nokogiri_nodeset(xml_string)
-        noko_proc = DcmDict::XML::NokogiriTool.tag_field_extract_proc(ns)
-        xml_data = DcmDict::XML::TagFieldData.new(noko_proc).data_element_data
-        indent = 4
-        tag_ary_str = "[0x#{data[:tag_ary].tag_group_str},0x#{data[:tag_ary].tag_element_str}]"
-        src_text = "#{' '*indent}{ tag_ps: '#{data[:tag_ps]}', tag_name: \"#{data[:tag_name]}\", tag_key: '#{data[:tag_key]}', tag_vr: #{data[:tag_vr]}, tag_vm: #{data[:tag_vm]}, tag_str: '#{data[:tag_str]}', tag_sym: #{data[:tag_sym].inspect}, tag_ndm: '#{data[:tag_ndm]}', tag_ary: #{tag_ary_str}, tag_multiple: #{data[:tag_multiple].inspect}, tag_note: '#{data[:tag_note]}'},"
-        src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(xml_data)
-        expect(src_line).to eq(src_text)
-        src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(xml_data, indent: indent)
-        expect(src_line).to eq(src_text)
-        indent = 6
-        src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(xml_data, indent: indent)
-        expect(src_line.start_with?("#{' '*indent}{")).to be true
+      XmlSampleSpecHelper.xml_tag_single_set.each do |xml_string, data|
+        it "for data element sample as #{data[:tag_ps].inspect}" do
+          indent = 4
+          tag_ary_str = "[0x#{data[:tag_ary].tag_group_str},0x#{data[:tag_ary].tag_element_str}]"
+          src_text = "#{' '*indent}{ tag_ps: '#{data[:tag_ps]}', tag_name: \"#{data[:tag_name]}\", tag_key: '#{data[:tag_key]}', tag_vr: #{data[:tag_vr]}, tag_vm: #{data[:tag_vm]}, tag_str: '#{data[:tag_str]}', tag_sym: #{data[:tag_sym].inspect}, tag_ndm: '#{data[:tag_ndm]}', tag_ary: #{tag_ary_str}, tag_multiple: #{data[:tag_multiple].inspect}, tag_note: '#{data[:tag_note]}'},"
+          src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(data)
+          expect(src_line).to eq(src_text)
+          src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(data, indent: indent)
+          expect(src_line).to eq(src_text)
+          indent = 6
+          src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(data, indent: indent)
+          expect(src_line.start_with?("#{' '*indent}{")).to be true
+        end
       end
+
     end
   end
 
@@ -91,21 +89,18 @@ END
     end
 
     describe "uid data field" do
-      it "for standard sample" do
-        sample = XmlSampleSpecHelper.uid_single_standard.flatten
-        xml_string, data = sample
-        ns = XmlSampleSpecHelper.string_to_nokogiri_nodeset(xml_string)
-        noko_proc = DcmDict::XML::NokogiriTool.uid_field_extract_proc(ns)
-        xml_data = DcmDict::XML::UidFieldData.new(noko_proc).uid_data
+      XmlSampleSpecHelper.xml_uid_set.each do |xml_string, data|
+      it "for uid sample as #{data[:uid_value].inspect}" do
         indent = 4
         src_text = "#{' '*indent}{ uid_value: '#{data[:uid_value]}', uid_name: \"#{data[:uid_name]}\", uid_type: #{data[:uid_type].inspect}},"
-        src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(xml_data)
+        src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(data)
         expect(src_line).to eq(src_text)
-        src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(xml_data, indent: indent)
+        src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(data, indent: indent)
         expect(src_line).to eq(src_text)
         indent = 6
-        src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(xml_data, indent: indent)
+        src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(data, indent: indent)
         expect(src_line.start_with?("#{' '*indent}{")).to be true
+      end
       end
     end
 

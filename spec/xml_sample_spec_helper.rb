@@ -511,4 +511,11 @@ END
     tr = xml_doc.xpath('//tr')
     tr[0].xpath('td')
   end
+
+  def self.string_to_rexml_nodeset(xml_string)
+    ns = REXML::Document.new(xml_string)
+    ns.elements[1].get_elements('td')
+  end
+
+
 end

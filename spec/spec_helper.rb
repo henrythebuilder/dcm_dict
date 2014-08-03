@@ -32,3 +32,5 @@ require 'nokogiri'
 require 'dictionary_shared_example_spec_helper'
 require 'data_element_shared_example_spec_helper'
 require 'refine_shared_example_spec_helper'
+require "rexml/document"
+require 'dcm_dict/xml/rexml_tool'
