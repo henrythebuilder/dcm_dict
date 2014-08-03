@@ -28,14 +28,14 @@ module DcmDict
     # Main class to handle uid data as dictionary
     class UidDictionary
 
+      Semaphore = Mutex.new
+
       def initialize
         map_source_data
       end
 
       def feature_of(uid)
-        try_to_find_uid(uid)
-      rescue => ex
-        raise DictionaryError.new("Unable to find reference for uid '#{uid}' as #{uid.class}")
+        Semaphore.synchronize { atomic_feature_of(uid) }
       end
 
       private
@@ -48,6 +48,12 @@ module DcmDict
             @dict[data[key]] = record
           end
         end
+      end
+
+      def atomic_feature_of(uid)
+        try_to_find_uid(uid)
+      rescue => ex
+        raise DictionaryError.new("Unable to find reference for uid '#{uid}' as #{uid.class}")
       end
 
       def try_to_find_uid(uid)

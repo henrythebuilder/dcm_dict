@@ -30,15 +30,15 @@ module DcmDict
       using DcmDict::Refine::Internal::ArrayRefineInternal
       using DcmDict::Refine::Internal::StringRefineInternal
 
+      Semaphore = Mutex.new
+
       def initialize
         map_source_data
         freeze_source_data
       end
 
       def feature_of(tag)
-        try_to_find(tag)
-      rescue => ex
-        raise DictionaryError.new("Unable to find reference for tag '#{tag}' as #{tag.class}")
+        Semaphore.synchronize { atomic_feature_of(tag) }
       end
 
       private
@@ -58,6 +58,12 @@ module DcmDict
       def freeze_source_data
         @standard_dict.freeze
         @multi_dict.freeze
+      end
+
+      def atomic_feature_of(tag)
+        try_to_find(tag)
+      rescue => ex
+        raise DictionaryError.new("Unable to find reference for tag '#{tag}' as #{tag.class}")
       end
 
       def try_to_find(tag)

@@ -65,4 +65,6 @@ describe DcmDict::Dictionary::UidDictionary do
     obj = DcmDict::Dictionary::TheUidDictionary.feature_of(uid)
     expect{obj.uid_value << 'aaa'}.to raise_error
   end
+
+  include_examples "Concurrency support", '1.2.840.10008.1.2', DcmDict::Dictionary::TheUidDictionary
 end

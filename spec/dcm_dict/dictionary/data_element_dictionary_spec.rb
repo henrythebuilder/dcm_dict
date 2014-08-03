@@ -81,4 +81,7 @@ describe DcmDict::Dictionary::DataElementDictionary do
     obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(tag)
     expect{obj.tag_ps << 'aaa'}.to raise_error
   end
+
+  include_examples "Concurrency support", '(0002,0010)', DcmDict::Dictionary::TheDataElementDictionary
+
 end
