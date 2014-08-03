@@ -24,28 +24,31 @@
 module DcmDict
   module Xml
     module NokogiriTool
+      DataElementNodeSetIdx = { tag_ps: 0,
+                                tag_name: 1,
+                                tag_key: 2,
+                                tag_vr: 3,
+                                tag_vm: 4,
+                                tag_note: 5 }.freeze
+
+      UidNodeSetIdx = { uid_value: 0,
+                        uid_name: 1,
+                        uid_type: 2}.freeze
+
       def self.tag_field_extract_proc(node_set)
-        node_set_idx = { tag_ps: 0,
-                         tag_name: 1,
-                         tag_key: 2,
-                         tag_vr: 3,
-                         tag_vm: 4,
-                         tag_note: 5 }
-        Proc.new do |key|
-          idx = node_set_idx[key]
-          node_set[idx] ? node_set[idx].content : ''
-        end
+        make_nokogiri_proc(node_set, DataElementNodeSetIdx)
       end
 
       def self.uid_field_extract_proc(node_set)
-        node_set_idx = { uid_value: 0,
-                         uid_name: 1,
-                         uid_type: 2}
+        make_nokogiri_proc(node_set, UidNodeSetIdx)
+      end
+
+      private
+      def self.make_nokogiri_proc(node_set, node_set_idx)
         Proc.new do |key|
           idx = node_set_idx[key]
           node_set[idx] ? node_set[idx].content : ''
         end
-
       end
     end
   end
