@@ -28,38 +28,40 @@ module DcmDict
       using DcmDict::Refine::Internal::StringRefineInternal
 
       def self.make_group_length_data(tag)
-        base_data = { :tag_ps =>  "(#{tag.tag_group_str},0000)",
-                      :tag_name => 'Group Length',
-                      :tag_key =>  'GroupLength',
-                      :tag_vr =>  'UL',
-                      :tag_vm =>  '1',
-                      :tag_note =>  'Dummy Record'}
-        DcmDict::XML::TagFieldData.new(Proc.new {|key| base_data[key]}).
-          data_element_data
+        make_detached_data(tag,
+                           { :tag_ps =>  "(#{tag.tag_group_str},0000)",
+                             :tag_name => 'Group Length',
+                             :tag_key =>  'GroupLength',
+                             :tag_vr =>  'UL',
+                             :tag_vm =>  '1',
+                             :tag_note =>  'Dummy Record'})
       end
 
       def self.make_private_creator_data(tag)
-        base_data = { :tag_ps =>  tag.to_tag_str,
-                      :tag_name => 'Private Creator',
-                      :tag_key =>  'PrivateCreator',
-                      :tag_vr =>  'LO',
-                      :tag_vm =>  '1',
-                      :tag_note =>  'Dummy Record'}
-        DcmDict::XML::TagFieldData.new(Proc.new {|key| base_data[key]}).
-          data_element_data
+        make_detached_data(tag,
+                           { :tag_ps =>  tag.to_tag_str,
+                             :tag_name => 'Private Creator',
+                             :tag_key =>  'PrivateCreator',
+                             :tag_vr =>  'LO',
+                             :tag_vm =>  '1',
+                             :tag_note =>  'Dummy Record'})
       end
 
       def self.make_unknown_data(tag)
-        base_data = { :tag_ps =>  tag.to_tag_str,
-                      :tag_name => 'Unknown Tag',
-                      :tag_key =>  'UnknownTag',
-                      :tag_vr =>  'UN',
-                      :tag_vm =>  '1',
-                      :tag_note =>  'Dummy Record'}
+        make_detached_data(tag,
+                           { :tag_ps =>  tag.to_tag_str,
+                             :tag_name => 'Unknown Tag',
+                             :tag_key =>  'UnknownTag',
+                             :tag_vr =>  'UN',
+                             :tag_vm =>  '1',
+                             :tag_note =>  'Dummy Record'})
+      end
+
+      private
+      def self.make_detached_data(tag, base_data)
         DcmDict::XML::TagFieldData.new(Proc.new {|key| base_data[key]}).
           data_element_data
       end
-
     end
   end
 end
