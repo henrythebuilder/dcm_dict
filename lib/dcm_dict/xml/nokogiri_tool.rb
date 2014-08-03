@@ -21,36 +21,56 @@
 #  It is the redistributor's or user's responsibility to comply with any
 #  applicable local, state, national or international regulations.
 #
+
 module DcmDict
   module XML
-    DataElementNodeSetIdx = { tag_ps: 0,
-                              tag_name: 1,
-                              tag_key: 2,
-                              tag_vr: 3,
-                              tag_vm: 4,
-                              tag_note: 5 }.freeze
 
-    UidNodeSetIdx = { uid_value: 0,
-                      uid_name: 1,
-                      uid_type: 2}.freeze
-
-    module NokogiriTool
-      def self.tag_field_extract_proc(node_set)
-        make_nokogiri_proc(node_set, DataElementNodeSetIdx)
-      end
-
-      def self.uid_field_extract_proc(node_set)
-        make_nokogiri_proc(node_set, UidNodeSetIdx)
-      end
-
-      private
-      def self.make_nokogiri_proc(node_set, node_set_idx)
-        Proc.new do |key|
-          idx = node_set_idx[key]
-          node_set[idx] ? node_set[idx].content.gsub(/ {2,}/, '') : ''
-        end
-      end
+    begin
+      require 'nokogiri'
+      #  raise LoadError.new "boom"
+      NOKOGIRI_ENABLE = true
+    rescue LoadError
+      NOKOGIRI_ENABLE = false
     end
 
+    if NOKOGIRI_ENABLE
+
+      module NokogiriTool
+        def self.extract_data_element_field_from_xml_tr(xml_tr_string)
+          nodeset = extract_nokogiri_nodeset(xml_tr_string)
+          proc = tag_field_extract_proc(nodeset)
+          TagFieldData.new(proc).data_element_data
+        end
+
+        def self.extract_uid_field_from_xml_tr(xml_tr_string)
+          nodeset = extract_nokogiri_nodeset(xml_tr_string)
+          proc = uid_field_extract_proc(nodeset)
+          UidFieldData.new(proc).uid_data
+        end
+
+        private
+        def self.tag_field_extract_proc(node_set)
+          make_nokogiri_proc(node_set, DataElementNodeSetIdx)
+        end
+
+        def self.uid_field_extract_proc(node_set)
+          make_nokogiri_proc(node_set, UidNodeSetIdx)
+        end
+
+        def self.make_nokogiri_proc(node_set, node_set_idx)
+          Proc.new do |key|
+            idx = node_set_idx[key]
+            node_set[idx] ? node_set[idx].content.gsub(/ {2,}/, '') : ''
+          end
+        end
+
+        def self.extract_nokogiri_nodeset(xml_tr_string)
+          xml_doc  = Nokogiri::XML(xml_tr_string)
+          tr = xml_doc.xpath('//tr')
+          tr[0].xpath('td')
+        end
+      end
+
+    end
   end
 end

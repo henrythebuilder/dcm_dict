@@ -506,16 +506,4 @@ END
     {}.merge(uid_single_standard)
   end
 
-  def self.string_to_nokogiri_nodeset(xml_string)
-    xml_doc  = Nokogiri::XML(xml_string)
-    tr = xml_doc.xpath('//tr')
-    tr[0].xpath('td')
-  end
-
-  def self.string_to_rexml_nodeset(xml_string)
-    ns = REXML::Document.new(xml_string)
-    ns.elements[1].get_elements('td')
-  end
-
-
 end

@@ -25,6 +25,19 @@ module DcmDict
   module XML
 
     module RexmlTool
+      def self.extract_data_element_field_from_xml_tr(xml_tr_string)
+        nodeset = extract_rexml_nodeset(xml_tr_string)
+        proc = tag_field_extract_proc(nodeset)
+        TagFieldData.new(proc).data_element_data
+      end
+
+      def self.extract_uid_field_from_xml_tr(xml_tr_string)
+        nodeset = extract_rexml_nodeset(xml_tr_string)
+        proc = uid_field_extract_proc(nodeset)
+        UidFieldData.new(proc).uid_data
+      end
+
+      private
       def self.tag_field_extract_proc(node_set)
         make_rexml_proc(node_set, DataElementNodeSetIdx)
       end
@@ -33,7 +46,6 @@ module DcmDict
         make_rexml_proc(node_set, UidNodeSetIdx)
       end
 
-      private
       def self.make_rexml_proc(node_set, node_set_idx)
         Proc.new do |key|
           element = node_set[node_set_idx[key]]
@@ -50,6 +62,12 @@ module DcmDict
           field
         end
       end
+
+      def self.extract_rexml_nodeset(xml_tr_string)
+        ns = REXML::Document.new(xml_tr_string)
+        ns.elements[1].get_elements('td')
+      end
+
     end
 
   end

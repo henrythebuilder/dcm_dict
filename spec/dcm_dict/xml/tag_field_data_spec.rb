@@ -27,9 +27,7 @@ require 'xml_sample_spec_helper'
 describe "XML management for Data Element" do
   describe "should extract data from single node set data (with nokogiri gem)" do
     XmlSampleSpecHelper.xml_tag_single_set.each do |xml_string, expected_data|
-      ns = XmlSampleSpecHelper.string_to_nokogiri_nodeset(xml_string)
-      noko_proc = DcmDict::XML::NokogiriTool.tag_field_extract_proc(ns)
-      xml_data = DcmDict::XML::TagFieldData.new(noko_proc).data_element_data
+      xml_data = DcmDict::XML::NokogiriTool.extract_data_element_field_from_xml_tr(xml_string)
       describe "for '#{expected_data[:tag_name]}'" do
         expected_data.each do |key, expected_value|
           it "with key #{key.inspect}" do
@@ -42,9 +40,7 @@ describe "XML management for Data Element" do
 
   describe "should extract data from single node set data (with REXML)" do
     XmlSampleSpecHelper.xml_tag_single_set.each do |xml_string, expected_data|
-      ns = XmlSampleSpecHelper.string_to_rexml_nodeset(xml_string)
-      rexml_proc = DcmDict::XML::RexmlTool.tag_field_extract_proc(ns)
-      xml_data = DcmDict::XML::TagFieldData.new(rexml_proc).data_element_data
+      xml_data = DcmDict::XML::RexmlTool.extract_data_element_field_from_xml_tr(xml_string)
       describe "for '#{expected_data[:tag_name]}'" do
         expected_data.each do |key, expected_value|
           it "with key #{key.inspect}" do
