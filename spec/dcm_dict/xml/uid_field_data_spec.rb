@@ -25,30 +25,24 @@ require 'spec_helper'
 require 'xml_sample_spec_helper'
 
 describe "XML management for UID" do
-  describe "should extract data from single node set data (with nokogiri gem)" do
-    XmlSampleSpecHelper.xml_uid_set.each do |xml_string, expected_data|
-      xml_data = DcmDict::XML::NokogiriTool.extract_uid_field_from_xml_tr(xml_string)
-      describe "for '#{expected_data[:uid_name]}'" do
-        expected_data.each do |key, expected_value|
-          it "with key #{key.inspect}" do
-            expect(xml_data[key]).to eq(expected_value)
+
+  RSpec.shared_examples "XML management for UID" do |xml_mod, desc|
+    describe "should extract data from single node set data (#{desc})" do
+      XmlSampleSpecHelper.xml_uid_set.each do |xml_string, expected_data|
+        xml_data = xml_mod.extract_uid_field_from_xml_tr(xml_string)
+        describe "for '#{expected_data[:uid_name]}'" do
+          expected_data.each do |key, expected_value|
+            it "with key #{key.inspect}" do
+              expect(xml_data[key]).to eq(expected_value)
+            end
           end
         end
       end
     end
   end
 
-  describe "should extract data from single node set data (with REXML)" do
-    XmlSampleSpecHelper.xml_uid_set.each do |xml_string, expected_data|
-      xml_data = DcmDict::XML::RexmlTool.extract_uid_field_from_xml_tr(xml_string)
-      describe "for '#{expected_data[:uid_name]}'" do
-        expected_data.each do |key, expected_value|
-          it "with key #{key.inspect}" do
-            expect(xml_data[key]).to eq(expected_value)
-          end
-        end
-      end
-    end
-  end
+  include_examples "XML management for UID", DcmDict::XML::NokogiriTool, "with Nokogiri"
+
+  include_examples "XML management for UID", DcmDict::XML::RexmlTool, "with REXML"
 
 end
