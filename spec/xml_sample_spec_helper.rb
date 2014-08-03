@@ -382,9 +382,94 @@ END
     {xml_string => data}
   end
 
+  def self.xml_tag_multiline_note_set
+    xml_string = <<END
+    <tr valign="top">
+      <td align="center" colspan="1" rowspan="1">
+        <para>(0000,0700)</para>
+      </td>
+      <td align="left" colspan="1" rowspan="1">
+        <para>Priority</para>
+      </td>
+      <td align="left" colspan="1" rowspan="1">
+        <para>Priority</para>
+      </td>
+      <td align="center" colspan="1" rowspan="1">
+        <para>US</para>
+      </td>
+      <td align="center" colspan="1" rowspan="1">
+        <para>1</para>
+      </td>
+      <td align="left" colspan="1" rowspan="1">
+        <para>The priority shall be set to one of the following values:</para>
+        <para>LOW = 0002H</para>
+        <para>MEDIUM = 0000H</para>
+        <para>HIGH = 0001H</para>
+      </td>
+    </tr>
+END
+    note = <<NOTE.chop
+The priority shall be set to one of the following values:
+LOW = 0002H
+MEDIUM = 0000H
+HIGH = 0001H
+NOTE
+    data = {tag_ps: '(0000,0700)',
+            tag_str: '(0000,0700)',
+            tag_ary: [0x0000,0x0700],
+            tag_sym: :priority,
+            tag_ndm: '00000700',
+            tag_name: 'Priority',
+            tag_key: 'Priority',
+            tag_vr: [:US],
+            tag_vm: ['1'],
+            tag_note: note,
+            tag_multiple: false}
+    {xml_string => data}
+  end
+
+  def self.xml_tag_complex_note
+    xml_string= <<END
+    <tr valign="top">
+      <td align="center" colspan="1" rowspan="1">
+        <para>(0000,0900)</para>
+      </td>
+      <td align="left" colspan="1" rowspan="1">
+        <para>Status</para>
+      </td>
+      <td align="left" colspan="1" rowspan="1">
+        <para>Status</para>
+      </td>
+      <td align="center" colspan="1" rowspan="1">
+        <para>US</para>
+      </td>
+      <td align="center" colspan="1" rowspan="1">
+        <para>1</para>
+      </td>
+      <td align="left" colspan="1" rowspan="1">
+        <para>Confirmation status of the operation. See <xref linkend="chapter_C" xrefstyle="template: Annex %n"/>.</para>
+      </td>
+    </tr>
+END
+    data = {tag_ps: '(0000,0900)',
+            tag_str: '(0000,0900)',
+            tag_ary: [0x0000,0x0900],
+            tag_sym: :status,
+            tag_ndm: '00000900',
+            tag_name: 'Status',
+            tag_key: 'Status',
+            tag_vr: [:US],
+            tag_vm: ['1'],
+            tag_note: "Confirmation status of the operation. See .",
+            tag_multiple: false}
+    {xml_string => data}
+  end
+
   def self.xml_tag_single_set
     { }.merge(xml_tag_sample_standard).
+      merge(xml_tag_multiline_note_set).
       merge(xml_tag_sample_standard_empty_note).
+      merge(xml_tag_complex_note).
       merge(xml_tag_sample_multiple_tag).
       merge(xml_tag_sample_no_note).
       merge(xml_tag_sample_multi_vr_vm).
@@ -421,7 +506,7 @@ END
     {}.merge(uid_single_standard)
   end
 
-  def self.string_to_nodeset(xml_string)
+  def self.string_to_nokogiri_nodeset(xml_string)
     xml_doc  = Nokogiri::XML(xml_string)
     tr = xml_doc.xpath('//tr')
     tr[0].xpath('td')

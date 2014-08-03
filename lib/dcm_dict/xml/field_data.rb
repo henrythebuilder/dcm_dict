@@ -36,7 +36,8 @@ module DcmDict
       end
 
       def extract_content_data(key)
-        @extract_proc.call(key).dcm_unspace
+        data = @extract_proc.call(key)
+        data ? data.dcm_unspace : ''
       end
     end
   end

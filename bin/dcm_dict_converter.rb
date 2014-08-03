@@ -25,9 +25,19 @@
 #
 require 'open-uri'
 require 'tempfile'
-require 'nokogiri'
 require 'dcm_dict'
-require 'dcm_dict/xml/nokogiri_tool'
+
+begin
+  require 'nokogiri'
+  require 'dcm_dict/xml/nokogiri_tool'
+  raise LoadError.new "boom"
+  USE_NOKOGIRI = true
+rescue  LoadError
+  USE_NOKOGIRI = false
+end
+
+require 'dcm_dict/xml/rexml_tool'
+require "rexml/document"
 
 LICENSE_TEXT=<<END_LICENSE
   Copyright (C) 2014  Enrico Rivarola
@@ -103,14 +113,24 @@ class DcmDictConverter
   end
 
   def extract_node_set(xml_file, table_to_map)
-    noko_doc = Nokogiri::XML(xml_file)
+    xml_doc = if USE_NOKOGIRI
+                Nokogiri::XML(xml_file)
+              else
+                REXML::Document.new File.read(xml_file)
+              end
     table_to_map.each do |table|
       trace("Extracting data elements data from '#{table}':")
       xpath="//xmlns:table[@xml:id=\"#{table}\"]//xmlns:tbody/xmlns:tr"
-      trs = noko_doc.xpath(xpath)
-      trs.each do |tr|
-        td = tr.xpath('xmlns:td')
-        yield(table, td)
+      if USE_NOKOGIRI
+        trs = xml_doc.xpath(xpath)
+        trs.each do |tr|
+          td = tr.xpath('xmlns:td')
+          yield(table, td)
+        end
+      else
+        xml_doc.elements.each(xpath) do |element|
+          yield(table, element.get_elements('td'))
+        end
       end
       trace("Done.\n")
     end
@@ -118,8 +138,12 @@ class DcmDictConverter
 
   def extract_data_element(xml_file, table_to_map)
     extract_node_set(xml_file, table_to_map) do |table, td|
-      noko_proc = DcmDict::Xml::NokogiriTool.tag_field_extract_proc(td)
-      data =  DcmDict::XML::TagFieldData.new(noko_proc).data_element_data
+      proc = if USE_NOKOGIRI
+               DcmDict::XML::NokogiriTool.tag_field_extract_proc(td)
+             else
+               DcmDict::XML::RexmlTool.tag_field_extract_proc(td)
+             end
+      data =  DcmDict::XML::TagFieldData.new(proc).data_element_data
       check_data_element_data(data, table)
       yield(data) if block_given?
     end
@@ -148,8 +172,12 @@ class DcmDictConverter
 
   def extract_uid(xml_file, table_to_map)
     extract_node_set(xml_file, table_to_map) do |table, td|
-      noko_proc = DcmDict::Xml::NokogiriTool.uid_field_extract_proc(td)
-      data =  DcmDict::XML::UidFieldData.new(noko_proc).uid_data
+      proc = if USE_NOKOGIRI
+               DcmDict::XML::NokogiriTool.uid_field_extract_proc(td)
+             else
+               DcmDict::XML::RexmlTool.uid_field_extract_proc(td)
+             end
+      data =  DcmDict::XML::UidFieldData.new(proc).uid_data
       yield(data) if block_given?
     end
   end
@@ -183,6 +211,12 @@ end
 STDERR << LICENSE_TEXT
 STDERR << "\nAny key to continue or Ctrl-C to break."
 STDIN.getc
+
+if USE_NOKOGIRI
+  $stderr.print("\nWorking with 'Nokogiri'\n\n")
+else
+  $stderr.print("\nWorking with 'Rexml'\n\n")
+end
 
 case ARGV[0]
 when "tag"

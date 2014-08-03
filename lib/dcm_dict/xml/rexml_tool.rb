@@ -21,20 +21,33 @@
 #  It is the redistributor's or user's responsibility to comply with any
 #  applicable local, state, national or international regulations.
 #
-require 'spec_helper'
-require 'xml_sample_spec_helper'
+module DcmDict
+  module XML
 
-describe "XML management for UID" do
-  describe "should extract data from single node set data" do
-    XmlSampleSpecHelper.xml_uid_set.each do |xml_string, expected_data|
-      ns = XmlSampleSpecHelper.string_to_nokogiri_nodeset(xml_string)
-      noko_proc = DcmDict::XML::NokogiriTool.uid_field_extract_proc(ns)
-      xml_data = DcmDict::XML::UidFieldData.new(noko_proc).uid_data
-      describe "for '#{expected_data[:uid_name]}'" do
-        expected_data.each do |key, expected_value|
-          it "with key #{key.inspect}" do
-            expect(xml_data[key]).to eq(expected_value)
+    module RexmlTool
+      def self.tag_field_extract_proc(node_set)
+        make_rexml_proc(node_set, DataElementNodeSetIdx)
+      end
+
+      def self.uid_field_extract_proc(node_set)
+        make_rexml_proc(node_set, UidNodeSetIdx)
+      end
+
+      private
+      def self.make_rexml_proc(node_set, node_set_idx)
+        Proc.new do |key|
+          element = node_set[node_set_idx[key]]
+          field = ''
+          if element
+            element.each_element_with_text do |txt1|
+              field << "\n"  unless field.nil_or_empty?
+              txt1.each_element_with_text do |txt2|
+                field << txt2.texts.map(&:value).join('')
+              end
+              field << txt1.texts.map(&:value).join('')
+            end
           end
+          field
         end
       end
     end

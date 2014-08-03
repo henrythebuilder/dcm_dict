@@ -52,8 +52,8 @@ END
       it "for standard sample" do
         sample = XmlSampleSpecHelper.xml_tag_sample_standard.flatten
         xml_string, data = sample
-        ns = XmlSampleSpecHelper.string_to_nodeset(xml_string)
-        noko_proc = DcmDict::Xml::NokogiriTool.tag_field_extract_proc(ns)
+        ns = XmlSampleSpecHelper.string_to_nokogiri_nodeset(xml_string)
+        noko_proc = DcmDict::XML::NokogiriTool.tag_field_extract_proc(ns)
         xml_data = DcmDict::XML::TagFieldData.new(noko_proc).data_element_data
         indent = 4
         tag_ary_str = "[0x#{data[:tag_ary].tag_group_str},0x#{data[:tag_ary].tag_element_str}]"
@@ -94,8 +94,8 @@ END
       it "for standard sample" do
         sample = XmlSampleSpecHelper.uid_single_standard.flatten
         xml_string, data = sample
-        ns = XmlSampleSpecHelper.string_to_nodeset(xml_string)
-        noko_proc = DcmDict::Xml::NokogiriTool.uid_field_extract_proc(ns)
+        ns = XmlSampleSpecHelper.string_to_nokogiri_nodeset(xml_string)
+        noko_proc = DcmDict::XML::NokogiriTool.uid_field_extract_proc(ns)
         xml_data = DcmDict::XML::UidFieldData.new(noko_proc).uid_data
         indent = 4
         src_text = "#{' '*indent}{ uid_value: '#{data[:uid_value]}', uid_name: \"#{data[:uid_name]}\", uid_type: #{data[:uid_type].inspect}},"
