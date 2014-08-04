@@ -29,36 +29,36 @@ module DcmDict
       { tag_ps: '(0000,0002)', tag_name: "Affected SOP Class UID", tag_key: 'AffectedSOPClassUID', tag_vr: [:UI], tag_vm: ["1"], tag_str: '(0000,0002)', tag_sym: :affected_sop_class_uid, tag_ndm: '00000002', tag_ary: [0x0000,0x0002], tag_multiple: false, tag_note: 'The affected SOP Class UID associated with the operation.'},
       { tag_ps: '(0000,0003)', tag_name: "Requested SOP Class UID", tag_key: 'RequestedSOPClassUID', tag_vr: [:UI], tag_vm: ["1"], tag_str: '(0000,0003)', tag_sym: :requested_sop_class_uid, tag_ndm: '00000003', tag_ary: [0x0000,0x0003], tag_multiple: false, tag_note: 'The requested SOP Class UID associated with the operation.'},
       { tag_ps: '(0000,0100)', tag_name: "Command Field", tag_key: 'CommandField', tag_vr: [:US], tag_vm: ["1"], tag_str: '(0000,0100)', tag_sym: :command_field, tag_ndm: '00000100', tag_ary: [0x0000,0x0100], tag_multiple: false, tag_note: 'This field distinguishes the DIMSE operation conveyed by this Message. This field shall be set to one of the following values:
-        0001H C-STORE-RQ
-        8001H C-STORE-RSP
-        0010H C-GET-RQ
-        8010H C-GET-RSP
-        0020H C-FIND-RQ
-        8020H C-FIND-RSP
-        0021HC-MOVE-RQ
-        8021H C-MOVE-RSP
-        0030H C-ECHO-RQ
-        8030H C-ECHO-RSP
-        0100H N-EVENT-REPORT-RQ
-        8100H N-EVENT-REPORT-RSP
-        0110H N-GET-RQ
-        8110H N-GET-RSP
-        0120H N-SET-RQ
-        8120H N-SET-RSP
-        0130H N-ACTION-RQ
-        8130H N-ACTION-RSP
-        0140H N-CREATE-RQ
-        8140H N-CREATE-RSP
-        0150H N-DELETE-RQ
-        8150H N-DELETE-RSP
-        0FFFH C-CANCEL-RQ'},
+0001H C-STORE-RQ
+8001H C-STORE-RSP
+0010H C-GET-RQ
+8010H C-GET-RSP
+0020H C-FIND-RQ
+8020H C-FIND-RSP
+0021HC-MOVE-RQ
+8021H C-MOVE-RSP
+0030H C-ECHO-RQ
+8030H C-ECHO-RSP
+0100H N-EVENT-REPORT-RQ
+8100H N-EVENT-REPORT-RSP
+0110H N-GET-RQ
+8110H N-GET-RSP
+0120H N-SET-RQ
+8120H N-SET-RSP
+0130H N-ACTION-RQ
+8130H N-ACTION-RSP
+0140H N-CREATE-RQ
+8140H N-CREATE-RSP
+0150H N-DELETE-RQ
+8150H N-DELETE-RSP
+0FFFH C-CANCEL-RQ'},
       { tag_ps: '(0000,0110)', tag_name: "Message ID", tag_key: 'MessageID', tag_vr: [:US], tag_vm: ["1"], tag_str: '(0000,0110)', tag_sym: :message_id, tag_ndm: '00000110', tag_ary: [0x0000,0x0110], tag_multiple: false, tag_note: 'Implementation-specific value that distinguishes this Message from other Messages.'},
       { tag_ps: '(0000,0120)', tag_name: "Message ID Being Responded To", tag_key: 'MessageIDBeingRespondedTo', tag_vr: [:US], tag_vm: ["1"], tag_str: '(0000,0120)', tag_sym: :message_id_being_responded_to, tag_ndm: '00000120', tag_ary: [0x0000,0x0120], tag_multiple: false, tag_note: 'Shall be set to the value of the Message ID (0000,0110) field used in associated request Message.'},
       { tag_ps: '(0000,0600)', tag_name: "Move Destination", tag_key: 'MoveDestination', tag_vr: [:AE], tag_vm: ["1"], tag_str: '(0000,0600)', tag_sym: :move_destination, tag_ndm: '00000600', tag_ary: [0x0000,0x0600], tag_multiple: false, tag_note: 'Shall be set to the DICOM AE Title of the destination DICOM AE to which the C-STORE sub-operations are being performed.'},
       { tag_ps: '(0000,0700)', tag_name: "Priority", tag_key: 'Priority', tag_vr: [:US], tag_vm: ["1"], tag_str: '(0000,0700)', tag_sym: :priority, tag_ndm: '00000700', tag_ary: [0x0000,0x0700], tag_multiple: false, tag_note: 'The priority shall be set to one of the following values:
-        LOW = 0002H
-        MEDIUM = 0000H
-        HIGH = 0001H'},
+LOW = 0002H
+MEDIUM = 0000H
+HIGH = 0001H'},
       { tag_ps: '(0000,0800)', tag_name: "Command Data Set Type", tag_key: 'CommandDataSetType', tag_vr: [:US], tag_vm: ["1"], tag_str: '(0000,0800)', tag_sym: :command_data_set_type, tag_ndm: '00000800', tag_ary: [0x0000,0x0800], tag_multiple: false, tag_note: 'This field indicates if a Data Set is present in the Message. This field shall be set to the value of 0101H if no Data Set is present; any other value indicates a Data Set is included in the Message.'},
       { tag_ps: '(0000,0900)', tag_name: "Status", tag_key: 'Status', tag_vr: [:US], tag_vm: ["1"], tag_str: '(0000,0900)', tag_sym: :status, tag_ndm: '00000900', tag_ary: [0x0000,0x0900], tag_multiple: false, tag_note: 'Confirmation status of the operation. See .'},
       { tag_ps: '(0000,0901)', tag_name: "Offending Element", tag_key: 'OffendingElement', tag_vr: [:AT], tag_vm: ["1-n"], tag_str: '(0000,0901)', tag_sym: :offending_element, tag_ndm: '00000901', tag_ary: [0x0000,0x0901], tag_multiple: false, tag_note: 'If status is Cxxx, then this field contains a list of the elements in which the error was detected.'},
