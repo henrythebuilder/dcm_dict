@@ -24,28 +24,51 @@
 
 module DcmDict
   module XML
+    @@nokogiri_enable = false
 
     begin
+      #raise LoadError.new "Simulate LoadError to disable Nokogiri"
       require 'nokogiri'
-      #  raise LoadError.new "boom"
-      NOKOGIRI_ENABLE = true
+      @@nokogiri_enable = true
     rescue LoadError
-      NOKOGIRI_ENABLE = false
     end
 
-    if NOKOGIRI_ENABLE
+    def self.nokogiri_enable
+      @@nokogiri_enable
+    end
 
+    if @@nokogiri_enable
       module NokogiriTool
         def self.extract_data_element_field_from_xml_tr(xml_tr_string)
           nodeset = extract_nokogiri_nodeset(xml_tr_string)
-          proc = tag_field_extract_proc(nodeset)
+          extract_data_element_field_from_tr_set(nodeset)
+        end
+
+        def self.extract_data_element_field_from_tr_set(trset)
+          proc = tag_field_extract_proc(trset)
           TagFieldData.new(proc).data_element_data
         end
 
         def self.extract_uid_field_from_xml_tr(xml_tr_string)
           nodeset = extract_nokogiri_nodeset(xml_tr_string)
-          proc = uid_field_extract_proc(nodeset)
+          extract_uid_field_from_tr_set(nodeset)
+        end
+
+        def self.extract_uid_field_from_tr_set(trset)
+          proc = uid_field_extract_proc(trset)
           UidFieldData.new(proc).uid_data
+        end
+
+        def self.create_xml_doc(xml_string)
+          Nokogiri::XML(xml_string)
+        end
+
+        def self.each_tr_set(doc, xpath)
+          alltr = doc.xpath(xpath)
+          alltr.each do |tr|
+            trset = tr.xpath('xmlns:td')
+            yield trset if block_given?
+          end
         end
 
         private
@@ -65,12 +88,13 @@ module DcmDict
         end
 
         def self.extract_nokogiri_nodeset(xml_tr_string)
-          xml_doc  = Nokogiri::XML(xml_tr_string)
-          tr = xml_doc.xpath('//tr')
-          tr[0].xpath('td')
+          doc  = create_xml_doc(xml_tr_string)
+          each_tr_set(doc, '//xmlns:tr') do |tdset|
+            return tdset
+          end
         end
       end
-
     end
+
   end
 end

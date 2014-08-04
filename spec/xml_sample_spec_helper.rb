@@ -25,6 +25,7 @@
 module XmlSampleSpecHelper
   def self.xml_tag_sample_standard
     xml_string=<<END
+<book xmlns="http://docbook.org/ns/docbook">
         <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
             <para>
@@ -57,6 +58,7 @@ module XmlSampleSpecHelper
             </para>
           </td>
         </tr>
+</book>
 END
     data = {tag_ps: '(0008,0010)',
             tag_str: '(0008,0010)',
@@ -74,6 +76,7 @@ END
 
   def self.xml_tag_sample_standard_empty_note
     xml_string = <<END
+<book xmlns="http://docbook.org/ns/docbook">
         <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
             <para>(0008,0012)</para>
@@ -94,6 +97,7 @@ END
             <para/>
           </td>
         </tr>
+</book>
 END
     data = {tag_ps: '(0008,0012)',
             tag_str: '(0008,0012)',
@@ -111,7 +115,8 @@ END
 
   def self.xml_tag_sample_multiple_tag
     xml_string=<<END
-<tr valign="top">
+<book xmlns="http://docbook.org/ns/docbook">
+        <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
             <para>(60xx,0040)</para>
           </td>
@@ -131,6 +136,7 @@ END
             <para/>
           </td>
         </tr>
+</book>
 END
 
     data = {tag_ps: '(60XX,0040)',
@@ -149,7 +155,8 @@ END
 
   def self.xml_tag_sample_no_note
     xml_string=<<END
-  <tr valign="top">
+<book xmlns="http://docbook.org/ns/docbook">
+       <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
             <para>(0018,1202)</para>
           </td>
@@ -166,6 +173,7 @@ END
             <para>1</para>
           </td>
         </tr>
+</book>
 END
     data = {tag_ps: '(0018,1202)',
             tag_str: '(0018,1202)',
@@ -183,6 +191,7 @@ END
 
   def self.xml_tag_sample_multi_vr_vm
     xml_string = <<END
+<book xmlns="http://docbook.org/ns/docbook">
         <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
             <para>
@@ -215,6 +224,7 @@ END
             </para>
           </td>
         </tr>
+</book>
 END
     data = {tag_ps: '(0028,1200)',
             tag_str: '(0028,1200)',
@@ -232,7 +242,8 @@ END
 
   def self.xml_tag_sample_no_vr
     xml_string = <<END
-<tr valign="top">
+<book xmlns="http://docbook.org/ns/docbook">
+       <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
             <para>(FFFE,E000)</para>
           </td>
@@ -252,6 +263,7 @@ END
             <para/>
           </td>
         </tr>
+</book>
 END
     data = {tag_ps: '(FFFE,E000)',
             tag_str: '(FFFE,E000)',
@@ -269,6 +281,7 @@ END
 
   def self.xml_tag_sample_multi_vr
     xml_string = <<END
+<book xmlns="http://docbook.org/ns/docbook">
         <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
             <para>(0014,3050)</para>
@@ -289,6 +302,7 @@ END
             <para>DICONDE</para>
           </td>
         </tr>
+</book>
 END
     data = {tag_ps: '(0014,3050)',
             tag_str: '(0014,3050)',
@@ -306,6 +320,7 @@ END
 
   def self.xml_tag_sample_empty
     xml_string=<<END
+<book xmlns="http://docbook.org/ns/docbook">
         <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
             <para>
@@ -330,6 +345,7 @@ END
             </para>
           </td>
         </tr>
+</book>
 END
     data = {tag_ps: '(0018,9445)',
             tag_str: '(0018,9445)',
@@ -347,6 +363,7 @@ END
 
   def self.xml_tag_sample_lowercase_tag
     xml_string = <<END
+<book xmlns="http://docbook.org/ns/docbook">
         <tr valign="top">
           <td align="center" colspan="1" rowspan="1">
             <para>(0074,100a)</para>
@@ -367,6 +384,7 @@ END
             <para/>
           </td>
         </tr>
+</book>
 END
     data = {tag_ps: '(0074,100A)',
             tag_str: '(0074,100A)',
@@ -384,6 +402,7 @@ END
 
   def self.xml_tag_multiline_note_set
     xml_string = <<END
+<book xmlns="http://docbook.org/ns/docbook">
     <tr valign="top">
       <td align="center" colspan="1" rowspan="1">
         <para>(0000,0700)</para>
@@ -407,6 +426,7 @@ END
         <para>HIGH = 0001H</para>
       </td>
     </tr>
+</book>
 END
     note = <<NOTE.chop
 The priority shall be set to one of the following values:
@@ -430,6 +450,7 @@ NOTE
 
   def self.xml_tag_complex_note
     xml_string= <<END
+<book xmlns="http://docbook.org/ns/docbook">
     <tr valign="top">
       <td align="center" colspan="1" rowspan="1">
         <para>(0000,0900)</para>
@@ -450,6 +471,7 @@ NOTE
         <para>Confirmation status of the operation. See <xref linkend="chapter_C" xrefstyle="template: Annex %n"/>.</para>
       </td>
     </tr>
+</book>
 END
     data = {tag_ps: '(0000,0900)',
             tag_str: '(0000,0900)',
@@ -481,6 +503,7 @@ END
 
   def self.uid_single_standard
     xml_string=<<END
+<book xmlns="http://docbook.org/ns/docbook">
         <tr valign="top">
           <td align="left" colspan="1" rowspan="1">
             <para>1.2.840.10008.1.​2</para>
@@ -495,6 +518,7 @@ END
             <para><olink targetdoc="PS3.5" targetptr="PS3.5" xrefstyle="select: labelnumber"/></para>
           </td>
         </tr>
+</book>
 END
     data = {uid_value: "1.2.840.10008.1.2",
             uid_name: "Implicit VR Little Endian: Default Transfer Syntax for DICOM",

@@ -43,7 +43,9 @@ describe "XML management for Data Element" do
     end
   end
 
-  include_examples "XML management for Data Element", DcmDict::XML::NokogiriTool, "with Nokogiri"
+  if DcmDict::XML.nokogiri_enable
+    include_examples "XML management for Data Element", DcmDict::XML::NokogiriTool, "with Nokogiri"
+  end
 
   include_examples "XML management for Data Element", DcmDict::XML::RexmlTool, "with REXML"
 

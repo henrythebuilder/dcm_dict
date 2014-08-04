@@ -41,7 +41,9 @@ describe "XML management for UID" do
     end
   end
 
-  include_examples "XML management for UID", DcmDict::XML::NokogiriTool, "with Nokogiri"
+  if DcmDict::XML.nokogiri_enable
+    include_examples "XML management for UID", DcmDict::XML::NokogiriTool, "with Nokogiri"
+  end
 
   include_examples "XML management for UID", DcmDict::XML::RexmlTool, "with REXML"
 

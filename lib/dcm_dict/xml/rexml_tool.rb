@@ -21,20 +21,42 @@
 #  It is the redistributor's or user's responsibility to comply with any
 #  applicable local, state, national or international regulations.
 #
+require "rexml/document"
+
 module DcmDict
   module XML
 
     module RexmlTool
       def self.extract_data_element_field_from_xml_tr(xml_tr_string)
         nodeset = extract_rexml_nodeset(xml_tr_string)
-        proc = tag_field_extract_proc(nodeset)
+        extract_data_element_field_from_tr_set(nodeset)
+      end
+
+      def self.extract_data_element_field_from_tr_set(trset)
+        proc = tag_field_extract_proc(trset)
         TagFieldData.new(proc).data_element_data
       end
 
       def self.extract_uid_field_from_xml_tr(xml_tr_string)
         nodeset = extract_rexml_nodeset(xml_tr_string)
-        proc = uid_field_extract_proc(nodeset)
+        extract_uid_field_from_tr_set(nodeset)
+      end
+
+      def self.extract_uid_field_from_tr_set(trset)
+        proc = uid_field_extract_proc(trset)
         UidFieldData.new(proc).uid_data
+      end
+
+      def self.create_xml_doc(xml_string)
+        REXML::Document.new(xml_string)
+      end
+
+      def self.each_tr_set(doc, xpath)
+        alltr = REXML::XPath.match(doc, xpath)
+        alltr.each do |tr|
+          trset = tr.get_elements('xmlns:td')
+          yield trset if block_given?
+        end
       end
 
       private
@@ -64,8 +86,10 @@ module DcmDict
       end
 
       def self.extract_rexml_nodeset(xml_tr_string)
-        ns = REXML::Document.new(xml_tr_string)
-        ns.elements[1].get_elements('td')
+        doc = create_xml_doc(xml_tr_string)
+        each_tr_set(doc, "//xmlns:tr") do |tdset|
+          return tdset
+        end
       end
 
     end
