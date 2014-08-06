@@ -38,15 +38,25 @@ describe "XML management for Data Element" do
               expect(xml_data[key]).to eq(expected_value)
             end
           end
+          it "from XML doc" do
+            doc = xml_mod.create_xml_doc(xml_string)
+            data = {}
+            xml_mod.each_tr_set(doc, '//xmlns:tr') do |trset|
+              data = xml_mod.extract_data_element_field_from_tr_set(trset)
+            end
+            expect(data).to eq(expected_data)
+          end
         end
       end
     end
   end
 
-  if DcmDict::XML.nokogiri_enable
+  if DcmDict::XML.nokogiri_enable?
     include_examples "XML management for Data Element", DcmDict::XML::NokogiriTool, "with Nokogiri"
   end
 
   include_examples "XML management for Data Element", DcmDict::XML::RexmlTool, "with REXML"
+
+  include_examples "XML management for Data Element", DcmDict::XML::XmlTool, "with general XML module"
 
 end

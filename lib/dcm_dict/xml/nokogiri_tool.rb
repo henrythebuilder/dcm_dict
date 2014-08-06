@@ -27,13 +27,13 @@ module DcmDict
     @@nokogiri_enable = false
 
     begin
-      #raise LoadError.new "Simulate LoadError to disable Nokogiri"
+      raise LoadError.new "Simulate LoadError to disable Nokogiri"
       require 'nokogiri'
       @@nokogiri_enable = true
     rescue LoadError
     end
 
-    def self.nokogiri_enable
+    def self.nokogiri_enable?
       @@nokogiri_enable
     end
 

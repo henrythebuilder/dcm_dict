@@ -21,15 +21,39 @@
 #  It is the redistributor's or user's responsibility to comply with any
 #  applicable local, state, national or international regulations.
 #
-if ENV['COVERAGE']
-  require 'simplecov'
-  SimpleCov.start
-end
+require_relative 'constant'
+require_relative 'rexml_tool'
+require_relative 'nokogiri_tool'
 
-require 'dcm_dict'
-require 'dcm_dict/xml/nokogiri_tool'
-require 'dictionary_shared_example_spec_helper'
-require 'data_element_shared_example_spec_helper'
-require 'refine_shared_example_spec_helper'
-require 'dcm_dict/xml/rexml_tool'
-require 'dcm_dict/xml/xml_tool'
+module DcmDict
+  module XML
+
+    module XmlTool
+      @@xml_tool = XML.nokogiri_enable? ? NokogiriTool : RexmlTool
+
+      def self.extract_data_element_field_from_xml_tr(xml_tr_string)
+        @@xml_tool.extract_data_element_field_from_xml_tr(xml_tr_string)
+      end
+
+      def self.extract_data_element_field_from_tr_set(trset)
+        @@xml_tool.extract_data_element_field_from_tr_set(trset)
+      end
+
+      def self.extract_uid_field_from_xml_tr(xml_tr_string)
+        @@xml_tool.extract_uid_field_from_xml_tr(xml_tr_string)
+      end
+
+      def self.extract_uid_field_from_tr_set(trset)
+        @@xml_tool.extract_uid_field_from_tr_set(trset)
+      end
+
+      def self.create_xml_doc(xml_string)
+        @@xml_tool.create_xml_doc(xml_string)
+      end
+
+      def self.each_tr_set(doc, xpath, &block)
+        @@xml_tool.each_tr_set(doc, xpath, &block)
+      end
+    end
+  end
+end

@@ -26,15 +26,7 @@
 require 'open-uri'
 require 'tempfile'
 require 'dcm_dict'
-
-require 'dcm_dict/xml/nokogiri_tool'
-require 'dcm_dict/xml/rexml_tool'
-
-if DcmDict::XML.nokogiri_enable
-  XML_MOD = DcmDict::XML::NokogiriTool
-else
-  XML_MOD = DcmDict::XML::RexmlTool
-end
+require 'dcm_dict/xml/xml_tool'
 
 LICENSE_TEXT=<<END_LICENSE
   Copyright (C) 2014  Enrico Rivarola
@@ -110,11 +102,11 @@ class DcmDictConverter
   end
 
   def extract_node_set(xml_file, table_to_map)
-    xml_doc = XML_MOD.create_xml_doc(File.read(xml_file))
+    xml_doc = DcmDict::XML::XmlTool.create_xml_doc(File.read(xml_file))
     table_to_map.each do |table|
       trace("Extracting data from '#{table}':")
       xpath="//xmlns:table[@xml:id=\"#{table}\"]//xmlns:tbody/xmlns:tr"
-      XML_MOD.each_tr_set(xml_doc, xpath) do |tdset|
+      DcmDict::XML::XmlTool.each_tr_set(xml_doc, xpath) do |tdset|
         yield(table, tdset)
       end
       trace("Done.\n")
@@ -123,7 +115,7 @@ class DcmDictConverter
 
   def extract_data_element(xml_file, table_to_map)
     extract_node_set(xml_file, table_to_map) do |table, td|
-      data = XML_MOD.extract_data_element_field_from_tr_set(td)
+      data = DcmDict::XML::XmlTool.extract_data_element_field_from_tr_set(td)
       check_data_element_data(data, table)
       yield(data) if block_given?
     end
@@ -152,7 +144,7 @@ class DcmDictConverter
 
   def extract_uid(xml_file, table_to_map)
     extract_node_set(xml_file, table_to_map) do |table, td|
-      data = XML_MOD.extract_uid_field_from_tr_set(td)
+      data = DcmDict::XML::XmlTool.extract_uid_field_from_tr_set(td)
       yield(data) if block_given?
     end
   end
@@ -183,13 +175,13 @@ class DcmDictConverter
 end
 
 STDERR << LICENSE_TEXT
-STDERR << "\nAny key to continue or Ctrl-C to break."
+STDERR << "\nAny key to continue or Ctrl-C to break.\n"
 STDIN.getc
 
-if DcmDict::XML.nokogiri_enable
-  STDERR << "\nXML: Working with 'Nokogiri'\n\n"
+if (DcmDict::XML.nokogiri_enable?)
+  STDERR << "Parsing XML data with Nokogiri.\n\n"
 else
-  STDERR << "\nXML: Working with 'REXML'\n\n"
+  STDERR << "Parsing XML data with REXML.\n\n"
 end
 
 case ARGV[0]
