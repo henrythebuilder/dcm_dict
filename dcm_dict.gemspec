@@ -15,10 +15,12 @@ Gem::Specification.new do |s|
   s.test_files  = Dir.glob("spec/**/*")
   s.test_files  += %w[Rakefile]
   s.require_paths = ['lib']
+  s.executables << 'dcm_dict_converter.rb'
   s.homepage    = 'http://rubygems.org/gems/dcm_dict'
   s.license     = 'GPL-3.0+'
   s.required_ruby_version = '>= 2.1'
   s.add_development_dependency 'nokogiri', '~> 1.6.2','>= 1.6.2.1'
   s.add_development_dependency "rspec", '~> 3.0', ">= 3.0.0"
   s.add_development_dependency "simplecov", '~> 0.8', '>= 0.8.2'
+  s.add_development_dependency('rake', "~> 10.3.2", '>= 10.3.0')
 end
