@@ -22,8 +22,11 @@
 #  applicable local, state, national or international regulations.
 #
 if ENV['COVERAGE']
-  require 'simplecov'
-  SimpleCov.start
+  begin
+    require 'simplecov'
+    SimpleCov.start
+  rescue LoadError
+  end
 end
 
 require 'dcm_dict'
