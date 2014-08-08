@@ -99,6 +99,8 @@ The main methods supported are:
 |**tag_note** | tag note|String|
 |**tag_multiple?** | is a multiple tag ? |boolean|
 ||useful for 'multi tag' attribute||
+|**data_element** | All tag informations | Object respond|
+||as single object| to all previous methods|
 
 each data element is indexed by these fields:
 
@@ -137,6 +139,7 @@ puts "Patient's Birth Name".tag_str.inspect
 puts [0x0010,0x1005].tag_note.inspect
 puts [0x0010,0x1005].tag_group.inspect
 puts :patient_birth_name.tag_element.inspect
+puts 'PatientBirthName'.data_element.tag_ndm.inspect
 ```
 
 will produce
@@ -156,6 +159,7 @@ will produce
 ""
 16
 4101
+"00101005"
 ```
 
 ### 'multiple tag'
@@ -256,7 +260,8 @@ The script produces the conversion in the *stdout* so for example is possible to
 dcm_dict_converter.rb tag > /tmp/tag-dict.rb
 ```
 
-Note: the script use the [Nokogiri][3] as XML parser if installed as gem. If not the standard *REXML* is used.
+Note: the script use the [Nokogiri][3] as XML parser if installed as gem, otherwise the standard *REXML* is used.
+
 Check the file for other details.
 
 ## Install
