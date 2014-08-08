@@ -2,7 +2,7 @@
 **DcmDict** is a Ruby gem (*dcm\_dict*) to handle in a simple way the Data defined within the [DICOM(r)][1] Standard such as DICOM Data Elements or DICOM Unique Identifiers.
 
 # Why *DcmDict*
-With the 2014 realease DICOM documents are available in different format including one particularly interesting, the *DocBook* XML version.
+With the latest releases of this year (2014) DICOM documents are available in different format including one particularly interesting, the *DocBook* XML version.
 As written by D. Clunie on [its web site][2]:
 > "... other formats (such as DocBook, HTML, Word and ODT) are also made available for the convenience of implementors who may need to extract machine-readable content, ..."
 
@@ -241,15 +241,23 @@ For this uid all field are expressed as:
  => "Verification SOP Class"
 ```
 ### TODO
+There are many candidates for inclusion in the *dictionary*, here are some ideas:
 - Directory Record type
 - Well-known Frames of Reference UID Values
 - Context Group UID Values
 - Standard Color Palettes UID Values
-- IOD definition (???)
+- IOD definition
 
 ## How data is extracted
-The library also contains a script (*dcm_dict_converter.rb* into *bin* folder) able to download the xml documents and extracts the data in a *Ruby compatible format*.
-See the file for details.
+The library also contains a script (*dcm_dict_converter.rb* into *bin* folder) able to download the xml documents and extracts the source data in a *Ruby compatible format*.
+The script produces the conversion in the *stdout* so for example is possible to extract the Tag Values by:
+
+```ruby
+dcm_dict_converter.rb tag > /tmp/tag-dict.rb
+```
+
+Note: the script use the [Nokogiri][3] as XML parser if installed as gem. If not the standard *REXML* is used.
+Check the file for other details.
 
 ## Install
 
@@ -268,3 +276,4 @@ Main source code repository on github at [henrythebuilder/dcm_dict](https://gith
 
 [1]: http://medical.nema.org/dicom/        "DICOM Homepage"
 [2]: http://www.dclunie.com/dicom-status/status.html "DICOM Standard Status"
+[3]: http://nokogiri.org/ "Nokogiri"
