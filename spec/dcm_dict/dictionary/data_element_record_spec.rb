@@ -81,6 +81,12 @@ describe DcmDict::Dictionary::DataElementRecord do
       expect(der.tag_ps).to eq(old_ps)
     end
 
+    it "should extract multiple tag record only for specific tag" do
+      der = DcmDict::Dictionary::DataElementRecord.new(data)
+      mrec = der.extract_multiple_tag_record(data[:tag_ary])
+      expect(mrec).to be_nil
+    end
+
   end
 
   {
@@ -91,17 +97,16 @@ describe DcmDict::Dictionary::DataElementRecord do
       :source_data => { tag_ps: '(60XX,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(6022,0010)', tag_sym: :overlay_rows, tag_ndm: '60220010', tag_ary: [24610, 16], tag_multiple: true, tag_note: ''},
       :specific_data => { tag_ps: '(60XX,0010)', tag_name: "Overlay Rows", tag_key: 'OverlayRows', tag_vr: [:US], tag_vm: ["1"], tag_str: '(6068,0010)', tag_sym: :overlay_rows, tag_ndm: '60680010', tag_ary: [0x6068,0x0010], tag_multiple: true, tag_note: ''} }
   }.each do |keys, multi_data|
-    it "check match for multiple tag definition" do
+    it "check match for multiple tag definition from #{keys[0].inspect}" do
       der = DcmDict::Dictionary::DataElementRecord.new(multi_data[:source_data])
       keys.each do |key|
-        expect(der.match_tag?(key)).to be_truthy
+        expect(der.send(:match_tag?, key)).to be_truthy
       end
-
     end
 
-    it "generate equivalent record for specific tag" do
+    it "generate equivalent record for specific tag from #{keys[0].inspect}" do
       der_multi = DcmDict::Dictionary::DataElementRecord.new(multi_data[:source_data])
-      der = der_multi.make_specific_record(multi_data[:specific_data][:tag_ary])
+      der = der_multi.extract_multiple_tag_record(multi_data[:specific_data][:tag_ary])
       multi_data[:specific_data].each do |key, val|
         expect(der.send(key)).to eq(val)
       end

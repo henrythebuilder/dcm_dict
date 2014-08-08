@@ -53,15 +53,6 @@ module DcmDict
         @data[:tag_ary].tag_element
       end
 
-      def match_tag?(tag)
-        tag_to_match = tag.to_tag_str
-        tag_pattern.each do |pattern|
-          re = Regexp.new(pattern)
-          return true if re.match(tag_to_match)
-        end
-        false
-      end
-
       def method_missing(name, *args, &block)
         name_as_sym = name.to_sym
         return @data[DataElementMethodMap[name_as_sym]] if (DataElementMethodMap.has_key?(name_as_sym))
@@ -69,15 +60,26 @@ module DcmDict
         super
       end
 
-      def make_specific_record(tag)
-        DataElementRecord.new( @data.merge( { tag_str: tag.to_tag_str,
-                                              tag_ndm: tag.to_tag_ndm,
-                                              tag_ary: tag.to_tag_ary }))
+      def extract_multiple_tag_record(tag)
+        if ( @data[:tag_multiple] && match_tag?(tag) )
+          DataElementRecord.new( @data.merge( { tag_str: tag.to_tag_str,
+                                                tag_ndm: tag.to_tag_ndm,
+                                                tag_ary: tag.to_tag_ary } ))
+        end
       end
 
       private
       def respond_to_missing?(name, include_priv)
         DataElementMethodMap.has_key?(name) || @data.has_key?(name)
+      end
+
+      def match_tag?(tag)
+        tag_to_match = tag.to_tag_str
+        tag_pattern.each do |pattern|
+          re = Regexp.new(pattern)
+          return true if re.match(tag_to_match)
+        end
+        false
       end
 
       def tag_pattern

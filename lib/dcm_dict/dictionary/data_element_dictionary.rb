@@ -80,9 +80,8 @@ module DcmDict
 
       def try_to_find_multiple_tag(tag)
         @multi_dict.each do |record|
-          if (record.match_tag?(tag))
-            return record.make_specific_record(tag)
-          end
+          mrec = record.extract_multiple_tag_record(tag)
+          return mrec if mrec
         end
         nil
       end
