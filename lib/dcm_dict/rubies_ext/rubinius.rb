@@ -21,22 +21,14 @@
 #  It is the redistributor's or user's responsibility to comply with any
 #  applicable local, state, national or international regulations.
 #
-if ENV['COVERAGE']
-  begin
-    require 'simplecov'
-    SimpleCov.start
-  rescue LoadError
+unless respond_to? :refine
+  require 'refine'
+end
+
+unless 1.respond_to?(:bit_length)
+  class ::Fixnum
+    def bit_length
+      self.to_s(2).size
+    end
   end
 end
-
-if (RUBY_ENGINE == 'rbx')
-  require 'dcm_dict/rubies_ext/rubinius'
-end
-
-require 'dcm_dict'
-require 'dcm_dict/xml/nokogiri_tool'
-require 'dictionary_shared_example_spec_helper'
-require 'data_element_shared_example_spec_helper'
-require 'refine_shared_example_spec_helper'
-require 'dcm_dict/xml/rexml_tool'
-require 'dcm_dict/xml/xml_tool'

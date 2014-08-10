@@ -56,10 +56,10 @@ END
           src_text = "#{' '*indent}{ tag_ps: '#{data[:tag_ps]}', tag_name: \"#{data[:tag_name]}\", tag_key: '#{data[:tag_key]}', tag_vr: #{data[:tag_vr]}, tag_vm: #{data[:tag_vm]}, tag_str: '#{data[:tag_str]}', tag_sym: #{data[:tag_sym].inspect}, tag_ndm: '#{data[:tag_ndm]}', tag_ary: #{tag_ary_str}, tag_multiple: #{data[:tag_multiple].inspect}, tag_note: '#{data[:tag_note]}'},"
           src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(data)
           expect(src_line).to eq(src_text)
-          src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(data, indent: indent)
+          src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(data, indent)
           expect(src_line).to eq(src_text)
           indent = 6
-          src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(data, indent: indent)
+          src_line = DcmDict::Encoder::DataToCode.data_element_data_to_code(data, indent)
           expect(src_line.start_with?("#{' '*indent}{")).to be true
         end
       end
@@ -95,10 +95,10 @@ END
         src_text = "#{' '*indent}{ uid_value: '#{data[:uid_value]}', uid_name: \"#{data[:uid_name]}\", uid_type: #{data[:uid_type].inspect}},"
         src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(data)
         expect(src_line).to eq(src_text)
-        src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(data, indent: indent)
+        src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(data, indent)
         expect(src_line).to eq(src_text)
         indent = 6
-        src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(data, indent: indent)
+        src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(data, indent)
         expect(src_line.start_with?("#{' '*indent}{")).to be true
       end
       end

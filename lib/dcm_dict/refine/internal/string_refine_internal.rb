@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 #  Copyright (C) 2014  Enrico Rivarola
 #
@@ -27,7 +28,8 @@ module DcmDict
       module StringRefineInternal
 
         refine String do
-          # remove zero width spaces
+
+          # remove zero width spaces -> "​"
           def dcm_unspace
             zero_width_space = "\u200B"
             self.gsub(zero_width_space, '').strip
@@ -58,6 +60,7 @@ module DcmDict
           def tag_element_str
             self.to_tag_ndm[4..7]
           end
+
           # (0010,0010) -> '00100010'
           #  00100010   -> '00100010'
           def to_tag_ndm
