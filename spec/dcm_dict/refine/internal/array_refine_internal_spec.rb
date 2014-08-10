@@ -32,8 +32,8 @@ describe "Array Refinement" do
 
   describe "should extract group and element from 'array tag'" do
     it "for correct object" do
-      expect([0x0010,0x0020].tag_group).to eq(0x0010)
-      expect([0x0010,0x0020].tag_element).to eq(0x0020)
+      expect([0x0010,0x0020].tag_group_num).to eq(0x0010)
+      expect([0x0010,0x0020].tag_element_num).to eq(0x0020)
     end
 
     describe "and for wrong array must be raise error" do
@@ -46,8 +46,8 @@ describe "Array Refinement" do
         [-1,-2]
       ].each do |tag|
         it "as #{tag.inspect}" do
-          expect{ tag.tag_group }.to raise_error
-          expect{ tag.tag_element }.to raise_error
+          expect{ tag.tag_group_num }.to raise_error
+          expect{ tag.tag_element_num }.to raise_error
 
         end
       end

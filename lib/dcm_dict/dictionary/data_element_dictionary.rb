@@ -69,7 +69,7 @@ module DcmDict
       def try_to_find(tag)
         try_to_find_standard_tag(tag) ||
           try_to_find_multiple_tag(tag) ||
-          try_to_group_length_tag(tag) ||
+          try_to_find_group_length_tag(tag) ||
           try_to_find_private_creator_tag(tag) ||
           try_to_find_unknown_tag(tag)
       end
@@ -86,8 +86,8 @@ module DcmDict
         nil
       end
 
-      def try_to_group_length_tag(tag)
-        if (tag.tag_element == 0)
+      def try_to_find_group_length_tag(tag)
+        if (tag.tag_element_num == 0)
           return DataElementRecord.new(
                    SourceData::DetachedData.make_group_length_data(tag))
         end
@@ -95,7 +95,7 @@ module DcmDict
       end
 
       def try_to_find_private_creator_tag(tag)
-        if (tag.tag_group.odd? && tag.tag_element<0xff)
+        if ( tag.tag_group_num.odd? && (tag.tag_element_num < 0xff) )
           return DataElementRecord.new(
                    SourceData::DetachedData.make_private_creator_data(tag))
         end

@@ -46,11 +46,11 @@ module DcmDict
       end
 
       def tag_group
-        @data[:tag_ary].tag_group
+        @data[:tag_ary].tag_group_num
       end
 
       def tag_element
-        @data[:tag_ary].tag_element
+        @data[:tag_ary].tag_element_num
       end
 
       def method_missing(name, *args, &block)

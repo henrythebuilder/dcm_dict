@@ -43,11 +43,11 @@ module DcmDict
               to_sym
           end
 
-          def tag_group
+          def tag_group_num
             tag_group_str.hex
           end
 
-          def tag_element
+          def tag_element_num
             tag_element_str.hex
           end
 
@@ -67,7 +67,7 @@ module DcmDict
 
           # (0010,0010) -> [0x0010, 0x0010]
           def to_tag_ary
-            [tag_group,tag_element]
+            [tag_group_num, tag_element_num]
           end
 
           # '00100010', (0010,0010) -> (0010,0010)

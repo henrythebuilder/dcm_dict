@@ -70,8 +70,8 @@ describe DcmDict::Dictionary::DataElementRecord do
 
     it "Handle group and element with explicit method" do
       der = DcmDict::Dictionary::DataElementRecord.new(data)
-      expect(der.tag_group).to eq(data[:tag_ary].tag_group)
-      expect(der.tag_element).to eq(data[:tag_ary].tag_element)
+      expect(der.tag_group).to eq(data[:tag_ary].tag_group_num)
+      expect(der.tag_element).to eq(data[:tag_ary].tag_element_num)
     end
 
     it "data should be not modifiable" do

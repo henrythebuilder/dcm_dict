@@ -115,9 +115,9 @@ describe "String refinement (internal)" do
     '00100020' => [0x0010,0x0020]
 
   }.each do |src, expected_val|
-    it "should implement tag_group and tag_element method" do
-      expect(src.tag_group).to eq(expected_val[0])
-      expect(src.tag_element).to eq(expected_val[1])
+    it "should implement tag_group_num and tag_element_num method" do
+      expect(src.tag_group_num).to eq(expected_val[0])
+      expect(src.tag_element_num).to eq(expected_val[1])
     end
   end
 
