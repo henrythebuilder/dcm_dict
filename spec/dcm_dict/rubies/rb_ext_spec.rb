@@ -21,8 +21,8 @@
 #  It is the redistributor's or user's responsibility to comply with any
 #  applicable local, state, national or international regulations.
 #
-describe "Rubinius dedicate extension" do
-  it "should implement Fixnum::bit_length" do
+describe "Rubies dedicate extension" do
+  it "should check for Fixnum::bit_length method" do
     {(-2**12-1) => 13,
      (-2**12)   => 12,
      (-2**12+1) => 12,

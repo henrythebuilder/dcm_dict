@@ -29,8 +29,8 @@ if ENV['COVERAGE']
   end
 end
 
-if (RUBY_ENGINE == 'rbx')
-  require 'dcm_dict/rubies/rbx_ext'
+if (RUBY_ENGINE == 'rbx' || RUBY_VERSION == "1.9.3")
+  require 'dcm_dict/rubies/rb_ext'
 end
 
 require 'dcm_dict'
