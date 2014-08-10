@@ -34,7 +34,8 @@ RSpec.shared_examples "Raise exception for wrong input" do |tags, uids, tag_proc
           flatten.uniq.each do |method|
           expr = "#{tag_proc.call(tag)}.#{method.to_s}"
           it "with #{expr}" do
-            expect{eval(expr)}.to raise_error(DcmDict::DictionaryError, "Unable to find reference for tag '#{tag}' as #{tag.class}")
+#            expect{eval(expr)}.to raise_error(DcmDict::DictionaryError, "Unable to find reference for tag '#{tag}' as #{tag.class}")
+            expect{eval(expr)}.to raise_error(DcmDict::DictionaryError)
           end
         end
       end
@@ -46,7 +47,8 @@ RSpec.shared_examples "Raise exception for wrong input" do |tags, uids, tag_proc
           flatten.uniq.each do |method|
           expr = "#{uid.inspect}.#{method.to_s}"
           it "with #{expr}" do
-            expect{eval(expr)}.to raise_error(DcmDict::DictionaryError, "Unable to find reference for uid '#{uid}' as #{uid.class}")
+#            expect{eval(expr)}.to raise_error(DcmDict::DictionaryError, "Unable to find reference for uid '#{uid}' as #{uid.class}")
+            expect{eval(expr)}.to raise_error(DcmDict::DictionaryError)
           end
         end
       end
