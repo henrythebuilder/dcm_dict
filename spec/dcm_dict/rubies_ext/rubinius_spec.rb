@@ -21,16 +21,24 @@
 #  It is the redistributor's or user's responsibility to comply with any
 #  applicable local, state, national or international regulations.
 #
-unless respond_to? :refine
-  require 'refine'
-end
-
-unless 1.respond_to?(:bit_length)
-  class ::Fixnum
-    def bit_length
-      return 0 if self.zero?
-      num = (self < 0) ? -self : self+1
-      Math.log2(num).ceil
+describe "Rubinius dedicate extension" do
+  it "should implement Fixnum::bit_length" do
+    {(-2**12-1) => 13,
+     (-2**12)   => 12,
+     (-2**12+1) => 12,
+     -0x101    => 9,
+     -0x100    => 8,
+     -0xff     => 8,
+     -2        => 1,
+     -1        => 0,
+     0         => 0,
+     1         => 1,
+     0xff      => 8,
+     0x100     => 9,
+     (2**12-1) => 12,
+     (2**12)   => 13,
+     (2**12+1) => 13}.each do |num, expected_bit_length|
+      expect(num.bit_length).to eq(expected_bit_length)
     end
   end
 end
