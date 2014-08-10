@@ -22,10 +22,12 @@
 #  applicable local, state, national or international regulations.
 #
 unless respond_to? :refine
+  warn "warning: no #refine directive detected -> try to include 'refine' gem"
   require 'refine'
 end
 
 unless 1.respond_to?(:bit_length)
+  warn "warning: no Fixnum#bit_length method detected -> define method bit_length for Fixnum class"
   class ::Fixnum
     def bit_length
       return 0 if self.zero?
