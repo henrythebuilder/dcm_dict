@@ -30,7 +30,7 @@ if ENV['COVERAGE']
 end
 
 if (RUBY_ENGINE == 'rbx')
-  require 'dcm_dict/rubies/rbx_ext'
+  require 'dcm_dict/rubies/rb_ext'
 end
 
 require 'dcm_dict'
