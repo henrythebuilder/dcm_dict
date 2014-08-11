@@ -28,7 +28,7 @@ module DcmDict
       DcmDict::Dictionary::UidMethodMap.
         flatten.uniq.each do |method|
         define_method(method) do
-          Dictionary::TheUidDictionary.feature_of(self).send(method)
+          Dictionary::TheUidDictionary.record_at(self).send(method)
         end
       end
     end

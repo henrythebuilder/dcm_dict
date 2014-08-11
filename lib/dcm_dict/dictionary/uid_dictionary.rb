@@ -34,8 +34,8 @@ module DcmDict
         map_source_data
       end
 
-      def feature_of(uid)
-        Semaphore.synchronize { atomic_feature_of(uid) }
+      def record_at(uid)
+        Semaphore.synchronize { atomic_record_at(uid) }
       end
 
       private
@@ -50,7 +50,7 @@ module DcmDict
         end
       end
 
-      def atomic_feature_of(uid)
+      def atomic_record_at(uid)
         try_to_find_uid(uid)
       rescue Exception => ex
         raise DictionaryError.new("Unable to find reference for uid '#{uid}' as #{uid.class} (#{ex.class}: #{ex.message.inspect})")

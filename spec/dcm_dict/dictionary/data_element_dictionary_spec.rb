@@ -29,7 +29,7 @@ describe DcmDict::Dictionary::DataElementDictionary do
     index_keys = [:tag_ps, :tag_name, :tag_key, :tag_str, :tag_sym, :tag_ndm, :tag_ary]
     DcmDict::SourceData::DataElementsData.each do |record|
       index_keys.each do |key|
-        obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(record[key])
+        obj = DcmDict::Dictionary::TheDataElementDictionary.record_at(record[key])
         expect(obj).not_to be_nil, "#{key.inspect} > #{record[:tag_ps]}"
         expect(obj).to be_a(DcmDict::Dictionary::DataElementRecord)
         expect(obj).to be_frozen
@@ -42,7 +42,7 @@ describe DcmDict::Dictionary::DataElementDictionary do
     merge(DataElementSampleSpecHelper.private_creator_sample).
     merge(DataElementSampleSpecHelper.unknown_sample).each do |tag, data|
     it "should handling special case for tag = #{tag.inspect}" do
-      obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(tag)
+      obj = DcmDict::Dictionary::TheDataElementDictionary.record_at(tag)
       expect(obj).not_to be_nil, "#{tag.inspect} not found into dictionary"
       data.each do |key, value|
         field = obj.send(key)
@@ -53,7 +53,7 @@ describe DcmDict::Dictionary::DataElementDictionary do
 
   DataElementSampleSpecHelper.multiple_tag_sample.each do |tag, data|
     it "should handling multiple tag (#{tag.inspect})" do
-      obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(tag)
+      obj = DcmDict::Dictionary::TheDataElementDictionary.record_at(tag)
       expect(obj).not_to be_nil, "#{tag.inspect} not found into dictionary"
       data.each do |key, value|
         field = obj.send(key)
@@ -70,7 +70,7 @@ describe DcmDict::Dictionary::DataElementDictionary do
    [1234.5678, 1234]
   ].each do |wrong_tag|
     it "with wrong tag request as tag = #{wrong_tag.inspect}" do
-      expect {DcmDict::Dictionary::TheDataElementDictionary.feature_of(wrong_tag)}.
+      expect {DcmDict::Dictionary::TheDataElementDictionary.record_at(wrong_tag)}.
         to raise_error(DcmDict::DictionaryError)
     end
   end
@@ -78,7 +78,7 @@ describe DcmDict::Dictionary::DataElementDictionary do
   it "data should be not modifiable" do
     expect(DcmDict::Dictionary::TheDataElementDictionary).to be_frozen
     tag = '(0002,0010)'
-    obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(tag)
+    obj = DcmDict::Dictionary::TheDataElementDictionary.record_at(tag)
     expect{obj.tag_ps << 'aaa'}.to raise_error
   end
 

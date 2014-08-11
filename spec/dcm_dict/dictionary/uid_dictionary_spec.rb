@@ -27,7 +27,7 @@ describe DcmDict::Dictionary::UidDictionary do
     index_keys = [:uid_value, :uid_name]
     DcmDict::SourceData::UidValuesData.each do |record|
       index_keys.each do |key|
-        obj = DcmDict::Dictionary::TheUidDictionary.feature_of(record[key])
+        obj = DcmDict::Dictionary::TheUidDictionary.record_at(record[key])
         expect(obj).not_to be_nil, "#{key.inspect} > #{record[:uid_value]}"
         expect(obj).to be_a(DcmDict::Dictionary::UidRecord)
         expect(obj).to be_frozen
@@ -41,7 +41,7 @@ describe DcmDict::Dictionary::UidDictionary do
                        :uid_type => :unknown }
   }.each do |uid, data|
     it "should handling unknown value for uid = #{uid.inspect}" do
-      obj = DcmDict::Dictionary::TheUidDictionary.feature_of(uid)
+      obj = DcmDict::Dictionary::TheUidDictionary.record_at(uid)
       expect(obj).not_to be_nil, "#{uid.inspect} not found into dictionary"
       data.each do |key, value|
         field = obj.send(key)
@@ -54,7 +54,7 @@ describe DcmDict::Dictionary::UidDictionary do
     '1.2.abc.3.4', 'this string is not a valid uid', '1.2.3.04.5'
   ].each do |uid|
     it "should raise exception for wrong value for uid as #{uid.inspect}" do
-      expect{DcmDict::Dictionary::TheUidDictionary.feature_of(uid)}.
+      expect{DcmDict::Dictionary::TheUidDictionary.record_at(uid)}.
         to raise_error(DcmDict::DictionaryError)
     end
   end
@@ -62,7 +62,7 @@ describe DcmDict::Dictionary::UidDictionary do
   it "data should be not modifiable" do
     expect(DcmDict::Dictionary::TheUidDictionary).to be_frozen
     uid  = '1.2.840.10008.1.2'
-    obj = DcmDict::Dictionary::TheUidDictionary.feature_of(uid)
+    obj = DcmDict::Dictionary::TheUidDictionary.record_at(uid)
     expect{obj.uid_value << 'aaa'}.to raise_error
   end
 

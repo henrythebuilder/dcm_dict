@@ -37,8 +37,8 @@ module DcmDict
         freeze_source_data
       end
 
-      def feature_of(tag)
-        Semaphore.synchronize { atomic_feature_of(tag) }
+      def record_at(tag)
+        Semaphore.synchronize { atomic_record_at(tag) }
       end
 
       private
@@ -60,7 +60,7 @@ module DcmDict
         @multi_dict.freeze
       end
 
-      def atomic_feature_of(tag)
+      def atomic_record_at(tag)
         try_to_find(tag)
       rescue Exception => ex
         raise DictionaryError.new("Unable to find reference for tag '#{tag}' as #{tag.class} (#{ex.class}: #{ex.message.inspect})")

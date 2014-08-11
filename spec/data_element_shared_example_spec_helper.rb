@@ -29,7 +29,7 @@ RSpec.shared_examples "refinement for standard tag" do |tags, tag_proc|
   describe "for standard tag" do
     tags.each do |tag|
       describe "as #{tag_proc.call(tag)}" do
-        obj = DcmDict::Dictionary::TheDataElementDictionary.feature_of(tag)
+        obj = DcmDict::Dictionary::TheDataElementDictionary.record_at(tag)
         DcmDict::Dictionary::DataElementMethodMap.
           merge({tag_group: :tag_group, tag_element: :tag_element}).
           flatten.uniq.each do |method|
