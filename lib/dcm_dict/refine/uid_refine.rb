@@ -25,8 +25,7 @@ module DcmDict
   module Refine
 
     module UidRefine
-      DcmDict::Dictionary::UidMethodMap.
-        flatten.uniq.each do |method|
+      DcmDict::Dictionary::UidMethod.each do |method|
         define_method(method) do
           Dictionary::TheUidDictionary.record_at(self).send(method)
         end

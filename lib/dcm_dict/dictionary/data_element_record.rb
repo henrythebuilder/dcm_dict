@@ -36,6 +36,9 @@ module DcmDict
                              :tag_ndm => :tag_ndm,
                              :tag_str => :tag_str }
 
+    DataElementMethod = DataElementMethodMap.flatten.
+                        concat([:tag_group, :tag_element]).uniq
+
     # Class to handle data element record from source dictionary data
     class DataElementRecord
       using DcmDict::Refine::Internal::StringRefineInternal

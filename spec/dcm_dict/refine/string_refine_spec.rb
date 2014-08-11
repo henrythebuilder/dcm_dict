@@ -67,8 +67,7 @@ describe "String refinement" do
       ].each do |uid|
         describe "as #{uid.inspect}" do
           obj = DcmDict::Dictionary::TheUidDictionary.record_at(uid)
-          DcmDict::Dictionary::UidMethodMap.
-            flatten.uniq.each do |method|
+          DcmDict::Dictionary::UidMethod.each do |method|
             expr = "#{uid.inspect}.#{method.to_s}"
             it "with #{expr} > #{obj.send(method).inspect}" do
               value = eval(expr)

@@ -29,9 +29,7 @@ RSpec.shared_examples "Raise exception for wrong input" do |tags, uids, tag_proc
   describe "should raise exception for wrong input" do
     describe "for data element" do
       tags.each do |tag|
-        DcmDict::Dictionary::DataElementMethodMap.
-          merge({tag_group: :tag_group, tag_element: :tag_element}).
-          flatten.uniq.each do |method|
+        DcmDict::Dictionary::DataElementMethod.each do |method|
           expr = "#{tag_proc.call(tag)}.#{method.to_s}"
           it "with #{expr}" do
 #            expect{eval(expr)}.to raise_error(DcmDict::DictionaryError, "Unable to find reference for tag '#{tag}' as #{tag.class}")
@@ -43,8 +41,7 @@ RSpec.shared_examples "Raise exception for wrong input" do |tags, uids, tag_proc
 
     describe "and for uid" do
       uids.each do |uid|
-        DcmDict::Dictionary::UidMethodMap.
-          flatten.uniq.each do |method|
+        DcmDict::Dictionary::UidMethod.each do |method|
           expr = "#{uid.inspect}.#{method.to_s}"
           it "with #{expr}" do
 #            expect{eval(expr)}.to raise_error(DcmDict::DictionaryError, "Unable to find reference for uid '#{uid}' as #{uid.class}")

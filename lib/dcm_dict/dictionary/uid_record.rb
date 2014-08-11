@@ -27,6 +27,8 @@ module DcmDict
                     uid_name: :uid_name,
                     uid_type: :uid_type }
 
+    UidMethod = UidMethodMap.flatten.uniq
+
     class UidRecord
       def initialize(data)
         initialize_data(data)
