@@ -25,51 +25,26 @@ require 'spec_helper'
 require 'data_element_sample_spec_helper'
 
 describe DcmDict::Dictionary::DataElementDictionary do
-  it "should map all source data" do
-    index_keys = [:tag_ps, :tag_name, :tag_key, :tag_str, :tag_sym, :tag_ndm, :tag_ary]
-    DcmDict::SourceData::DataElementsData.each do |record|
-      index_keys.each do |key|
-        obj = DcmDict::Dictionary::TheDataElementDictionary.record_at(record[key])
-        expect(obj).not_to be_nil, "#{key.inspect} > #{record[:tag_ps]}"
-        expect(obj).to be_a(DcmDict::Dictionary::DataElementRecord)
-        expect(obj).to be_frozen
-        [:tag_ps, :tag_name, :tag_key, :tag_vr, :tag_vm, :tag_str, :tag_sym, :tag_ndm, :tag_ary, :tag_multiple, :tag_note].each do |field|
-          feature = DcmDict::Dictionary::TheDataElementDictionary.
-                    feature_at(record[key], field)
-          expect(feature).to eq(record[field])
-        end
-      end
-    end
-  end
+
+  include_examples "Map all source data",
+                   [:tag_ps, :tag_name, :tag_key, :tag_str, :tag_sym, :tag_ndm, :tag_ary],
+                   DcmDict::SourceData::DataElementsData,
+                   DcmDict::Dictionary::TheDataElementDictionary,
+                   DcmDict::Dictionary::DataElementRecord,
+                   [:tag_ps, :tag_name, :tag_key, :tag_vr, :tag_vm, :tag_str, :tag_sym,
+                    :tag_ndm, :tag_ary, :tag_multiple, :tag_note]
 
   DataElementSampleSpecHelper.unknown_group_length_sample.
     merge(DataElementSampleSpecHelper.known_group_length_sample).
     merge(DataElementSampleSpecHelper.private_creator_sample).
     merge(DataElementSampleSpecHelper.unknown_sample).each do |tag, data|
-    it "should handling special case for tag = #{tag.inspect}" do
-      obj = DcmDict::Dictionary::TheDataElementDictionary.record_at(tag)
-      expect(obj).not_to be_nil, "#{tag.inspect} not found into dictionary"
-      data.each do |key, value|
-        field = obj.send(key)
-        expect(field).to eq(value)
-        feature = DcmDict::Dictionary::TheDataElementDictionary.feature_at(tag, key)
-        expect(feature).to eq(value)
-      end
-    end
+    include_examples "Handle specific record", "single tag",
+                     tag, data, DcmDict::Dictionary::TheDataElementDictionary
   end
 
   DataElementSampleSpecHelper.multiple_tag_sample.each do |tag, data|
-    it "should handling multiple tag (#{tag.inspect})" do
-      obj = DcmDict::Dictionary::TheDataElementDictionary.record_at(tag)
-      expect(obj).not_to be_nil, "#{tag.inspect} not found into dictionary"
-      data.each do |key, value|
-        field = obj.send(key)
-        expect(field).to eq(value)
-        feature = DcmDict::Dictionary::TheDataElementDictionary.feature_at(tag, key)
-        expect(feature).to eq(value)
-      end
-
-    end
+    include_examples "Handle specific record", "multiple tag",
+                     tag, data, DcmDict::Dictionary::TheDataElementDictionary
   end
 
   [nil,
@@ -78,25 +53,15 @@ describe DcmDict::Dictionary::DataElementDictionary do
    Time.now,
    [1234.5678, 1234]
   ].each do |wrong_tag|
-    it "with wrong tag request as tag = #{wrong_tag.inspect}" do
-      expect {DcmDict::Dictionary::TheDataElementDictionary.record_at(wrong_tag)}.
-        to raise_error(DcmDict::DictionaryError)
-      [:tag_ps, :tag_name, :tag_key, :tag_vr, :tag_vm, :tag_str, :tag_sym, :tag_ndm, :tag_ary, :tag_multiple, :tag_note].each do |field|
-        expect { DcmDict::Dictionary::TheDataElementDictionary.
-                 feature_at(wrong_tag, field) }.
-          to raise_error(DcmDict::DictionaryError)
-      end
-    end
+    include_examples "Dictionary with wrong key",
+                     wrong_tag,
+                     [:tag_ps, :tag_name, :tag_key, :tag_vr, :tag_vm, :tag_str,
+                      :tag_sym, :tag_ndm, :tag_ary, :tag_multiple, :tag_note],
+                     DcmDict::Dictionary::TheDataElementDictionary
   end
 
-  it "data should be not modifiable" do
-    expect(DcmDict::Dictionary::TheDataElementDictionary).to be_frozen
-    tag = '(0002,0010)'
-    obj = DcmDict::Dictionary::TheDataElementDictionary.record_at(tag)
-    expect{obj.tag_ps << 'aaa'}.to raise_error
-    expect { DcmDict::Dictionary::TheDataElementDictionary.
-             feature_at(tag, :tag_ps) << 'aaa' }.to raise_error
-  end
+  include_examples "Dictionary Data not modifiable",
+                   '(0002,0010)', :tag_ps, DcmDict::Dictionary::TheDataElementDictionary
 
   include_examples "Concurrency support",
                    '(0002,0010)',

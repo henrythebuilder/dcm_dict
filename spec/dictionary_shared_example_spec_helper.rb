@@ -60,3 +60,61 @@ RSpec.shared_examples "Concurrency support" do |key, dictionary, expected_values
     #warn "Example 'should support concurrency' finish in #{Time.now-start}"
   end
 end
+
+RSpec.shared_examples "Map all source data" do |index_keys, record_data, dictionary, record_type, field_list|
+  it "should map all source data" do
+    record_data.each do |record|
+      index_keys.each do |key|
+        obj = dictionary.record_at(record[key])
+        expect(obj).not_to be_nil, "#{key.inspect} > #{record[key].inspect}"
+        expect(obj).to be_a(record_type)
+        expect(obj).to be_frozen
+        field_list.each do |field|
+          feature = dictionary.feature_at(record[key], field)
+          expect(feature).to eq(record[field])
+        end
+      end
+    end
+  end
+end
+
+RSpec.shared_examples "Handle specific record" do |note, record_key, record_data, dictionary|
+  it "should handle specific record as #{record_key.inspect} (#{note})" do
+      obj = dictionary.record_at(record_key)
+      expect(obj).not_to be_nil, "#{record_key.inspect} not found into dictionary #{dictionary.class}"
+      record_data.each do |key, value|
+        field = obj.send(key)
+        expect(field).to eq(value)
+        feature = dictionary.feature_at(record_key, key)
+        expect(feature).to eq(value)
+      end
+    end
+end
+
+RSpec.shared_examples "Dictionary Data not modifiable" do |record_key, key, dictionary|
+  it "data should be not modifiable" do
+    expect(dictionary).to be_frozen
+    obj = dictionary.record_at(record_key)
+    expect(obj).to be_frozen
+    ex_msg = if (RUBY_ENGINE == 'rbx')
+               "can't modify frozen instance of String"
+             else
+               "can't modify frozen String"
+             end
+    expect{ eval("obj.#{key} << 'aaa'") }.
+      to raise_error(RuntimeError, ex_msg)
+    expect{ eval("dictionary.feature_at('#{record_key}', #{key.inspect}) << 'aaa'") }.
+      to raise_error(RuntimeError, ex_msg)
+  end
+end
+
+RSpec.shared_examples "Dictionary with wrong key" do |record_key, field_list, dictionary|
+  it "should raise exception for wrong value as #{record_key.inspect}" do
+    expect{dictionary.record_at(record_key)}.
+      to raise_error(DcmDict::DictionaryError)
+    field_list.each do |field|
+      expect { dictionary.feature_at(record_key, field) }.
+        to raise_error(DcmDict::DictionaryError)
+    end
+  end
+end
