@@ -35,23 +35,27 @@ RSpec.shared_examples "Record handle methods correctly" do |obj, data|
   end
 end
 
-RSpec.shared_examples "Concurrency support" do |key, dictionary|
+RSpec.shared_examples "Concurrency support" do |key, dictionary, expected_values|
   it "should support concurrency" do
     #start = Time.now
     max_threads = 128
     times_for_threads = 1_024
+    idx = Random.rand(0...expected_values.size)
+    rnd_key = expected_values.keys[idx]
+    rnd_val = expected_values[rnd_key]
     Thread.abort_on_exception = true
     th = (1..max_threads).map do |n|
       Thread.new do
         Thread.stop
         times_for_threads.times do |t|
           Thread.current[:obj] = dictionary.feature_of(key)
+          expect(Thread.current[:obj].send(rnd_key)).to eq(rnd_val)
           Thread.pass
         end
       end
     end
     sleep 0.01 while th[max_threads-1].status!='sleep'
     th.map(&:run).map(&:join)
-    #puts "Example 'should support concurrency' finish in #{Time.now-start}"
+    #warn "Example 'should support concurrency' finish in #{Time.now-start}"
   end
 end

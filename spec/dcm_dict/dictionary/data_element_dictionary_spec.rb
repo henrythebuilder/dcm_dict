@@ -82,6 +82,13 @@ describe DcmDict::Dictionary::DataElementDictionary do
     expect{obj.tag_ps << 'aaa'}.to raise_error
   end
 
-  include_examples "Concurrency support", '(0002,0010)', DcmDict::Dictionary::TheDataElementDictionary
+  include_examples "Concurrency support",
+                   '(0002,0010)',
+                   DcmDict::Dictionary::TheDataElementDictionary,
+                   { tag_ps: '(0002,0010)', tag_name: "Transfer Syntax UID",
+                     tag_key: 'TransferSyntaxUID', tag_vr: [:UI], tag_vm: ["1"],
+                     tag_str: '(0002,0010)', tag_sym: :transfer_syntax_uid,
+                     tag_ndm: '00020010', tag_ary: [0x0002,0x0010],
+                     tag_multiple: false, tag_note: ''}
 
 end

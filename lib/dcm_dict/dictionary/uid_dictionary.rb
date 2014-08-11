@@ -1,4 +1,4 @@
-
+#
 #  This file is part of DcmDict gem (dcm_dict).
 #
 #  DcmDict is free software: you can redistribute it and/or modify
