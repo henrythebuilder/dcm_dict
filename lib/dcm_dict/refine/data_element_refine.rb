@@ -32,10 +32,6 @@ module DcmDict
           Dictionary::TheDataElementDictionary.feature_of(self).send(method)
         end
       end
-
-      def data_element
-        Dictionary::TheDataElementDictionary.feature_of(self)
-      end
     end
 
   end

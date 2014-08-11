@@ -57,15 +57,3 @@ RSpec.shared_examples "refinement for multiple tag" do |tag_data, tag_proc|
     end
   end
 end
-
-RSpec.shared_examples "should get data element record" do |tag_data, tag_proc|
-  describe "should get single 'information record' for a data element" do
-    tag_data.each do |tag|
-      expr = "#{tag_proc.call(tag)}.data_element"
-      it "as #{tag.inspect} with #{expr}" do
-        value = eval(expr)
-        expect(value).to be_a(DcmDict::Dictionary::DataElementRecord)
-      end
-    end
-  end
-end

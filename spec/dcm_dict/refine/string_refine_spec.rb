@@ -54,10 +54,6 @@ describe "String refinement" do
                      multi_str_data,
                      Proc.new {|tag| tag.inspect}
 
-    include_examples "should get data element record",
-                     [ "Patient's Birth Name", "PatientBirthName", "(0010,1005)", "00101005" ],
-                     Proc.new {|tag| tag.inspect}
-
   end
 
 

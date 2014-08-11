@@ -54,10 +54,6 @@ describe "Array refinement" do
 
   end
 
-  include_examples "should get data element record",
-                   [ [0x0010,0x1005] ],
-                   Proc.new {|tag| tag}
-
   include_examples "Raise exception for wrong input",
                    [ [0,1,2,3], [-0x0010,-0x0010], [0x1ffff,0x0010], [0x1ffff,0x10010], [0x0010, 0x1ffff]],
                    [],
