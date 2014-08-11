@@ -19,6 +19,8 @@
 #  It is the redistributor's or user's responsibility to comply with any
 #  applicable local, state, national or international regulations.
 #
+require_relative 'base_dictionary'
+
 module DcmDict
   module Dictionary
     using DcmDict::Refine::Internal::StringRefineInternal
@@ -26,32 +28,26 @@ module DcmDict
     UidIndexKey = [:uid_value, :uid_name]
 
     # Main class to handle uid data as dictionary
-    class UidDictionary
-
-      Semaphore = Mutex.new
+    class UidDictionary < BaseDictionary
 
       def initialize
-        map_source_data
-      end
-
-      def record_at(uid)
-        Semaphore.synchronize { atomic_record_at(uid) }
-      end
-
-      def feature_at(uid, key)
-        Semaphore.synchronize { atomic_feature_at(uid, key) }
+        super
       end
 
       private
       def map_source_data
-        @dict={}
+        @uid_dict={}
         SourceData::UidValuesData.each do |data|
           record = UidRecord.new(data)
           record.freeze
           UidIndexKey.each do |key|
-            @dict[data[key]] = record
+            @uid_dict[data[key]] = record
           end
         end
+      end
+
+      def freeze_source_data
+        @uid_dict.freeze
       end
 
       def atomic_feature_at(uid, key)
@@ -71,7 +67,7 @@ module DcmDict
       end
 
       def try_to_find_uid(uid)
-        @dict[uid] ||
+        @uid_dict[uid] ||
           try_to_find_unknown_uid(uid)
       end
 
@@ -82,6 +78,8 @@ module DcmDict
                         uid_type: :unknown })
       end
     end
+
     TheUidDictionary = UidDictionary.new.freeze
+
   end
 end

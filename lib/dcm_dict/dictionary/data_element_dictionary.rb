@@ -21,28 +21,20 @@
 #  It is the redistributor's or user's responsibility to comply with any
 #  applicable local, state, national or international regulations.
 #
+require_relative 'base_dictionary'
+
 module DcmDict
   module Dictionary
-    DataElementIndexKey = [:tag_ps, :tag_name, :tag_key, :tag_str, :tag_sym, :tag_ndm, :tag_ary]
+    DataElementIndexKey = [:tag_ps, :tag_name, :tag_key, :tag_str,
+                           :tag_sym, :tag_ndm, :tag_ary]
 
     # Main class to handle data element data as dictionary
-    class DataElementDictionary
+    class DataElementDictionary < BaseDictionary
       using DcmDict::Refine::Internal::ArrayRefineInternal
       using DcmDict::Refine::Internal::StringRefineInternal
 
-      Semaphore = Mutex.new
-
       def initialize
-        map_source_data
-        freeze_source_data
-      end
-
-      def record_at(tag)
-        Semaphore.synchronize { atomic_record_at(tag) }
-      end
-
-      def feature_at(tag, key)
-        Semaphore.synchronize { atomic_feature_at(tag, key) }
+        super
       end
 
       private
@@ -123,6 +115,8 @@ module DcmDict
       end
 
     end
+
     TheDataElementDictionary = DataElementDictionary.new.freeze
+
   end
 end
