@@ -38,6 +38,10 @@ module DcmDict
         Semaphore.synchronize { atomic_record_at(uid) }
       end
 
+      def feature_at(uid, key)
+        Semaphore.synchronize { atomic_feature_at(uid, key) }
+      end
+
       private
       def map_source_data
         @dict={}
@@ -48,6 +52,16 @@ module DcmDict
             @dict[data[key]] = record
           end
         end
+      end
+
+      def atomic_feature_at(uid, key)
+        try_to_find_feature(uid, key)
+      rescue Exception => ex
+        raise DictionaryError.new("Unable to find feature #{key.inspect} for uid '#{uid}' as #{uid.class} (#{ex.class}: #{ex.message.inspect})")
+      end
+
+      def try_to_find_feature(uid, key)
+        atomic_record_at(uid).send(key)
       end
 
       def atomic_record_at(uid)

@@ -27,7 +27,7 @@ module DcmDict
     module UidRefine
       DcmDict::Dictionary::UidMethod.each do |method|
         define_method(method) do
-          Dictionary::TheUidDictionary.record_at(self).send(method)
+          Dictionary::TheUidDictionary.feature_at(self, method)
         end
       end
     end

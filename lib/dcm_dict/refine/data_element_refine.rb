@@ -27,7 +27,7 @@ module DcmDict
     module DataElementRefine
       DcmDict::Dictionary::DataElementMethod.each do |method|
         define_method(method) do
-          Dictionary::TheDataElementDictionary.record_at(self).send(method)
+          Dictionary::TheDataElementDictionary.feature_at(self, method)
         end
       end
     end

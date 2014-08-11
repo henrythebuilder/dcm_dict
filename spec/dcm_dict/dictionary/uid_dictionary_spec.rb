@@ -31,6 +31,10 @@ describe DcmDict::Dictionary::UidDictionary do
         expect(obj).not_to be_nil, "#{key.inspect} > #{record[:uid_value]}"
         expect(obj).to be_a(DcmDict::Dictionary::UidRecord)
         expect(obj).to be_frozen
+        [:uid_value, :uid_name, :uid_type].each do |field|
+          feature = DcmDict::Dictionary::TheUidDictionary.feature_at(record[key], field)
+          expect(feature).to eq(record[field])
+        end
       end
     end
   end
@@ -46,6 +50,8 @@ describe DcmDict::Dictionary::UidDictionary do
       data.each do |key, value|
         field = obj.send(key)
         expect(field).to eq(value)
+        feature = DcmDict::Dictionary::TheUidDictionary.feature_at(uid, key)
+        expect(feature).to eq(value)
       end
     end
   end
@@ -56,6 +62,10 @@ describe DcmDict::Dictionary::UidDictionary do
     it "should raise exception for wrong value for uid as #{uid.inspect}" do
       expect{DcmDict::Dictionary::TheUidDictionary.record_at(uid)}.
         to raise_error(DcmDict::DictionaryError)
+      [:uid_value, :uid_name, :uid_type].each do |field|
+        expect { DcmDict::Dictionary::TheUidDictionary.feature_at(uid, field) }.
+          to raise_error(DcmDict::DictionaryError)
+      end
     end
   end
 
@@ -64,6 +74,8 @@ describe DcmDict::Dictionary::UidDictionary do
     uid  = '1.2.840.10008.1.2'
     obj = DcmDict::Dictionary::TheUidDictionary.record_at(uid)
     expect{obj.uid_value << 'aaa'}.to raise_error
+    expect { DcmDict::Dictionary::TheUidDictionary.
+             feature_at(tag, :tag_ps) << 'aaa' }.to raise_error
   end
 
   include_examples "Concurrency support",

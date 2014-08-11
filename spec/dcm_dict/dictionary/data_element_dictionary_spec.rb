@@ -33,6 +33,11 @@ describe DcmDict::Dictionary::DataElementDictionary do
         expect(obj).not_to be_nil, "#{key.inspect} > #{record[:tag_ps]}"
         expect(obj).to be_a(DcmDict::Dictionary::DataElementRecord)
         expect(obj).to be_frozen
+        [:tag_ps, :tag_name, :tag_key, :tag_vr, :tag_vm, :tag_str, :tag_sym, :tag_ndm, :tag_ary, :tag_multiple, :tag_note].each do |field|
+          feature = DcmDict::Dictionary::TheDataElementDictionary.
+                    feature_at(record[key], field)
+          expect(feature).to eq(record[field])
+        end
       end
     end
   end
@@ -47,6 +52,8 @@ describe DcmDict::Dictionary::DataElementDictionary do
       data.each do |key, value|
         field = obj.send(key)
         expect(field).to eq(value)
+        feature = DcmDict::Dictionary::TheDataElementDictionary.feature_at(tag, key)
+        expect(feature).to eq(value)
       end
     end
   end
@@ -58,6 +65,8 @@ describe DcmDict::Dictionary::DataElementDictionary do
       data.each do |key, value|
         field = obj.send(key)
         expect(field).to eq(value)
+        feature = DcmDict::Dictionary::TheDataElementDictionary.feature_at(tag, key)
+        expect(feature).to eq(value)
       end
 
     end
@@ -72,6 +81,11 @@ describe DcmDict::Dictionary::DataElementDictionary do
     it "with wrong tag request as tag = #{wrong_tag.inspect}" do
       expect {DcmDict::Dictionary::TheDataElementDictionary.record_at(wrong_tag)}.
         to raise_error(DcmDict::DictionaryError)
+      [:tag_ps, :tag_name, :tag_key, :tag_vr, :tag_vm, :tag_str, :tag_sym, :tag_ndm, :tag_ary, :tag_multiple, :tag_note].each do |field|
+        expect { DcmDict::Dictionary::TheDataElementDictionary.
+                 feature_at(wrong_tag, field) }.
+          to raise_error(DcmDict::DictionaryError)
+      end
     end
   end
 
@@ -80,6 +94,8 @@ describe DcmDict::Dictionary::DataElementDictionary do
     tag = '(0002,0010)'
     obj = DcmDict::Dictionary::TheDataElementDictionary.record_at(tag)
     expect{obj.tag_ps << 'aaa'}.to raise_error
+    expect { DcmDict::Dictionary::TheDataElementDictionary.
+             feature_at(tag, :tag_ps) << 'aaa' }.to raise_error
   end
 
   include_examples "Concurrency support",

@@ -49,7 +49,8 @@ RSpec.shared_examples "Concurrency support" do |key, dictionary, expected_values
         Thread.stop
         times_for_threads.times do |t|
           Thread.current[:obj] = dictionary.record_at(key)
-          expect(Thread.current[:obj].send(rnd_key)).to eq(rnd_val)
+          expect( Thread.current[:obj].send(rnd_key) ).to eq(rnd_val)
+          expect( dictionary.feature_at(key, rnd_key) ).to eq(rnd_val)
           Thread.pass
         end
       end

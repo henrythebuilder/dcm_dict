@@ -41,6 +41,10 @@ module DcmDict
         Semaphore.synchronize { atomic_record_at(tag) }
       end
 
+      def feature_at(tag, key)
+        Semaphore.synchronize { atomic_feature_at(tag, key) }
+      end
+
       private
       def map_source_data
         @standard_dict = {}
@@ -58,6 +62,17 @@ module DcmDict
       def freeze_source_data
         @standard_dict.freeze
         @multi_dict.freeze
+      end
+
+      def atomic_feature_at(tag, key)
+        try_to_find_feature(tag, key)
+      rescue Exception => ex
+        raise DictionaryError.new("Unable to find feature #{key.inspect} for tag '#{tag}' (#{ex.class}: #{ex.message.inspect})")
+
+      end
+
+      def try_to_find_feature(tag, key)
+        atomic_record_at(tag).send(key)
       end
 
       def atomic_record_at(tag)
