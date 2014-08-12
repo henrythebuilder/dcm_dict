@@ -28,8 +28,7 @@ module DcmDict
       using DcmDict::Refine::Internal::StringRefineInternal
 
       def self.make_group_length_data(tag)
-        make_detached_data(tag,
-                           { :tag_ps =>  "(#{tag.tag_group_str},0000)",
+        make_detached_data({ :tag_ps =>  "(#{tag.tag_group_str},0000)",
                              :tag_name => 'Group Length',
                              :tag_key =>  'GroupLength',
                              :tag_vr =>  'UL',
@@ -38,8 +37,7 @@ module DcmDict
       end
 
       def self.make_private_creator_data(tag)
-        make_detached_data(tag,
-                           { :tag_ps =>  tag.to_tag_str,
+        make_detached_data({ :tag_ps =>  tag.to_tag_str,
                              :tag_name => 'Private Creator',
                              :tag_key =>  'PrivateCreator',
                              :tag_vr =>  'LO',
@@ -48,8 +46,7 @@ module DcmDict
       end
 
       def self.make_unknown_data(tag)
-        make_detached_data(tag,
-                           { :tag_ps =>  tag.to_tag_str,
+        make_detached_data({ :tag_ps =>  tag.to_tag_str,
                              :tag_name => 'Unknown Tag',
                              :tag_key =>  'UnknownTag',
                              :tag_vr =>  'UN',
@@ -58,7 +55,7 @@ module DcmDict
       end
 
       private
-      def self.make_detached_data(tag, base_data)
+      def self.make_detached_data(base_data)
         DcmDict::XML::TagFieldData.new(Proc.new {|key| base_data[key]}).
           data_element_data
       end

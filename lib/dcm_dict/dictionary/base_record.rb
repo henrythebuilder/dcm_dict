@@ -21,26 +21,41 @@
 #  It is the redistributor's or user's responsibility to comply with any
 #  applicable local, state, national or international regulations.
 #
-require_relative 'base_record'
-
 module DcmDict
   module Dictionary
-    UidMethodMap = {uid_value: :uid_value,
-                    uid_name: :uid_name,
-                    uid_type: :uid_type }.freeze
 
-    UidMethod = UidMethodMap.flatten.uniq.freeze
-
-    class UidRecord < BaseRecord
+    class BaseRecord
       def initialize(data)
-        super
+        @data = {}
+        initialize_data(data)
       end
 
       private
-      def method_map
-        UidMethodMap
+      def method_missing(name, *args, &block)
+        name_as_sym = name.to_sym
+        return @data[method_map[name_as_sym]] if (method_map.has_key?(name_as_sym))
+        return @data[name_as_sym] if (@data.has_key?(name_as_sym))
+        super
       end
-    end
 
+      def respond_to_missing?(name, include_priv)
+        method_map.has_key?(name) || @data.has_key?(name)
+      end
+
+      def initialize_data(data)
+        @data = data
+        freeze_data
+      end
+
+      def freeze_data
+        @data.each {|key, value| value.freeze }
+        @data.freeze
+      end
+
+      def record_data
+        @data
+      end
+
+    end
   end
 end

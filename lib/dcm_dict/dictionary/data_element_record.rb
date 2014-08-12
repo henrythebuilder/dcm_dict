@@ -21,6 +21,8 @@
 #  It is the redistributor's or user's responsibility to comply with any
 #  applicable local, state, national or international regulations.
 #
+require_relative 'base_record'
+
 module DcmDict
   module Dictionary
     DataElementMethodMap = { :tag_multiple? => :tag_multiple,
@@ -34,46 +36,39 @@ module DcmDict
                              :tag_ps => :tag_ps,
                              :tag_sym => :tag_sym,
                              :tag_ndm => :tag_ndm,
-                             :tag_str => :tag_str }
+                             :tag_str => :tag_str }.freeze
 
     DataElementMethod = DataElementMethodMap.flatten.
-                        concat([:tag_group, :tag_element]).uniq
+                        concat([:tag_group, :tag_element]).uniq.freeze
 
     # Class to handle data element record from source dictionary data
-    class DataElementRecord
+    class DataElementRecord < BaseRecord
       using DcmDict::Refine::Internal::StringRefineInternal
       using DcmDict::Refine::Internal::ArrayRefineInternal
 
       def initialize(data)
-        initialize_data(data)
-      end
-
-      def tag_group
-        @data[:tag_ary].tag_group_num
-      end
-
-      def tag_element
-        @data[:tag_ary].tag_element_num
-      end
-
-      def method_missing(name, *args, &block)
-        name_as_sym = name.to_sym
-        return @data[DataElementMethodMap[name_as_sym]] if (DataElementMethodMap.has_key?(name_as_sym))
-        return @data[name_as_sym] if (@data.has_key?(name_as_sym))
         super
       end
 
+      def tag_group
+        record_data[:tag_ary].tag_group_num
+      end
+
+      def tag_element
+        record_data[:tag_ary].tag_element_num
+      end
+
       def extract_multiple_tag_record(tag)
-        if ( @data[:tag_multiple] && match_tag?(tag) )
-          DataElementRecord.new( @data.merge( { tag_str: tag.to_tag_str,
-                                                tag_ndm: tag.to_tag_ndm,
-                                                tag_ary: tag.to_tag_ary } ))
+        if ( record_data[:tag_multiple] && match_tag?(tag) )
+          DataElementRecord.new( record_data.merge( { tag_str: tag.to_tag_str,
+                                                      tag_ndm: tag.to_tag_ndm,
+                                                      tag_ary: tag.to_tag_ary } ))
         end
       end
 
       private
-      def respond_to_missing?(name, include_priv)
-        DataElementMethodMap.has_key?(name) || @data.has_key?(name)
+      def method_map
+        DataElementMethodMap
       end
 
       def match_tag?(tag)
@@ -88,16 +83,6 @@ module DcmDict
       def tag_pattern
         gs, es = self.tag_ps.gsub(/[\(|\)]/, '').gsub(/[xX]/,"[0-9A-Fa-f]").split(',')
         ["^\\(#{gs}\\,#{es}\\)$", "^#{gs}#{es}$" ]
-      end
-
-      def initialize_data(data)
-        @data = data
-        freeze_data
-      end
-
-      def freeze_data
-        @data.each {|key, value| value.freeze }
-        @data.freeze
       end
 
     end
