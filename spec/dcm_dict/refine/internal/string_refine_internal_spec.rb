@@ -177,4 +177,38 @@ describe "String refinement (internal)" do
       expect(string.uid_value?).to eq(expected_as_uid)
     end
   end
+
+  describe "should check for group-length tag" do
+    {
+      "00100020" => false,
+      "(0010,0020)" => false,
+      "00100000" => true,
+      "(0010,0000)" => true,
+      "00000002" => false,
+      "(0000,0002)" => false,
+      "00000000" => true,
+      "(0000,0000)" => true
+    }.each do |tag, value|
+      it "for #{tag.inspect}" do
+        expect(tag.group_length_tag?).to eq(value)
+      end
+    end
+  end
+
+  describe "should check for private-creator tag" do
+    {
+      '00100010' => false,
+      '(0010,0010)' => false,
+      '00110010' => true,
+      '(0011,0010)' => true,
+      '00110110' => false,
+      '(0011,0110)' => false,
+      '00282468' => false,
+      '(0028,2468)' => false
+    }.each do |tag, value|
+      it "for #{tag.inspect}" do
+        expect(tag.private_creator_tag?).to eq(value)
+      end
+    end
+  end
 end

@@ -21,6 +21,9 @@
 #  It is the redistributor's or user's responsibility to comply with any
 #  applicable local, state, national or international regulations.
 #
+
+FrozenStringExMessage = (RUBY_ENGINE == 'rbx') ? "can't modify frozen instance of String" : "can't modify frozen String"
+
 RSpec.shared_examples "Record handle methods correctly" do |obj, data|
   it "Handle methods correctly" do
     data.each do |key, expected_val|
@@ -96,15 +99,10 @@ RSpec.shared_examples "Dictionary Data not modifiable" do |record_key, key, dict
     expect(dictionary).to be_frozen
     obj = dictionary.record_at(record_key)
     expect(obj).to be_frozen
-    ex_msg = if (RUBY_ENGINE == 'rbx')
-               "can't modify frozen instance of String"
-             else
-               "can't modify frozen String"
-             end
     expect{ eval("obj.#{key} << 'aaa'") }.
-      to raise_error(RuntimeError, ex_msg)
+      to raise_error(RuntimeError, FrozenStringExMessage)
     expect{ eval("dictionary.feature_at('#{record_key}', #{key.inspect}) << 'aaa'") }.
-      to raise_error(RuntimeError, ex_msg)
+      to raise_error(RuntimeError, FrozenStringExMessage)
   end
 end
 

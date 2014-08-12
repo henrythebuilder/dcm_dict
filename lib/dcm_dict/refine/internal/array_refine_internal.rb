@@ -57,6 +57,14 @@ module DcmDict
             [tag_group_num, tag_element_num]
           end
 
+          def group_length_tag?
+            tag_element_num == 0
+          end
+
+          def private_creator_tag?
+            (tag_group_num.odd? && (tag_element_num < 0xff))
+          end
+
           private
           def check_dicom_tag
             return true if ( (self.size==2) &&

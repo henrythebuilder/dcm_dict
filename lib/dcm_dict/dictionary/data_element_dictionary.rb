@@ -91,19 +91,17 @@ module DcmDict
       end
 
       def try_to_find_group_length_tag(tag)
-        if (tag.tag_element_num == 0)
+        if (tag.group_length_tag?)
           return DataElementRecord.new(
                    SourceData::DetachedData.make_group_length_data(tag))
         end
-        nil
       end
 
       def try_to_find_private_creator_tag(tag)
-        if ( tag.tag_group_num.odd? && (tag.tag_element_num < 0xff) )
+        if ( tag.private_creator_tag? )
           return DataElementRecord.new(
                    SourceData::DetachedData.make_private_creator_data(tag))
         end
-        nil
       end
 
       def try_to_find_unknown_tag(tag)

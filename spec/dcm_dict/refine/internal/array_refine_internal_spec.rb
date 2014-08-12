@@ -69,4 +69,30 @@ describe "Array Refinement" do
     end
   end
 
+  describe "should check for group-length tag" do
+    {
+      [0x0010, 0x0020] => false,
+      [0x0010, 0x0000] => true,
+      [0x0000, 0x0002] => false,
+      [0x0000, 0x0000] => true
+    }.each do |tag, value|
+      it "for #{tag.inspect}" do
+        expect(tag.group_length_tag?).to eq(value)
+      end
+    end
+  end
+
+  describe "should check for private-creator tag" do
+    {
+      [0x0010, 0x0010] => false,
+      [0x0011, 0x0010] => true,
+      [0x0011, 0x0110] => false,
+      [0x0028, 0x2468] => false
+    }.each do |tag, value|
+      it "for #{tag.inspect}" do
+        expect(tag.private_creator_tag?).to eq(value)
+      end
+    end
+  end
+
 end

@@ -89,6 +89,14 @@ module DcmDict
               (/^(([0-9][\.])|([1-9][0-9]*[\.]))*(([0-9])|([1-9][0-9]*))$/.match(self) != nil)
           end
 
+          def group_length_tag?
+            tag_element_num == 0
+          end
+
+          def private_creator_tag?
+            (tag_group_num.odd? && (tag_element_num < 0xff))
+          end
+
           private
           def check_dicom_tag
             return true if (/^[0-9|A-F]{8}$/.match(self) ||
