@@ -38,11 +38,8 @@ module DcmDict
       def map_source_data
         @uid_dict={}
         SourceData::UidValuesData.each do |data|
-          record = UidRecord.new(data)
-          record.freeze
-          UidIndexKey.each do |key|
-            @uid_dict[data[key]] = record
-          end
+          record = UidRecord.new(data).freeze
+          UidIndexKey.each { |key| @uid_dict[data[key]] = record }
         end
       end
 

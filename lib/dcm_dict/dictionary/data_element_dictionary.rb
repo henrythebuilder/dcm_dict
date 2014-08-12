@@ -42,11 +42,8 @@ module DcmDict
         @standard_dict = {}
         @multi_dict = []
         SourceData::DataElementsData.each do |data|
-          record = DataElementRecord.new(data)
-          record.freeze
-          DataElementIndexKey.each do |key|
-            @standard_dict[data[key]] = record
-          end
+          record = DataElementRecord.new(data).freeze
+          DataElementIndexKey.each { |key| @standard_dict[data[key]] = record }
           @multi_dict << record if record.tag_multiple?
         end
       end
@@ -75,8 +72,8 @@ module DcmDict
 
       def try_to_find(tag)
         try_to_find_standard_tag(tag) ||
-          try_to_find_multiple_tag(tag) ||
           try_to_find_group_length_tag(tag) ||
+          try_to_find_multiple_tag(tag) ||
           try_to_find_private_creator_tag(tag) ||
           try_to_find_unknown_tag(tag)
       end

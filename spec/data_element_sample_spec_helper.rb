@@ -103,6 +103,7 @@ module DataElementSampleSpecHelper
       [0x1010,0xa1b2] => { tag_ps: '(1010,XXXX)', tag_name: "Zonal Map", tag_key: 'ZonalMap', tag_vr: [:US], tag_vm: ["1-n"], tag_str: '(1010,A1B2)', tag_sym: :zonal_map, tag_ndm: '1010A1B2', tag_ary: [0x1010, 0xa1b2], tag_multiple: true, tag_note: 'RET'},
       '(1010,A1B2)' => { tag_ps: '(1010,XXXX)', tag_name: "Zonal Map", tag_key: 'ZonalMap', tag_vr: [:US], tag_vm: ["1-n"], tag_str: '(1010,A1B2)', tag_sym: :zonal_map, tag_ndm: '1010A1B2', tag_ary: [0x1010, 0xa1b2], tag_multiple: true, tag_note: 'RET'},
       '1010A1B2' => { tag_ps: '(1010,XXXX)', tag_name: "Zonal Map", tag_key: 'ZonalMap', tag_vr: [:US], tag_vm: ["1-n"], tag_str: '(1010,A1B2)', tag_sym: :zonal_map, tag_ndm: '1010A1B2', tag_ary: [0x1010, 0xa1b2], tag_multiple: true, tag_note: 'RET'},
+      '10100000' => { tag_ps: '(1010,0000)', tag_name: 'Group Length', tag_key: 'GroupLength', tag_vr: [:UL], tag_vm: ["1"], tag_str: '(1010,0000)', tag_sym: :group_length, tag_ndm: '10100000', tag_ary: [0x1010, 0x0000], tag_multiple: false, tag_note: 'Dummy Record'},
     }
   end
 
