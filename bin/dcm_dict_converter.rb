@@ -133,7 +133,7 @@ class DcmDictConverter
       Tempfile.create('dcmps') do |xml_file|
         pull_standard_draft(url, xml_file)
         extract_data_element(xml_file, table_to_map) do |data|
-          print_out(DcmDict::Encoder::DataToCode.data_element_data_to_code(data, indent: 6))
+          print_out(DcmDict::Encoder::DataToCode.data_element_data_to_code(data, 6))
           print_out("\r\n")
           trace('.')
         end
@@ -155,7 +155,7 @@ class DcmDictConverter
       Tempfile.create('dcmps') do |xml_file|
         pull_standard_draft(url, xml_file)
         extract_uid(xml_file, table_to_map) do |data|
-          print_out(DcmDict::Encoder::DataToCode.uid_data_to_code(data, indent: 6))
+          print_out(DcmDict::Encoder::DataToCode.uid_data_to_code(data, 6))
           print_out("\r\n")
           trace('.')
         end
