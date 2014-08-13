@@ -50,14 +50,17 @@ module DcmDict
         super
       end
 
+      # Group of tag
       def tag_group
         record_data[:tag_ary].tag_group_num
       end
 
+      # Element of tag
       def tag_element
         record_data[:tag_ary].tag_element_num
       end
 
+      # Extract data from 'multiple tag' record using +tag+
       def extract_multiple_tag_record(tag)
         if ( record_data[:tag_multiple] && match_tag?(tag) )
           DataElementRecord.new( record_data.merge( { tag_str: tag.to_tag_str,

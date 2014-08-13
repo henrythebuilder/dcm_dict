@@ -23,6 +23,7 @@
 #
 module DcmDict
 
+  # Dictionary Exception class
   class DictionaryError < StandardError
   end
 

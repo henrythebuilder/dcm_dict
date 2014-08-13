@@ -24,6 +24,7 @@
 module DcmDict
   module Dictionary
 
+    # Base class for dictionary record element
     class BaseRecord
       def initialize(data)
         @data = {}

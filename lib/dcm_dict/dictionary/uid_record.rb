@@ -31,6 +31,7 @@ module DcmDict
 
     UidMethod = UidMethodMap.flatten.uniq.freeze
 
+    # Class to handle uid record from source dictionary data
     class UidRecord < BaseRecord
       def initialize(data)
         super

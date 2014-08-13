@@ -27,30 +27,37 @@ module DcmDict
   module XML
 
     module RexmlTool
+
+      # Extract data element data from a table row using +xml_tr_string+ as source string
       def self.extract_data_element_field_from_xml_tr(xml_tr_string)
         nodeset = extract_rexml_nodeset(xml_tr_string)
         extract_data_element_field_from_tr_set(nodeset)
       end
 
+      # Extract data element data from xml table row using +trset+ (NodeSet) as source
       def self.extract_data_element_field_from_tr_set(trset)
         proc = tag_field_extract_proc(trset)
         TagFieldData.new(proc).data_element_data
       end
 
+      # Extract uid data from a table row using +xml_tr_string+ as source string
       def self.extract_uid_field_from_xml_tr(xml_tr_string)
         nodeset = extract_rexml_nodeset(xml_tr_string)
         extract_uid_field_from_tr_set(nodeset)
       end
 
+      # Extract uid data from a table row using +trset+ (XML Element) as source
       def self.extract_uid_field_from_tr_set(trset)
         proc = uid_field_extract_proc(trset)
         UidFieldData.new(proc).uid_data
       end
 
+      # Create XML root object from xml source string +xml_string+
       def self.create_xml_doc(xml_string)
         REXML::Document.new(xml_string)
       end
 
+      # Calls the given block from +doc+ once for each 'table row' identified by +xpath+
       def self.each_tr_set(doc, xpath)
         alltr = REXML::XPath.match(doc, xpath)
         alltr.each do |tr|

@@ -24,6 +24,7 @@
 module DcmDict
   module Refine
 
+    # Module to manage uid record data
     module UidRefine
       DcmDict::Dictionary::UidMethod.each do |method|
         define_method(method) do

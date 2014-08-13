@@ -26,12 +26,14 @@ module DcmDict
     module DataToCode
       using DcmDict::Refine::Internal::ArrayRefineInternal
 
+      # Convert data element +data+ to Ruby code using +indent+ spaces indentation
       def self.data_element_data_to_code(data, indent=4)
         indent = 4 unless indent
         tag_ary_str = "[0x#{data[:tag_ary].tag_group_str},0x#{data[:tag_ary].tag_element_str}]"
         "#{' '*indent}{ tag_ps: '#{data[:tag_ps]}', tag_name: \"#{data[:tag_name]}\", tag_key: '#{data[:tag_key]}', tag_vr: #{data[:tag_vr]}, tag_vm: #{data[:tag_vm]}, tag_str: '#{data[:tag_str]}', tag_sym: #{data[:tag_sym].inspect}, tag_ndm: '#{data[:tag_ndm]}', tag_ary: #{tag_ary_str}, tag_multiple: #{data[:tag_multiple].inspect}, tag_note: '#{data[:tag_note]}'},"
       end
 
+      # Source data element header
       def self.data_element_header
         <<END
 module DcmDict
@@ -40,6 +42,7 @@ module DcmDict
 END
       end
 
+      # Source data element footer
       def self.data_element_footer
         <<END
     ]
@@ -48,6 +51,7 @@ end
 END
       end
 
+      # Source uid header
       def self.uid_header
         <<END
 module DcmDict
@@ -56,6 +60,7 @@ module DcmDict
 END
       end
 
+      # Source uid footer
       def self.uid_footer
         <<END
     ]
@@ -64,6 +69,7 @@ end
 END
       end
 
+      # Convert uid +data+ to Ruby code using +indent+ spaces indentation
       def self.uid_data_to_code(data, indent=4)
         indent = 4 unless indent
         "#{' '*indent}{ uid_value: '#{data[:uid_value]}', uid_name: \"#{data[:uid_name]}\", uid_type: #{data[:uid_type].inspect}},"

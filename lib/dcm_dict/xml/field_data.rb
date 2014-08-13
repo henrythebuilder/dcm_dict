@@ -23,9 +23,12 @@
 #
 module DcmDict
   module XML
+
+    # Base class to manage xml data
     class FieldData
       using DcmDict::Refine::Internal::StringRefineInternal
 
+      # Initialize object using +extract_proc+ as proc to extract data from xml element
       def initialize(extract_proc)
         @extract_proc = extract_proc
       end

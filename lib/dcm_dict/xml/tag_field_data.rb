@@ -23,17 +23,20 @@
 #
 module DcmDict
   module XML
-    MultiFieldSeparator = ' or '
-    DefaultMultiTagValue = '2'
+    MultiFieldSeparator = ' or '.freeze
+    DefaultMultiTagValue = '2'.freeze
 
+    # Class to handle data element data
     class TagFieldData < FieldData
       using DcmDict::Refine::Internal::StringRefineInternal
       using DcmDict::Refine::Internal::HashRefineInternal
 
+      # Initialize object using +extract_proc+ as proc to extract data from xml element
       def initialize(extract_proc)
         super
       end
 
+      # Extract and build data element data
       def data_element_data
         extract_base_data()
         @data.check_base_data_tag_field!

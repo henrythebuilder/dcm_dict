@@ -27,18 +27,21 @@ module DcmDict
       module HashRefineInternal
 
         refine Hash do
+          # Check/update content for data tag field
           def check_base_data_tag_field!
             check_tag_ps!
             check_placeholder_data!
             self
           end
 
+          # Check for mandatory :tag_ps key
           def check_tag_ps!
             tag_ps = self[:tag_ps]
             raise "Missing tag_ps field" if tag_ps.nil_or_empty?
             tag_ps.upcase!
           end
 
+          # Check for place holder tag data
           def check_placeholder_data!
             # PS3.5:
             # For some Data Elements, no Name or Keyword or VR or VM is specified;

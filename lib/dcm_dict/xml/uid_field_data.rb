@@ -23,13 +23,17 @@
 #
 module DcmDict
   module XML
+
+    # Class to handle uid data
     class UidFieldData < FieldData
       using DcmDict::Refine::Internal::StringRefineInternal
 
+      # Initialize object using +extract_proc+ as proc to extract data from xml element
       def initialize(extract_proc)
         super
       end
 
+      # Extract and build uid data
       def uid_data
         extract_base_data
       end

@@ -24,6 +24,7 @@
 module DcmDict
   module Refine
 
+    # Module to manage data element record data
     module DataElementRefine
       DcmDict::Dictionary::DataElementMethod.each do |method|
         define_method(method) do

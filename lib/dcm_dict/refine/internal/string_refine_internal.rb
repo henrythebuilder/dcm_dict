@@ -29,13 +29,13 @@ module DcmDict
 
         refine String do
 
-          # remove zero width spaces -> "​"
+          # Remove zero width spaces (-> "​") and leading/trailing whitespace
           def dcm_unspace
             zero_width_space = "\u200B"
             self.gsub(zero_width_space, '').strip
           end
 
-          # 'PatientName' -> :patient_name
+          # Convert tag key to tag symbol -> 'PatientName' -> :patient_name
           def tag_key_to_sym
             self.gsub('IDs', 'IDS').gsub('3D', '_3D').
               gsub(/([A-Z])([a-z])/,'_\1\2').
@@ -45,54 +45,61 @@ module DcmDict
               to_sym
           end
 
+          # Tag group as number
           def tag_group_num
             tag_group_str.hex
           end
 
+          # Tag element as number
           def tag_element_num
             tag_element_str.hex
           end
 
+          # Tag group as string
           def tag_group_str
             self.to_tag_ndm[0..3]
           end
 
+          # Tag element as string
           def tag_element_str
             self.to_tag_ndm[4..7]
           end
 
-          # (0010,0010) -> '00100010'
-          #  00100010   -> '00100010'
+          # Tag as Native Dicom Model tag ('(0010,0010)' -> '00100010')
           def to_tag_ndm
             check_dicom_tag
             self.gsub(/[\(|\),]/, '').upcase
           end
 
-          # (0010,0010) -> [0x0010, 0x0010]
+          # Tag as array ('(0010,0010)' -> [0x0010, 0x0010])
           def to_tag_ary
             [tag_group_num, tag_element_num]
           end
 
-          # '00100010', (0010,0010) -> (0010,0010)
+          # Tag as string ('00100010'/'(0010,0010)' -> '(0010,0010)')
           def to_tag_str
             "(#{tag_group_str},#{tag_element_str})"
           end
 
+          # Convert uid type to symbol
           def uid_type_to_sym
             self.gsub(/[ -\/]/, '_').
               downcase.
               to_sym
           end
 
+          # Check for valid uid value
           def uid_value?
             (self.length <= 64) &&
               (/^(([0-9][\.])|([1-9][0-9]*[\.]))*(([0-9])|([1-9][0-9]*))$/.match(self) != nil)
           end
 
+          # Check for group length tag
           def group_length_tag?
             tag_element_num == 0
           end
 
+          # Check for private creator tag
           def private_creator_tag?
             (tag_group_num.odd? && (tag_element_num < 0xff))
           end

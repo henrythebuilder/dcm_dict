@@ -27,40 +27,49 @@ module DcmDict
       module ArrayRefineInternal
 
         refine Array do
+          # Tag group as number
           def tag_group_num
             check_dicom_tag
             self[0]
           end
 
+          # Tag element as number
           def tag_element_num
             check_dicom_tag
             self[1]
           end
 
+          # Tag group as string
           def tag_group_str
             tag_group_num.to_s(16).rjust(4, '0').upcase()
           end
 
+          # Tag element as string
           def tag_element_str
             tag_element_num.to_s(16).rjust(4, '0').upcase()
           end
 
+          # Tag as string
           def to_tag_str
             "(#{tag_group_str},#{tag_element_str})"
           end
 
+          # Tag as Native Dicom Model tag
           def to_tag_ndm
             "#{tag_group_str}#{tag_element_str}"
           end
 
+          # Tag as array
           def to_tag_ary
             [tag_group_num, tag_element_num]
           end
 
+          # Check for group length tag
           def group_length_tag?
             tag_element_num == 0
           end
 
+          # Check for private creator tag
           def private_creator_tag?
             (tag_group_num.odd? && (tag_element_num < 0xff))
           end

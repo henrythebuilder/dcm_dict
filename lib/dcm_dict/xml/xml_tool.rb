@@ -28,6 +28,7 @@ require_relative 'nokogiri_tool'
 module DcmDict
   module XML
 
+    # Main tool to handle xml data for uid and data element
     module XmlTool
       @@xml_tool = XML.nokogiri_enable? ? NokogiriTool : RexmlTool
 

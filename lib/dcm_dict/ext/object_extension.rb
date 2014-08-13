@@ -24,7 +24,10 @@
 module DcmDict
   module Ext
 
+    # Extension for object class
     class ::Object
+
+      # Check for nil or 'empty' object
       def nil_or_empty?
         return empty? if(respond_to?(:empty?))
         nil?

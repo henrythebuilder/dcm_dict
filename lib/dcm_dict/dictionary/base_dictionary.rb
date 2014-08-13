@@ -24,6 +24,7 @@
 module DcmDict
   module Dictionary
 
+    # Base class for specific dictionary
     class BaseDictionary
       def initialize
         @semaphore = Mutex.new
@@ -31,10 +32,12 @@ module DcmDict
         freeze_source_data
       end
 
+      # Find record data using +key+
       def record_at(key)
         @semaphore.synchronize { atomic_record_at(key) }
       end
 
+      # Find single feature identified by +field+ for record indexed by +key+
       def feature_at(key, field)
         @semaphore.synchronize { atomic_feature_at(key, field) }
       end

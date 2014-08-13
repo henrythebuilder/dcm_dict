@@ -27,6 +27,7 @@ module DcmDict
       using DcmDict::Refine::Internal::ArrayRefineInternal
       using DcmDict::Refine::Internal::StringRefineInternal
 
+      # Make group length data using +tag+
       def self.make_group_length_data(tag)
         make_detached_data({ :tag_ps =>  "(#{tag.tag_group_str},0000)",
                              :tag_name => 'Group Length',
@@ -36,6 +37,7 @@ module DcmDict
                              :tag_note =>  'Dummy Record'})
       end
 
+      # Make private creator data using +tag+
       def self.make_private_creator_data(tag)
         make_detached_data({ :tag_ps =>  tag.to_tag_str,
                              :tag_name => 'Private Creator',
@@ -45,6 +47,7 @@ module DcmDict
                              :tag_note =>  'Dummy Record'})
       end
 
+      # Make unknow data element data using +tag+
       def self.make_unknown_data(tag)
         make_detached_data({ :tag_ps =>  tag.to_tag_str,
                              :tag_name => 'Unknown Tag',
