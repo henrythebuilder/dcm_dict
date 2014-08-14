@@ -27,12 +27,6 @@ unless respond_to? :refine
 end
 
 unless 1.respond_to?(:bit_length)
-  warn "warning: no Fixnum#bit_length method detected -> define method bit_length for Fixnum class"
-  class ::Fixnum
-    def bit_length
-      return 0 if self.zero?
-      num = (self < 0) ? -self : self+1
-      Math.log2(num).ceil
-    end
-  end
+  warn "warning: no Fixnum#bit_length method detected -> try to include 'backports' gem"
+  require 'backports/2.1.0/fixnum'
 end
