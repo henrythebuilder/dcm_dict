@@ -76,7 +76,7 @@ end
 same way for Array and Symbol class.
 *The main way remains the **Refiniments***.
 
-**Rubies compatibility**: at this moment the other considered rubies is [Rubinius][4]. In order to try to ensure a minimum compatibility there is a file under *lib/dcm_dict/rubies/* called *rb_ext.rb* able to *mask*/*simulates* the refinements through [refine gem][5] and add the *bit_length* method to *Fixnum* class.
+**Rubies compatibility**: at this moment the other considered rubies is [Rubinius][4]. In order to try to ensure a minimum compatibility there is a file under *lib/dcm_dict/rubies/* called *rb_ext.rb* able to *mask*/*simulates* the refinements through [refine gem][5] and add the *bit_length* method to *Fixnum* class through [backports gem][6].
 This sort of extension is not loaded by default but only into *spec files*, see *spec_helper.rb* and *rb_ext.rb* for details.
 
 ## Data Element data in detail
@@ -283,3 +283,4 @@ Main source code repository on github at [henrythebuilder/dcm_dict](https://gith
 [3]: http://nokogiri.org/ "Nokogiri"
 [4]: http://rubini.us/ "Rubinius"
 [5]: https://rubygems.org/gems/refine "Refine gem at RubyGems.org"
+[6]: https://rubygems.org/gems/backports "Backports gem at RubyGems.org"
