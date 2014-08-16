@@ -4,6 +4,7 @@
 # Why *DcmDict*
 With the latest releases in this year (2014) DICOM documents are available in different format including one particularly interesting, the *DocBook* XML version.
 As written by D. Clunie on [its web site][2]:
+
 > "... other formats (such as DocBook, HTML, Word and ODT) are also made available for the convenience of implementors who may need to extract machine-readable content, ..."
 
 This is great news for anyone involved in the study of the standard !
@@ -12,6 +13,7 @@ Starting from this thing was born the idea of trying to automate the extraction 
 
 # *DcmDict* features
 The library involve *String*, *Array* and *Symbol* class as *refinements* to access to DICOM information. In this way is possible to *play* with the 'Patient's Birth Date' tag defined as (0010,0030) by:
+
 ```ruby
 > "(0010,0030)".tag_name
  => "Patient's Birth Date"
@@ -32,7 +34,9 @@ The library involve *String*, *Array* and *Symbol* class as *refinements* to acc
 > "Patient's Birth Date".tag_element
  => 48
 ```
+
 as well for UIDs
+
 ```ruby
 > '1.2.840.10008.1.2'.uid_name
  => "Implicit VR Little Endian: Default Transfer Syntax for DICOM"
@@ -66,12 +70,14 @@ That's it.
 **Note**: It is possible to use also the the *monkey patching* way, this is a *deprecated* utilization but possible, and, may be, useful technique in certain contexts or for some particular test. For the *monkey patching* is possible to include some specific *common modules* into the class you want to use as "keyword": there are two base modules *DcmDict::Refine::DataElementRefine* and *DcmDict::Refine::UidRefine*.
 
 For example in the String class will have the code:
+
 ```ruby
 class String
   include DcmDict::Refine::DataElementRefine
   include DcmDict::Refine::UidRefine
 end
 ```
+
 *The main way remains **Ruby Refinements***.
 
 **Rubies compatibility**: at this moment the other considered rubies is only [Rubinius][4] (v2.2.10). In order to try to ensure a minimum compatibility there is a file under *lib/dcm_dict/rubies/* called *rb_ext.rb* able to *mask*/*simulates* the refinements through [refine gem][5] and add the required *bit_length* method to *Fixnum* class through [backports gem][6].
@@ -98,8 +104,7 @@ The main methods supported are:
 |**tag_ndm** | tag as in Native DICOM Model|String|
 |**tag_str** | tag as string (similar to tag_ps)|String|
 |**tag_note** | tag note|String|
-|**tag_multiple?** | is a multiple tag ? |boolean|
-||useful for 'multi tag' attribute|
+|**tag_multiple?** | is a multiple tag ? |boolean|(useful for 'multi tag' attribute)|
 
 each data element is indexed by these fields:
 
@@ -194,11 +199,12 @@ As an example for this data element the default tag in array form is [0x0020,0x3
  => :source_image_ids
 > '00203120'.tag_key
  => "SourceImageIDs"
- > [0x0020,0x3138].tag_vr
+> [0x0020,0x3138].tag_vr
  => [:CS]
- > '(0020,3144)'.tag_note
+> '(0020,3144)'.tag_note
  => "RET"
 ```
+
 and so on.
 
 ## UID data in detail
@@ -236,6 +242,7 @@ For this uid all fields are expressed as:
 |**uid_type**  | :sop_class|
 
 ### example:
+
 ```ruby
 > "Verification SOP Class".uid_value
  => "1.2.840.10008.1.1"
@@ -268,6 +275,7 @@ Check the file for other details.
 ## What's next
 The main idea is that *dictionary* should include only fixed data defined in the DICOM standard to encode and then make it available in easy way.
 There are many possible *candidates* for inclusion in the *dictionary*, here are some *"ideas"*:
+
 - Directory Record type data
 - Well-known Frames of Reference UID Values
 - Context Group UID Values
