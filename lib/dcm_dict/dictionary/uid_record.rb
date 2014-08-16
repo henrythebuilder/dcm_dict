@@ -26,6 +26,7 @@ require_relative 'base_record'
 module DcmDict
   module Dictionary
     UidMethodMap = {uid_value: :uid_value,
+                    uid: :uid_value,
                     uid_name: :uid_name,
                     uid_type: :uid_type }.freeze
 

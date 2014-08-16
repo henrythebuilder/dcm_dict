@@ -32,6 +32,7 @@ describe DcmDict::Dictionary::UidRecord do
     it "Handle Data Element Data correctly" do
       ur = DcmDict::Dictionary::UidRecord.new(data.dup)
       expect(ur.uid_value).to eq(data[:uid_value])
+      expect(ur.uid).to eq(data[:uid_value])
       expect(ur.uid_name).to eq(data[:uid_name])
       expect(ur.uid_type).to eq(data[:uid_type])
     end
