@@ -45,7 +45,7 @@ as well for UIDs
 let see all features in detail:
 
 ## Library usage
-The library involve **Refinements** so use it is simple, it is necessary to include the specific *using directive*:
+The library involve **Ruby Refinements** so use it is simple, it is necessary to include the specific *using directive*:
 
 ```ruby
 using DcmDict::Refine::StringRefine
@@ -63,7 +63,7 @@ for the Symbol object.
 
 That's it.
 
-**Note**: It is possible to use also the the *monkey patching* way, this is a *deprecated* utilization but possible, and, may be, useful technique in certain contexts or for some particular test. For the *monkey patching* is possible to include some specific *common modules* into the class you want to use: there are two base modules *DcmDict::Refine::DataElementRefine* and *DcmDict::Refine::UidRefine*.
+**Note**: It is possible to use also the the *monkey patching* way, this is a *deprecated* utilization but possible, and, may be, useful technique in certain contexts or for some particular test. For the *monkey patching* is possible to include some specific *common modules* into the class you want to use as "keyword": there are two base modules *DcmDict::Refine::DataElementRefine* and *DcmDict::Refine::UidRefine*.
 
 For example in the String class will have the code:
 ```ruby
@@ -72,8 +72,7 @@ class String
   include DcmDict::Refine::UidRefine
 end
 ```
-same way for Array and Symbol class.
-*The main way remains the **Refinements***.
+*The main way remains **Ruby Refinements***.
 
 **Rubies compatibility**: at this moment the other considered rubies is only [Rubinius][4] (v2.2.10). In order to try to ensure a minimum compatibility there is a file under *lib/dcm_dict/rubies/* called *rb_ext.rb* able to *mask*/*simulates* the refinements through [refine gem][5] and add the required *bit_length* method to *Fixnum* class through [backports gem][6].
 This sort of extension is not loaded by default but only into *spec files* for the *'rbx' Ruby Engine*. See *spec_helper.rb* and *rb_ext.rb* for details.
@@ -85,9 +84,9 @@ For these objects is possible to access to Tag (group/element), Name, Keyword, V
 
 The main methods supported are:
 
-|Method  | Note| Type|
-|:------|:------------:|:---:|
-|**tag**     | tag as Array| Array of two Fixnum|
+|Method  | Note| Type||
+|:------|:------------:|:---:|:---:|
+|**tag**     | tag as Array| Array of two Fixnum|(alias of *tag_ary*)|
 |**tag_name**    | name of tag| String|
 |**tag_keyword** | keyword| String|
 |**tag_key** | keyword| String|
@@ -96,11 +95,11 @@ The main methods supported are:
 |**tag_ps**  | tag as string (as standard doc)| String|
 |**tag_ary** | tag as Array|Array of two Fixnum|
 |**tag_sym** | tag as Symbol|Symbol|
-|**tag_ndm** | tag as in Native DICOM Model|String
+|**tag_ndm** | tag as in Native DICOM Model|String|
 |**tag_str** | tag as string (similar to tag_ps)|String|
 |**tag_note** | tag note|String|
 |**tag_multiple?** | is a multiple tag ? |boolean|
-||useful for 'multi tag' attribute||
+||useful for 'multi tag' attribute|
 
 each data element is indexed by these fields:
 
@@ -120,7 +119,7 @@ Consider the case of the tag (0010,1005) (*Patient's Birth Name*), the primary f
 
 - As String key you may use the standard tag format **'(0010,1005)'**, the tag name **'Patient's Birth Name'**, the tag keyword **'PatientBirthName'** or the Native DICOM Format tag **'00101005'**
 - As Array key you may use the numeric array **[0x0010,0x1005]**
-- As Symbol key you may use the **:patient_birth_name** symbol
+- As Symbol key you may use **:patient_birth_name**
 
 ### example:
 Consider the previous case of tag (0010,1005), the code:
@@ -209,8 +208,9 @@ Any UID features can be accessed from a *String* object.
 For these objects is possible to access to value, name and type values for any single uid.
 Main methods supported are:
 
-|Method  | Note| Type|
-|:------|:------------:|:---:|
+|Method  | Note| Type||
+|:------|:------------:|:---:|:---:|
+|**uid**     | value of uid| String|(alias of *uid_value*)|
 |**uid_value**     | value of uid| String|
 |**uid_name**    | name of uid| String|
 |**uid_type** | type of uid| Symbol|
@@ -224,10 +224,13 @@ each uid is indexed by:
 
 From these fields is possible to access to all uid informations.
 Consider the case of the uid *1.2.840.10008.1.1* (*Verification SOP Class*), the primary fields are the strings **'1.2.840.10008.1.1'** and **"Verification SOP Class"**.
+- As String key you may use the standard value **'1.2.840.10008.1.1'** and the uid name **"Verification SOP Class"**
+
 For this uid all fields are expressed as:
 
 |Method/field  | Value|
 |:------|:------------:|
+|**uid** | '1.2.840.10008.1.1'|
 |**uid_value** | '1.2.840.10008.1.1'|
 |**uid_name**  | "Verification SOP Class"|
 |**uid_type**  | :sop_class|
@@ -240,6 +243,8 @@ For this uid all fields are expressed as:
  => :sop_class
 > "1.2.840.10008.1.1".uid_name
  => "Verification SOP Class"
+> "Verification SOP Class".uid
+ => "1.2.840.10008.1.1"
 ```
 
 ## How data is extracted
