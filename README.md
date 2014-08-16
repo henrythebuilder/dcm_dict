@@ -2,7 +2,7 @@
 **DcmDict** is a Ruby gem (*dcm\_dict*) to handle in a simple way the Data defined within the [DICOM(r)][1] Standard such as DICOM Data Elements or DICOM Unique Identifiers.
 
 # Why *DcmDict*
-With the latest releases of this year (2014) DICOM documents are available in different format including one particularly interesting, the *DocBook* XML version.
+With the latest releases in this year (2014) DICOM documents are available in different format including one particularly interesting, the *DocBook* XML version.
 As written by D. Clunie on [its web site][2]:
 > "... other formats (such as DocBook, HTML, Word and ODT) are also made available for the convenience of implementors who may need to extract machine-readable content, ..."
 
@@ -11,7 +11,7 @@ This is great news for anyone involved in the study of the standard !
 Starting from this thing was born the idea of trying to automate the extraction of data from XML documents to make available the information in a simple way that simplifies the study of the DICOM standard, in the hope this idea will be useful and inspiration.
 
 # *DcmDict* features
-The library involve *String*, *Array* and *Symbol* class as *refinement* to access to DICOM information. In this way is possible to *play* with the 'Patient's Birth Date' tag defined as (0010,0030) by:
+The library involve *String*, *Array* and *Symbol* class as *refinements* to access to DICOM information. In this way is possible to *play* with the 'Patient's Birth Date' tag defined as (0010,0030) by:
 ```ruby
 > "(0010,0030)".tag_name
  => "Patient's Birth Date"
@@ -32,7 +32,7 @@ The library involve *String*, *Array* and *Symbol* class as *refinement* to acce
 > "Patient's Birth Date".tag_element
  => 48
 ```
-as weel for UIDs
+as well for UIDs
 ```ruby
 > '1.2.840.10008.1.2'.uid_name
  => "Implicit VR Little Endian: Default Transfer Syntax for DICOM"
@@ -45,7 +45,7 @@ as weel for UIDs
 let see all features in detail:
 
 ## Library usage
-The library involve **Refiniment** so use it is simple, it is necessary to include the specific *using directive*:
+The library involve **Refinements** so use it is simple, it is necessary to include the specific *using directive*:
 
 ```ruby
 using DcmDict::Refine::StringRefine
@@ -63,8 +63,7 @@ for the Symbol object.
 
 That's it.
 
-**Note**: It is possible to use also the the *monkey patching* way, this is a *deprecated* utilization but possible, and, may be, useful technique in certain contexts as an *irb* session, or for some particular test. Anyway for the *monkey patching* is possible to include some specific *common modules* into the class you want to use.
-There are two base modules *DcmDict::Refine::DataElementRefine* and *DcmDict::Refine::UidRefine*.
+**Note**: It is possible to use also the the *monkey patching* way, this is a *deprecated* utilization but possible, and, may be, useful technique in certain contexts or for some particular test. For the *monkey patching* is possible to include some specific *common modules* into the class you want to use: there are two base modules *DcmDict::Refine::DataElementRefine* and *DcmDict::Refine::UidRefine*.
 
 For example in the String class will have the code:
 ```ruby
@@ -74,15 +73,15 @@ class String
 end
 ```
 same way for Array and Symbol class.
-*The main way remains the **Refiniments***.
+*The main way remains the **Refinements***.
 
-**Rubies compatibility**: at this moment the other considered rubies is [Rubinius][4]. In order to try to ensure a minimum compatibility there is a file under *lib/dcm_dict/rubies/* called *rb_ext.rb* able to *mask*/*simulates* the refinements through [refine gem][5] and add the *bit_length* method to *Fixnum* class through [backports gem][6].
-This sort of extension is not loaded by default but only into *spec files*, see *spec_helper.rb* and *rb_ext.rb* for details.
+**Rubies compatibility**: at this moment the other considered rubies is only [Rubinius][4] (v2.2.10). In order to try to ensure a minimum compatibility there is a file under *lib/dcm_dict/rubies/* called *rb_ext.rb* able to *mask*/*simulates* the refinements through [refine gem][5] and add the required *bit_length* method to *Fixnum* class through [backports gem][6].
+This sort of extension is not loaded by default but only into *spec files* for the *'rbx' Ruby Engine*. See *spec_helper.rb* and *rb_ext.rb* for details.
 
 ## Data Element data in detail
-Any Data Element features can be accessed from a *String*, *Array* or *Symbol* object.
+Any Data Element features can be accessed from a *String*, *Array* or *Symbol* objects.
 
-For this object you can access to tag, name, keyword, VR and VM for any single Data Element
+For these objects is possible to access to Tag (group/element), Name, Keyword, Value Representation (VR) and Value Multiplicity (VM) for any single Data Element.
 
 The main methods supported are:
 
@@ -93,12 +92,12 @@ The main methods supported are:
 |**tag_keyword** | keyword| String|
 |**tag_key** | keyword| String|
 |**tag_vr**      | Value Representation| Array of Symbol|
-|**tag_vm**      | Value Multeplicity| Array of Symbol|
+|**tag_vm**      | Value Multiplicity| Array of Symbol|
 |**tag_ps**  | tag as string (as standard doc)| String|
 |**tag_ary** | tag as Array|Array of two Fixnum|
 |**tag_sym** | tag as Symbol|Symbol|
 |**tag_ndm** | tag as in Native DICOM Model|String
-|**tag_str** | tag as string (symilar to tag_ps)|String|
+|**tag_str** | tag as string (similar to tag_ps)|String|
 |**tag_note** | tag note|String|
 |**tag_multiple?** | is a multiple tag ? |boolean|
 ||useful for 'multi tag' attribute||
@@ -115,16 +114,16 @@ each data element is indexed by these fields:
 |**tag_str** | String|
 |**tag_name** | String|
 
-Through these fields is possible to access to data element information.
+Through these fields is possible to access to data element informations.
 Consider the case of the tag (0010,1005) (*Patient's Birth Name*), the primary fields are:
 **'(0010,1005)'**, **"Patient's Birth Name"**, **'PatientBirthName'**, **:patient_birth_name**, **'00101005'** and **[0x0010,0x1005]**
 
-- As string key you may use the standard tag format **'(0010,1005)'**, the tag name **'Patient's Birth Name'**, the tag keyword **'PatientBirthName'** or the Native DICOM Format tag **'00101005'**
-- As array key you may use the numeric array **[0x0010,0x1005]**
-- As symbol key you may use the **:patient_birth_name** symbol
+- As String key you may use the standard tag format **'(0010,1005)'**, the tag name **'Patient's Birth Name'**, the tag keyword **'PatientBirthName'** or the Native DICOM Format tag **'00101005'**
+- As Array key you may use the numeric array **[0x0010,0x1005]**
+- As Symbol key you may use the **:patient_birth_name** symbol
 
-### example
-Consider the previous case of the tag (0010,1005) the code:
+### example:
+Consider the previous case of tag (0010,1005), the code:
 
 ```ruby
 puts "Patient's Birth Name".tag_ps.inspect
@@ -161,9 +160,9 @@ will produce
 4101
 ```
 
-### 'multiple tag'
-The library manage also the 'multiple tag' as *(0020,31XX)* (*Source Image IDs*).
-For this data element the default tag in array form is [0x0020,0x3122] and all fields are expressed as:
+### Multiple Tag
+The library also manage 'multiple tags' such as *(0020,31XX)* (*Source Image IDs*).
+As an example for this data element the default tag in array form is [0x0020,0x3122] and all fields are expressed as:
 
 |Method/field  | Value|
 |:------|:------------:|
@@ -181,7 +180,7 @@ For this data element the default tag in array form is [0x0020,0x3122] and all f
 |**tag_note** |  'RET'|
 |**tag_multiple?** | true|
 
-[0x0020,0x3122] is the default value for group/element pair (*[32, 12578]*), but any valid key will be refers that information:
+[0x0020,0x3122] is the default value for group/element pair (*[32, 12578]*), but any valid pair of numbers for this tag will be refers that information:
 
 ```ruby
 > '(0020,31XX)'.tag_name
@@ -207,7 +206,7 @@ and so on.
 Any UID features can be accessed from a *String* object.
 
 ### UID Values
-For this object you can access to value, name and type value any single uid.
+For these objects is possible to access to value, name and type values for any single uid.
 Main methods supported are:
 
 |Method  | Note| Type|
@@ -223,10 +222,9 @@ each uid is indexed by:
 |**uid_value** | String|
 |**uid_name**  | String|
 
-For this fields is possible to access to all uid information.
-Consider the case of the uid *1.2.840.10008.1.1* (*Verification SOP Class*), the primary field are:
-**'1.2.840.10008.1.1'** and **"Verification SOP Class"**
-For this uid all field are expressed as:
+From these fields is possible to access to all uid informations.
+Consider the case of the uid *1.2.840.10008.1.1* (*Verification SOP Class*), the primary fields are the strings **'1.2.840.10008.1.1'** and **"Verification SOP Class"**.
+For this uid all fields are expressed as:
 
 |Method/field  | Value|
 |:------|:------------:|
@@ -234,7 +232,7 @@ For this uid all field are expressed as:
 |**uid_name**  | "Verification SOP Class"|
 |**uid_type**  | :sop_class|
 
-#### example
+### example:
 ```ruby
 > "Verification SOP Class".uid_value
  => "1.2.840.10008.1.1"
@@ -243,13 +241,6 @@ For this uid all field are expressed as:
 > "1.2.840.10008.1.1".uid_name
  => "Verification SOP Class"
 ```
-### TODO
-There are many candidates for inclusion in the *dictionary*, here are some ideas:
-- Directory Record type
-- Well-known Frames of Reference UID Values
-- Context Group UID Values
-- Standard Color Palettes UID Values
-- IOD definition
 
 ## How data is extracted
 The library also contains a script (*dcm_dict_converter.rb* into *bin* folder) able to download the xml documents and extracts the source data in a *Ruby compatible format*.
@@ -259,13 +250,25 @@ The script produces the conversion in the *stdout* so for example is possible to
 dcm_dict_converter.rb tag > /tmp/tag-dict.rb
 ```
 
-Note: the script use the [Nokogiri][3] as XML parser if installed as gem, otherwise the standard *REXML* is used.
+Note: the script use the [Nokogiri][3] as XML parser if installed as gem, otherwise the standard *REXML*.
 
 Check the file for other details.
 
 ## Install
 
     $ gem install dcm_dict
+
+*Note for Windows users*: may be that it is installed a previous version of Ruby 2.1, at the moment [RubyInstaller][7] does not provide the official release for this version. It is still possible to make it manually by clone/download the ['git' version of RubyInstaller][8] and execute the rake command ```rake ruby21``` (see RubyInstaller doc for details).
+
+## What's next
+The main idea is that *dictionary* should include only fixed data defined in the DICOM standard to encode and then make it available in easy way.
+There are many possible *candidates* for inclusion in the *dictionary*, here are some *"ideas"*:
+- Directory Record type data
+- Well-known Frames of Reference UID Values
+- Context Group UID Values
+- Standard Color Palettes UID Values
+- IOD definition data
+- ...
 
 ## Contributing
 TBD
@@ -278,9 +281,11 @@ See the `LICENSE` and `COPYING` files for license details.
 Main source code repository on github at [henrythebuilder/dcm_dict](https://github.com/henrythebuilder/dcm_dict)
 
 
-[1]: http://medical.nema.org/dicom/        "DICOM Homepage"
+[1]: http://medical.nema.org/dicom/ "DICOM Homepage"
 [2]: http://www.dclunie.com/dicom-status/status.html "DICOM Standard Status"
 [3]: http://nokogiri.org/ "Nokogiri"
 [4]: http://rubini.us/ "Rubinius"
 [5]: https://rubygems.org/gems/refine "Refine gem at RubyGems.org"
 [6]: https://rubygems.org/gems/backports "Backports gem at RubyGems.org"
+[7]: http://rubyinstaller.org/ "The easy way to install Ruby on Windows"
+[8]: https://github.com/oneclick/rubyinstaller "RubyInstaller for Windows"
