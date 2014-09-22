@@ -266,6 +266,9 @@ Note: the script use the [Nokogiri][3] as XML parser if installed as gem, otherw
 
 Check the file for other details.
 
+## Note
+Current library version is aligned to *DICOM Base Standard **2014b***
+
 ## Install
 
     $ gem install dcm_dict
@@ -291,7 +294,7 @@ Copyright (C) 2014  Enrico Rivarola.
 See the `LICENSE` and `COPYING` files for license details.
 
 ## Ruby Gem
-Ruby gem *dcm\_dict* on [RubyGems][9] at [rubygems.org/gems/dcm_dict](https://rubygems.org/gems/dcm_dict)
+Ruby gem **dcm\_dict** on [RubyGems][9] at [rubygems.org/gems/dcm_dict](https://rubygems.org/gems/dcm_dict)
 
 ## Source Code
 Main source code repository on github at [henrythebuilder/dcm_dict](https://github.com/henrythebuilder/dcm_dict)
