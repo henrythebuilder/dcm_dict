@@ -290,6 +290,9 @@ TBD
 Copyright (C) 2014  Enrico Rivarola.
 See the `LICENSE` and `COPYING` files for license details.
 
+## Ruby Gem
+Ruby gem *dcm\_dict* on [RubyGems][9] at [rubygems.org/gems/dcm_dict](https://rubygems.org/gems/dcm_dict)
+
 ## Source Code
 Main source code repository on github at [henrythebuilder/dcm_dict](https://github.com/henrythebuilder/dcm_dict)
 
@@ -302,3 +305,4 @@ Main source code repository on github at [henrythebuilder/dcm_dict](https://gith
 [6]: https://rubygems.org/gems/backports "Backports gem at RubyGems.org"
 [7]: http://rubyinstaller.org/ "The easy way to install Ruby on Windows"
 [8]: https://github.com/oneclick/rubyinstaller "RubyInstaller for Windows"
+[9]: https://rubygems.org/
