@@ -41,6 +41,17 @@ describe DcmDict::Dictionary::DataElementRecord do
      tag_str: '(0008,0010)',
      tag_multiple: false
     },
+    { tag_ps: '(0008,1190)',
+      tag_name: "Retrieve URL",
+      tag_key: 'RetrieveURL',
+      tag_vr: [:UR],
+      tag_vm: ["1"],
+      tag_str: '(0008,1190)',
+      tag_sym: :retrieve_url,
+      tag_ndm: '00081190',
+      tag_ary: [0x0008,0x1190],
+      tag_multiple: false,
+      tag_note: ''}
   ].each do |data|
     it "Handle Data Element Data correctly" do
       der = DcmDict::Dictionary::DataElementRecord.new(data)
