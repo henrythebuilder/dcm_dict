@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Enrico Rivarola"]
   s.email       = 'henrythebuilder@yahoo.it'
   s.files       = Dir.glob("lib/**/*")
-  s.files       += %w[README.md LICENSE COPYING]
+  s.files       += %w[README.md LICENSE COPYING CHANGELOG]
   s.test_files  = Dir.glob("spec/**/*")
   s.test_files  += %w[Rakefile]
   s.require_paths = ['lib']
