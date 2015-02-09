@@ -1,9 +1,10 @@
 # What's *DcmDict*
-**DcmDict** is a Ruby gem (*dcm\_dict*) to handle in a simple way the Data defined within the [DICOM(r)][1] Standard such as DICOM Data Elements or DICOM Unique Identifiers.
+**DcmDict** is a Ruby gem (*dcm\_dict*) to handle in a simple way the *Dictionary Data* defined within the [DICOM(r)][1] Standard such as DICOM Data Elements or DICOM Unique Identifiers.
 
 # Why *DcmDict*
-With the latest releases in this year (2014) DICOM documents are available in different format including one particularly interesting, the *DocBook* XML version.
-As written by D. Clunie on [its web site][2]:
+With the new releases from year 2014 DICOM documents are available in different format including one particularly interesting, the *DocBook* XML version.
+
+As D. Clunie writes on [his web site][2]:
 
 > "... other formats (such as DocBook, HTML, Word and ODT) are also made available for the convenience of implementors who may need to extract machine-readable content, ..."
 
@@ -12,7 +13,9 @@ This is great news for anyone involved in the study of the standard !
 Starting from this thing was born the idea of trying to automate the extraction of data from XML documents to make available the information in a simple way that simplifies the study of the DICOM standard, in the hope this idea will be useful and inspiration.
 
 # *DcmDict* features
-The library involve *String*, *Array* and *Symbol* class as *refinements* to access to DICOM information. In this way is possible to *play* with the 'Patient's Birth Date' tag defined as (0010,0030) by:
+The library involve *String*, *Array* and *Symbol* class as *refinements* to access to DICOM information.
+
+In this way is possible to *play* with the 'Patient's Birth Date' tag defined as (0010,0030) by:
 
 ```ruby
 > "(0010,0030)".tag_name
@@ -67,7 +70,7 @@ for the Symbol object.
 
 That's it.
 
-**Note**: It is possible to use also the the *monkey patching* way, this is a *deprecated* utilization but possible, and, may be, useful technique in certain contexts or for some particular test. For the *monkey patching* is possible to include some specific *common modules* into the class you want to use as "keyword": there are two base modules *DcmDict::Refine::DataElementRefine* and *DcmDict::Refine::UidRefine*.
+**Note**: It is possible to use also the the *monkey patching* way, this is a *deprecated* utilization but possible, and, may be, useful technique in certain contexts or for some particular test. For the *monkey patching* is possible to include some specific *common modules* in the class you want to use as "keyword": there are two base modules *DcmDict::Refine::DataElementRefine* and *DcmDict::Refine::UidRefine*.
 
 For example in the String class will have the code:
 
@@ -80,11 +83,11 @@ end
 
 *The main way remains **Ruby Refinements***.
 
-**Rubies compatibility**: at this moment the other considered rubies is only [Rubinius][4] (v2.2.10). In order to try to ensure a minimum compatibility there is a file under *lib/dcm_dict/rubies/* called *rb_ext.rb* able to *mask*/*simulates* the refinements through [refine gem][5] and add the required *bit_length* method to *Fixnum* class through [backports gem][6].
+**Rubies compatibility**: at this moment the other considered rubies is only [Rubinius][4] (>= v2.2.10). In order to try to ensure a minimum compatibility there is a file under *lib/dcm_dict/rubies/* called *rb_ext.rb* able to *mask*/*simulates* the refinements by [refine gem][5] and add the required *bit_length* method to *Fixnum* class by [backports gem][6].
 This sort of extension is not loaded by default but only into *spec files* for the *'rbx' Ruby Engine*. See *spec_helper.rb* and *rb_ext.rb* for details.
 
 ## Data Element data in detail
-Any Data Element features can be accessed from a *String*, *Array* or *Symbol* objects.
+Any Data Element feature can be accessed from a *String*, *Array* or *Symbol* objects.
 
 For these objects is possible to access to Tag (group/element), Name, Keyword, Value Representation (VR) and Value Multiplicity (VM) for any single Data Element.
 
@@ -118,7 +121,7 @@ each data element is indexed by these fields:
 |**tag_str** | String|
 |**tag_name** | String|
 
-Through these fields is possible to access to data element informations.
+By these fields is possible to access to data element informations.
 Consider the case of the tag (0010,1005) (*Patient's Birth Name*), the primary fields are:
 **'(0010,1005)'**, **"Patient's Birth Name"**, **'PatientBirthName'**, **:patient_birth_name**, **'00101005'** and **[0x0010,0x1005]**
 
@@ -255,7 +258,7 @@ For this uid all fields are expressed as:
 ```
 
 ## How data is extracted
-The library also contains a script (*dcm_dict_converter.rb* into *bin* folder) able to download the xml documents and extracts the source data in a *Ruby compatible format*.
+The library also contains a script (*dcm_dict_converter.rb* in the *bin* folder) able to download the xml documents and extracts the source data in a *Ruby compatible format*.
 The script produces the conversion in the *stdout* so for example is possible to extract the Tag Values by:
 
 ```ruby
@@ -273,7 +276,7 @@ Current library version is aligned to *DICOM Base Standard **2015a***
 
     $ gem install dcm_dict
 
-*Note for Windows users*: may be that it is installed a previous version of Ruby 2.1, at the moment [RubyInstaller][7] does not provide the official release for this version. It is still possible to make it manually by clone/download the ['git' version of RubyInstaller][8] and execute the rake command ```rake ruby21``` (see RubyInstaller doc for details).
+*Note for Windows users*: may be that it is installed a previous version of Ruby 2.1, if [RubyInstaller][7] does not provide the official release for the supported version it's still possible to make it manually by clone/download the ['git' version of RubyInstaller][8] and execute the rake command ```rake ruby21``` or equivalent (see RubyInstaller doc for details).
 
 ## What's next
 The main idea is that *dictionary* should include only fixed data defined in the DICOM standard to encode and then make it available in easy way.
@@ -290,7 +293,7 @@ There are many possible *candidates* for inclusion in the *dictionary*, here are
 TBD
 
 ## License
-Copyright (C) 2014  Enrico Rivarola.
+Copyright (C) 2014-2015  Enrico Rivarola.
 See the `LICENSE` and `COPYING` files for license details.
 
 ## Ruby Gem
