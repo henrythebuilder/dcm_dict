@@ -339,6 +339,7 @@ module DcmDict
       { uid_value: '1.2.840.10008.5.1.4.45.4', uid_name: "Implant Template Group Information Model - GET", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.7.1.1', uid_name: "Native DICOM Model", uid_type: :application_hosting_model},
       { uid_value: '1.2.840.10008.7.1.2', uid_name: "Abstract Multi-Dimensional Image Model", uid_type: :application_hosting_model},
+      { uid_value: '1.2.840.10008.8.1.1', uid_name: "DICOM Content Mapping Resource", uid_type: :mapping_resource},
       { uid_value: '1.2.840.10008.15.0.3.1', uid_name: "dicomDeviceName", uid_type: :ldap_oid},
       { uid_value: '1.2.840.10008.15.0.3.2', uid_name: "dicomDescription", uid_type: :ldap_oid},
       { uid_value: '1.2.840.10008.15.0.3.3', uid_name: "dicomManufacturer", uid_type: :ldap_oid},
