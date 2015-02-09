@@ -36,7 +36,6 @@ describe "Array refinement" do
     multi_data = { [0x6046,0x0040] => {
                      tag_name: "Overlay Type",
                      tag_multiple: true,
-                     tag_name: "Overlay Type",
                      tag_keyword: "OverlayType",
                      tag_key: "OverlayType",
                      tag_vr: [:CS], tag_vm: ["1"],
