@@ -29,18 +29,17 @@ describe DcmDict::Dictionary::DataElementRecord do
   using DcmDict::Refine::Internal::ArrayRefineInternal
 
   [
-    {tag_ps: '(0008,0010)',
-     tag_name: 'Recognition Code',
-     tag_key: 'RecognitionCode',
-     tag_vr: [:SH],
-     tag_vm: ['1'],
-     tag_note: 'RET',
-     tag_ary: [0x0008,0x0010],
-     tag_sym: :recognition_code,
-     tag_ndm: '00080010',
-     tag_str: '(0008,0010)',
-     tag_multiple: false
-    },
+    { tag_ps: '(0008,0010)',
+      tag_name: 'Recognition Code',
+      tag_key: 'RecognitionCode',
+      tag_vr: [:SH],
+      tag_vm: ['1'],
+      tag_note: 'RET',
+      tag_ary: [0x0008,0x0010],
+      tag_sym: :recognition_code,
+      tag_ndm: '00080010',
+      tag_str: '(0008,0010)',
+      tag_multiple: false},
     { tag_ps: '(0008,1190)',
       tag_name: "Retrieve URL",
       tag_key: 'RetrieveURL',
@@ -51,9 +50,20 @@ describe DcmDict::Dictionary::DataElementRecord do
       tag_ndm: '00081190',
       tag_ary: [0x0008,0x1190],
       tag_multiple: false,
+      tag_note: ''},
+    { tag_ps: '(0008,0118)',
+      tag_name: "Mapping Resource UID",
+      tag_key: 'MappingResourceUID',
+      tag_vr: [:UC],
+      tag_vm: ["1"],
+      tag_str: '(0008,0118)',
+      tag_sym: :mapping_resource_uid,
+      tag_ndm: '00080118',
+      tag_ary: [0x0008,0x0118],
+      tag_multiple: false,
       tag_note: ''}
   ].each do |data|
-    it "Handle Data Element Data correctly" do
+    it "Handle Data Element Data correctly (#{data[:tag_name].inspect}-#{data[:tag_str]}-#{data[:tag_vr]})" do
       der = DcmDict::Dictionary::DataElementRecord.new(data)
       expect(der.tag_ps).to eq(data[:tag_ps])
       expect(der.tag_name).to eq(data[:tag_name])
