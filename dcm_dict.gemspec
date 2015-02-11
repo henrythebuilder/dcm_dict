@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.date        = TODAY
   s.summary     = "A simple way to handle DICOM Data Dictionary"
-  s.description = "DcmDict is a Ruby gem (dcm_dict) to handle in a simple way the Dictionary Data defined within the DICOM Standard"
+  s.description = "DcmDict is a Ruby gem (dcm_dict) to handle in a simple way the Data Dictionary defined within the DICOM Standard"
   s.authors     = ["Enrico Rivarola"]
   s.email       = 'henrythebuilder@yahoo.it'
   s.files       = Dir.glob("lib/**/*")
