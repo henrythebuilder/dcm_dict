@@ -222,6 +222,8 @@ module DcmDict
       { uid_value: '1.2.840.10008.5.1.4.1.1.77.1.5.2', uid_name: "Ophthalmic Photography 16 Bit Image Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.77.1.5.3', uid_name: "Stereometric Relationship Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.77.1.5.4', uid_name: "Ophthalmic Tomography Image Storage", uid_type: :sop_class},
+      { uid_value: '1.2.840.10008.5.1.4.1.1.77.1.5.5', uid_name: "Wide Field Ophthalmic Photography Stereographic Projection Image Storage", uid_type: :sop_class},
+      { uid_value: '1.2.840.10008.5.1.4.1.1.77.1.5.6', uid_name: "Wide Field Ophthalmic Photography 3D Coordinates Image Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.77.1.6', uid_name: "VL Whole Slide Microscopy Image Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.78.1', uid_name: "Lensometry Measurements Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.78.2', uid_name: "Autorefraction Measurements Storage", uid_type: :sop_class},
