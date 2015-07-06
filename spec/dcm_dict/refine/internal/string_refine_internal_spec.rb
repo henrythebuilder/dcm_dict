@@ -141,9 +141,9 @@ describe "String refinement (internal)" do
     '(123,1fff0)'
   ].each do |src|
     it "should manage wrong value #{src.inspect}" do
-      expect{src.to_tag_str}.to raise_error
-      expect{src.to_tag_ndm}.to raise_error
-      expect{src.to_tag_ary}.to raise_error
+      expect{src.to_tag_str}.to raise_error(RuntimeError)
+      expect{src.to_tag_ndm}.to raise_error(RuntimeError)
+      expect{src.to_tag_ary}.to raise_error(RuntimeError)
     end
   end
 

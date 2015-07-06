@@ -46,8 +46,8 @@ describe "Array Refinement" do
         [-1,-2]
       ].each do |tag|
         it "as #{tag.inspect}" do
-          expect{ tag.tag_group_num }.to raise_error
-          expect{ tag.tag_element_num }.to raise_error
+          expect{ tag.tag_group_num }.to raise_error(RuntimeError)
+          expect{ tag.tag_element_num }.to raise_error(RuntimeError)
 
         end
       end

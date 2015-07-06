@@ -45,7 +45,7 @@ describe DcmDict::Dictionary::UidRecord do
     it "data should be not modifiable" do
       uid = DcmDict::Dictionary::UidRecord.new(data.dup)
       old_value = uid.uid_value.dup
-      expect{uid.uid_value << 'aaa'}.to raise_error
+      expect{uid.uid_value << 'aaa'}.to raise_error(RuntimeError)
       expect(uid.uid_value).to eq(old_value)
     end
 

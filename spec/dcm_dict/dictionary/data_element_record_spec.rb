@@ -98,7 +98,7 @@ describe DcmDict::Dictionary::DataElementRecord do
     it "data should be not modifiable" do
       der = DcmDict::Dictionary::DataElementRecord.new(data)
       old_ps = der.tag_ps.dup
-      expect{der.tag_ps << 'aaa'}.to raise_error
+      expect{der.tag_ps << 'aaa'}.to raise_error(RuntimeError)
       expect(der.tag_ps).to eq(old_ps)
     end
 
