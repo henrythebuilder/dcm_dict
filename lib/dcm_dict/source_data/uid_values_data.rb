@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 #  Copyright (C) 2014-2015  Enrico Rivarola
 #
@@ -59,6 +60,9 @@ module DcmDict
       { uid_value: '1.2.840.10008.1.2.4.101', uid_name: "MPEG2 Main Profile @ High Level", uid_type: :transfer_syntax},
       { uid_value: '1.2.840.10008.1.2.4.102', uid_name: "MPEG-4 AVC/H.264 High Profile / Level 4.1", uid_type: :transfer_syntax},
       { uid_value: '1.2.840.10008.1.2.4.103', uid_name: "MPEG-4 AVC/H.264 BD-compatible High Profile / Level 4.1", uid_type: :transfer_syntax},
+      { uid_value: '1.2.840.10008.1.2.4.104', uid_name: "MPEG-4 AVC/H.264 High Profile / Level 4.2 For 2D Video", uid_type: :transfer_syntax},
+      { uid_value: '1.2.840.10008.1.2.4.105', uid_name: "MPEG-4 AVC/H.264 High Profile / Level 4.2 For 3D Video", uid_type: :transfer_syntax},
+      { uid_value: '1.2.840.10008.1.2.4.106', uid_name: "MPEG-4 AVC/H.264 Stereo High Profile / Level 4.2", uid_type: :transfer_syntax},
       { uid_value: '1.2.840.10008.1.2.5', uid_name: "RLE Lossless", uid_type: :transfer_syntax},
       { uid_value: '1.2.840.10008.1.2.6.1', uid_name: "RFC 2557 MIME encapsulation", uid_type: :transfer_syntax},
       { uid_value: '1.2.840.10008.1.2.6.2', uid_name: "XML Encoding", uid_type: :transfer_syntax},
@@ -245,6 +249,7 @@ module DcmDict
       { uid_value: '1.2.840.10008.5.1.4.1.1.88.22', uid_name: "Enhanced SR Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.88.33', uid_name: "Comprehensive SR Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.88.34', uid_name: "Comprehensive 3D SR Storage", uid_type: :sop_class},
+      { uid_value: '1.2.840.10008.5.1.4.1.1.88.35', uid_name: "Extensible SR Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.88.40', uid_name: "Procedure Log Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.88.50', uid_name: "Mammography CAD SR Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.88.59', uid_name: "Key Object Selection Document Storage", uid_type: :sop_class},

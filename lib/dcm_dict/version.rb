@@ -23,5 +23,5 @@
 #
 module DcmDict
   VERSION = "0.6.0"
-  DICOM_DOC_VERSION = "2015b"
+  DICOM_DOC_VERSION = "2015c"
 end
