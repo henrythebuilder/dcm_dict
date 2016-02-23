@@ -526,8 +526,42 @@ END
     {xml_string => data}
   end
 
+  def self.uid_sample_retired_noname
+    xml_string=<<END
+<book xmlns="http://docbook.org/ns/docbook">
+       <tr valign="top">
+          <td align="left" colspan="1" rowspan="1">
+            <para xml:id="para_0b48f6f3-b2fe-49cf-a870-c6d3635f4266">
+<emphasis role="italic">1.2.840.10008.​5.​1.​4.​1.​1.​12.​77</emphasis>
+</para>
+          </td>
+          <td align="left" colspan="1" rowspan="1">
+            <para xml:id="para_6ca19788-eac9-4d90-b754-aaa06bebe9e9">
+<emphasis role="italic">(Retired)</emphasis>
+</para>
+          </td>
+          <td align="left" colspan="1" rowspan="1">
+            <para xml:id="para_ca5d2e50-63ea-4008-80ae-896296e83fdd">
+<emphasis role="italic">SOP Class</emphasis>
+</para>
+          </td>
+          <td align="center" colspan="1" rowspan="1">
+            <para xml:id="para_178cccfe-86a2-41a1-b905-70e5fbc5eebf">
+<emphasis role="italic"/>
+</para>
+          </td>
+        </tr>
+</book>
+END
+    data = {uid_value: "1.2.840.10008.5.1.4.1.1.12.77",
+            uid_name: "1.2.840.10008.5.1.4.1.1.12.77 (Retired)",
+            uid_type: :sop_class}
+    {xml_string => data}
+  end
+
   def self.xml_uid_set
-    {}.merge(uid_single_standard)
+    {}.merge(uid_single_standard).
+      merge(uid_sample_retired_noname)
   end
 
 end

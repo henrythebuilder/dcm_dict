@@ -28,6 +28,8 @@ module DcmDict
     class UidFieldData < FieldData
       using DcmDict::Refine::Internal::StringRefineInternal
 
+      MISSING_NAME_VALUE = "(Retired)"
+
       # Initialize object using +extract_proc+ as proc to extract data from xml element
       def initialize(extract_proc)
         super
@@ -40,9 +42,18 @@ module DcmDict
 
       private
       def extract_base_data
-        { uid_value: extract_content_data(:uid_value),
-          uid_name: extract_content_data(:uid_name),
-          uid_type: extract_content_data(:uid_type).uid_type_to_sym}
+        value = extract_content_data(:uid_value)
+        type = extract_content_data(:uid_type).uid_type_to_sym
+        name = check_uid_name_for(extract_content_data(:uid_name), value, type)
+        { uid_value: value,
+          uid_name: name,
+          uid_type: type }
+      end
+
+      # patch for 2016a source data ...
+      def check_uid_name_for(name, value, type)
+        name = "#{value} #{MISSING_NAME_VALUE}" if (name == MISSING_NAME_VALUE)
+        name
       end
     end
   end
