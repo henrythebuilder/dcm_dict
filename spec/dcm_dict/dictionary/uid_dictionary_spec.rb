@@ -33,9 +33,15 @@ describe DcmDict::Dictionary::UidDictionary do
   {
     '1.2.3.4.5.6' => { :uid_value => '1.2.3.4.5.6',
                        :uid_name => 'Unknown UID',
-                       :uid_type => :unknown }
+                       :uid_type => :unknown },
+    '1.2.840.10008.5.1.4.1.1.12.77' => { :uid_value => '1.2.840.10008.5.1.4.1.1.12.77',
+                                         :uid_name => '1.2.840.10008.5.1.4.1.1.12.77 (Retired)',
+                                         :uid_type => :sop_class },
+    '1.2.840.10008.5.1.4.1.1.40' => { :uid_value => '1.2.840.10008.5.1.4.1.1.40',
+                                      :uid_name => '1.2.840.10008.5.1.4.1.1.40 (Retired)',
+                                      :uid_type => :sop_class }
   }.each do |uid, data|
-    include_examples "Handle specific record", "unknown uid",
+    include_examples "Handle specific record", data[:uid_name],
                      uid, data, DcmDict::Dictionary::TheUidDictionary
   end
 
@@ -57,4 +63,5 @@ describe DcmDict::Dictionary::UidDictionary do
                    {uid_value: '1.2.840.10008.1.2',
                     uid_name: "Implicit VR Little Endian: Default Transfer Syntax for DICOM",
                     uid_type: :transfer_syntax}
+
 end
