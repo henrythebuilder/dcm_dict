@@ -1,4 +1,3 @@
-# coding: utf-8
 #
 #  Copyright (C) 2014-2016  Enrico Rivarola
 #
@@ -270,6 +269,7 @@ module DcmDict
       { uid_value: '1.2.840.10008.5.1.4.1.1.88.69', uid_name: "Colon CAD SR Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.88.70', uid_name: "Implantation Plan SR Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.88.71', uid_name: "Acquisition Context SR Storage", uid_type: :sop_class},
+      { uid_value: '1.2.840.10008.5.1.4.1.1.90.1', uid_name: "Content Assessment Results Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.104.1', uid_name: "Encapsulated PDF Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.104.2', uid_name: "Encapsulated CDA Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.128', uid_name: "Positron Emission Tomography Image Storage", uid_type: :sop_class},
