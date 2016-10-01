@@ -37,6 +37,7 @@ describe DcmDict::Dictionary::DataElementDictionary do
   DataElementSampleSpecHelper.unknown_group_length_sample.
     merge(DataElementSampleSpecHelper.known_group_length_sample).
     merge(DataElementSampleSpecHelper.private_creator_sample).
+    merge(DataElementSampleSpecHelper.standard_sample).
     merge(DataElementSampleSpecHelper.unknown_sample).each do |tag, data|
     include_examples "Handle specific record", "single tag",
                      tag, data, DcmDict::Dictionary::TheDataElementDictionary

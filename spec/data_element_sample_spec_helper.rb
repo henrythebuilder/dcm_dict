@@ -60,9 +60,26 @@ module DataElementSampleSpecHelper
   def self.known_group_length_sample
     {
       [0,0] => { tag_ps: '(0000,0000)', tag_name: "Command Group Length", tag_key: 'CommandGroupLength',
-               tag_vr: [:UL], tag_vm: ["1"], tag_str: '(0000,0000)', tag_sym: :command_group_length,
-               tag_ndm: '00000000', tag_ary: [0, 0], tag_multiple: false,
-               tag_note: 'The even number of bytes from the end of the value field to the beginning of the next group.'}
+                 tag_vr: [:UL], tag_vm: ["1"], tag_str: '(0000,0000)', tag_sym: :command_group_length,
+                 tag_ndm: '00000000', tag_ary: [0, 0], tag_multiple: false,
+                 tag_note: 'The even number of bytes from the end of the value field to the beginning of the next group.'}
+    }
+  end
+
+  def self.standard_sample
+    {
+      [0x0018, 0x9323] => { tag_ps: '(0018,9323)', tag_name: "Exposure Modulation Type", tag_key: 'ExposureModulationType',
+                            tag_vr: [:CS], tag_vm: ["1-n"], tag_str: '(0018,9323)', tag_sym: :exposure_modulation_type,
+                            tag_ndm: '00189323', tag_ary: [0x0018, 0x9323], tag_multiple: false,
+                            tag_note: ''},
+      [0x3006, 0x0033] => { tag_ps: '(3006,0033)', tag_name: "RT ROI Relationship", tag_key: 'RTROIRelationship',
+                            tag_vr: [:CS], tag_vm: ["1"], tag_str: '(3006,0033)', tag_sym: :rt_roi_relationship,
+                            tag_ndm: '30060033', tag_ary: [0x3006, 0x0033], tag_multiple: false,
+                            tag_note: ''},
+      [0x3006, 0x00B9] => { tag_ps: '(3006,00B9)', tag_name: "Additional RT ROI Identification Code Sequence", tag_key: 'AdditionalRTROIIdentificationCodeSequence',
+                            tag_vr: [:SQ], tag_vm: ["1"], tag_str: '(3006,00B9)', tag_sym: :additional_rt_roi_identification_code_sequence,
+                            tag_ndm: '300600B9', tag_ary: [0x3006, 0x00B9], tag_multiple: false,
+                            tag_note: 'RET'}
     }
   end
 
@@ -72,22 +89,21 @@ module DataElementSampleSpecHelper
                  tag_sym: :group_length, tag_ndm: '00100000', tag_name: 'Group Length',
                  tag_key: 'GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',
                  tag_multiple: false},
-      [17,0] =>  {tag_ps: '(0011,0000)', tag_str: '(0011,0000)', tag_ary: [0x0011,0x0000],
-                  tag_sym: :group_length, tag_ndm: '00110000', tag_name: 'Group Length',
-                  tag_key: 'GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',},
+      [17,0] => {tag_ps: '(0011,0000)', tag_str: '(0011,0000)', tag_ary: [0x0011,0x0000],
+                 tag_sym: :group_length, tag_ndm: '00110000', tag_name: 'Group Length',
+                 tag_key: 'GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',},
       [0x4444,0x0000] => {tag_ps: '(4444,0000)', tag_str: '(4444,0000)', tag_ary: [0x4444,0x0000],
                           tag_sym: :group_length, tag_ndm: '44440000', tag_name: 'Group Length',
                           tag_key: 'GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',
                           tag_multiple: false},
       '44440000' => {tag_ps: '(4444,0000)', tag_str: '(4444,0000)', tag_ary: [0x4444,0x0000],
-                          tag_sym: :group_length, tag_ndm: '44440000', tag_name: 'Group Length',
-                          tag_key: 'GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',
-                          tag_multiple: false},
+                     tag_sym: :group_length, tag_ndm: '44440000', tag_name: 'Group Length',
+                     tag_key: 'GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',
+                     tag_multiple: false},
       '(4444,0000)' => {tag_ps: '(4444,0000)', tag_str: '(4444,0000)', tag_ary: [0x4444,0x0000],
-                          tag_sym: :group_length, tag_ndm: '44440000', tag_name: 'Group Length',
-                          tag_key: 'GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',
-                          tag_multiple: false}
-
+                        tag_sym: :group_length, tag_ndm: '44440000', tag_name: 'Group Length',
+                        tag_key: 'GroupLength', tag_vr: [:UL], tag_vm: ['1'], tag_note: 'Dummy Record',
+                        tag_multiple: false}
     }
   end
 
