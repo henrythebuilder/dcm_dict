@@ -39,6 +39,9 @@ describe DcmDict::Dictionary::UidDictionary do
                                          :uid_type => :sop_class },
     '1.2.840.10008.5.1.4.1.1.40' => { :uid_value => '1.2.840.10008.5.1.4.1.1.40',
                                       :uid_name => '1.2.840.10008.5.1.4.1.1.40 (Retired)',
+                                      :uid_type => :sop_class },
+    '1.2.840.10008.5.1.4.39.3' => { :uid_value => '1.2.840.10008.5.1.4.39.3',
+                                      :uid_name => 'Color Palette Query/Retrieve Information Model - MOVE',
                                       :uid_type => :sop_class }
   }.each do |uid, data|
     include_examples "Handle specific record", data[:uid_name],
