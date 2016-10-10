@@ -66,7 +66,21 @@ describe "String refinement (internal)" do
       ['ThreeDPointCoordinates', :three_d_point_coordinates],
       ['SourceImageIDs', :source_image_ids],
       ['ModifyingDeviceID', :modifying_device_id],
-      ['TIDOffset', :tid_offset]
+      ['TIDOffset', :tid_offset],
+      ['RT_ROIRelationship', :rt_roi_relationship],
+      ['DVHROIContributionType', :dvh_roi_contribution_type],
+      ['OCTZOffsetCorrection', :oct_z_offset_correction],
+      ['WADORSRetrievalSequence', :wado_rs_retrieval_sequence],
+      ['STOWRSStorageSequence', :stow_rs_storage_sequence],
+      ['CIExyWhitePoint', :ciexy_white_point],
+      ['RGBLUTTransferFunction', :rgb_lut_transfer_function],
+      ['ReferencedVOILUTBoxSequence', :referenced_voi_lut_box_sequence],
+      ['CTDIvolNotificationTrigger', :ctdi_vol_notification_trigger],
+      ['XAXRFFrameCharacteristicsSequence', :xa_xrf_frame_characteristics_sequence],
+      ['XRayTubeCurrentInuA', :x_ray_tube_current_in_ua],
+      ['ExposureTimeInuS', :exposure_time_in_us],
+      ['ExposureInuAs', :exposure_in_uas],
+      ['dBdt', :db_dt]
     ].each do |str, value|
       it "from #{str.inspect} to #{value.inspect}" do
         expect(str.tag_key_to_sym).to eq(value)

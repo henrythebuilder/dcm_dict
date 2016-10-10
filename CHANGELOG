@@ -1,6 +1,6 @@
 - V0.10.0
 -- Update to 2016d Base Standard
--- Fix symbol extraction for keyword tag with "RTROI" value
+-- Fix symbol extraction for keyword tag with "RTROI", "DVHROI", "OCTZ", "WADORS", "STOWRS", "CIExy", "RGBLUT", "VOILUT", "CTDIvol", "XAXRF", "CurrentInuA", "TimeInuS", "ExposureInuAs" and "dBdt" values
 
 - V0.9.0
 -- Update to 2016c Base Standard

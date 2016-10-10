@@ -37,10 +37,26 @@ module DcmDict
 
           # Convert tag key to tag symbol -> 'PatientName' -> :patient_name
           def tag_key_to_sym
-            self.gsub('IDs', 'IDS').gsub('3D', '_3D').gsub('RTROI', 'RT_ROI').
+            self.gsub('IDs', 'IDS').
+              gsub('3D', '_3D').
+              gsub('RTROI', 'RT_ROI').
+              gsub('DVHROI', 'DVH_ROI').
+              gsub('OCTZ', 'OCT_Z').
+              gsub('WADORS', 'WADO_RS').
+              gsub('STOWRS', 'STOW_RS').
+              gsub('CIExy', 'CIEXY').
+              gsub('RGBLUT', 'RGB_LUT').
+              gsub('VOILUT', 'VOI_LUT').
+              gsub('CTDIvol', 'CTDIVol').
+              gsub('XAXRF', 'XA_XRF').
+              gsub('CurrentInuA', 'Current_in_ua_').
+              gsub('TimeInuS', 'Time_in_us').
+              gsub('ExposureInuAs', 'Exposure_in_uas_').
+              gsub('dBdt', '_db_dt_').
               gsub(/([A-Z])([a-z])/,'_\1\2').
               gsub(/([a-z])([A-Z])/,'\1_\2').
-              gsub(/^_/,'').
+              gsub(/\A_/,'').
+              gsub(/_\z/,'').
               downcase.
               to_sym
           end
