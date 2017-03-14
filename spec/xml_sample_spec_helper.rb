@@ -1,6 +1,6 @@
 # coding: utf-8
 #
-#  Copyright (C) 2014-2016  Enrico Rivarola
+#  Copyright (C) 2014-2017  Enrico Rivarola
 #
 #  This file is part of DcmDict gem (dcm_dict).
 #
