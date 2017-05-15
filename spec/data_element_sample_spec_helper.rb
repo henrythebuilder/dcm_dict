@@ -100,7 +100,7 @@ module DataElementSampleSpecHelper
       [0x0010, 0x1000] => { tag_ps: '(0010,1000)', tag_name: "Other Patient IDs", tag_key: 'OtherPatientIDs',
                             tag_vr: [:LO], tag_vm: ["1-n"], tag_str: '(0010,1000)', tag_sym: :other_patient_ids,
                             tag_ndm: '00101000', tag_ary: [0x0010,0x1000], tag_multiple: false,
-                            tag_note: ''},
+                            tag_note: 'RET'},
       [0x0018, 0x9504] => { tag_ps: '(0018,9504)', tag_name: "X-Ray 3D Frame Type Sequence", tag_key: 'XRay3DFrameTypeSequence',
                             tag_vr: [:SQ], tag_vm: ["1"], tag_str: '(0018,9504)', tag_sym: :x_ray_3d_frame_type_sequence,
                             tag_ndm: '00189504', tag_ary: [0x0018,0x9504], tag_multiple: false,
