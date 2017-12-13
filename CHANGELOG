@@ -1,15 +1,24 @@
+- V0.16.0
+-- Update to 2017e Base Standard
+
 - V0.15.0
 -- Update to 2017d Base Standard
+
 - V0.14.0
 -- Update to 2017c Base Standard
+
 - V0.13.0
 -- Update to 2017b Base Standard
+
 - V0.12.1
 -- Update Changelog file
+
 - V0.12.0
 -- Update to 2017a Base Standard
+
 - V0.11.0
 -- Update to 2016e Base Standard
+
 - V0.10.0
 -- Update to 2016d Base Standard
 -- Fix symbol extraction for keyword tag with "RTROI", "DVHROI", "OCTZ", "WADORS", "STOWRS", "CIExy", "RGBLUT", "VOILUT", "CTDIvol", "XAXRF", "CurrentInuA", "TimeInuS", "ExposureInuAs" and "dBdt" values
