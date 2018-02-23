@@ -1,5 +1,5 @@
 # What's *DcmDict*
-**DcmDict** is a Ruby gem (*dcm\_dict*) to handle in a simple way the *Data Dictionary* defined within the [DICOM(r)][1] Standard such as DICOM Data Elements or DICOM Unique Identifiers.
+**DcmDict** is a Ruby gem (*dcm\_dict*) to handle in a simple way the *Data Dictionary* defined within the DICOM<sup>©</sup> Standard <sup id='fn-dcm-trademark'>[1]</sup> such as DICOM Data Elements or DICOM Unique Identifiers.
 
 # Why *DcmDict*
 With the new releases from year 2014 DICOM documents are available in different format including one particularly interesting, the *DocBook* XML version.
@@ -302,8 +302,19 @@ Ruby gem **dcm\_dict** on [RubyGems][9] at [rubygems.org/gems/dcm_dict](https://
 ## Source Code
 Main source code repository on github at [henrythebuilder/dcm_dict](https://github.com/henrythebuilder/dcm_dict)
 
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1-dcm-trademark">
+<p><a href="http://www.dicomstandard.org/" title="DICOM Standard">DICOM<sup>©</sup></a> is the registered trademark of the National Electrical Manufacturers Association for its standards publications relating to digital communications of medical information.
+<a href="#fn-dcm-trademark"  class='footnoteBackLink'  title="Jump back to footnote 1 in the text.">&#x21A9;&#xFE0E;</a></p>
+</li>
+</ol>
+</div>
 
-[1]: http://medical.nema.org/dicom/ "DICOM Homepage"
+[1]: #fn1-dcm-trademark
+
+[dcm1]: http://medical.nema.org/dicom/ "DICOM Homepage"
 [2]: http://www.dclunie.com/dicom-status/status.html "DICOM Standard Status"
 [3]: http://nokogiri.org/ "Nokogiri"
 [4]: http://rubini.us/ "Rubinius"
