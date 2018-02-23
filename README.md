@@ -1,5 +1,5 @@
 # What's *DcmDict*
-**DcmDict** is a Ruby gem (*dcm\_dict*) to handle in a simple way the *Data Dictionary* defined within the DICOM<sup>®</sup> Standard <sup id='fn-dcm-trademark'>[1]</sup> such as DICOM Data Elements or DICOM Unique Identifiers.
+**DcmDict** is a Ruby gem [(*dcm\_dict*)][12] to handle in a simple way the *Data Dictionary* defined within the DICOM<sup>®</sup> Standard <sup id='fn-dcm-trademark'>[1]</sup> such as DICOM Data Elements or DICOM Unique Identifiers.
 
 # Why *DcmDict*
 With the new releases from year 2014 DICOM documents are available in different format including one particularly interesting, the *DocBook* XML version.
@@ -327,3 +327,4 @@ Main source code repository on github at [henrythebuilder/dcm_dict](https://gith
 [9]: https://rubygems.org/
 [10]: http://www.dicomstandard.org/
 [11]: http://www.dicomstandard.org/current/
+[12]: https://rubygems.org/gems/dcm_dict
