@@ -293,7 +293,7 @@ There are many possible *candidates* for inclusion in the *dictionary*, here are
 TBD
 
 ## License
-Copyright (C) 2014-2017  Enrico Rivarola.
+Copyright (C) 2014-2018  Enrico Rivarola.
 See the `LICENSE` and `COPYING` files for license details.
 
 ## Ruby Gem
