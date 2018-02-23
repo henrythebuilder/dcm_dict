@@ -7,7 +7,7 @@ With the new releases from year 2014 DICOM documents are available in different 
 As D. Clunie writes on his web site in the [DICOM Standard Status page][2]:
 > "... other formats (such as DocBook, HTML, Word and ODT) are also made available for the convenience of implementors who may need to extract machine-readable content, ..."
 
-This is confirmed in the DICOM<sup>©</sup> Standard [web site][10] where each part is published in [multiple formats][11] and the XML format is defined:
+This is confirmed in the DICOM<sup>®</sup> Standard [web site][10] where each part is published in [multiple formats][11] and the XML format is defined:
 >"... good for machine readability, e.g. self-updating validators ..."
 
 This is great news for anyone involved in the study of the standard !
@@ -308,7 +308,7 @@ Main source code repository on github at [henrythebuilder/dcm_dict](https://gith
 <hr />
 <ol>
 <li id="fn1-dcm-trademark">
-<p><a href="http://www.dicomstandard.org/" title="DICOM Standard">DICOM<sup>©</sup></a> is the registered trademark of the National Electrical Manufacturers Association for its standards publications relating to digital communications of medical information.
+<p><a href="http://www.dicomstandard.org/" title="DICOM Standard">DICOM<sup>®</sup></a> is the registered trademark of the National Electrical Manufacturers Association for its standards publications relating to digital communications of medical information.
 <a href="#fn-dcm-trademark"  class='footnoteBackLink'  title="Jump back to footnote 1 in the text.">&#x21A9;&#xFE0E;</a></p>
 </li>
 </ol>
