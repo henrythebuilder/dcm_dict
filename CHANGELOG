@@ -1,3 +1,7 @@
+- V0.17.1
+-- Update DICOM reference into 'README'
+-- Update dcm_dict.gemspec
+
 - V0.17.0
 -- Update to 2018a Base Standard
 
