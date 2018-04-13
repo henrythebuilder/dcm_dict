@@ -287,6 +287,7 @@ module DcmDict
       { uid_value: '1.2.840.10008.5.1.4.1.1.90.1', uid_name: "Content Assessment Results Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.104.1', uid_name: "Encapsulated PDF Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.104.2', uid_name: "Encapsulated CDA Storage", uid_type: :sop_class},
+      { uid_value: '1.2.840.10008.5.1.4.1.1.104.3', uid_name: "Encapsulated STL Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.128', uid_name: "Positron Emission Tomography Image Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.128.1', uid_name: "Legacy Converted Enhanced PET Image Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.129', uid_name: "Standalone PET Curve Storage (Retired)", uid_type: :sop_class},
