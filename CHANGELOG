@@ -1,3 +1,6 @@
+- V0.19.0
+-- Update to 2018c Base Standard
+
 - V0.18.1
 -- Updated dcm_dict.gemspec due to a security vulnerabilities into the Nokogiri gem as defined into gemspec (v1.6 to v1.8)
 
