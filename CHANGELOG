@@ -1,3 +1,9 @@
+- V0.20.2
+-- Update Changelog
+
+- V0.20.1
+-- Updated dcm_dict.gemspec for Nokogiri gem due to a security vulnerabilities into libxml2 library (ref 1.8.5).
+
 - V0.20.0
 -- Update to 2018d Base Standard
 
