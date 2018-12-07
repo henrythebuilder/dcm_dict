@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rake',      '~> 10.3', '>= 10.3.0')
   s.metadata = {
   "bug_tracker_uri"   => "https://github.com/henrythebuilder/dcm_dict/issues",
-  "changelog_uri"     => "https://github.com/henrythebuilder/dcm_dict/blob/master/CHANGELOG",
+  "changelog_uri"     => "https://github.com/henrythebuilder/dcm_dict/blob/master/CHANGELOG.md",
   "documentation_uri" => "http://www.rubydoc.info/gems/dcm_dict/" + DcmDict::VERSION.to_s,
   "homepage_uri"      => "http://rubygems.org/gems/dcm_dict",
 #  "mailing_list_uri"  => "",
