@@ -1,5 +1,8 @@
 # DcmDict project Changelog
-___
+
+## v0.21.0 (2018-12-07)
+* Update to 2018e Base Standard
+__
 ## v0.20.3 (2018-12-07)
 * Migrate Changelog file to markdown format (CHANGELOG.md)
 ___
