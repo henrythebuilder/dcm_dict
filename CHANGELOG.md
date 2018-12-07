@@ -1,7 +1,10 @@
 # DcmDict project Changelog
 ___
+## v0.20.3 (2018-12-07)
+* Migrate Changelog file to markdown format (CHANGELOG.md)
+___
 ## v0.20.2 (2018-10-12)
-* Migrate Changelog file to morkdown format (CHANGELOG.md)
+* Update Changelog
 ___
 ## v0.20.1 (2018-10-12)
 * Updated dcm_dict.gemspec for Nokogiri gem due to a security vulnerabilities into libxml2 library (ref 1.8.5).
