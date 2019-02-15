@@ -1,6 +1,10 @@
 # DcmDict project Changelog
 
 ___
+## v0.22.0 (2019-02-15)
+* Update copyright year
+* Update to 2018e Base Standard
+___
 ## v0.21.1 (2018-12-07)
 * Update gemspec (fix CHANGELOG.md file reference)
 ___
