@@ -2,8 +2,8 @@
 
 ___
 ## v0.22.0 (2019-02-15)
+* Update to 2019a Base Standard
 * Update copyright year
-* Update to 2018e Base Standard
 ___
 ## v0.21.1 (2018-12-07)
 * Update gemspec (fix CHANGELOG.md file reference)
