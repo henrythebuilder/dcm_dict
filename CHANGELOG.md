@@ -1,5 +1,8 @@
 # DcmDict project Changelog
 
+## v0.23.0 (2019-05-18)
+* Update to 2019b Base Standard
+* Update source url for xml data
 ___
 ## v0.22.0 (2019-02-15)
 * Update to 2019a Base Standard
