@@ -54,8 +54,8 @@ LICENSE_TEXT=<<END_LICENSE
 END_LICENSE
 
 class DcmDictConverter
-  Part6XmlUrl="ftp://medical.nema.org/medical/dicom/current/source/docbook/part06/part06.xml"
-  Part7XmlUrl="ftp://medical.nema.org/medical/dicom/current/source/docbook/part07/part07.xml"
+  Part6XmlUrl="http://dicom.nema.org/medical/dicom/current/source/docbook/part06/part06.xml"
+  Part7XmlUrl="http://dicom.nema.org/medical/dicom/current/source/docbook/part07/part07.xml"
   DataElementSource={
     Part7XmlUrl => ["table_E.1-1", "table_E.2-1"],
     Part6XmlUrl => ["table_7-1", "table_8-1", "table_6-1"]
