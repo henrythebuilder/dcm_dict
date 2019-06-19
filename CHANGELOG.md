@@ -1,5 +1,10 @@
 # DcmDict project Changelog
 
+___
+## v0.24.0 (2019-06-19)
+* Update to 2019c Base Standard
+* (No Dictionary Change from 2019b)
+___
 ## v0.23.0 (2019-05-18)
 * Update to 2019b Base Standard
 * Update source url for xml data

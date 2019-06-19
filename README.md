@@ -272,7 +272,7 @@ Note: the script use the [Nokogiri][3] as XML parser if installed as gem, otherw
 Check the file for other details.
 
 ## Note
-Current library version is aligned to *DICOM Base Standard* **2019b**
+Current library version is aligned to *DICOM Base Standard* **2019c**
 
 ## Install
 
