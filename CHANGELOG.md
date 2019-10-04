@@ -1,6 +1,9 @@
 # DcmDict project Changelog
 
 ___
+## v0.25.0 (2019-10-04)
+* Update to 2019d Base Standard
+___
 ## v0.24.0 (2019-06-19)
 * Update to 2019c Base Standard
 * (No Dictionary Change from 2019b)
