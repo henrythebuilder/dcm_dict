@@ -1,6 +1,9 @@
 # DcmDict project Changelog
 
 ___
+## v0.26.0 (2019-11-20)
+* Update to 2019e Base Standard
+___
 ## v0.25.0 (2019-10-04)
 * Update to 2019d Base Standard
 ___

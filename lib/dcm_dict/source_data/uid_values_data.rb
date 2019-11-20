@@ -368,6 +368,7 @@ module DcmDict
       { uid_value: '1.2.840.10008.5.1.4.34.6.2', uid_name: "Unified Procedure Step - Watch SOP Class", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.34.6.3', uid_name: "Unified Procedure Step - Pull SOP Class", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.34.6.4', uid_name: "Unified Procedure Step - Event SOP Class", uid_type: :sop_class},
+      { uid_value: '1.2.840.10008.5.1.4.34.6.5', uid_name: "Unified Procedure Step - Query SOP Class", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.34.7', uid_name: "RT Beams Delivery Instruction Storage", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.34.8', uid_name: "RT Conventional Machine Verification", uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.34.9', uid_name: "RT Ion Machine Verification", uid_type: :sop_class},

@@ -148,6 +148,10 @@ module DataElementSampleSpecHelper
       [0x0018,0x1318] => { tag_ps: '(0018,1318)', tag_name: "dB/dt", tag_key: 'dBdt',
                             tag_vr: [:DS], tag_vm: ["1"], tag_str: '(0018,1318)', tag_sym: :db_dt,
                             tag_ndm: '00181318', tag_ary: [0x0018,0x1318], tag_multiple: false,
+                            tag_note: ''},
+      [0x0002,0x0027] => { tag_ps: '(0002,0027)', tag_name: "Sending Presentation Address", tag_key: 'SendingPresentationAddress',
+                            tag_vr: [:UR], tag_vm: ["1"], tag_str: '(0002,0027)', tag_sym: :sending_presentation_address,
+                            tag_ndm: '00020027', tag_ary: [0x0002,0x0027], tag_multiple: false,
                             tag_note: ''}
     }
   end
