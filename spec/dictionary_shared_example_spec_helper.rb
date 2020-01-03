@@ -100,9 +100,9 @@ RSpec.shared_examples "Dictionary Data not modifiable" do |record_key, key, dict
     obj = dictionary.record_at(record_key)
     expect(obj).to be_frozen
     expect{ eval("obj.#{key} << 'aaa'") }.
-      to raise_error(RuntimeError, FrozenStringExMessage)
+      to raise_error(FrozenError)
     expect{ eval("dictionary.feature_at('#{record_key}', #{key.inspect}) << 'aaa'") }.
-      to raise_error(RuntimeError, FrozenStringExMessage)
+      to raise_error(FrozenError)
   end
 end
 

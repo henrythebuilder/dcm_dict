@@ -1,6 +1,10 @@
 # DcmDict project Changelog
 
 ___
+## v0.26.1 (2020-01-03)
+* Fix test to be compatible with ruby 2.7
+* (No Dictionary Change from 2019e)
+___
 ## v0.26.0 (2019-11-20)
 * Update to 2019e Base Standard
 ___
