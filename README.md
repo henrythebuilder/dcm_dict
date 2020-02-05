@@ -295,7 +295,7 @@ There are many possible *candidates* for inclusion in the *dictionary*, here are
 TBD
 
 ## License
-Copyright (C) 2014-2019  Enrico Rivarola.
+Copyright (C) 2014-2020  Enrico Rivarola.
 See the `LICENSE` and `COPYING` files for license details.
 
 ## Ruby Gem

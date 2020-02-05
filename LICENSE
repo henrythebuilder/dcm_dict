@@ -1,7 +1,7 @@
 DcmDict is a Ruby gem (dcm_dict) to handle
 in a simple way the Data defined within the DICOM Standard.
 
-Copyright (C) 2014-2019  Enrico Rivarola
+Copyright (C) 2014-2020  Enrico Rivarola
 
 DcmDict is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

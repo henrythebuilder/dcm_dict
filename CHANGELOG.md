@@ -1,5 +1,7 @@
 # DcmDict project Changelog
 
+## v0.26.2 (2020-02-05)
+* Update copyright year
 ___
 ## v0.26.1 (2020-01-03)
 * Fix test to be compatible with ruby 2.7

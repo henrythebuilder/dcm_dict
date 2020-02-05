@@ -1,5 +1,5 @@
 #
-#  Copyright (C) 2014-2019  Enrico Rivarola
+#  Copyright (C) 2014-2020  Enrico Rivarola
 #
 #  This file is part of DcmDict gem (dcm_dict).
 #
@@ -22,6 +22,6 @@
 #  applicable local, state, national or international regulations.
 #
 module DcmDict
-  VERSION = "0.26.1"
+  VERSION = "0.26.2"
   DICOM_DOC_VERSION = "2019e"
 end
