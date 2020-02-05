@@ -4,11 +4,8 @@
 # Why *DcmDict*
 With the new releases from year 2014 DICOM documents are available in different format including one particularly interesting, the *DocBook* XML version.
 
-As D. Clunie writes on his web site in the [DICOM Standard Status page][2]:
-> "... other formats (such as DocBook, HTML, Word and ODT) are also made available for the convenience of implementors who may need to extract machine-readable content, ..."
-
-This is confirmed in the DICOM<sup>®</sup> Standard [web site][10] where each part is published in [multiple formats][11] and the XML format is defined:
->"... good for machine readability, e.g. self-updating validators ..."
+As confirmed in the DICOM<sup>®</sup> Standard [web site][10] where each part is published in [multiple formats][11] and XML format is defined by:
+>"... XML – good for machine readability, e.g. self-updating validators ..."
 
 This is great news for anyone involved in the study of the standard !
 
@@ -272,7 +269,7 @@ Note: the script use the [Nokogiri][3] as XML parser if installed as gem, otherw
 Check the file for other details.
 
 ## Note
-Current library version is aligned to *DICOM Base Standard* **2019e**
+Current library version is aligned to *DICOM Base Standard* **2020a**
 
 ## Install
 

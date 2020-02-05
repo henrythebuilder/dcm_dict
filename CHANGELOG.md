@@ -1,5 +1,8 @@
 # DcmDict project Changelog
 
+## v0.27.0 (2020-02-05)
+* Update to 2020a Base Standard
+___
 ## v0.26.2 (2020-02-05)
 * Update copyright year
 ___
