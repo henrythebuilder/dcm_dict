@@ -1,5 +1,20 @@
 # DcmDict project Changelog
 
+## v0.28.1 (2020-03-18)
+* Updated dcm_dict.gemspec due to a security vulnerabilities into the Rake gem as defined into gemspec (>=10.3 to >=12.3.3)
+#### Note for gemspec security report:
+>rake vulnerability found in dcm_dict.gemspec:
+>CVE-2020-8130 (moderate severity)
+>Vulnerable versions: <= 12.3.2
+>Patched version: 12.3.3
+>There is an OS command injection vulnerability in Ruby Rake before 12.3.3 in Rake::FileList when supplying a filename that begins with the pipe character |.
+>
+>Remediation:
+>Upgrade rake to version 12.3.3 or later.
+>
+>["OS Command Injection in Rake"](https://github.com/advisories/GHSA-jppv-gw3r-w3q8)
+>["CVE-2020-8130 Detail"](https://nvd.nist.gov/vuln/detail/CVE-2020-8130)
+___
 ## v0.28.0 (2020-03-18)
 * Update to 2020b Base Standard
 * Remove warning for deprecated method 'Kernel#open'

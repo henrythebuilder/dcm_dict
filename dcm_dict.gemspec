@@ -19,10 +19,10 @@ Gem::Specification.new do |s|
   s.homepage      = 'http://rubygems.org/gems/dcm_dict'
   s.license       = 'GPL-3.0+'
   s.required_ruby_version = '>= 2.1'
-  s.add_development_dependency('nokogiri',  '~> 1.8',  '>= 1.8.5')
-  s.add_development_dependency('rspec',     '~> 3.0',  '>= 3.0.0')
-  s.add_development_dependency('simplecov', '~> 0.8',  '>= 0.8.2')
-  s.add_development_dependency('rake',      '~> 10.3', '>= 10.3.0')
+  s.add_development_dependency('nokogiri',  '~> 1.8',   '>= 1.8.5')
+  s.add_development_dependency('rspec',     '~> 3.0',   '>= 3.0.0')
+  s.add_development_dependency('simplecov', '~> 0.8',   '>= 0.8.2')
+  s.add_development_dependency('rake',      '~> 12.3.3','>= 12.3.3')
   s.metadata = {
   "bug_tracker_uri"   => "https://github.com/henrythebuilder/dcm_dict/issues",
   "changelog_uri"     => "https://github.com/henrythebuilder/dcm_dict/blob/master/CHANGELOG.md",
