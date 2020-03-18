@@ -89,7 +89,7 @@ class DcmDictConverter
   def pull_standard_draft(url, output)
     buffer_size = 256 * 1_024
     trace("Downloading #{url}\n")
-    open(url, "r",
+    URI.open(url, "r",
          :content_length_proc => lambda {|content_length| trace("Content Length: #{content_length} bytes\n.") },
          :progress_proc => lambda { |size| trace(".") }) do |src|
       while (buffer = src.read(buffer_size))
