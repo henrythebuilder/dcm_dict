@@ -31,21 +31,27 @@ describe DcmDict::Dictionary::UidDictionary do
                    [:uid_value, :uid_name, :uid_type]
 
   {
-    '1.2.3.4.5.6' => { :uid_value => '1.2.3.4.5.6',
-                       :uid_name => 'Unknown UID',
-                       :uid_type => :unknown },
+    '1.2.3.4.5.6'                   => { :uid_value => '1.2.3.4.5.6',
+                                         :uid_name  => 'Unknown UID',
+                                         :uid_type  => :unknown },
     '1.2.840.10008.5.1.4.1.1.12.77' => { :uid_value => '1.2.840.10008.5.1.4.1.1.12.77',
-                                         :uid_name => '1.2.840.10008.5.1.4.1.1.12.77 (Retired)',
-                                         :uid_type => :sop_class },
-    '1.2.840.10008.5.1.4.1.1.40' => { :uid_value => '1.2.840.10008.5.1.4.1.1.40',
-                                      :uid_name => '1.2.840.10008.5.1.4.1.1.40 (Retired)',
-                                      :uid_type => :sop_class },
-    '1.2.840.10008.5.1.4.39.3' => { :uid_value => '1.2.840.10008.5.1.4.39.3',
-                                      :uid_name => 'Color Palette Query/Retrieve Information Model - MOVE',
-                                      :uid_type => :sop_class },
-    '1.2.840.10008.5.1.4.34.6.5' => { :uid_value => '1.2.840.10008.5.1.4.34.6.5',
-                                      :uid_name => 'Unified Procedure Step - Query SOP Class',
-                                      :uid_type => :sop_class }
+                                         :uid_name  => '1.2.840.10008.5.1.4.1.1.12.77 (Retired)',
+                                         :uid_type  => :sop_class },
+    '1.2.840.10008.5.1.4.1.1.40'    => { :uid_value => '1.2.840.10008.5.1.4.1.1.40',
+                                         :uid_name  => '1.2.840.10008.5.1.4.1.1.40 (Retired)',
+                                         :uid_type  => :sop_class },
+    '1.2.840.10008.5.1.4.39.3'      => { :uid_value => '1.2.840.10008.5.1.4.39.3',
+                                         :uid_name  => 'Color Palette Query/Retrieve Information Model - MOVE',
+                                         :uid_type  => :sop_class },
+    '1.2.840.10008.5.1.4.34.6.5'    => { :uid_value => '1.2.840.10008.5.1.4.34.6.5',
+                                         :uid_name  => 'Unified Procedure Step - Query SOP Class',
+                                         :uid_type  => :sop_class },
+    '1.2.840.10008.1.2.4.70'        => { :uid_value => '1.2.840.10008.1.2.4.70',
+                                         :uid_name  => "JPEG Lossless, Non-Hierarchical, First-Order Prediction (Process 14 [Selection Value 1]): Default Transfer Syntax for Lossless JPEG Image Compression",
+                                         :uid_type  => :transfer_syntax},
+    '1.2.840.10008.1.2.4.60'        => { :uid_value => '1.2.840.10008.1.2.4.60',
+                                         :uid_name  => 'JPEG Extended, Hierarchical (Process 1719) (Retired)',
+                                         :uid_type  => :transfer_syntax }
   }.each do |uid, data|
     include_examples "Handle specific record", data[:uid_name],
                      uid, data, DcmDict::Dictionary::TheUidDictionary

@@ -152,7 +152,11 @@ module DataElementSampleSpecHelper
       [0x0002,0x0027] => { tag_ps: '(0002,0027)', tag_name: "Sending Presentation Address", tag_key: 'SendingPresentationAddress',
                             tag_vr: [:UR], tag_vm: ["1"], tag_str: '(0002,0027)', tag_sym: :sending_presentation_address,
                             tag_ndm: '00020027', tag_ary: [0x0002,0x0027], tag_multiple: false,
-                            tag_note: ''}
+                            tag_note: ''},
+      [0x3010,0x0096] => { tag_ps: '(3010,0096)', tag_name: "Radiation Source Coordinate System Pitch Angle",
+                           tag_key: 'RadiationSourceCoordinateSystemPitchAngle', tag_vr: [:FD], tag_vm: ["1"], tag_str: '(3010,0096)',
+                           tag_sym: :radiation_source_coordinate_system_pitch_angle, tag_ndm: '30100096',
+                           tag_ary: [0x3010,0x0096], tag_multiple: false, tag_note: ''}
     }
   end
 

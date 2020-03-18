@@ -1,5 +1,9 @@
 # DcmDict project Changelog
 
+## v0.28.0 (2020-03-18)
+* Update to 2020b Base Standard
+* Remove warning for deprecated method 'Kernel#open'
+___
 ## v0.27.0 (2020-02-05)
 * Update to 2020a Base Standard
 ___
