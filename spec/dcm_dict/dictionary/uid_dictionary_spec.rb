@@ -50,8 +50,11 @@ describe DcmDict::Dictionary::UidDictionary do
                                          :uid_name  => "JPEG Lossless, Non-Hierarchical, First-Order Prediction (Process 14 [Selection Value 1]): Default Transfer Syntax for Lossless JPEG Image Compression",
                                          :uid_type  => :transfer_syntax},
     '1.2.840.10008.1.2.4.60'        => { :uid_value => '1.2.840.10008.1.2.4.60',
-                                         :uid_name  => 'JPEG Extended, Hierarchical (Process 1719) (Retired)',
-                                         :uid_type  => :transfer_syntax }
+                                         :uid_name  => 'JPEG Extended, Hierarchical (Process 17 & 19) (Retired)',
+                                         :uid_type  => :transfer_syntax },
+    '1.2.840.10008.5.1.4.1.1.481.19'=> { :uid_value => '1.2.840.10008.5.1.4.1.1.481.19',
+                                         :uid_name  => "C-Arm Photon-Electron Radiation Record Storage",
+                                         :uid_type  => :sop_class},
   }.each do |uid, data|
     include_examples "Handle specific record", data[:uid_name],
                      uid, data, DcmDict::Dictionary::TheUidDictionary

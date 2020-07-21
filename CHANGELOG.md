@@ -1,5 +1,8 @@
 # DcmDict project Changelog
 
+## v0.29.0 (2020-07-21)
+* Update to 2020c Base Standard
+___
 ## v0.28.1 (2020-03-18)
 * Updated dcm_dict.gemspec due to a security vulnerabilities into the Rake gem as defined into gemspec (>=10.3 to >=12.3.3)
 #### Note for gemspec security report:
