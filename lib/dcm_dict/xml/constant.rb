@@ -32,7 +32,8 @@ module DcmDict
 
     UidNodeSetIdx = { uid_value: 0,
                       uid_name: 1,
-                      uid_type: 2}.freeze
+                      uid_key: 2,
+                      uid_type: 3}.freeze
 
   end
 end

@@ -44,10 +44,12 @@ module DcmDict
       def extract_base_data
         value = extract_content_data(:uid_value)
         type = extract_content_data(:uid_type).uid_type_to_sym
+        key = extract_content_data(:uid_key)
         name = check_uid_name_for(extract_content_data(:uid_name), value, type)
         { uid_value: value,
           uid_name: name,
-          uid_type: type }
+          uid_type: type,
+          uid_key: key }
       end
 
       # patch for 2016a source data ...

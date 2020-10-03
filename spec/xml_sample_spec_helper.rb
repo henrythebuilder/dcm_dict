@@ -502,26 +502,32 @@ END
   end
 
   def self.uid_single_standard
-    xml_string=<<END
+       xml_string=<<END
 <book xmlns="http://docbook.org/ns/docbook">
-        <tr valign="top">
-          <td align="left" colspan="1" rowspan="1">
-            <para>1.2.840.10008.1.​2</para>
-          </td>
-          <td align="left" colspan="1" rowspan="1">
-            <para>Implicit VR Little Endian: Default Transfer Syntax for DICOM</para>
-          </td>
-          <td align="left" colspan="1" rowspan="1">
-            <para>Transfer Syntax</para>
-          </td>
-          <td align="center" colspan="1" rowspan="1">
-            <para><olink targetdoc="PS3.5" targetptr="PS3.5" xrefstyle="select: labelnumber"/></para>
-          </td>
-        </tr>
+<tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_893becfb-16cd-4300-923d-e422781af211">1.2.840.10008.1.​2</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_ccbbb435-5d2e-4d4d-b2c2-a27a5a762f75">Implicit VR Little Endian: Default Transfer Syntax for DICOM</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_6871172d-db56-4b45-b5d5-446f82a22c89">Implicit​VR​Little​Endian</para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_6e075f3d-2392-4c57-908c-889b50ebcbcd">Transfer Syntax</para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_c2a11bee-08cc-422f-a64c-01dcb4baf73b">
+                            <olink targetdoc="PS3.5" targetptr="PS3.5" xrefstyle="select: labelnumber"/>
+                        </para>
+                    </td>
+                </tr>
 </book>
 END
     data = {uid_value: "1.2.840.10008.1.2",
             uid_name: "Implicit VR Little Endian: Default Transfer Syntax for DICOM",
+            uid_key: 'ImplicitVRLittleEndian',
             uid_type: :transfer_syntax}
     {xml_string => data}
   end
@@ -529,39 +535,78 @@ END
   def self.uid_sample_retired_noname
     xml_string=<<END
 <book xmlns="http://docbook.org/ns/docbook">
-       <tr valign="top">
-          <td align="left" colspan="1" rowspan="1">
-            <para xml:id="para_0b48f6f3-b2fe-49cf-a870-c6d3635f4266">
-<emphasis role="italic">1.2.840.10008.​5.​1.​4.​1.​1.​12.​77</emphasis>
-</para>
-          </td>
-          <td align="left" colspan="1" rowspan="1">
-            <para xml:id="para_6ca19788-eac9-4d90-b754-aaa06bebe9e9">
-<emphasis role="italic">(Retired)</emphasis>
-</para>
-          </td>
-          <td align="left" colspan="1" rowspan="1">
-            <para xml:id="para_ca5d2e50-63ea-4008-80ae-896296e83fdd">
-<emphasis role="italic">SOP Class</emphasis>
-</para>
-          </td>
-          <td align="center" colspan="1" rowspan="1">
-            <para xml:id="para_178cccfe-86a2-41a1-b905-70e5fbc5eebf">
+<tr valign="top">
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_0b48f6f3-b2fe-49cf-a870-c6d3635f4266">
+                            <emphasis role="italic">1.2.840.10008.​5.​1.​4.​1.​1.​12.​77</emphasis>
+                        </para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_6ca19788-eac9-4d90-b754-aaa06bebe9e9">
+                            <emphasis role="italic">(Retired)</emphasis>
+                        </para>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_336821ef-5d70-4332-9b88-f4704825ac91">
 <emphasis role="italic"/>
 </para>
-          </td>
-        </tr>
+                    </td>
+                    <td align="left" colspan="1" rowspan="1">
+                        <para xml:id="para_ca5d2e50-63ea-4008-80ae-896296e83fdd">
+                            <emphasis role="italic">SOP Class</emphasis>
+                        </para>
+                    </td>
+                    <td align="center" colspan="1" rowspan="1">
+                        <para xml:id="para_178cccfe-86a2-41a1-b905-70e5fbc5eebf">
+                            <emphasis role="italic">(2015c)</emphasis>
+                        </para>
+                    </td>
+                </tr>
 </book>
 END
     data = {uid_value: "1.2.840.10008.5.1.4.1.1.12.77",
             uid_name: "1.2.840.10008.5.1.4.1.1.12.77 (Retired)",
+            uid_key: "",
+            uid_type: :sop_class}
+    {xml_string => data}
+  end
+
+  def self.uid_standard_sop
+    xml_string=<<END
+<book xmlns="http://docbook.org/ns/docbook">
+<tr valign="top">
+          <td align="left" colspan="1" rowspan="1">
+            <para xml:id="para_de68fe97-b7cf-497e-af8f-a653669ac4e4">1.2.840.10008.1.​1</para>
+          </td>
+          <td align="left" colspan="1" rowspan="1">
+            <para xml:id="para_935df29c-2e6c-4d50-aa93-83225337b0ba">Verification SOP Class</para>
+          </td>
+          <td align="left" colspan="1" rowspan="1">
+            <para xml:id="para_5b280f39-109f-416f-bbc7-fb65409d9574">Verification</para>
+          </td>
+          <td align="left" colspan="1" rowspan="1">
+            <para xml:id="para_5e8dcea9-7c49-4751-b561-ca8a41698555">SOP Class</para>
+          </td>
+          <td align="center" colspan="1" rowspan="1">
+            <para xml:id="para_d37461b4-5537-4bf6-98b1-ded888b9b028">
+               <olink targetdoc="PS3.4" targetptr="PS3.4" xrefstyle="select: labelnumber"/>
+            </para>
+          </td>
+        </tr>
+
+</book>
+END
+    data = {uid_value: "1.2.840.10008.1.1",
+            uid_name: "Verification SOP Class",
+            uid_key: 'Verification',
             uid_type: :sop_class}
     {xml_string => data}
   end
 
   def self.xml_uid_set
     {}.merge(uid_single_standard).
-      merge(uid_sample_retired_noname)
+      merge(uid_sample_retired_noname).
+      merge(uid_standard_sop)
   end
 
 end
