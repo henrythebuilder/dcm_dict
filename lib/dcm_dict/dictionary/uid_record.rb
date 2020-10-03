@@ -25,8 +25,12 @@ require_relative 'base_record'
 
 module DcmDict
   module Dictionary
+    using DcmDict::Refine::Internal::HashRefineInternal
+
     UidMethodMap = {uid_value: :uid_value,
                     uid: :uid_value,
+                    uid_key: :uid_key,
+                    uid_sym: :uid_sym,
                     uid_name: :uid_name,
                     uid_type: :uid_type }.freeze
 
@@ -35,6 +39,7 @@ module DcmDict
     # Class to handle uid record from source dictionary data
     class UidRecord < BaseRecord
       def initialize(data)
+        data.check_base_data_uid_field!
         super
       end
 

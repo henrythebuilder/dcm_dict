@@ -26,6 +26,24 @@ require 'spec_helper'
 describe "Hash internal refinement" do
   using DcmDict::Refine::Internal::HashRefineInternal
 
+  {
+    '1.2.3.4.5.6' =>  { :uid_value => '1.2.3.4.5.6',
+                        :uid_name  => '1.2.3.4.5.6 (Unknown UID)',
+                        :uid_type  => :unknown,
+                        :uid_key   => 'UID_1_2_3_4_5_6',
+                        :uid_sym   => :uid_1_2_3_4_5_6,
+                      }
+  }.each do |uid_ref, expected_data|
+    it "should check base uid fields for '#{uid_ref}" do
+      data = {uid_value: uid_ref}
+      data.check_base_data_uid_field!
+      expect(data).to eq(expected_data)
+    end
+
+  end
+
+
+
   it "should check for lowercase tag_ps field" do
     h = {tag_ps: '(fffe,E000)'}
     h.check_tag_ps!

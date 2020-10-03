@@ -40,7 +40,7 @@ module DcmDict
       def uid_data
         extract_base_data
         @data.check_base_data_uid_field!
-        extend_base_data
+        # extend_base_data
         @data
       end
 
@@ -56,9 +56,9 @@ module DcmDict
                   uid_key: key }
       end
 
-      def extend_base_data
-        @data[:uid_sym] = @data[:uid_key].tag_key_to_sym
-      end
+      # def extend_base_data
+      #   @data[:uid_sym] = @data[:uid_key].tag_key_to_sym
+      # end
 
       # patch for 2016a source data ...
       def check_uid_name_for(name, value, type)

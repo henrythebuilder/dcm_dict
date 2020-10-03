@@ -25,7 +25,7 @@ module DcmDict
   module Dictionary
     using DcmDict::Refine::Internal::StringRefineInternal
 
-    UidIndexKey = [:uid_value, :uid_name]
+    UidIndexKey = [:uid_value, :uid_name, :uid_key, :uid_sym]
 
     # Main class to handle uid data as dictionary
     class UidDictionary < BaseDictionary
@@ -70,9 +70,7 @@ module DcmDict
 
       def try_to_find_unknown_uid(uid)
         raise "Unknown UID value" unless uid.uid_value?
-        UidRecord.new({ uid_value: uid,
-                        uid_name: 'Unknown UID',
-                        uid_type: :unknown })
+        UidRecord.new({ uid_value: uid })
       end
     end
 

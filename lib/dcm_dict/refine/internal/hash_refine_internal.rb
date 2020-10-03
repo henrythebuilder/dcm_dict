@@ -25,6 +25,7 @@ module DcmDict
   module Refine
     module Internal
       module HashRefineInternal
+        using DcmDict::Refine::Internal::StringRefineInternal
 
         refine Hash do
           # Check/update content for data tag field
@@ -64,6 +65,9 @@ module DcmDict
               new_key = uid_value.gsub('.','_')
               "UID_#{new_key}"
             end
+            fill_nil_or_empty_value(:uid_sym) { self[:uid_key].tag_key_to_sym }
+            fill_nil_or_empty_value(:uid_name) { "#{self[:uid_value]} (Unknown UID)" }
+            fill_nil_or_empty_value(:uid_type) { :unknown }
           end
 
           private

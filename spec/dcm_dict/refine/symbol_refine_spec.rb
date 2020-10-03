@@ -38,4 +38,29 @@ describe "Symbol refinement" do
                    [],
                    Proc.new {|tag| tag.inspect}
 
+  {
+    :uid_1_2_840_10008_5_1_4_1_1_12_77 => { :uid_value => '1.2.840.10008.5.1.4.1.1.12.77',
+                                            :uid       => '1.2.840.10008.5.1.4.1.1.12.77',
+                                            :uid_name  => '1.2.840.10008.5.1.4.1.1.12.77 (Retired)',
+                                            :uid_key   => 'UID_1_2_840_10008_5_1_4_1_1_12_77',
+                                            :uid_sym   => :uid_1_2_840_10008_5_1_4_1_1_12_77,
+                                            :uid_type  => :sop_class
+                                          },
+    :color_palette_query_retrieve_information_model_move    => { :uid_value => '1.2.840.10008.5.1.4.39.3',
+                                                                 :uid       => '1.2.840.10008.5.1.4.39.3',
+                                                                 :uid_name  => 'Color Palette Query/Retrieve Information Model - MOVE',
+                                                                 :uid_key   => 'ColorPaletteQueryRetrieveInformationModelMove',
+                                                                 :uid_sym   => :color_palette_query_retrieve_information_model_move,
+                                                                 :uid_type  => :sop_class
+                                                               },
+  }.each do |sym, sym_data|
+    it "for uid as symbol (#{sym.inspect})" do
+      DcmDict::Dictionary::UidMethod.each do |method|
+        expr = "#{sym.inspect}.#{method.to_s}"
+        expected_value = sym_data[method]
+        value = eval(expr)
+        expect(value).to eq(expected_value)
+      end
+    end
+  end
 end

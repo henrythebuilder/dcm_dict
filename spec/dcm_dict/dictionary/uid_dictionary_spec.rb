@@ -24,37 +24,73 @@ require 'spec_helper'
 describe DcmDict::Dictionary::UidDictionary do
 
   include_examples "Map all source data",
-                   [:uid_value, :uid_name],
+                   [:uid_value, :uid_name, :uid_key, :uid_sym],
                    DcmDict::SourceData::UidValuesData,
                    DcmDict::Dictionary::TheUidDictionary,
                    DcmDict::Dictionary::UidRecord,
-                   [:uid_value, :uid_name, :uid_type]
+                   [:uid_value, :uid_name, :uid_key, :uid_sym, :uid_type]
 
   {
     '1.2.3.4.5.6'                   => { :uid_value => '1.2.3.4.5.6',
-                                         :uid_name  => 'Unknown UID',
-                                         :uid_type  => :unknown },
+                                         :uid_name  => '1.2.3.4.5.6 (Unknown UID)',
+                                         :uid_type  => :unknown,
+                                         :uid_key   => 'UID_1_2_3_4_5_6',
+                                         :uid_sym   => :uid_1_2_3_4_5_6,
+                                       },
     '1.2.840.10008.5.1.4.1.1.12.77' => { :uid_value => '1.2.840.10008.5.1.4.1.1.12.77',
                                          :uid_name  => '1.2.840.10008.5.1.4.1.1.12.77 (Retired)',
-                                         :uid_type  => :sop_class },
+                                         :uid_key   => 'UID_1_2_840_10008_5_1_4_1_1_12_77',
+                                         :uid_sym   => :uid_1_2_840_10008_5_1_4_1_1_12_77,
+                                         :uid_type  => :sop_class
+                                       },
+    '1.2.840.10008.5.1.4.1.1.12.77 (Retired)' => { :uid_value => '1.2.840.10008.5.1.4.1.1.12.77',
+                                         :uid_name  => '1.2.840.10008.5.1.4.1.1.12.77 (Retired)',
+                                         :uid_key   => 'UID_1_2_840_10008_5_1_4_1_1_12_77',
+                                         :uid_sym   => :uid_1_2_840_10008_5_1_4_1_1_12_77,
+                                         :uid_type  => :sop_class
+                                       },
+    'UID_1_2_840_10008_5_1_4_1_1_12_77' => { :uid_value => '1.2.840.10008.5.1.4.1.1.12.77',
+                                         :uid_name  => '1.2.840.10008.5.1.4.1.1.12.77 (Retired)',
+                                         :uid_key   => 'UID_1_2_840_10008_5_1_4_1_1_12_77',
+                                         :uid_sym   => :uid_1_2_840_10008_5_1_4_1_1_12_77,
+                                         :uid_type  => :sop_class
+                                       },
+    :uid_1_2_840_10008_5_1_4_1_1_12_77 => { :uid_value => '1.2.840.10008.5.1.4.1.1.12.77',
+                                         :uid_name  => '1.2.840.10008.5.1.4.1.1.12.77 (Retired)',
+                                         :uid_key   => 'UID_1_2_840_10008_5_1_4_1_1_12_77',
+                                         :uid_sym   => :uid_1_2_840_10008_5_1_4_1_1_12_77,
+                                         :uid_type  => :sop_class
+                                       },
     '1.2.840.10008.5.1.4.1.1.40'    => { :uid_value => '1.2.840.10008.5.1.4.1.1.40',
                                          :uid_name  => '1.2.840.10008.5.1.4.1.1.40 (Retired)',
-                                         :uid_type  => :sop_class },
+                                         :uid_key   => 'UID_1_2_840_10008_5_1_4_1_1_40',
+                                         :uid_sym   => :uid_1_2_840_10008_5_1_4_1_1_40,
+                                         :uid_type  => :sop_class
+                                       },
     '1.2.840.10008.5.1.4.39.3'      => { :uid_value => '1.2.840.10008.5.1.4.39.3',
                                          :uid_name  => 'Color Palette Query/Retrieve Information Model - MOVE',
-                                         :uid_type  => :sop_class },
-    '1.2.840.10008.5.1.4.34.6.5'    => { :uid_value => '1.2.840.10008.5.1.4.34.6.5',
-                                         :uid_name  => 'Unified Procedure Step - Query SOP Class',
-                                         :uid_type  => :sop_class },
-    '1.2.840.10008.1.2.4.70'        => { :uid_value => '1.2.840.10008.1.2.4.70',
-                                         :uid_name  => "JPEG Lossless, Non-Hierarchical, First-Order Prediction (Process 14 [Selection Value 1]): Default Transfer Syntax for Lossless JPEG Image Compression",
-                                         :uid_type  => :transfer_syntax},
-    '1.2.840.10008.1.2.4.60'        => { :uid_value => '1.2.840.10008.1.2.4.60',
-                                         :uid_name  => 'JPEG Extended, Hierarchical (Process 17 & 19) (Retired)',
-                                         :uid_type  => :transfer_syntax },
-    '1.2.840.10008.5.1.4.1.1.481.19'=> { :uid_value => '1.2.840.10008.5.1.4.1.1.481.19',
-                                         :uid_name  => "C-Arm Photon-Electron Radiation Record Storage",
-                                         :uid_type  => :sop_class},
+                                         :uid_key   => 'ColorPaletteQueryRetrieveInformationModelMove',
+                                         :uid_sym   => :color_palette_query_retrieve_information_model_move,
+                                         :uid_type  => :sop_class
+                                       },
+    'Color Palette Query/Retrieve Information Model - MOVE' => { :uid_value => '1.2.840.10008.5.1.4.39.3',
+                                         :uid_name  => 'Color Palette Query/Retrieve Information Model - MOVE',
+                                         :uid_key   => 'ColorPaletteQueryRetrieveInformationModelMove',
+                                         :uid_sym   => :color_palette_query_retrieve_information_model_move,
+                                         :uid_type  => :sop_class
+                                       },
+    'ColorPaletteQueryRetrieveInformationModelMove'         => { :uid_value => '1.2.840.10008.5.1.4.39.3',
+                                         :uid_name  => 'Color Palette Query/Retrieve Information Model - MOVE',
+                                         :uid_key   => 'ColorPaletteQueryRetrieveInformationModelMove',
+                                         :uid_sym   => :color_palette_query_retrieve_information_model_move,
+                                         :uid_type  => :sop_class
+                                       },
+    :color_palette_query_retrieve_information_model_move    => { :uid_value => '1.2.840.10008.5.1.4.39.3',
+                                         :uid_name  => 'Color Palette Query/Retrieve Information Model - MOVE',
+                                         :uid_key   => 'ColorPaletteQueryRetrieveInformationModelMove',
+                                         :uid_sym   => :color_palette_query_retrieve_information_model_move,
+                                         :uid_type  => :sop_class
+                                       },
   }.each do |uid, data|
     include_examples "Handle specific record", data[:uid_name],
                      uid, data, DcmDict::Dictionary::TheUidDictionary
@@ -64,7 +100,7 @@ describe DcmDict::Dictionary::UidDictionary do
     '1.2.abc.3.4', 'this string is not a valid uid', '1.2.3.04.5'
   ].each do |uid|
     include_examples "Dictionary with wrong key",
-                     uid, [:uid_value, :uid_name, :uid_type],
+                     uid, [:uid_value, :uid_name, :uid_type, :uid_key, :uid_sym],
                      DcmDict::Dictionary::TheUidDictionary
   end
 

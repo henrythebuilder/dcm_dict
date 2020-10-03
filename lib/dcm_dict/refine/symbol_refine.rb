@@ -27,6 +27,7 @@ module DcmDict
 
       refine Symbol do
         include DcmDict::Refine::DataElementRefine
+        include DcmDict::Refine::UidRefine
       end
 
     end
