@@ -27,6 +27,7 @@ module DcmDict
     # Class to handle uid data
     class UidFieldData < FieldData
       using DcmDict::Refine::Internal::StringRefineInternal
+      using DcmDict::Refine::Internal::HashRefineInternal
 
       MISSING_NAME_VALUE = "(Retired)"
 
@@ -38,6 +39,9 @@ module DcmDict
       # Extract and build uid data
       def uid_data
         extract_base_data
+        @data.check_base_data_uid_field!
+        extend_base_data
+        @data
       end
 
       private
@@ -46,10 +50,14 @@ module DcmDict
         type = extract_content_data(:uid_type).uid_type_to_sym
         key = extract_content_data(:uid_key)
         name = check_uid_name_for(extract_content_data(:uid_name), value, type)
-        { uid_value: value,
-          uid_name: name,
-          uid_type: type,
-          uid_key: key }
+        @data = { uid_value: value,
+                  uid_name: name,
+                  uid_type: type,
+                  uid_key: key }
+      end
+
+      def extend_base_data
+        @data[:uid_sym] = @data[:uid_key].tag_key_to_sym
       end
 
       # patch for 2016a source data ...

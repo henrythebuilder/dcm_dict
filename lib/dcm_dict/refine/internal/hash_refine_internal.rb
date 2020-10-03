@@ -57,6 +57,15 @@ module DcmDict
             fill_nil_or_empty_value(:tag_vm) { ['1'] }
           end
 
+          def check_base_data_uid_field!
+            uid_value = self[:uid_value]
+            raise "Missing uid_value field" if uid_value.nil_or_empty?
+            fill_nil_or_empty_value(:uid_key) do
+              new_key = uid_value.gsub('.','_')
+              "UID_#{new_key}"
+            end
+          end
+
           private
           def fill_nil_or_empty_value(key)
             if self[key].nil_or_empty?

@@ -528,6 +528,7 @@ END
     data = {uid_value: "1.2.840.10008.1.2",
             uid_name: "Implicit VR Little Endian: Default Transfer Syntax for DICOM",
             uid_key: 'ImplicitVRLittleEndian',
+            uid_sym: :implicit_vr_little_endian,
             uid_type: :transfer_syntax}
     {xml_string => data}
   end
@@ -566,7 +567,8 @@ END
 END
     data = {uid_value: "1.2.840.10008.5.1.4.1.1.12.77",
             uid_name: "1.2.840.10008.5.1.4.1.1.12.77 (Retired)",
-            uid_key: "",
+            uid_key: 'UID_1_2_840_10008_5_1_4_1_1_12_77',
+            uid_sym: :uid_1_2_840_10008_5_1_4_1_1_12_77,
             uid_type: :sop_class}
     {xml_string => data}
   end
@@ -599,6 +601,7 @@ END
     data = {uid_value: "1.2.840.10008.1.1",
             uid_name: "Verification SOP Class",
             uid_key: 'Verification',
+            uid_sym: :verification,
             uid_type: :sop_class}
     {xml_string => data}
   end
