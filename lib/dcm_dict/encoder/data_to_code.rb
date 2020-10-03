@@ -72,7 +72,7 @@ END
       # Convert uid +data+ to Ruby code using +indent+ spaces indentation
       def self.uid_data_to_code(data, indent=4)
         indent = 4 unless indent
-        "#{' '*indent}{ uid_value: '#{data[:uid_value]}', uid_name: \"#{data[:uid_name]}\", uid_type: #{data[:uid_type].inspect}},"
+        "#{' '*indent}{ uid_value: '#{data[:uid_value]}', uid_name: '#{data[:uid_name]}', uid_key: '#{data[:uid_key]}', uid_sym: #{data[:uid_sym].inspect}, uid_type: #{data[:uid_type].inspect}},"
       end
     end
   end

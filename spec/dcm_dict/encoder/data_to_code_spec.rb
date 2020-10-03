@@ -92,7 +92,7 @@ END
       XmlSampleSpecHelper.xml_uid_set.each do |xml_string, data|
       it "for uid sample as #{data[:uid_value].inspect}" do
         indent = 4
-        src_text = "#{' '*indent}{ uid_value: '#{data[:uid_value]}', uid_name: \"#{data[:uid_name]}\", uid_type: #{data[:uid_type].inspect}},"
+        src_text = "#{' '*indent}{ uid_value: '#{data[:uid_value]}', uid_name: '#{data[:uid_name]}', uid_key: '#{data[:uid_key]}', uid_sym: #{data[:uid_sym].inspect}, uid_type: #{data[:uid_type].inspect}},"
         src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(data)
         expect(src_line).to eq(src_text)
         src_line = DcmDict::Encoder::DataToCode.uid_data_to_code(data, indent)
