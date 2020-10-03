@@ -1,5 +1,9 @@
 # DcmDict project Changelog
 
+## v0.30.0 (2020-10-03)
+* Update to 2020d Base Standard
+* Add keywords support for standard UIDs
+___
 ## v0.29.0 (2020-07-21)
 * Update to 2020c Base Standard
 ___
