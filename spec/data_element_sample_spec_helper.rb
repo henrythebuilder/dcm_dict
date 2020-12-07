@@ -156,7 +156,13 @@ module DataElementSampleSpecHelper
       [0x3010,0x0096] => { tag_ps: '(3010,0096)', tag_name: "Radiation Source Coordinate System Pitch Angle",
                            tag_key: 'RadiationSourceCoordinateSystemPitchAngle', tag_vr: [:FD], tag_vm: ["1"], tag_str: '(3010,0096)',
                            tag_sym: :radiation_source_coordinate_system_pitch_angle, tag_ndm: '30100096',
-                           tag_ary: [0x3010,0x0096], tag_multiple: false, tag_note: ''}
+                           tag_ary: [0x3010,0x0096], tag_multiple: false, tag_note: ''},
+      [0x0016,0x1002] => { tag_ps: '(0016,1002)', tag_name: "Emitter Color Temperature", tag_key: 'EmitterColorTemperature',
+                           tag_vr: [:DS], tag_vm: ["1"], tag_str: '(0016,1002)', tag_sym: :emitter_color_temperature,
+                           tag_ndm: '00161002', tag_ary: [0x0016,0x1002], tag_multiple: false, tag_note: ''},
+      [0x0072,0x0082] => { tag_ps: '(0072,0082)', tag_name: "Selector SV Value", tag_key: 'SelectorSVValue',
+                           tag_vr: [:SV], tag_vm: ["1-n"], tag_str: '(0072,0082)', tag_sym: :selector_sv_value,
+                           tag_ndm: '00720082', tag_ary: [0x0072,0x0082], tag_multiple: false, tag_note: ''},
     }
   end
 
