@@ -310,6 +310,7 @@ module DcmDict
       { uid_value: '1.2.840.10008.5.1.4.1.1.88.73', uid_name: 'Patient Radiation Dose SR Storage', uid_key: 'PatientRadiationDoseSRStorage', uid_sym: :patient_radiation_dose_sr_storage, uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.88.74', uid_name: 'Planned Imaging Agent Administration SR Storage', uid_key: 'PlannedImagingAgentAdministrationSRStorage', uid_sym: :planned_imaging_agent_administration_sr_storage, uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.88.75', uid_name: 'Performed Imaging Agent Administration SR Storage', uid_key: 'PerformedImagingAgentAdministrationSRStorage', uid_sym: :performed_imaging_agent_administration_sr_storage, uid_type: :sop_class},
+      { uid_value: '1.2.840.10008.5.1.4.1.1.88.76', uid_name: 'Enhanced X-Ray Radiation Dose SR Storage', uid_key: 'EnhancedXRayRadiationDoseSRStorage', uid_sym: :enhanced_x_ray_radiation_dose_sr_storage, uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.90.1', uid_name: 'Content Assessment Results Storage', uid_key: 'ContentAssessmentResultsStorage', uid_sym: :content_assessment_results_storage, uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.104.1', uid_name: 'Encapsulated PDF Storage', uid_key: 'EncapsulatedPDFStorage', uid_sym: :encapsulated_pdf_storage, uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.104.2', uid_name: 'Encapsulated CDA Storage', uid_key: 'EncapsulatedCDAStorage', uid_sym: :encapsulated_cda_storage, uid_type: :sop_class},
