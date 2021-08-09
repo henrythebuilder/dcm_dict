@@ -91,6 +91,36 @@ describe DcmDict::Dictionary::UidDictionary do
                                          :uid_sym   => :color_palette_query_retrieve_information_model_move,
                                          :uid_type  => :sop_class
                                        },
+    '1.2.840.10008.1.4.1.6'             => { :uid_value => '1.2.840.10008.1.4.1.6',
+                                            :uid_name  => 'SPM2 FIL T1 Frame of Reference',
+                                            :uid_key   => 'SPM2FILT1',
+                                            :uid_sym   => :spm2filt1,
+                                            :uid_type  => :well_known_frame_of_reference
+                                     },
+    'SPM2 FIL T1 Frame of Reference'    => { :uid_value => '1.2.840.10008.1.4.1.6',
+                                            :uid_name  => 'SPM2 FIL T1 Frame of Reference',
+                                            :uid_key   => 'SPM2FILT1',
+                                            :uid_sym   => :spm2filt1,
+                                            :uid_type  => :well_known_frame_of_reference
+                                      },
+    'SPM2FILT1'                         => { :uid_value => '1.2.840.10008.1.4.1.6',
+                                             :uid_name  => 'SPM2 FIL T1 Frame of Reference',
+                                             :uid_key   => 'SPM2FILT1',
+                                             :uid_sym   => :spm2filt1,
+                                             :uid_type  => :well_known_frame_of_reference
+                                       },
+    :spm2filt1                          => { :uid_value => '1.2.840.10008.1.4.1.6',
+                                             :uid_name  => 'SPM2 FIL T1 Frame of Reference',
+                                             :uid_key   => 'SPM2FILT1',
+                                             :uid_sym   => :spm2filt1,
+                                             :uid_type  => :well_known_frame_of_reference
+                                        },
+    '1.2.840.10008.1.4.3.2'             => { :uid_value => '1.2.840.10008.1.4.3.2',
+                                             :uid_name  => 'Standard Robotic-Arm Coordinate System Frame of Reference',
+                                             :uid_key   => 'StandardRoboticArmCoordinateSystem',
+                                             :uid_sym   => :standard_robotic_arm_coordinate_system,
+                                             :uid_type  => :well_known_frame_of_reference
+                                   },
   }.each do |uid, data|
     include_examples "Handle specific record", data[:uid_name],
                      uid, data, DcmDict::Dictionary::TheUidDictionary

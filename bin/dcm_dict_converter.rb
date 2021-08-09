@@ -62,7 +62,11 @@ class DcmDictConverter
   }
 
   UidSource={
-    Part6XmlUrl => ["table_A-1"]
+    Part6XmlUrl => ["table_A-1", "table_A-2"]
+  }
+
+  UidDataFix={
+    "table_A-2" => {:uid_type => :well_known_frame_of_reference}
   }
 
   DataElementFix = {
@@ -145,8 +149,13 @@ class DcmDictConverter
   def extract_uid(xml_file, table_to_map)
     extract_node_set(xml_file, table_to_map) do |table, td|
       data = DcmDict::XML::XmlTool.extract_uid_field_from_tr_set(td)
+      check_uid_data(data, table)
       yield(data) if block_given?
     end
+  end
+
+  def check_uid_data(data, table)
+    data.merge!(UidDataFix.fetch(table, {}))
   end
 
   def print_out_uid_data()
