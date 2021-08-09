@@ -100,26 +100,26 @@ For these objects is possible to access to Tag (group/element), Name, Keyword, V
 
 The main methods supported are:
 
-| Method            | Note                              | Type                |                                    |
-|:------------------|:---------------------------------:|:-------------------:|:----------------------------------:|
-| **tag**           | tag as Array                      | Array of two Fixnum | (alias of *tag_ary*)               |
-| **tag_name**      | name of tag                       | String              |                                    |
-| **tag_keyword**   | keyword                           | String              |                                    |
-| **tag_key**       | keyword                           | String              |                                    |
-| **tag_vr**        | Value Representation              | Array of Symbol     |                                    |
-| **tag_vm**        | Value Multiplicity                | Array of Symbol     |                                    |
-| **tag_ps**        | tag as string (as standard doc)   | String              |                                    |
-| **tag_ary**       | tag as Array                      | Array of two Fixnum |                                    |
-| **tag_sym**       | tag as Symbol                     | Symbol              |                                    |
-| **tag_ndm**       | tag as in Native DICOM Model      | String              |                                    |
-| **tag_str**       | tag as string (similar to tag_ps) | String              |                                    |
-| **tag_note**      | tag note                          | String              |                                    |
-| **tag_multiple?** | is a multiple tag ?               | boolean             | (useful for 'multi tag' attribute) |
+| Method            |               Note                |        Type         |                                    |
+| :---------------- | :-------------------------------: | :-----------------: | :--------------------------------: |
+| **tag**           |           tag as Array            | Array of two Fixnum |        (alias of *tag_ary*)        |
+| **tag_name**      |            name of tag            |       String        |                                    |
+| **tag_keyword**   |              keyword              |       String        |                                    |
+| **tag_key**       |              keyword              |       String        |                                    |
+| **tag_vr**        |       Value Representation        |   Array of Symbol   |                                    |
+| **tag_vm**        |        Value Multiplicity         |   Array of Symbol   |                                    |
+| **tag_ps**        |  tag as string (as standard doc)  |       String        |                                    |
+| **tag_ary**       |           tag as Array            | Array of two Fixnum |                                    |
+| **tag_sym**       |           tag as Symbol           |       Symbol        |                                    |
+| **tag_ndm**       |   tag as in Native DICOM Model    |       String        |                                    |
+| **tag_str**       | tag as string (similar to tag_ps) |       String        |                                    |
+| **tag_note**      |             tag note              |       String        |                                    |
+| **tag_multiple?** |        is a multiple tag ?        |       boolean       | (useful for 'multi tag' attribute) |
 
 each data element is indexed by these fields:
 
-| Field        | Type   |
-|:-------------|:------:|
+| Field        |  Type  |
+| :----------- | :----: |
 | **tag_key**  | String |
 | **tag_ps**   | String |
 | **tag_ary**  | Array  |
@@ -178,21 +178,21 @@ will produce
 The library also manage 'multiple tags' such as *(0020,31XX)* (*Source Image IDs*).
 As an example for this data element the default tag in array form is [0x0020,0x3122] and all fields are expressed as:
 
-| Method/field      | Value              |
-|:------------------|:------------------:|
-| **tag**           | [0x0020,0x3122]    |
+| Method/field      |       Value        |
+| :---------------- | :----------------: |
+| **tag**           |  [0x0020,0x3122]   |
 | **tag_name**      | "Source Image IDs" |
-| **tag_keyword**   | 'SourceImageIDs'   |
-| **tag_key**       | 'SourceImageIDs'   |
-| **tag_vr**        | [:CS]              |
-| **tag_vm**        | ["1-n"]            |
-| **tag_ps**        | '(0020,31XX)'      |
-| **tag_ary**       | [0x0020,0x3122]    |
+| **tag_keyword**   |  'SourceImageIDs'  |
+| **tag_key**       |  'SourceImageIDs'  |
+| **tag_vr**        |       [:CS]        |
+| **tag_vm**        |      ["1-n"]       |
+| **tag_ps**        |   '(0020,31XX)'    |
+| **tag_ary**       |  [0x0020,0x3122]   |
 | **tag_sym**       | :source_image_ids  |
-| **tag_ndm**       | '00203122'         |
-| **tag_str**       | '(0020,3122)'      |
-| **tag_note**      | 'RET'              |
-| **tag_multiple?** | true               |
+| **tag_ndm**       |     '00203122'     |
+| **tag_str**       |   '(0020,3122)'    |
+| **tag_note**      |       'RET'        |
+| **tag_multiple?** |        true        |
 
 [0x0020,0x3122] is the default value for group/element pair (*[32, 12578]*), but any valid pair of numbers for this tag will be refers that information:
 
@@ -224,19 +224,19 @@ Any UID features can be accessed from a *String* or a *Symbol* object.
 For these objects is possible to access to value, name and type values for any single uid.
 Main methods supported are:
 
-| Method        | Note                     | Type   |                        |
-|:--------------|:------------------------:|:------:|:----------------------:|
-| **uid**       | value of uid             | String | (alias of *uid_value*) |
-| **uid_value** | value of uid             | String |                        |
-| **uid_name**  | name of uid              | String |                        |
-| **uid_key**   | keyword of uid           | String |                        |
+| Method        |           Note           |  Type  |                        |
+| :------------ | :----------------------: | :----: | :--------------------: |
+| **uid**       |       value of uid       | String | (alias of *uid_value*) |
+| **uid_value** |       value of uid       | String |                        |
+| **uid_name**  |       name of uid        | String |                        |
+| **uid_key**   |      keyword of uid      | String |                        |
 | **uid_sym**   | keyword as symbol of uid | Symbol |                        |
-| **uid_type**  | type of uid              | Symbol |                        |
+| **uid_type**  |       type of uid        | Symbol |                        |
 
 each uid is indexed by:
 
 | Field         | Type   |
-|:--------------|:-------|
+| :------------ | :----- |
 | **uid_value** | String |
 | **uid_name**  | String |
 | **uid_key**   | String |
@@ -248,14 +248,14 @@ Consider the case of the uid *1.2.840.10008.1.1* (*Verification SOP Class*), the
 
 For this uid all fields are expressed as:
 
-| Method/field  | Value                    |
-|:--------------|:------------------------:|
-| **uid**       | '1.2.840.10008.1.1'      |
-| **uid_value** | '1.2.840.10008.1.1'      |
+| Method/field  |          Value           |
+| :------------ | :----------------------: |
+| **uid**       |   '1.2.840.10008.1.1'    |
+| **uid_value** |   '1.2.840.10008.1.1'    |
 | **uid_name**  | "Verification SOP Class" |
-| **uid_key**   | "Verification"           |
-| **uid_sym**   | :verification            |
-| **uid_type**  | :sop_class               |
+| **uid_key**   |      "Verification"      |
+| **uid_sym**   |      :verification       |
+| **uid_type**  |        :sop_class        |
 
 ### example:
 
@@ -287,7 +287,7 @@ Note: the script use the [Nokogiri][3] as XML parser if installed as gem, otherw
 Check the file for other details.
 
 ## Note
-Current library version is aligned to *DICOM Base Standard* **2021b**
+Current library version is aligned to *DICOM Base Standard* **2021c**
 
 ## Install
 
