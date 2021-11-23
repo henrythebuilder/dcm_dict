@@ -471,6 +471,7 @@ module DcmDict
       { uid_value: '1.2.840.10008.1.4.2.2', uid_name: 'ICBM Single Subject MRI Frame of Reference', uid_key: 'ICBMSingleSubjectMRI', uid_sym: :icbm_single_subject_mri, uid_type: :well_known_frame_of_reference},
       { uid_value: '1.2.840.10008.1.4.3.1', uid_name: 'IEC 61217 Fixed Coordinate System Frame of Reference', uid_key: 'IEC61217FixedCoordinateSystem', uid_sym: :iec61217_fixed_coordinate_system, uid_type: :well_known_frame_of_reference},
       { uid_value: '1.2.840.10008.1.4.3.2', uid_name: 'Standard Robotic-Arm Coordinate System Frame of Reference', uid_key: 'StandardRoboticArmCoordinateSystem', uid_sym: :standard_robotic_arm_coordinate_system, uid_type: :well_known_frame_of_reference},
+      { uid_value: '1.2.840.10008.1.4.3.3', uid_name: 'IEC 61217 Table Top Coordinate System Frame of Reference', uid_key: 'IEC61217TableTopCoordinateSystem', uid_sym: :iec61217_table_top_coordinate_system, uid_type: :well_known_frame_of_reference},
       { uid_value: '1.2.840.10008.1.4.4.1', uid_name: 'SRI24 Frame of Reference', uid_key: 'SRI24', uid_sym: :sri24, uid_type: :well_known_frame_of_reference},
       { uid_value: '1.2.840.10008.1.4.5.1', uid_name: 'Colin27 Frame of Reference', uid_key: 'Colin27', uid_sym: :colin27, uid_type: :well_known_frame_of_reference},
       { uid_value: '1.2.840.10008.1.4.6.1', uid_name: 'LPBA40/AIR Frame of Reference', uid_key: 'LPBA40AIR', uid_sym: :lpba40air, uid_type: :well_known_frame_of_reference},
