@@ -1,5 +1,8 @@
 # DcmDict project Changelog
 
+## v0.37.0 (2022-01-30)
+* Update to 2022a Base Standard
+___
 ## v0.36.0 (2021-11-23)
 * Update to 2021e Base Standard
 ___

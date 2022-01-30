@@ -105,6 +105,8 @@ module DcmDict
       { uid_value: '1.2.840.10008.2.16.14', uid_name: 'Radiomics Ontology', uid_key: 'RO', uid_sym: :ro, uid_type: :coding_scheme},
       { uid_value: '1.2.840.10008.2.16.15', uid_name: 'RadElement', uid_key: 'RADELEMENT', uid_sym: :radelement, uid_type: :coding_scheme},
       { uid_value: '1.2.840.10008.2.16.16', uid_name: 'ICD-11', uid_key: 'I11', uid_sym: :i11, uid_type: :coding_scheme},
+      { uid_value: '1.2.840.10008.2.16.17', uid_name: 'Unified numbering system (UNS) for metals and alloys', uid_key: 'UNS', uid_sym: :uns, uid_type: :coding_scheme},
+      { uid_value: '1.2.840.10008.2.16.18', uid_name: 'Research Resource Identification', uid_key: 'RRID', uid_sym: :rrid, uid_type: :coding_scheme},
       { uid_value: '1.2.840.10008.3.1.1.1', uid_name: 'DICOM Application Context Name', uid_key: 'DICOMApplicationContext', uid_sym: :dicom_application_context, uid_type: :application_context_name},
       { uid_value: '1.2.840.10008.3.1.2.1.1', uid_name: 'Detached Patient Management SOP Class (Retired)', uid_key: 'DetachedPatientManagement', uid_sym: :detached_patient_management, uid_type: :sop_class},
       { uid_value: '1.2.840.10008.3.1.2.1.4', uid_name: 'Detached Patient Management Meta SOP Class (Retired)', uid_key: 'DetachedPatientManagementMeta', uid_sym: :detached_patient_management_meta, uid_type: :meta_sop_class},
