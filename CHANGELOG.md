@@ -1,7 +1,11 @@
 # DcmDict project Changelog
 
+## v0.38.1 (2022-04-29)
+* Fix Changelog for release 0.38.0
+* Not publish on [RubyGems](https://rubygems.org/gems/dcm_dict)
+___
 ## v0.38.0 (2022-04-29)
-* Update to 2022a Base Standard
+* Update to 2022b Base Standard
 ___
 ## v0.37.0 (2022-01-30)
 * Update to 2022a Base Standard
