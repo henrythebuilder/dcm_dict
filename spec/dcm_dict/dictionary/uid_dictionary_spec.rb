@@ -120,7 +120,13 @@ describe DcmDict::Dictionary::UidDictionary do
                                              :uid_key   => 'StandardRoboticArmCoordinateSystem',
                                              :uid_sym   => :standard_robotic_arm_coordinate_system,
                                              :uid_type  => :well_known_frame_of_reference
-                                   },
+                                        },
+    '1.2.840.10008.5.1.1.25'            => { :uid_value => '1.2.840.10008.5.1.1.25',
+                                             :uid_name  => 'Print Queue SOP Instance (Retired)',
+                                             :uid_key   => 'PrintQueue',
+                                             :uid_sym   => :print_queue,
+                                             :uid_type  => :well_known_sop_instance
+                                        },
   }.each do |uid, data|
     include_examples "Handle specific record", data[:uid_name],
                      uid, data, DcmDict::Dictionary::TheUidDictionary

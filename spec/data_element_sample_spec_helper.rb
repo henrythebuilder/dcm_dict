@@ -163,6 +163,9 @@ module DataElementSampleSpecHelper
       [0x0072,0x0082] => { tag_ps: '(0072,0082)', tag_name: "Selector SV Value", tag_key: 'SelectorSVValue',
                            tag_vr: [:SV], tag_vm: ["1-n"], tag_str: '(0072,0082)', tag_sym: :selector_sv_value,
                            tag_ndm: '00720082', tag_ary: [0x0072,0x0082], tag_multiple: false, tag_note: ''},
+      [0x3006,0x0088] => { tag_ps: '(3006,0088)', tag_name: "ROI Observation Description", tag_key: 'ROIObservationDescription',
+                           tag_vr: [:ST], tag_vm: ["1"], tag_str: '(3006,0088)', tag_sym: :roi_observation_description,
+                           tag_ndm: '30060088', tag_ary: [0x3006,0x0088], tag_multiple: false, tag_note: 'RET (2022b)'},
     }
   end
 
