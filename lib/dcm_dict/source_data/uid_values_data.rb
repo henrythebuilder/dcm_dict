@@ -147,7 +147,7 @@ module DcmDict
       { uid_value: '1.2.840.10008.5.1.1.23', uid_name: 'Presentation LUT SOP Class', uid_key: 'PresentationLUT', uid_sym: :presentation_lut, uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.1.24', uid_name: 'Image Overlay Box SOP Class (Retired)', uid_key: 'ImageOverlayBox', uid_sym: :image_overlay_box, uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.1.24.1', uid_name: 'Basic Print Image Overlay Box SOP Class (Retired)', uid_key: 'BasicPrintImageOverlayBox', uid_sym: :basic_print_image_overlay_box, uid_type: :sop_class},
-      { uid_value: '1.2.840.10008.5.1.1.25', uid_name: 'Print Queue SOP Instance (Retired)', uid_key: 'PrintQueue', uid_sym: :print_queue, uid_type: :well_known_sop_instance},
+      { uid_value: '1.2.840.10008.5.1.1.25', uid_name: 'Print Queue SOP Instance (Retired)', uid_key: 'PrintQueueInstance', uid_sym: :print_queue_instance, uid_type: :well_known_sop_instance},
       { uid_value: '1.2.840.10008.5.1.1.26', uid_name: 'Print Queue Management SOP Class (Retired)', uid_key: 'PrintQueueManagement', uid_sym: :print_queue_management, uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.1.27', uid_name: 'Stored Print Storage SOP Class (Retired)', uid_key: 'StoredPrintStorage', uid_sym: :stored_print_storage, uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.1.29', uid_name: 'Hardcopy Grayscale Image Storage SOP Class (Retired)', uid_key: 'HardcopyGrayscaleImageStorage', uid_sym: :hardcopy_grayscale_image_storage, uid_type: :sop_class},

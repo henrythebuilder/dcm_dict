@@ -123,8 +123,8 @@ describe DcmDict::Dictionary::UidDictionary do
                                         },
     '1.2.840.10008.5.1.1.25'            => { :uid_value => '1.2.840.10008.5.1.1.25',
                                              :uid_name  => 'Print Queue SOP Instance (Retired)',
-                                             :uid_key   => 'PrintQueue',
-                                             :uid_sym   => :print_queue,
+                                             :uid_key   => 'PrintQueueInstance',
+                                             :uid_sym   => :print_queue_instance,
                                              :uid_type  => :well_known_sop_instance
                                         },
   }.each do |uid, data|

@@ -22,6 +22,6 @@
 #  applicable local, state, national or international regulations.
 #
 module DcmDict
-  VERSION = "0.39.0"
-  DICOM_DOC_VERSION = "2022c"
+  VERSION = "0.40.0"
+  DICOM_DOC_VERSION = "2022d"
 end
