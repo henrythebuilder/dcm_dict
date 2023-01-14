@@ -1,6 +1,6 @@
 # coding: utf-8
 #
-#  Copyright (C) 2014-2022  Enrico Rivarola
+#  Copyright (C) 2014-2023  Enrico Rivarola
 #
 #  This file is part of DcmDict gem (dcm_dict).
 #
@@ -343,6 +343,9 @@ module DcmDict
       { uid_value: '1.2.840.10008.5.1.4.1.1.481.20', uid_name: 'Robotic Radiation Record Storage', uid_key: 'RoboticRadiationRecordStorage', uid_sym: :robotic_radiation_record_storage, uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.481.21', uid_name: 'RT Radiation Set Delivery Instruction Storage', uid_key: 'RTRadiationSetDeliveryInstructionStorage', uid_sym: :rt_radiation_set_delivery_instruction_storage, uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.481.22', uid_name: 'RT Treatment Preparation Storage', uid_key: 'RTTreatmentPreparationStorage', uid_sym: :rt_treatment_preparation_storage, uid_type: :sop_class},
+      { uid_value: '1.2.840.10008.5.1.4.1.1.481.23', uid_name: 'Enhanced RT Image Storage', uid_key: 'EnhancedRTImageStorage', uid_sym: :enhanced_rt_image_storage, uid_type: :sop_class},
+      { uid_value: '1.2.840.10008.5.1.4.1.1.481.24', uid_name: 'Enhanced Continuous RT Image Storage', uid_key: 'EnhancedContinuousRTImageStorage', uid_sym: :enhanced_continuous_rt_image_storage, uid_type: :sop_class},
+      { uid_value: '1.2.840.10008.5.1.4.1.1.481.25', uid_name: 'RT Patient Position Acquisition Instruction Storage', uid_key: 'RTPatientPositionAcquisitionInstructionStorage', uid_sym: :rt_patient_position_acquisition_instruction_storage, uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.501.1', uid_name: 'DICOS CT Image Storage', uid_key: 'DICOSCTImageStorage', uid_sym: :dicosct_image_storage, uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.501.2.1', uid_name: 'DICOS Digital X-Ray Image Storage - For Presentation', uid_key: 'DICOSDigitalXRayImageStorageForPresentation', uid_sym: :dicos_digital_x_ray_image_storage_for_presentation, uid_type: :sop_class},
       { uid_value: '1.2.840.10008.5.1.4.1.1.501.2.2', uid_name: 'DICOS Digital X-Ray Image Storage - For Processing', uid_key: 'DICOSDigitalXRayImageStorageForProcessing', uid_sym: :dicos_digital_x_ray_image_storage_for_processing, uid_type: :sop_class},

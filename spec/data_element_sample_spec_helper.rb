@@ -1,6 +1,6 @@
 # coding: utf-8
 #
-#  Copyright (C) 2014-2022  Enrico Rivarola
+#  Copyright (C) 2014-2023  Enrico Rivarola
 #
 #  This file is part of DcmDict gem (dcm_dict).
 #
@@ -166,6 +166,12 @@ module DataElementSampleSpecHelper
       [0x3006,0x0088] => { tag_ps: '(3006,0088)', tag_name: "ROI Observation Description", tag_key: 'ROIObservationDescription',
                            tag_vr: [:ST], tag_vm: ["1"], tag_str: '(3006,0088)', tag_sym: :roi_observation_description,
                            tag_ndm: '30060088', tag_ary: [0x3006,0x0088], tag_multiple: false, tag_note: 'RET (2022b)'},
+      [0x0008,0x9007] => { tag_ps: '(0008,9007)', tag_name: "Frame Type", tag_key: 'FrameType',
+                           tag_vr: [:CS], tag_vm: ["4-5"], tag_str: '(0008,9007)', tag_sym: :frame_type,
+                           tag_ndm: '00089007', tag_ary: [0x0008,0x9007], tag_multiple: false, tag_note: ''},
+      [0x3004,0x0012] => { tag_ps: '(3004,0012)', tag_name: "Dose Value", tag_key: 'DoseValue',
+                           tag_vr: [:DS], tag_vm: ["1"], tag_str: '(3004,0012)', tag_sym: :dose_value,
+                           tag_ndm: '30040012', tag_ary: [0x3004,0x0012], tag_multiple: false, tag_note: 'RET (2022d)'},
     }
   end
 

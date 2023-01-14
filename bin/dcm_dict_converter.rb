@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # -*- ruby -*-
 #
-#  Copyright (C) 2014-2022  Enrico Rivarola
+#  Copyright (C) 2014-2023  Enrico Rivarola
 #
 #  This file is part of DcmDict gem (dcm_dict).
 #
@@ -29,7 +29,7 @@ require 'dcm_dict'
 require 'dcm_dict/xml/xml_tool'
 
 LICENSE_TEXT=<<END_LICENSE
-  Copyright (C) 2014-2022  Enrico Rivarola
+  Copyright (C) 2014-2023  Enrico Rivarola
 
   This file is part of DcmDict gem (dcm_dict).
 
