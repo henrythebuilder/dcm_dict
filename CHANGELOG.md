@@ -1,7 +1,15 @@
 # DcmDict project Changelog
 
 ___
+## v0.51.0 (2023-02-09)
+* Not publish on [RubyGems](https://rubygems.org/gems/dcm_dict)
+* Updated gemspec requirements
+#### Note for gemspec
+> Required Ruby Version fixed for stable releases (>= 3.0)
+> Development Dependency fixed to latest tested version
+___
 ## v0.50.0 (2023-02-09)
+* Not publish on [RubyGems](https://rubygems.org/gems/dcm_dict)
 * Updated gemspec(dcm_dict requires Ruby version >= 2.1, < 3.2)
 #### Note for gemspec
 > Refinement#include is deprecated and will be removed in Ruby 3.2

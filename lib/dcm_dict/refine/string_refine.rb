@@ -25,7 +25,7 @@ module DcmDict
   module Refine
     module StringRefine
 
-      refine String do
+      class ::String
         include DcmDict::Refine::DataElementRefine
         include DcmDict::Refine::UidRefine
       end

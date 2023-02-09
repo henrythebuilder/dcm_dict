@@ -25,7 +25,7 @@ module DcmDict
   module Refine
     module SymbolRefine
 
-      refine Symbol do
+      class ::Symbol
         include DcmDict::Refine::DataElementRefine
         include DcmDict::Refine::UidRefine
       end

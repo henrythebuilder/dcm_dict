@@ -25,7 +25,7 @@ module DcmDict
   module Refine
     module ArrayRefine
 
-      refine Array do
+      class ::Array
         include DcmDict::Refine::DataElementRefine
       end
 

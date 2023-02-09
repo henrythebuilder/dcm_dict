@@ -90,7 +90,10 @@ end
 
 *The main way remains **Ruby Refinements***.
 
-**Rubies compatibility**: at this moment the other considered rubies is only [Rubinius][4] (>= v2.2.10). In order to try to ensure a minimum compatibility there is a file under *lib/dcm_dict/rubies/* called *rb_ext.rb* able to *mask*/*simulates* the refinements by [refine gem][5] and add the required *bit_length* method to *Fixnum* class by [backports gem][6].
+### Rubies compatibility
+**Other Rubies**: the other considered rubies is only [Rubinius][4] checked at version _**v2.2.10**_.
+
+**Test Note**: In order to try to ensure a minimum compatibility there is a file under *lib/dcm_dict/rubies/* called *rb_ext.rb* able to *mask*/*simulates* the refinements by [refine gem][5] and add the required *bit_length* method to *Fixnum* class by [backports gem][6].
 This sort of extension is not loaded by default but only into *spec files* for the *'rbx' Ruby Engine*. See *spec_helper.rb* and *rb_ext.rb* for details.
 
 ## Data Element data in detail
