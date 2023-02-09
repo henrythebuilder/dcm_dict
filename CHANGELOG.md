@@ -1,6 +1,9 @@
 # DcmDict project Changelog
 
 ___
+## v0.52.0 (2023-02-09)
+* Update to 2023a Base Standard
+___
 ## v0.51.0 (2023-02-09)
 * Not publish on [RubyGems](https://rubygems.org/gems/dcm_dict)
 * Updated gemspec requirements
