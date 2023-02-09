@@ -91,6 +91,10 @@ end
 *The main way remains **Ruby Refinements***.
 
 ### Rubies compatibility
+**MRI Ruby**: from version _**v0.51.0**_ gemspec are changed: the minimum required version is _**3.0**_ in order to manage the refinements changes that occurred in version _**3.2**_:
+- The include/extend in refinements never worked (ref [Bug #17429][13])
+- import_methods is limited in functionality (ref [class Refinement][14])
+
 **Other Rubies**: the other considered rubies is only [Rubinius][4] checked at version _**v2.2.10**_.
 
 **Test Note**: In order to try to ensure a minimum compatibility there is a file under *lib/dcm_dict/rubies/* called *rb_ext.rb* able to *mask*/*simulates* the refinements by [refine gem][5] and add the required *bit_length* method to *Fixnum* class by [backports gem][6].
@@ -346,3 +350,5 @@ Main source code repository on github at [henrythebuilder/dcm_dict](https://gith
 [10]: http://www.dicomstandard.org/
 [11]: http://www.dicomstandard.org/current/
 [12]: https://rubygems.org/gems/dcm_dict
+[13]: https://bugs.ruby-lang.org/issues/17429
+[14]: https://docs.ruby-lang.org/en/3.2/Refinement.html
