@@ -1,6 +1,9 @@
 # DcmDict project Changelog
 
 ___
+## v0.56.0 (2023-12-15)
+* Update to 2023e Base Standard
+___
 ## v0.55.0 (2023-09-20)
 * Update to 2023d Base Standard
 * Not publish on [RubyGems](https://rubygems.org/gems/dcm_dict)
