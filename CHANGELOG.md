@@ -1,6 +1,10 @@
 # DcmDict project Changelog
 
 ___
+## v0.56.1 (2024-01-02)
+* Bump copyright years
+* Not publish on [RubyGems](https://rubygems.org/gems/dcm_dict)
+___
 ## v0.56.0 (2023-12-15)
 * Update to 2023e Base Standard
 ___
