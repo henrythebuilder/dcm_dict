@@ -1,6 +1,9 @@
 # DcmDict project Changelog
 
 ___
+## v0.59.0 (2024-07-09)
+* Update to 2024c Base Standard
+___
 ## v0.58.0 (2024-04-03)
 * Update to 2024b Base Standard
 ___

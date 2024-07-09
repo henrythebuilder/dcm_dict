@@ -1,3 +1,4 @@
+
 # What's *DcmDict*
 **DcmDict** is a Ruby gem [(*dcm\_dict*)][12] to handle in a simple way the *Data Dictionary* defined within the DICOM<sup>®</sup> Standard <sup id='fn-dcm-trademark'>[1]</sup> such as DICOM Data Elements or DICOM Unique Identifiers.
 
@@ -294,7 +295,7 @@ Note: the script use the [Nokogiri][3] as XML parser if installed as gem, otherw
 Check the file for other details.
 
 ## Note
-Current library version is aligned to *DICOM Base Standard* **2024b**
+Current library version is aligned to *DICOM Base Standard* **2024c**
 
 ## Install
 
