@@ -171,7 +171,10 @@ module DataElementSampleSpecHelper
                            tag_ndm: '00089007', tag_ary: [0x0008,0x9007], tag_multiple: false, tag_note: ''},
       [0x3004,0x0012] => { tag_ps: '(3004,0012)', tag_name: "Dose Value", tag_key: 'DoseValue',
                            tag_vr: [:DS], tag_vm: ["1"], tag_str: '(3004,0012)', tag_sym: :dose_value,
-                           tag_ndm: '30040012', tag_ary: [0x3004,0x0012], tag_multiple: false, tag_note: 'RET (2022d)'},
+                           tag_ndm: '30040012', tag_ary: [0x3004,0x0012], tag_multiple: false, tag_note: ''},
+      [0x300A,0x02EC] => { tag_ps: '(300A,02EC)', tag_name: "Compensator Surface Representation Flag", tag_key: 'CompensatorSurfaceRepresentationFlag',
+                           tag_vr: [:CS], tag_vm: ["1"], tag_str: '(300A,02EC)', tag_sym: :compensator_surface_representation_flag,
+                           tag_ndm: '300A02EC', tag_ary: [0x300A,0x02EC], tag_multiple: false, tag_note: ''},
     }
   end
 
