@@ -1,5 +1,5 @@
 #
-#  Copyright (C) 2014-2024  Enrico Rivarola
+#  Copyright (C) 2014-2025  Enrico Rivarola
 #
 #  This file is part of DcmDict gem (dcm_dict).
 #
