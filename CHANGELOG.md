@@ -1,5 +1,12 @@
 # DcmDict project Changelog
 ___
+## v0.61.1 (2025-01-01)
+* Not publish on [RubyGems](https://rubygems.org/gems/dcm_dict)
+* Update copyright years
+* Updated gemspec requirements
+#### Note for gemspec
+> Development Dependency fixed to latest tested version
+___
 ## v0.61.0 (2024-12-28)
 * Update to 2024e Base Standard
 ___

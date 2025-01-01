@@ -18,11 +18,11 @@ Gem::Specification.new do |s|
   s.executables   << 'dcm_dict_converter.rb'
   s.homepage      = 'http://rubygems.org/gems/dcm_dict'
   s.license       = 'GPL-3.0+'
-  s.required_ruby_version = '>= 3.0'
-  s.add_development_dependency('nokogiri',  '~> 1.14',   '>= 1.14.0')
-  s.add_development_dependency('rspec',     '~> 3.12',   '>= 3.12.0')
+  s.required_ruby_version = '>= 3.3'
+  s.add_development_dependency('nokogiri',  '~> 1.18',   '>= 1.18.1')
+  s.add_development_dependency('rspec',     '~> 3.13',   '>= 3.13.0')
   s.add_development_dependency('simplecov', '~> 0.22',   '>= 0.22.0')
-  s.add_development_dependency('rake',      '~> 13.0',   '>= 13.0.0')
+  s.add_development_dependency('rake',      '~> 13.2',   '>= 13.2.1')
   s.metadata = {
   "bug_tracker_uri"   => "https://github.com/henrythebuilder/dcm_dict/issues",
   "changelog_uri"     => "https://github.com/henrythebuilder/dcm_dict/blob/master/CHANGELOG.md",
