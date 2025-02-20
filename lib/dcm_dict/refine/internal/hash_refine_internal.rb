@@ -39,7 +39,7 @@ module DcmDict
           def check_tag_ps!
             tag_ps = self[:tag_ps]
             raise "Missing tag_ps field" if tag_ps.nil_or_empty?
-            tag_ps.upcase!
+            self[:tag_ps] = tag_ps.upcase # fix for ruby 3.4 >> FrozenError: can't modify frozen String
           end
 
           # Check for place holder tag data

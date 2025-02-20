@@ -78,7 +78,7 @@ module DcmDict
       def self.make_rexml_proc(node_set, node_set_idx)
         Proc.new do |key|
           element = node_set[node_set_idx[key]]
-          field = ''
+          field = +'' # fix for ruby 3.4 >> make string 'not chilled'
           if element
             element.each_element_with_text do |txt1|
               field << "\n"  unless field.nil_or_empty?

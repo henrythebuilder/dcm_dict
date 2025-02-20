@@ -1,5 +1,8 @@
 # DcmDict project Changelog
 ---
+## v0.62.0 (2025-02-20)
+* Fix Ruby 3.4 compatibility for 'Frozen String Literal'
+---
 ## v0.61.2 (2025-02-20)
 * Updated dcm_dict.gemspec due to a security update for the Nokogiri gem
 
