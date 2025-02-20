@@ -1,4 +1,12 @@
 # DcmDict project Changelog
+---
+## v0.61.2 (2025-02-20)
+* Updated dcm_dict.gemspec due to a security update for the Nokogiri gem
+
+### Note
+* Nokogiri v1.18.3 upgrades its dependency libxml2 to v2.13.6
+
+[resolve CVE-2025-24928 and CVE-2024-56171](https://rubysec.com/advisories/GHSA-vvfq-8hwr-qm4m)
 ___
 ## v0.61.1 (2025-01-01)
 * Not publish on [RubyGems](https://rubygems.org/gems/dcm_dict)
