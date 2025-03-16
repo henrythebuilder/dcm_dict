@@ -1,4 +1,7 @@
 # DcmDict project Changelog
+___
+## v0.63.0 (2025-03-16)
+* Update to 2025a Base Standard
 ---
 ## v0.62.0 (2025-02-20)
 * Fix Ruby 3.4 compatibility for 'Frozen String Literal'
