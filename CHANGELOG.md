@@ -1,5 +1,14 @@
 # DcmDict project Changelog
 ---
+## v0.64.0 (2025-04-24)
+* Update to 2025b Base Standard
+* Updated dcm_dict.gemspec due to a security update for the Nokogiri gem
+
+### Note
+* Nokogiri updates packaged libxml2 to v2.13.8 to resolve CVE-2025-32414 and CVE-2025-32415
+
+[GHSA-5w6v-399v-w3cc (nokogiri)](https://rubysec.com/advisories/GHSA-5w6v-399v-w3cc/)
+---
 ## v0.63.1 (2025-03-23)
 * Updated dcm_dict.gemspec due to a security update for the Nokogiri gem
 
