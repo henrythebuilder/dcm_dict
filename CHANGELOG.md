@@ -5,6 +5,7 @@
 ## v0.68.0 (2026-05-31)
 
 - Update to 2026b Base Standard
+- Updated gemspec requirements
 
 ---
 
