@@ -3,6 +3,8 @@ require "dcm_dict/version"
 require 'rake'
 require 'rspec/core/rake_task'
 
+puts "Using Rake #{Rake::VERSION}"
+
 desc "Check all spec"
 RSpec::Core::RakeTask.new(:spec) do |t|
   t.pattern = 'spec/**/*_spec.rb'
