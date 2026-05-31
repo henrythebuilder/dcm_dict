@@ -1,27 +1,3 @@
-# coding: utf-8
-#
-#  Copyright (C) 2014-2026  Enrico Rivarola
-#
-#  This file is part of DcmDict gem (dcm_dict).
-#
-#  DcmDict is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 3 of the License, or
-#  (at your option) any later version.
-#
-#  DcmDict is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
-#
-#  This software has neither been tested nor approved for clinical use
-#  or for incorporation in a medical device.
-#  It is the redistributor's or user's responsibility to comply with any
-#  applicable local, state, national or international regulations.
-#
 module DcmDict
   module SourceData
     DataElementsData = [
@@ -1603,6 +1579,9 @@ Only characters from the Default Character Repertoire may be used.'},
       { tag_ps: '(0018,9382)', tag_name: "Material Attenuation Sequence", tag_key: 'MaterialAttenuationSequence', tag_vr: [:SQ], tag_vm: ["1"], tag_str: '(0018,9382)', tag_sym: :material_attenuation_sequence, tag_ndm: '00189382', tag_ary: [0x0018,0x9382], tag_multiple: false, tag_note: ''},
       { tag_ps: '(0018,9383)', tag_name: "Photon Energy", tag_key: 'PhotonEnergy', tag_vr: [:DS], tag_vm: ["1"], tag_str: '(0018,9383)', tag_sym: :photon_energy, tag_ndm: '00189383', tag_ary: [0x0018,0x9383], tag_multiple: false, tag_note: ''},
       { tag_ps: '(0018,9384)', tag_name: "X-Ray Mass Attenuation Coefficient", tag_key: 'XRayMassAttenuationCoefficient', tag_vr: [:DS], tag_vm: ["1"], tag_str: '(0018,9384)', tag_sym: :x_ray_mass_attenuation_coefficient, tag_ndm: '00189384', tag_ary: [0x0018,0x9384], tag_multiple: false, tag_note: ''},
+      { tag_ps: '(0018,9390)', tag_name: "Metal Artifact Reduction Sequence", tag_key: 'MetalArtifactReductionSequence', tag_vr: [:SQ], tag_vm: ["1"], tag_str: '(0018,9390)', tag_sym: :metal_artifact_reduction_sequence, tag_ndm: '00189390', tag_ary: [0x0018,0x9390], tag_multiple: false, tag_note: ''},
+      { tag_ps: '(0018,9391)', tag_name: "Metal Artifact Reduction Applied", tag_key: 'MetalArtifactReductionApplied', tag_vr: [:CS], tag_vm: ["1"], tag_str: '(0018,9391)', tag_sym: :metal_artifact_reduction_applied, tag_ndm: '00189391', tag_ary: [0x0018,0x9391], tag_multiple: false, tag_note: ''},
+      { tag_ps: '(0018,9392)', tag_name: "Metal Artifact Reduction Algorithm Identification Sequence", tag_key: 'MetalArtifactReductionAlgorithmIdentificationSequence', tag_vr: [:SQ], tag_vm: ["1"], tag_str: '(0018,9392)', tag_sym: :metal_artifact_reduction_algorithm_identification_sequence, tag_ndm: '00189392', tag_ary: [0x0018,0x9392], tag_multiple: false, tag_note: ''},
       { tag_ps: '(0018,9401)', tag_name: "Projection Pixel Calibration Sequence", tag_key: 'ProjectionPixelCalibrationSequence', tag_vr: [:SQ], tag_vm: ["1"], tag_str: '(0018,9401)', tag_sym: :projection_pixel_calibration_sequence, tag_ndm: '00189401', tag_ary: [0x0018,0x9401], tag_multiple: false, tag_note: ''},
       { tag_ps: '(0018,9402)', tag_name: "Distance Source to Isocenter", tag_key: 'DistanceSourceToIsocenter', tag_vr: [:FL], tag_vm: ["1"], tag_str: '(0018,9402)', tag_sym: :distance_source_to_isocenter, tag_ndm: '00189402', tag_ary: [0x0018,0x9402], tag_multiple: false, tag_note: ''},
       { tag_ps: '(0018,9403)', tag_name: "Distance Object to Table Top", tag_key: 'DistanceObjectToTableTop', tag_vr: [:FL], tag_vm: ["1"], tag_str: '(0018,9403)', tag_sym: :distance_object_to_table_top, tag_ndm: '00189403', tag_ary: [0x0018,0x9403], tag_multiple: false, tag_note: ''},

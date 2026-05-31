@@ -312,7 +312,7 @@ Check the file for other details.
 
 ## Note
 
-Current library version is aligned to _DICOM Base Standard_ **2026a**
+Current library version is aligned to _DICOM Base Standard_ **2026b**
 
 ## Install
 
