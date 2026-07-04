@@ -1,3 +1,27 @@
+# coding: utf-8
+#
+#  Copyright (C) 2014-2026  Enrico Rivarola
+#
+#  This file is part of DcmDict gem (dcm_dict).
+#
+#  DcmDict is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  DcmDict is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with DcmDict.  If not, see <http://www.gnu.org/licenses/>.
+#
+#  This software has neither been tested nor approved for clinical use
+#  or for incorporation in a medical device.
+#  It is the redistributor's or user's responsibility to comply with any
+#  applicable local, state, national or international regulations.
+#
 module DcmDict
   module SourceData
     DataElementsData = [
@@ -2956,6 +2980,7 @@ Only characters from the Default Character Repertoire may be used.'},
       { tag_ps: '(0040,E008)', tag_name: "Document Class Code Sequence", tag_key: 'DocumentClassCodeSequence', tag_vr: [:SQ], tag_vm: ["1"], tag_str: '(0040,E008)', tag_sym: :document_class_code_sequence, tag_ndm: '0040E008', tag_ary: [0x0040,0xE008], tag_multiple: false, tag_note: ''},
       { tag_ps: '(0040,E010)', tag_name: "Retrieve URI", tag_key: 'RetrieveURI', tag_vr: [:UR], tag_vm: ["1"], tag_str: '(0040,E010)', tag_sym: :retrieve_uri, tag_ndm: '0040E010', tag_ary: [0x0040,0xE010], tag_multiple: false, tag_note: ''},
       { tag_ps: '(0040,E011)', tag_name: "Retrieve Location UID", tag_key: 'RetrieveLocationUID', tag_vr: [:UI], tag_vm: ["1"], tag_str: '(0040,E011)', tag_sym: :retrieve_location_uid, tag_ndm: '0040E011', tag_ary: [0x0040,0xE011], tag_multiple: false, tag_note: ''},
+      { tag_ps: '(0040,E012)', tag_name: "Display URI", tag_key: 'DisplayURI', tag_vr: [:UR], tag_vm: ["1"], tag_str: '(0040,E012)', tag_sym: :display_uri, tag_ndm: '0040E012', tag_ary: [0x0040,0xE012], tag_multiple: false, tag_note: ''},
       { tag_ps: '(0040,E020)', tag_name: "Type of Instances", tag_key: 'TypeOfInstances', tag_vr: [:CS], tag_vm: ["1"], tag_str: '(0040,E020)', tag_sym: :type_of_instances, tag_ndm: '0040E020', tag_ary: [0x0040,0xE020], tag_multiple: false, tag_note: ''},
       { tag_ps: '(0040,E021)', tag_name: "DICOM Retrieval Sequence", tag_key: 'DICOMRetrievalSequence', tag_vr: [:SQ], tag_vm: ["1"], tag_str: '(0040,E021)', tag_sym: :dicom_retrieval_sequence, tag_ndm: '0040E021', tag_ary: [0x0040,0xE021], tag_multiple: false, tag_note: ''},
       { tag_ps: '(0040,E022)', tag_name: "DICOM Media Retrieval Sequence", tag_key: 'DICOMMediaRetrievalSequence', tag_vr: [:SQ], tag_vm: ["1"], tag_str: '(0040,E022)', tag_sym: :dicom_media_retrieval_sequence, tag_ndm: '0040E022', tag_ary: [0x0040,0xE022], tag_multiple: false, tag_note: ''},
