@@ -2,6 +2,12 @@
 
 ---
 
+## v0.70.0 (2026-10-28)
+
+- Update to 2026d Base Standard
+
+---
+
 ## v0.69.0 (2026-07-04)
 
 - Update to 2026c Base Standard
